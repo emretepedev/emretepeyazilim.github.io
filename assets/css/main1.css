@@ -3761,6 +3761,8 @@ body.is-preload #intro:not(.hidden) + #header + #nav {
     overflow: hidden;
     padding: 0 2rem 0 0;
     position: sticky;
+    position: -webkit-sticky;
+    top: 0;
     width: calc(100% - 4rem);
     max-width: 72rem;
     z-index: 2;
