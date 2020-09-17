@@ -80,16 +80,20 @@
                 <form method="post" action="https://send.pageclip.co/rx4yxYy5Jq1cHBYIeQhx6F2AWc0tvkjk" class="pageclip-form">
                     <div class="fields">
                         <div class="field">
-                            <label for="name">Ad</label>
-                            <input type="text" name="name" id="name" placeholder="Adınız..." />
+                            <label for="name">Ad*</label>
+                            <input type="text" name="name" id="name" placeholder="Ad..." Required />
                         </div>
                         <div class="field">
-                            <label for="email">Mail</label>
-                            <input type="text" name="email" id="email" placeholder="Mailiniz..." />
+                            <label for="email">Mail*</label>
+                            <input type="email" name="email" id="email" placeholder="Mail..." Required />
                         </div>
                         <div class="field">
-                            <label for="message">Mesaj</label>
-                            <textarea name="message" id="message" rows="3" placeholder="Mesajınız..."></textarea>
+                            <label for="subject">Konu</label>
+                            <input type="text" name="subject" id="subject" placeholder="Konu..." />
+                        </div>
+                        <div class="field">
+                            <label for="message">Mesaj*</label>
+                            <textarea name="message" id="message" rows="3" placeholder="Mesaj..." Required></textarea>
                         </div>
                     </div>
                     <ul class="actions">
