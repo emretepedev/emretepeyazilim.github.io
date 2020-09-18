@@ -4856,3 +4856,11 @@ body.is-preload #intro:not(.hidden) + #header + #nav {
     }
 
 }
+
+@media screen and (max-width: 576px) {
+
+    .ortala {
+        text-align: center;
+    }
+
+}
