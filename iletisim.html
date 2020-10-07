@@ -3,7 +3,6 @@ layout: default
 title: İletişim
 ---
 
-
 <main class="page hire-me-page">
     <section class="portfolio-block hire-me pt-5 pb-5">
         <div class="container">
@@ -17,7 +16,7 @@ title: İletişim
                 <div class="form-group">
                     <select class="form-control" id="subject" name="subject" required>
                         <option value="" selected="">
-                            <div>Bir Konu Seçiniz...<span class="ml-5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&darr;</span></div>
+                            <div>&darr;</div>
                         </option>
                         <option value="1">Web Sitesi Planı</option>
                         <option value="2">İş Görüşmesi</option>
@@ -30,11 +29,11 @@ title: İletişim
                 </div>
                 <div class="form-group">
                     <div class="button">
-                        <button class="btn btn-primary btn-block" type="submit">Hire Me</button>
+                        <button class="btn btn-primary btn-block" type="submit" class="pageclip-form__submit">Hire Me</button>
                     </div>
                 </div>
             </form>
         </div>
     </section>
 </main>
-<script src="https://s.pageclip.co/v1/pageclip.js" charset="utf-8"></script>
+<script src="{{'/assets/vendor/js/pageclip.js' | relative_url }}" charset="utf-8"></script>
