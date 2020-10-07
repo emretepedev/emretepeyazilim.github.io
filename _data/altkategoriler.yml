@@ -1,0 +1,8 @@
+- name: Projeler
+  slug: /tamamlanan-isler
+  
+- name: Hakkımda
+  slug: /cv
+  
+- name: Bana Ulaş
+  slug: /iletisim

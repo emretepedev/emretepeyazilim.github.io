@@ -1,0 +1,49 @@
+- username: emretepeyazilim
+  name: Twitter
+  icon: fab fa-twitter fa-lg
+  url: 'https://twitter.com/'
+  
+- username: emretepeyazilim
+  name: Github
+  icon: fab fa-github fa-lg
+  url: 'https://github.com/'
+
+- username: emretepeyazilim
+  name: Linkedin
+  icon: fab fa-linkedin-in fa-lg
+  url: 'https://linkedin.com/in/'
+  
+- username: emretepeyazilim
+  name: Instagram
+  icon: fab fa-instagram fa-lg
+  url: 'https://instagram.com/'
+  
+- username: emretepeyazilim
+  name: Facebook
+  icon: fab fa-facebook-f fa-lg
+  url: 'https://facebook.com/'
+    
+- username: phone=905522801804&text=Merhaba%20@emretepeyazilim.
+  name: Whatsapp
+  icon: fab fa-whatsapp fa-lg
+  url: 'https://api.whatsapp.com/send?'
+  
+- username: .cid.ebf04f9e644e1570
+  name: Skype
+  icon: fab fa-skype fa-lg
+  url: 'skype:live:'
+  
+- username: emretepeyazilim
+  name: Telegram
+  icon: fab fa-telegram-plane fa-lg
+  url: 'https://telegram.me/'
+  
+- username: +905522801804
+  name: Telephone
+  icon: fas fa-phone-alt fa-lg
+  url: 'tel:'
+  
+- username: emretepeyazilim@gmail.com
+  name: Mail
+  icon: far fa-envelope fa-lg
+  url: 'mailto:'

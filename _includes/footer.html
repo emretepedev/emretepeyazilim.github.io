@@ -1,0 +1,15 @@
+<footer class="page-footer">
+    <div class="container">
+        <div class="links">
+            {% for altkategori in site.data.altkategoriler %}
+            <a target="_blank" class="text-decoration-none" href="{{'altkategori.slug | relative_url }}">{{ altkategori.name }}</a>
+            {% endfor %}
+        </div>
+        <div class="social-icons">
+            {% for sosyalmedya in site.data.sosyalmedyalar %}
+            <a target="_blank" href="{{ sosyalmedya.url }}{{ sosyalmedya.username }}"><i class="{{ sosyalmedya.icon }} text-dark"></i></a>
+            {% endfor %}
+        </div>
+        <p class="copyright text-muted">Copyright &copy; {{ site.author }} {{ 'now' | date: "%Y" }}</p>
+    </div>
+</footer>

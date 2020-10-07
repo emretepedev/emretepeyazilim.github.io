@@ -1,0 +1,15 @@
+- name: Anasayfa
+  slug: /
+  active: /
+
+- name: Tamamlanan İşler
+  slug: /tamamlanan-isler
+  active: /tamamlanan-isler.html
+  
+- name: CV
+  slug: /cv
+  active: /cv.html
+  
+- name: İletişim
+  slug: /iletisim
+  active: /iletisim.html

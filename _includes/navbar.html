@@ -1,0 +1,14 @@
+<nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-dark portfolio-navbar">
+    <div class="container"><a class="navbar-brand logo" href="{{'/' | relative_url }}">{{ site.title | escape }}</a>
+        <button data-toggle="collapse" class="navbar-toggler" data-target="#navbarNav">
+            <span class="sr-only">Menu</span><span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="nav navbar-nav ml-auto">
+                {% for kategori in site.data.kategoriler %}
+                <li class="nav-item {% if page.url == kategori.active %} active {% endif %} "><a class="nav-link" href="{{ kategori.slug | relative_url }}">{{ kategori.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</nav>
