@@ -185,17 +185,21 @@ title: CV
                             <div class="contact-info portfolio-info-card p-0 mt-3 mt-md-0">
                                 <h2>İletişim Bilgileri</h2>
                                 <div class="row">
-                                    <div class="col-1"><i class="icon ion-person icon"></i></div>
-                                    <div class="col-9"><span>Emre Tepe</span></div>
+                                    <div class="col-1"><i class="fas fa-user"></i></div>
+                                    <div class="col-9"><span class="text-dark">Emre Tepe</span></div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-1"><i class="icon ion-ios-telephone icon"></i></div>
-                                    <div class="col-9"><span>0552 280 18 04</span></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-1"><i class="icon ion-at icon"></i></div>
-                                    <div class="col-9"><span>emretepeyazilim@gmail.com</span></div>
-                                </div>
+                                {% for sosyalmedya in site.data.sosyalmedyalar %}
+                                    {% if sosyalmedya.version == 'iletisimsayfasi' %}
+                                        <div class="row">
+                                            <div class="col-1">
+                                                <i class="{{ sosyalmedya.icon }}"></i>
+                                            </div>
+                                            <div class="col-9">
+                                                <a target="_blank" class="text-decoration-none text-dark" href="{{ sosyalmedya.url }}{{ sosyalmedya.username }}">{{ sosyalmedya.iletisimsayfasispan }}</a>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
                             </div>
                         </div>
                     </div>

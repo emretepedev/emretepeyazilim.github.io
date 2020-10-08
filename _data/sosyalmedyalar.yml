@@ -37,13 +37,17 @@
   name: Telegram
   icon: fab fa-telegram-plane fa-lg
   url: 'https://telegram.me/'
-  
-- username: +905522801804
+
+- username: 05522801804
   name: Telephone
   icon: fas fa-phone-alt fa-lg
   url: 'tel:'
-  
+  iletisimsayfasispan: 0552 280 18 04
+  version: iletisimsayfasi
+
 - username: emretepeyazilim@gmail.com
   name: Mail
   icon: far fa-envelope fa-lg
   url: 'mailto:'
+  iletisimsayfasispan: emretepeyazilim@gmail.com
+  version: iletisimsayfasi
