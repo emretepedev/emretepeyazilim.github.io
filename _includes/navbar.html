@@ -9,6 +9,12 @@
                 <li class="nav-item {% if page.url == kategori.active %} active {% endif %} "><a class="nav-link" href="{{ kategori.slug | relative_url }}">{{ kategori.name }}</a></li>
                 {% endfor %}
             </ul>
+            <hr class="d-md-none text-white-50">
+            <ul class="navbar-nav flex-row flex-wrap text-center d-md-none w-100">
+                {% for sosyalmedya in site.data.sosyalmedyalar %}
+                <li class="{% if sosyalmedya.name == 'Twitter' %} ml-1 {% endif %} nav-item col-1 col-md-auto p-0 mr-1"><a class="nav-link" target="_blank" href="{{ sosyalmedya.url }}{{ sosyalmedya.username }}"><i class="{{ sosyalmedya.icon }}"></i></a></li>
+                {% endfor %}
+            </ul>
         </div>
     </div>
 </nav>
