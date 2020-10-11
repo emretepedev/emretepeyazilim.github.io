@@ -6,7 +6,11 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="nav navbar-nav ml-auto">
                 {% for kategori in site.data.kategoriler %}
-                <li class="nav-item {% if page.url == kategori.active %} active {% endif %} "><a class="nav-link" href="{{ kategori.slug | relative_url }}">{{ kategori.name }}</a></li>
+                {% capture anasayfa %}/{% endcapture %}
+                {% capture normalurl %}/{{ kategori.name | slugify: "latin" }}.html{% endcapture %}
+                {% capture genisurl %}/{{ kategori.name | slugify: "latin" }}/{% if page.name != 'index.html' %}{{ page.name }}{% endif %}{% endcapture %}
+                <li class="nav-item {% if kategori.name == 'Anasayfa' %}{% if page.url == anasayfa %} active {% endif %}{% elsif kategori.name == 'Blog' || page.name  == 'Blog' %}{% if page.url == genisurl %} active {% endif %}{% else %}{% if page.url == normalurl %} active {% endif %}{% endif %}
+"><a class="nav-link" href="{% if kategori.name == 'Anasayfa' %} / {% else %} {{ kategori.name | slugify: 'latin' | relative_url }} {% endif %}">{{ kategori.name }}</a></li>
                 {% endfor %}
             </ul>
             <hr class="d-md-none text-white-50">

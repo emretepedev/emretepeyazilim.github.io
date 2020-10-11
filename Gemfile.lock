@@ -1,0 +1,33 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    concurrent-ruby (1.1.7)
+    ffi (1.13.1)
+    ffi (1.13.1-x64-mingw32)
+    i18n (1.8.5)
+      concurrent-ruby (~> 1.0)
+    jekyll-watch (2.2.1)
+      listen (~> 3.0)
+    liquid (4.0.3)
+    listen (3.2.1)
+      rb-fsevent (~> 0.10, >= 0.10.3)
+      rb-inotify (~> 0.9, >= 0.9.10)
+    mercenary (0.4.0)
+    rb-fsevent (0.10.4)
+    rb-inotify (0.10.1)
+      ffi (~> 1.0)
+    rouge (3.23.0)
+
+PLATFORMS
+  ruby
+  x64-mingw32
+
+DEPENDENCIES
+  i18n
+  jekyll-watch
+  liquid
+  mercenary
+  rouge
+
+BUNDLED WITH
+   2.1.4

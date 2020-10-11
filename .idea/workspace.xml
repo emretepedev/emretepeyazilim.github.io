@@ -3,12 +3,34 @@
   <component name="ChangeListManager">
     <list default="true" id="23952e19-d4ca-4711-9c5b-4d9de86f8b60" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_data/sosyalmedyalar.yml" beforeDir="false" afterPath="$PROJECT_DIR$/_data/sosyalmedyalar.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/_config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_data/kategoriler.yml" beforeDir="false" afterPath="$PROJECT_DIR$/_data/kategoriler.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_includes/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/footer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_includes/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/navbar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/assets/vendor/img/nature/image1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/assets/vendor/img/nature/image2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/assets/vendor/img/nature/image3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/assets/vendor/img/nature/image4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/assets/vendor/img/nature/image5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/assets/vendor/img/nature/image6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/assets/vendor/img/tech/image4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/assets/vendor/img/tech/image6.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/_site/cv.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/cv.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_site/iletisim.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/iletisim.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_site/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_site/tamamlanan-isler.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/tamamlanan-isler.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/vendor/img/nature/image1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/vendor/img/nature/image2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/vendor/img/nature/image3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/vendor/img/nature/image4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/vendor/img/nature/image5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/vendor/img/nature/image6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/vendor/img/tech/image4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/vendor/img/tech/image6.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cv.html" beforeDir="false" afterPath="$PROJECT_DIR$/cv.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iletisim.html" beforeDir="false" afterPath="$PROJECT_DIR$/iletisim.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tamamlanan-isler.html" beforeDir="false" afterPath="$PROJECT_DIR$/tamamlanan-isler.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +44,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1iUDPCJzbhvWW1p60QS6JBee1uq" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -29,11 +54,15 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/blog" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\AlmoraLaptop\Desktop\github\githubpages\emretepeyazilim.github.io\blog" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\AlmoraLaptop\Desktop\github\githubpages\emretepeyazilim.github.io\assets\vendor\img\avatars" />
     </key>
@@ -51,7 +80,17 @@
       <workItem from="1602001761633" duration="111000" />
       <workItem from="1602037367993" duration="720000" />
       <workItem from="1602038130633" duration="1271000" />
-      <workItem from="1602150364054" duration="9014000" />
+      <workItem from="1602150364054" duration="11576000" />
+      <workItem from="1602168171574" duration="1580000" />
+      <workItem from="1602211375084" duration="754000" />
+      <workItem from="1602215827951" duration="51000" />
+      <workItem from="1602216243532" duration="30000" />
+      <workItem from="1602221520088" duration="863000" />
+      <workItem from="1602333341305" duration="277000" />
+      <workItem from="1602335112042" duration="4445000" />
+      <workItem from="1602343433577" duration="5000" />
+      <workItem from="1602346110865" duration="696000" />
+      <workItem from="1602366863080" duration="17965000" />
     </task>
     <servers />
   </component>
@@ -67,5 +106,9 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="616" y="250" key="run.anything.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1601973594510" />
+    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1602370648207">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1602370648207" />
   </component>
 </project>
