@@ -1,12 +1,54 @@
 ---
-layout: default
+layout: post
 title: Laravel Kişisel El Defteri
+blog: 2
 ---
 
-<div class="page">
-    <div class="container">
-        <section>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam dolor, esse labore maxime minus neque sed veritatis voluptate! Architecto autem dolor explicabo fuga in natus quia repellat, reprehenderit sed veritatis!</p>
-        </section>
+    <div class="item mt-4">
+        <p class="m-0">1) <a class="text-decoration-none border-0 text-info align-middle">Bağlantı / Ayrıntılı Bağlantı</a></p>
+        <p class="mb-1">php artisan serve / php artisan serve --host=127.0.0.1 --port=8000</p>
+        <p>İlk komut sonunda proje çalışmaz ise host ve port belirtilerek ayrıntılı bağlantı sağlanabilir.</p>
     </div>
+    <div class="item">
+        <p class="m-0">2) <a class="text-decoration-none border-0 text-info align-middle">Migration Oluşturma</a></p>
+        <p class="mb-1">php artisan make:migration {tablo_adi_cogul} --create={tablo_adi_cogul}</p>
+        <p>Tablonun migration'ı oluşturulur. Sample hali düzenlenir.</p>
+    </div>
+    <div class="item">
+        <p class="m-0">3) <a class="text-decoration-none border-0 text-info align-middle">Tabloyu Migrate Etme</a></p>
+        <p class="mb-1">php artisan migrate</p>
+        <p>Migration işleminden sonra düzenlenmiş sample veritabanına kaydedilmek üzere migrate edilir.</p>
+    </div>
+    <div class="item">
+        <p class="m-0">4) <a class="text-decoration-none border-0 text-info align-middle">Model Oluşturma</a></p>
+        <p class="mb-1">php artisan make:model {Tablo_adi}</p>
+        <p>Model oluşturarak controller'ımız ve buna bağlı olarak görüntülememiz ile veritabanı tablomuz arasında bağlantı kurarak içerdiği bilgileri alıp, filtreleyip sorgulayıp listeleyebilip yeni veri kaydedebiliriz! Ve bu oluşturduğumuz model ilgili controller'a "<span class="text-danger">use App\Models\{Tablo_adi};</span>" şeklinde eklenir.</p>
+    </div>
+    <div class="item">
+        <p class="m-0">5) <a class="text-decoration-none border-0 text-info align-middle">Seeder Oluşturma</a></p>
+        <p class="mb-1">php artisan make:seeder {Tablo_adi}Seeder</p>
+        <p>Veritabanına aktarılan tabloya veri yüklemek için seeder oluşturulur. Oluşturulan seeder, DatabaseSeeder'a "<span class="text-danger">$this->call({Tablo_adi_tekil}Seeder::class);</span>" olarak eklenir. Seeder, ilgili modeli kullanacağı için en üste "<span class="text-danger">use App\Models\{Tablo_adi};</span>" şeklinde eklenir.</p>
+    </div>
+    <div class="item">
+        <p class="m-0">6) <a class="text-decoration-none border-0 text-info align-middle">Seeder'ı Çalıştırma</a></p>
+        <p class="mb-1">php artisan db:seed --class={Tablo_adi}Seeder</p>
+        <p class="mb-0">Oluşturulan disiplinli seeder'la tablomuzu doldurmak için komut basılır.</p>
+        <span>*Ekstra olarak Faker Kütüphanesinin seeder ile kullanımı yaygındır. Bunun için önce Faker kütüphanesini <a class="text-decoration-none border-0 text-primary" href="https://github.com/fzaninotto/Faker">indirmek</a> gerekir.
+                                Faker'ı yüklemek için terminale "<span class="text-danger">composer require fzaninotto/faker</span>" yazılır. Yüklendikten sonra ilgili seeder'da kullanacağımız için seeder'a "<span class="text-danger">use Faker\Factory as Faker;</span>" yazılır.
+                                Ardından Faker'ı kullanmak için disipline uyulmalıdır. Dökümantasyonu indirme linkinde mevcuttur. "$<span class="text-danger">faker=Faker::create();</span>" ardından "<span class="text-danger">'name' => $faker->name;</span>" benzeri yapılarla tablo donatılabilir.</span>
+    </div>
+    <p></p>
+    <div class="item">
+        <p class="m-0">7) <a class="text-decoration-none border-0 text-info align-middle">Mevcut Tabloyu Güncelleme</a></p>
+        <p class="mb-1">php artisan migrate:fresh --seed</p>
+        <p>Tablo içeriğinde değişiklik yapmadan, verileri koruyarak tabloyu güncellemek istediğimizde kullanabiliriz. Misal tabloya sadece bir veri daha eklemek, yani bir sütun daha oluşturmak istiyorsak ilgili migration düzenlendikten sonra ilgili komut kullanılabilir. İsteğe bağlı default değeri verilebilir ki yeni veri içerisindekiler null olmasın.</p>
+    </div>
+
+    <div class="note">
+        <span class="text-danger">Not:</span> Bu yazı <a class="text-decoration-none border-0 text-primary" href="https://emretepeyazilim.media" target="_blank">emretepeyazilim.media</a> adına yazılmış olup referans verilmeden kullanılmaması rica olunur.
+    </div>
+</div>
+<div class="mt-4 d-block">
+    <a href="/blog/15-kullanisli-brackets-eklentisi" class="float-left text-info text-decoration-none">&lt;Önceki Gönderi</a>
+    <a href="/blog/laravel-el-defteri" class="float-right text-info text-decoration-none">Sonraki Gönderi&gt;</a>
 </div>

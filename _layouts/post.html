@@ -1,0 +1,22 @@
+---
+layout: default
+---
+
+<div class="page">
+    <div class="container">
+        <section>
+            {% for yazi in site.data.yazilar %}
+            {% if page.blog == yazi.blog %}
+            {% capture imageurljpg %}assets/vendor/img/blog/{{ yazi.title | slugify: "latin" }}.jpg{% endcapture %}
+            <span class="date d-block text-right text-muted">{{ yazi.tarih }}</span>
+            <header>
+                <h2 class="text-center"><a class="border-0 text-decoration-none" href="{{ yazi.title | slugify: 'latin' }}">{{ yazi.title }}</a></h2>
+            </header>
+            <p class="text-center">{{ yazi.kisayazi }} Öneride yahut katkıda bulunmak isteyen İletişim'den iletebilir. İyi okurlar.</p>
+            <a href="{{ yazi.title | slugify: 'latin' }}" class="image d-block"><img class="rounded mx-auto d-block img-fluid" src="{{ imageurljpg | relative_url }}"></a>
+            {% endif %}
+            {% endfor %}
+            {{ content }}
+        </section>
+    </div>
+</div>
