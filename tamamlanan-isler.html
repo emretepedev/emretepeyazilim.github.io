@@ -4,37 +4,20 @@ title: Tamamlanan İşler
 ---
 
 <main class="page projects-page">
-
-    <section class="portfolio-block projects-cards">
+    <section class="portfolio-block projects-cards p-3">
         <div class="container">
-            <div class="heading">
-                <h2>Recent Work</h2>
-            </div>
             <div class="row">
+                {% for tamamlananis in site.data.tamamlananisler %}
+                {% capture imageurlpng %}assets/vendor/img/logo/{{ tamamlananis.name | slugify: "latin" }}.png{% endcapture %}
                 <div class="col-md-6 col-lg-4">
-                    <div class="card border-0"><a href="#"><img class="card-img-top scale-on-hover" src="{{'assets/vendor/img/images/Logo1.png' | relative_url }}" alt="Card Image"></a>
+                    <div class="card border-0"><a target="_blank" href="{{ tamamlananis.url }}"><img class="card-img-top scale-on-hover" title="{{ tamamlananis.name }}" src="{{ imageurlpng | relative_url }}" alt="{{ tamamlananis.name }}"></a>
                         <div class="card-body">
-                            <h6><a target="_blank" href="https://kspmotors.tk" class="text-decoration-none">KSP MOTORS</a></h6>
-                            <p class="text-muted card-text">Kalite Tesadüf Değildir!</p>
+                            <h6><a target="_blank" href="{{ tamamlananis.url }}" class="text-decoration-none">{{ tamamlananis.name }}</a></h6>
+                            <p class="text-muted card-text">{{ tamamlananis.description }}</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="card border-0"><a href="#"><img class="card-img-top scale-on-hover" src="{{'assets/vendor/img/images/Logo1.png' | relative_url }}" alt="Card Image"></a>
-                        <div class="card-body">
-                            <h6><a target="_blank" href="https://ornekblog.tk" class="text-decoration-none">SanatD</a></h6>
-                            <p class="text-muted card-text">Sanatd Kalın!</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="card border-0"><a href="#"><img class="card-img-top scale-on-hover" src="{{'assets/vendor/img/images/Logo1.png' | relative_url }}" alt="Card Image"></a>
-                        <div class="card-body">
-                            <h6><a target="_blank" href="https://eskiemretepeyazilim.tk">Kişiselleştirilebilir Örnek CV</a></h6>
-                            <p class="text-muted card-text">İstediğiniz Tarifi Yaparak CV Tadında Web Sitenizi Özelleştirin!</p>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </section>

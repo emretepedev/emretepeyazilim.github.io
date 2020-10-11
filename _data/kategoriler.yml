@@ -1,14 +1,9 @@
 - name: Anasayfa
-  active: /
 
 - name: Tamamlanan İşler
-  active: /tamamlanan-isler.html
   
 - name: CV
-  active: /cv.html
 
 - name: Blog
-  active: /blog/
   
 - name: İletişim
-  active: /iletisim.html
