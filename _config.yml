@@ -1,6 +1,25 @@
-title:              emretepeyazilim
-email:              emretepeyazilim@gmail.com
-description:        Focus on Science!
-author:             Emre Tepe
-baseurl:            ""
-url:                "https://emretepeyazilim.media"
+title:        Emre Tepe | emretepeyazilim
+email:        emretepeyazilim@gmail.com
+tagline:      Web Sitenizi Oluşturun! Emre Tepe - Focus on Science!
+description:  Web Siteniz İçin Fiyat Alın Ve Bir Web Sitesi Oluşturun! Emre Tepe - Focus on Science!
+author:       Emre Tepe
+url:          https://emretepeyazilim.media
+
+locale:       tr_TR
+google_site_verification:
+social:
+  name: Emre Tepe
+  links:
+    - https://twitter.com/emretepeyazilim
+    - https://www.facebook.com/emretepeyazilim
+    - https://www.linkedin.com/in/emretepeyazilim
+    - https://github.com/emretepeyazilim
+    - https://instagram.com/emretepeyazilim
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+twitter:
+  username: emretepeyazilim
+  card: summary
