@@ -111,6 +111,11 @@
 <div class="page">
     <div class="container">
         <section>
+        <div class="my-0">
+            <a href="15-kullanisli-brackets-eklentisi" class="float-left text-secondary text-decoration-none">&lt;Önceki</a>
+            <a href="laravel-kisisel-el-defteri" class="float-right text-secondary text-decoration-none">Sonraki&gt;</a>
+        </div>
+<div class="border-bottom my-0">&nbsp;</div>
             
             
             
@@ -126,70 +131,87 @@
             
             <div class="item mt-4">
     <p class="m-0">1) <a class="text-decoration-none border-0 text-info align-middle">Bağlantı / Ayrıntılı Bağlantı</a></p>
-    <p class="mb-1">php artisan serve / php artisan serve --host=127.0.0.1 --port=8000</p>
+    <p class="mb-1"><kbd>php artisan serve / php artisan serve --host=127.0.0.1 --port=8000</kbd></p>
     <p>İlk komut sonunda proje çalışmaz ise host ve port belirtilerek ayrıntılı bağlantı sağlanabilir.</p>
 </div>
 <div class="item">
-    <p class="m-0">2) <a class="text-decoration-none border-0 text-info align-middle">Migration Oluşturma</a></p>
-    <p class="mb-1">php artisan make:migration {tablo_adi_cogul} --create={tablo_adi_cogul}</p>
-    <p>Tablonun migration'ı oluşturulur. Sample hali düzenlenir.</p>
+    <p class="m-0">2) <a class="text-decoration-none border-0 text-info align-middle">Controller Oluşturma</a></p>
+    <p class="mb-1"><kbd>php artisan make:controller {Tablo_adi}Controller</kbd></p>
+    <p>Controllerlar veri aktarmak, kontrol etmek, oluşturmak, okumak, güncellemek, silmek ve birçok çeşitli işlem için kullanılabilir.</p>
 </div>
 <div class="item">
-    <p class="m-0">3) <a class="text-decoration-none border-0 text-info align-middle">Tabloyu Migrate Etme</a></p>
-    <p class="mb-1">php artisan migrate</p>
+    <p class="m-0">3) <a class="text-decoration-none border-0 text-info align-middle">Migration Oluşturma</a></p>
+    <p class="mb-1"><kbd>php artisan make:migration create_{tablo_adi_cogul}_table</kbd></p>
+    <p>Tablonun migration'ı oluşturulur. Sample hali düzenlenir. "<span class="text-danger"><var>$table->string('name');</var></span>" örnek olarak verilebilir.</p>
+</div>
+<div class="item">
+    <p class="m-0">4) <a class="text-decoration-none border-0 text-info align-middle">Tabloyu Migrate Etme</a></p>
+    <p class="mb-1"><kbd>php artisan migrate</kbd></p>
     <p>Migration işleminden sonra düzenlenmiş sample veritabanına kaydedilmek üzere migrate edilir.</p>
 </div>
 <div class="item">
-    <p class="m-0">4) <a class="text-decoration-none border-0 text-info align-middle">Model Oluşturma</a></p>
-    <p class="mb-1">php artisan make:model {Tablo_adi}</p>
-    <p>Model oluşturarak controller'ımız ve buna bağlı olarak görüntülememiz ile veritabanı tablomuz arasında bağlantı kurarak içerdiği bilgileri alıp, filtreleyip sorgulayıp listeleyebilip yeni veri kaydedebiliriz! Ve bu oluşturduğumuz model ilgili controller'a "<span class="text-danger">use App\Models\{Tablo_adi};</span>" şeklinde eklenir.</p>
+    <p class="m-0">5) <a class="text-decoration-none border-0 text-info align-middle">Model Oluşturma</a></p>
+    <p class="mb-1"><kbd>php artisan make:model {Tablo_adi}</kbd></p>
+    <p>Model oluşturarak controller'ımız ve buna bağlı olarak görüntülememiz ile veritabanı tablomuz arasında bağlantı kurarak içerdiği bilgileri alıp, filtreleyip sorgulayıp listeleyebilip yeni veri kaydedebiliriz! Ve bu oluşturduğumuz model ilgili controller'a "<span class="text-danger"><var>use App\Models\{Tablo_adi};</var></span>" şeklinde eklenir.</p>
 </div>
 <div class="item">
-    <p class="m-0">5) <a class="text-decoration-none border-0 text-info align-middle">Seeder Oluşturma</a></p>
-    <p class="mb-1">php artisan make:seeder {Tablo_adi}Seeder</p>
-    <p>Veritabanına aktarılan tabloya veri yüklemek için seeder oluşturulur. Oluşturulan seeder, DatabaseSeeder'a "<span class="text-danger">$this->call({Tablo_adi_tekil}Seeder::class);</span>" olarak eklenir. Seeder, ilgili modeli kullanacağı için en üste "<span class="text-danger">use App\Models\{Tablo_adi};</span>" şeklinde eklenir.</p>
+    <p class="m-0">6) <a class="text-decoration-none border-0 text-info align-middle">Seeder Oluşturma</a></p>
+    <p class="mb-1"><kbd>php artisan make:seeder {Tablo_adi}Seeder</kbd></p>
+    <p>Veritabanına aktarılan tabloya veri yüklemek için Seeder oluşturulur. Oluşturulan Seeder, DatabaseSeeder'a "<span class="text-danger"><var>$this->call({Tablo_adi}Seeder::class);</var></span>" olarak eklenir. Seeder, ilgili modeli kullanacağı için en üste "<span class="text-danger"><var>use App\Models\{Tablo_adi};</var></span>" şeklinde eklenir.</p>
 </div>
 <div class="item">
-    <p class="m-0">6) <a class="text-decoration-none border-0 text-info align-middle">Seeder'ı Çalıştırma</a></p>
-    <p class="mb-1">php artisan db:seed --class={Tablo_adi}Seeder</p>
-    <p class="mb-0">Oluşturulan disiplinli seeder'la tablomuzu doldurmak için komut basılır.</p>
-    <span>*Ekstra olarak Faker Kütüphanesinin seeder ile kullanımı yaygındır. Bunun için önce Faker kütüphanesini <a class="text-decoration-none border-0 text-primary" href="https://github.com/fzaninotto/Faker">indirmek</a> gerekir. Faker'ı yüklemek için terminale "<span class="text-danger">composer require fzaninotto/faker</span>" yazılır. Yüklendikten sonra ilgili seeder'da kullanacağımız için seeder'a "<span class="text-danger">use Faker\Factory as Faker;</span>" yazılır. Ardından Faker'ı kullanmak için disipline uyulmalıdır. Dökümantasyonu indirme linkinde mevcuttur. "<span class="text-danger">$faker=Faker::create();</span>" ardından "<span class="text-danger">'name' => $faker->name;</span>" benzeri yapılarla tablo donatılabilir.</span>
+    <p class="m-0">7) <a class="text-decoration-none border-0 text-info align-middle">Seeder'ı Çalıştırma</a></p>
+    <p class="mb-1"><kbd>php artisan db:seed --class={Tablo_adi}Seeder</kbd></p>
+    <p>Oluşturulan disiplinli Seeder ile tablomuzu doldurmak için komut basılır.</p>
 </div>
 <div class="item">
-    <p class="m-0">7) <a class="text-decoration-none border-0 text-info align-middle">Mevcut Tabloyu Güncelleme</a></p>
-    <p class="mb-1">php artisan migrate:fresh --seed</p>
-    <p>Tablo içeriğinde değişiklik yapmadan, verileri koruyarak tabloyu güncellemek istediğimizde kullanabiliriz. Misal tabloya sadece bir veri daha eklemek, yani bir sütun daha oluşturmak istiyorsak ilgili migration düzenlendikten sonra ilgili komut kullanılabilir. İsteğe bağlı default değeri verilebilir ki yeni veri içerisindekiler null olmasın.</p>
+    <p class="m-0">8) <a class="text-decoration-none border-0 text-info align-middle">Factory Oluşturma</a></p>
+    <p class="mb-1"><kbd>php artisan make:factory {Tablo_adi}Factory -m "{Tablo_adi}"</kbd></p>
+    <p>Veritabanına aktarılan tabloya veri yüklemek için Factory oluşturulur. Kodun sonundaki "<span class="text-danger"><var>-m "{Tablo_adi}"</var></span>" sayesinde otomatik olarak Model bağlantısı gerçekleşmiş olur. Eğer bu kod bloğu yazılmazsa Factory içinde ilgili alanlar düzenlenerek Model'a bağlanması gerekir. Factory içinde otomatik olarak Faker kütüphanesi barındırılır. "<span class="text-danger"><var>'name' => $this->faker->name</var></span>" örnek olarak kullanımıdır. Factory'i kullanmak için Tinker'a girilir ve  "<span class="text-danger"><var>{Tablo_adi}::factory()->count(x)->create();</var></span>" şeklinde bir komut girilir. Bu komut {tablo_adi} adlı tablonuza x tane belirlenmiş disiplinde sahte veriler oluşturacaktır.</p>
 </div>
 <div class="item">
-    <p class="m-0">8) <a class="text-decoration-none border-0 text-info align-middle">Controller Oluşturma</a></p>
-    <p class="mb-1">php artisan make:controller {Tablo_adi_tekil}Controller</p>
-    <p>Controller'lar bizim view'ımize yani layoutlarımızın içindeki xyz.blade.php'lere veri aktarmak, kontrol etmek ve birçok çeşitli işlem için kullanılır.</p>
+    <p class="m-0">9) <a class="text-decoration-none border-0 text-info align-middle">Tinker Bağlantısı</a></p>
+    <p class="mb-1"><kbd>php artisan tinker</kbd></p>
+    <p>Tinker, route oluşturmadan bir veritabanı ve dolayısıyla tablolar ile etkileşim kurmamızı sağlar ve birçok kolaylığı vardır.</p>
 </div>
-<div class="note">
-    <span class="text-danger">Not:</span> Bu yazı <a class="text-decoration-none border-0 text-primary" href="https://emretepeyazilim.media" target="_blank">emretepeyazilim.media</a> adına yazılmış olup referans verilmeden kullanılmaması rica olunur.
+<div class="item">
+    <p class="m-0">10) <a class="text-decoration-none border-0 text-info align-middle">Mevcut Tabloyu Güncelleme</a></p>
+    <p class="mb-1"><kbd>php artisan migrate:fresh --seed</kbd></p>
+    <p>Tablo içeriğinde değişiklik yapmadan, verileri koruyarak tabloyu güncellemek istediğimizde kullanabiliriz. Misal tabloya sadece bir veri daha eklemek, yani bir sütun daha oluşturmak istiyorsak ilgili migration düzenlendikten sonra ilgili komut kullanılabilir. Yeni sütun eklendiğinde isteğe bağlı olarak migration'dan default değeri verilebilir, bu sayede yeni sütun içerisindeki değerler null olmaz. Kodun sonundaki "<span class="text-danger"><var>--seed</var></span>" sayesinde otomatik olarak Seeder'da tanımladığınız bir disiplin ile yeniden veriler basılır. Eğer bu kod bloğu yazılmazsa tablolar içerisindeki tüm veriler kaybedilebilir.</p>
+</div>
+<div class="item">
+    <p class="m-0">11) <a class="text-decoration-none border-0 text-info align-middle">Tek Komutla Aynı Disiplinde Model, Controller, Migration ve Factory Oluşturma</a></p>
+    <p class="mb-1"><kbd>php artisan make:model {Tablo_adi} -cmf</kbd></p>
+    <p class="mb-0">Kodun sonundaki "<span class="text-danger"><var>-cmf</var></span>" sayesinde otomatik olarak veritabanındaki {tablo_adi_cogul} tablosu için aynı disiplinde sırasıyla Controller, Migration ve Factory oluşur. Bu oluşumlar içinde bazı tanımlamalar (Controller-Model arası hariç) otomatik olarak yapılmıştır.</p>
 </div>
             <br>
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-
+            <div class="note mt-0 mb-3">
+                <span class="text-danger">Not:</span> Bu yazı <a class="text-decoration-none border-0 text-primary" href="https://emretepeyazilim.media" target="_blank">emretepeyazilim.media</a> adına yazılmış olup referans verilmeden kullanılmaması rica olunur.
+            </div>
             <div class="share-box container">
                 <h5>Bu Yazıyı Paylaş:</h5>
-                <a class="f" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/blog/laravel-kisisel-el-defteri.html" onclick="window.open(this.href, 'mywin',
-'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" ><i class="fa fa-facebook-official fa"></i><span> facebook</span></a>
-
-                <a class="t" href="https://twitter.com/intent/tweet?text=&url=http://localhost:4000/blog/laravel-kisisel-el-defteri.html" onclick="window.open(this.href, 'mywin',
-'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"><i class="fa fa-twitter fa"></i><span> twitter</span></a>
-
-                <a class="r" href="http://www.reddit.com/submit?url=http://localhost:4000/blog/laravel-kisisel-el-defteri.html" onclick="window.open(this.href, 'mywin',
-'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;" ><i class="fa fa-reddit fa"></i><span> reddit</span></a>
-
-                <a class="l" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/blog/laravel-kisisel-el-defteri.html" onclick="window.open(this.href, 'mywin',
-'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" ><i class="fa fa-linkedin fa"></i><span> linkedin</span></a>
-
-                <a class="e" href="mailto:?subject=&amp;body=Bu yazıya göz atmalısın! http://localhost:4000/blog/laravel-kisisel-el-defteri.html"><i class="fa fa-envelope fa"></i><span> email</span></a>
+                <div class="row">
+                    <div class="col-2">
+                        <a class="f" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/blog/laravel-kisisel-el-defteri.html" onclick="window.open(this.href, 'mywin', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" ><i class="fa fa-facebook-official fa"></i></a>
+                    </div>
+                    <div class="col">
+                        <a class="t" href="https://twitter.com/intent/tweet?text=&url=http://localhost:4000/blog/laravel-kisisel-el-defteri.html" onclick="window.open(this.href, 'mywin', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"><i class="fa fa-twitter fa"></i></a>
+                    </div>
+                    <div class="col">
+                        <a class="r" href="http://www.reddit.com/submit?url=http://localhost:4000/blog/laravel-kisisel-el-defteri.html" onclick="window.open(this.href, 'mywin', 'left=20,top=20,width=900,height=500,toolbar=1,resizable=0'); return false;" ><i class="fa fa-reddit fa"></i></a>
+                    </div>
+                    <div class="col">
+                        <a class="l" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/blog/laravel-kisisel-el-defteri.html" onclick="window.open(this.href, 'mywin', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" ><i class="fa fa-linkedin fa"></i></a>
+                    </div>
+                    <div class="col">
+                        <a class="e" href="mailto:?subject=&amp;body=Bu yazıya göz atmalısın! http://localhost:4000/blog/laravel-kisisel-el-defteri.html"><i class="fa fa-envelope fa"></i></a>
+                    </div>
+                </div>
             </div>
             <div class="mt-4 d-block">
-                <a href="15-kullanisli-brackets-eklentisi" class="float-left text-secondary text-decoration-none">&lt;Önceki Gönderi</a>
-                <a href="laravel-kisisel-el-defteri" class="float-right text-secondary text-decoration-none">Sonraki Gönderi&gt;</a>
+                <a href="15-kullanisli-brackets-eklentisi" class="float-left text-secondary text-decoration-none">&lt;Önceki</a>
+                <a href="laravel-kisisel-el-defteri" class="float-right text-secondary text-decoration-none">Sonraki&gt;</a>
             </div>
         </section>
     </div>
@@ -229,7 +251,7 @@
             <a class="mx-0" target="_blank" href="mailto:emretepeyazilim@gmail.com"><i class="far fa-envelope fa-lg text-dark"></i></a>
             
         </div>
-        <p>Bu sayfa en son 14/10/2020 - 23:59 tarihinde güncellendi.</p>
+        <p>Bu sayfa en son 26/10/2020 - 11:10 tarihinde güncellendi.</p>
         <p class="copyright text-muted mb-0">Copyright &copy; <a target="_blank" class="text-decoration-none text-muted mx-0 font-weight-bold" style="font-size: 1rem;" href="https://github.com/emretepeyazilim">Emre Tepe</a> 2020</p>
     </div>
 </footer>
