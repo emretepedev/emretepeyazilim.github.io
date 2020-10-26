@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="23952e19-d4ca-4711-9c5b-4d9de86f8b60" name="Default Changelist" comment="" />
+    <list default="true" id="23952e19-d4ca-4711-9c5b-4d9de86f8b60" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Cache/b7/9606fb3afea5bd1609ed40b622142f1c98125abcfe89a76a661b0e8e343910" beforeDir="false" afterPath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Cache/b7/9606fb3afea5bd1609ed40b622142f1c98125abcfe89a76a661b0e8e343910" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/blog/15-kullanisli-brackets-eklentisi.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/15-kullanisli-brackets-eklentisi.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/blog/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/blog/laravel-kisisel-el-defteri.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/laravel-kisisel-el-defteri.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/cv.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/cv.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/iletisim.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/iletisim.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_site/tamamlanan-isler.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/tamamlanan-isler.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -68,6 +78,7 @@
       <workItem from="1602703072645" duration="6427000" />
       <workItem from="1603129113817" duration="3374000" />
       <workItem from="1603691355861" duration="7681000" />
+      <workItem from="1603706095615" duration="378000" />
     </task>
     <servers />
   </component>
