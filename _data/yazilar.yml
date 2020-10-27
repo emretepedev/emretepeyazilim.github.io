@@ -1,9 +1,14 @@
-- title:      Laravel Kişisel El Defteri
-  kisayazi:   Laravel çalışma sürecim boyunca aldığım ufak ve faydalı hatırlatıcıları derlediğim yazı. Kendini güncel tutacaktır.
+- title:      GitHub Student Developer Pack İncelemesi
+  kisayazi:   GitHub'ın biz öğrenciler için ücretsiz olarak sunduğu an itibariyle 106 servisi yavaş yavaş inceliyorum. Hem kendim keşfediyorum hem de sizlerle paylaşıyorum.
+  tarih:      26/10/2020
+  blog:       3
+
+- title:    Laravel Kişisel El Defteri
+  kisayazi:   Laravel çalışma sürecim boyunca aldığım ufak ve faydalı hatırlatıcıları derlediğim yazı. Yazılar Laravel'in 8 sürümü baz alınarak yazılmıştır. Kendini güncel tutacaktır.
   tarih:      02/10/2020
   blog:       2
 
 - title:      15+ Kullanışlı Brackets Eklentisi
-  kisayazi:   Brackets kullananların çoğunun içinden geçirip de yapmaya vakit bulamadığı içeriği Covid-19 sürecinde iken derleme fırsatı buldum. En kapsamlı ve örneklemli yerli inceleme olduğunu ufak bir araştırmayla siz de görebilirsiniz.
+  kisayazi:   Brackets kullananların çoğunun içinden geçirip de yapmaya vakit bulamadığı içeriği Covid-19 sürecinde iken derleme fırsatı buldum.
   tarih:      14/09/2020
   blog:       1

@@ -49,6 +49,13 @@ h2 {
     font-family: monospace, monospace;
 }
 
+.item p span a{
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    background-image: radial-gradient(blue .1%, blue 99.9%);
+    font-family: monospace, monospace;
+}
+
 .share-box a {
     display: inline-block;
     -webkit-box-shadow: 0 0 1px #777;
