@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="23952e19-d4ca-4711-9c5b-4d9de86f8b60" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Cache/b7/9606fb3afea5bd1609ed40b622142f1c98125abcfe89a76a661b0e8e343910" beforeDir="false" afterPath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Cache/b7/9606fb3afea5bd1609ed40b622142f1c98125abcfe89a76a661b0e8e343910" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/_config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_data/yazilar.yml" beforeDir="false" afterPath="$PROJECT_DIR$/_data/yazilar.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_includes/head.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/head.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/assets/vendor/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/_site/assets/vendor/css/main.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_site/blog/15-kullanisli-brackets-eklentisi.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/15-kullanisli-brackets-eklentisi.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_site/blog/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_site/blog/laravel-kisisel-el-defteri.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/laravel-kisisel-el-defteri.html" afterDir="false" />
@@ -16,8 +10,9 @@
       <change beforePath="$PROJECT_DIR$/_site/iletisim.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/iletisim.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_site/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_site/tamamlanan-isler.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/tamamlanan-isler.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/vendor/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/vendor/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/laravel-kisisel-el-defteri.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/laravel-kisisel-el-defteri.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/github-student-developer-pack-incelemesi.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/github-student-developer-pack-incelemesi.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cv.html" beforeDir="false" afterPath="$PROJECT_DIR$/cv.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,6 +85,8 @@
       <workItem from="1603716380580" duration="1779000" />
       <workItem from="1603722664312" duration="3748000" />
       <workItem from="1603782776863" duration="12275000" />
+      <workItem from="1603805392043" duration="796000" />
+      <workItem from="1603869561536" duration="6850000" />
     </task>
     <servers />
   </component>
@@ -113,9 +110,9 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="616" y="250" key="run.anything.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1603786754765" />
-    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1603696452007">
+    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1603805400574">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1603696452007" />
+    <state x="623" y="235" width="672" height="678" key="search.everywhere.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1603805400574" />
   </component>
 </project>
