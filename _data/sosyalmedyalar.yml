@@ -23,7 +23,7 @@
   icon: fab fa-facebook-f fa-lg
   url: 'https://facebook.com/'
     
-- username: phone=905522801804&text=Merhaba%20@emretepeyazilim.
+- username: phone=905522801804&text=Merhaba%20@emretepedev.
   name: Whatsapp
   icon: fab fa-whatsapp fa-lg
   url: 'https://api.whatsapp.com/send?'
