@@ -1,24 +1,24 @@
-- username: emretepeyazilim
+- username: emretepedev
   name: Twitter
   icon: fab fa-twitter fa-lg
   url: 'https://twitter.com/'
   
-- username: emretepeyazilim
+- username: emretepedev
   name: Github
   icon: fab fa-github fa-lg
   url: 'https://github.com/'
 
-- username: emretepeyazilim
+- username: emretepedev
   name: Linkedin
   icon: fab fa-linkedin-in fa-lg
   url: 'https://linkedin.com/in/'
   
-- username: emretepeyazilim
+- username: emretepedev
   name: Instagram
   icon: fab fa-instagram fa-lg
   url: 'https://instagram.com/'
   
-- username: emretepeyazilim
+- username: emretepedev
   name: Facebook
   icon: fab fa-facebook-f fa-lg
   url: 'https://facebook.com/'
@@ -33,7 +33,7 @@
   icon: fab fa-skype fa-lg
   url: 'skype:live:'
   
-- username: emretepeyazilim
+- username: emretepedev
   name: Telegram
   icon: fab fa-telegram-plane fa-lg
   url: 'https://telegram.me/'
@@ -45,9 +45,9 @@
   iletisimsayfasispan: 0552 280 18 04
   version: iletisimsayfasi
 
-- username: emretepeyazilim@gmail.com
+- username: emretepedev@gmail.com
   name: Mail
   icon: far fa-envelope fa-lg
   url: 'mailto:'
-  iletisimsayfasispan: emretepeyazilim@gmail.com
+  iletisimsayfasispan: emretepedev@gmail.com
   version: iletisimsayfasi

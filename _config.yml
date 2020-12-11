@@ -1,25 +1,25 @@
-title:        Emre Tepe | emretepeyazilim
-email:        emretepeyazilim@gmail.com
+title:        Emre Tepe | @emretepedev
+email:        emretepedev@gmail.com
 tagline:      Web Sitenizi Oluşturun!
 description:  Web Siteniz İçin Fiyat Alın Ve Bir Web Sitesi Oluşturun!
 author:       Emre Tepe
-url:          https://emretepeyazilim.media
+url:          https://emretepedev.github.io
 
 locale:       tr_TR
 google_site_verification:
 social:
   name: Emre Tepe
   links:
-    - https://twitter.com/emretepeyazilim
-    - https://www.facebook.com/emretepeyazilim
-    - https://www.linkedin.com/in/emretepeyazilim
-    - https://github.com/emretepeyazilim
-    - https://instagram.com/emretepeyazilim
+    - https://twitter.com/emretepedev
+    - https://www.facebook.com/emretepedev
+    - https://www.linkedin.com/in/emretepedev
+    - https://github.com/emretepedev
+    - https://instagram.com/emretepedev
 
 plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
 
 twitter:
-  username: emretepeyazilim
+  username: emretepedev
   card: summary
