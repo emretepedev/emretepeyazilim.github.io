@@ -2,18 +2,17 @@
 layout: default
 title: Anasayfa
 ---
-
 <main class="page landing-page">
     <section class="portfolio-block block-intro py-2 py-md-3 py-lg-0 pb-4 pb-lg-1">
         <div class="container" style="font-size: 11px;">
             <div class="avatar mt-1 mb-2 mb-md-3" style="background-image: url({{'assets/vendor/img/avatars/avatar.jpg' | relative_url }});"></div>
             <div class="about-me">
-                <p class="my-1 my-md-3" style="font-family: 'Josefin Sans', sans-serif;">Merhaba. Ben <strong>Emre Tepe</strong>. Bir süredir Laravel ile yakından ilgileniyorum. Ayrıca Jekyll ile GitHub Pages üzerinden <strong>hızlı</strong>, <strong>mobil uyumlu</strong> ve <strong>kullanıcı dostu</strong> siteler hazırlayarak freelance olarak yerel işletmelere hizmet sağlıyorum. Daha detaylı bilgi için alttaki broşürü inceleyebilir veya iletişimden bana ulaşabilirsiniz!</p>
-                <a class="btn btn-outline-dark mt-3 mt-lg-0 mb-0 mb-lg-4" role="button" href="iletisim">Bana Ulaş!</a>
+                <p class="my-1 my-md-3" style="font-family: 'Josefin Sans', sans-serif;">Merhaba. Ben <strong>Emre Tepe</strong>. Bir senedir Laravel ile yakından ilgileniyorum. Daha detaylı bilgi için iletişimden bana ulaşabilirsiniz.</p>
+                <a class="btn btn-outline-dark mt-3 mt-lg-0 mb-0 mb-lg-4" role="button" href="/iletisim">İletişim</a>
             </div>
         </div>
     </section>
-    <section class="portfolio-block skills pt-0 mx-auto border-bottom-0 pb-4 pb-lg-5">
+    <!--<section class="portfolio-block skills pt-0 mx-auto border-bottom-0 pb-4 pb-lg-5">
         <div class="container">
             <div id="carouselExampleIndicators" class="carousel slide carousel-dark carousel-fade" data-ride="carousel">
                 <ol class="carousel-indicators">
@@ -42,7 +41,7 @@ title: Anasayfa
                 </a>
             </div>
         </div>
-    </section>
+    </section>-->
     <section class="portfolio-block photography">
         <div class="container">
             <div class="heading mt-0 mb-2 mb-lg-4">
@@ -51,7 +50,7 @@ title: Anasayfa
             <div class="row no-gutters border-top">
                 {% for tamamlananis in site.data.tamamlananisler limit:3 %}
                 {% capture imageurlpng %}assets/vendor/img/logo/{{ tamamlananis.name | slugify: "latin" }}.png{% endcapture %}
-                <div class="col-md-4 item zoom-on-hover"><a target="_blank" href="{{ tamamlananis.url }}"><img class="img-fluid image" title="{{ tamamlananis.name }}" alt="{{ tamamlananis.name }}" src="{{ imageurlpng | relative_url }}"></a></div>
+                <div class="col-md-4 item zoom-on-hover"><a href="{{ tamamlananis.url }}"><img class="img-fluid image" title="{{ tamamlananis.name }}" alt="{{ tamamlananis.name }}" src="{{ imageurlpng | relative_url }}"></a></div>
                 {% endfor %}
             </div>
             <div class="text-center mt-2 mb-3 mt-lg-3 mb-lg-4"><a class="btn btn-outline-dark" role="button" href="tamamlanan-isler.html">Daha Fazla Gör!</a></div>
