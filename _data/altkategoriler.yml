@@ -1,8 +1,8 @@
-- name: Projeler
+- name: Projects
   slug: /tamamlanan-isler
   
-- name: Hakkımda
+- name: CV
   slug: /cv
   
-- name: Bana Ulaş
+- name: Contact
   slug: /iletisim
