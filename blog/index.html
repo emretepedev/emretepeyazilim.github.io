@@ -5,15 +5,20 @@ title: Blog
 
 <main class="page">
     <div class="container">
+        <section>
             <div class="row mb-5">
                 {% for yazi in site.data.yazilar %}
                 {% capture imageurljpg %}assets/vendor/img/blog/{{ yazi.title | slugify: "latin" }}.jpg{% endcapture %}
-                <div class="col-12 col-lg-6 my-2" style="height: 500px;">
+                <div class="col-12 col-lg-6 my-2">
                     <div class="card card-inverse card-primary text-center">
                         <a href="{{ yazi.title | slugify: 'latin' }}"><img class="card-img-top" title="{{ yazi.title }}" src="{{ imageurljpg | relative_url }}" alt="{{ yazi.title }}"></a>
-                        <div><span class="text-muted d-block float-left">{{ yazi.tarih }}</span></div>
+                        <div>
+                            <span class="text-muted d-block float-left">{{ yazi.tarih }}</span>
+                        </div>
                         <div class="card-block mb-3 mt-0">
-                            <a class="text-decoration-none text-dark mt-0" href="{{ yazi.title | slugify: 'latin' }}"><h2 class="card-title mb-3">{{ yazi.title }}</h2></a>
+                            <a class="text-decoration-none text-dark mt-0" href="{{ yazi.title | slugify: 'latin' }}">
+                                <h3 class="card-title mb-3">{{ yazi.title }}</h3>
+                            </a>
                             <p class="card-text" style='min-height: 6rem;'>{{ yazi.kisayazi }} Öneride yahut katkıda bulunmak isteyen İletişim'den iletebilir. İyi okurlar.</p>
                         </div>
                     </div>
@@ -21,5 +26,6 @@ title: Blog
                 </div>
                 {% endfor %}
             </div>
+        </section>
     </div>
 </main>
