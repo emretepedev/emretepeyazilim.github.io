@@ -17,8 +17,8 @@ title: Blog
                             <a class="text-decoration-none text-dark mt-0" href="{{ yazi.title | slugify: 'latin' }}"><h2 class="card-title mb-3">{{ yazi.title }}</h2></a>
                             <p class="card-text" style='min-height: 6rem;'>{{ yazi.kisayazi }} Öneride yahut katkıda bulunmak isteyen İletişim'den iletebilir. İyi okurlar.</p>
                         </div>
-                        <a href="{{ yazi.title | slugify: 'latin' }}" class="btn btn-outline-dark btn-block">Read More</a>
                     </div>
+                    <a href="{{ yazi.title | slugify: 'latin' }}" class="btn btn-outline-dark btn-block">Read More</a>
                 </div>
                 {% endfor %}
             </div>
