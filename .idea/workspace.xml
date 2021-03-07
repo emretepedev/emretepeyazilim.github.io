@@ -2,26 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="23952e19-d4ca-4711-9c5b-4d9de86f8b60" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Cache/b7/9606fb3afea5bd1609ed40b622142f1c98125abcfe89a76a661b0e8e343910" beforeDir="false" afterPath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Cache/b7/9606fb3afea5bd1609ed40b622142f1c98125abcfe89a76a661b0e8e343910" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/b8/7114b5f8a4798f2fea760331dba3ff1ebcfa2cf546010e11c4a3e0bad0d7be" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/fe/fd2d49f8f30bf3bfab4f3156c5b7988315e338148159cbdb945fd5d5786087" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_data/tamamlananisler.yml" beforeDir="false" afterPath="$PROJECT_DIR$/_data/tamamlananisler.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_data/yazilar.yml" beforeDir="false" afterPath="$PROJECT_DIR$/_data/yazilar.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/assets/vendor/img/blog/laravel-kisisel-el-defteri.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/blog/15-kullanisli-brackets-eklentisi.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/15-kullanisli-brackets-eklentisi.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/blog/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/blog/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/blog/laravel-kisisel-el-defteri.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/cv.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/cv.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/iletisim.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/iletisim.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_site/tamamlanan-isler.html" beforeDir="false" afterPath="$PROJECT_DIR$/_site/tamamlanan-isler.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/vendor/img/blog/laravel-kisisel-el-defteri.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/15-kullanisli-brackets-eklentisi.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/15-kullanisli-brackets-eklentisi.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/github-student-developer-pack-incelemesi.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/github-student-developer-pack-incelemesi.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/laravel-kisisel-el-defteri.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cv.html" beforeDir="false" afterPath="$PROJECT_DIR$/cv.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +25,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/blog" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -100,6 +82,7 @@
       <workItem from="1605021220957" duration="243000" />
       <workItem from="1607718291870" duration="3164000" />
       <workItem from="1609499426315" duration="2127000" />
+      <workItem from="1615133369986" duration="352000" />
     </task>
     <servers />
   </component>

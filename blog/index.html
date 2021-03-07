@@ -18,8 +18,8 @@ title: Blog
                             <p class="card-text" style='min-height: 6rem;'>{{ yazi.kisayazi }} Öneride yahut katkıda bulunmak isteyen İletişim'den iletebilir. İyi okurlar.</p>
                         </div>
                     </div>
-                    <a href="{{ yazi.title | slugify: 'latin' }}" class="btn btn-outline-dark btn-block">Read More</a>
                 </div>
+                <a href="{{ yazi.title | slugify: 'latin' }}" class="btn btn-outline-dark btn-block">Read More</a>
                 {% endfor %}
             </div>
         </section>
