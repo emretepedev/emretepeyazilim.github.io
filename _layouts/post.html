@@ -20,7 +20,7 @@ layout: default
             </div>
             {% for yazi in site.data.yazilar %}
             {% if page.blog == yazi.blog %}
-            {% capture imageurljpg %}assets/vendor/img/blog/{{ yazi.title | slugify: "latin" }}.jpg{% endcapture %}
+            {% capture imageurljpg %}assets/vendor/img/blog/{{ yazi.title | slugify: "latin" }}.png{% endcapture %}
             <span class="date d-block text-right text-muted">
                 {{ yazi.tarih }}
             </span>
