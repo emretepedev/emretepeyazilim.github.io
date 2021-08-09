@@ -11,18 +11,29 @@ title: Blog
                 {% capture imageurljpg %}assets/vendor/img/blog/{{ yazi.title | slugify: "latin" }}.jpg{% endcapture %}
                 <div class="col-12 col-lg-6 my-2">
                     <div class="card card-inverse card-primary text-center">
-                        <a href="{{ yazi.title | slugify: 'latin' }}"><img class="card-img-top" title="{{ yazi.title }}" src="{{ imageurljpg | relative_url }}" alt="{{ yazi.title }}"></a>
+                        <a href="{{ yazi.title | slugify: 'latin' }}">
+                            <img class="card-img-top" title="{{ yazi.title }}" src="{{ imageurljpg | relative_url }}"
+                                alt="{{ yazi.title }}">
+                        </a>
                         <div>
-                            <span class="text-muted d-block float-left">{{ yazi.tarih }}</span>
+                            <span class="text-muted d-block float-left">
+                                {{ yazi.tarih }}
+                            </span>
                         </div>
                         <div class="card-block mb-3 mt-0">
                             <a class="text-decoration-none text-dark mt-0" href="{{ yazi.title | slugify: 'latin' }}">
-                                <h3 class="card-title mb-3">{{ yazi.title }}</h3>
+                                <h3 class="card-title mb-3">
+                                    {{ yazi.title }}
+                                </h3>
                             </a>
-                            <p class="card-text" style='min-height: 6rem;'>{{ yazi.kisayazi }} Öneride yahut katkıda bulunmak isteyen İletişim'den iletebilir. İyi okurlar.</p>
+                            <p class="card-text" style='min-height: 6rem;'>
+                                {{ yazi.kisayazi }}
+                            </p>
                         </div>
                     </div>
-                    <a href="{{ yazi.title | slugify: 'latin' }}" class="btn btn-outline-dark btn-block">Read More</a>
+                    <a href="{{ yazi.title | slugify: 'latin' }}" class="btn btn-outline-dark btn-block">
+                        Read More
+                    </a>
                 </div>
                 {% endfor %}
             </div>
