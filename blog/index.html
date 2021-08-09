@@ -8,7 +8,7 @@ title: Blog
         <section>
             <div class="row mb-5">
                 {% for yazi in site.data.yazilar %}
-                {% capture imageurljpg %}assets/vendor/img/blog/{{ yazi.title | slugify: "latin" }}.jpg{% endcapture %}
+                {% capture imageurljpg %}assets/vendor/img/blog/{{ yazi.title | slugify: "latin" }}.png{% endcapture %}
                 <div class="col-12 col-lg-6 my-2">
                     <div class="card card-inverse card-primary text-center">
                         <a href="{{ yazi.title | slugify: 'latin' }}">
