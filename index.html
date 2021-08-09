@@ -5,31 +5,42 @@ title: Homepage
 <main class="page landing-page">
     <section class="portfolio-block block-intro py-2 py-md-3 py-lg-0 pb-4 pb-lg-1">
         <div class="container" style="font-size: 11px;">
-            <div class="avatar mt-1 mb-2 mb-md-3" style="background-image: url({{'assets/vendor/img/avatars/avatar.jpg' | relative_url }});"></div>
+            <div class="avatar mt-1 mb-2 mb-md-3"
+                style="background-image: url({{'assets/vendor/img/avatars/avatar.jpg' | relative_url }});"></div>
             <div class="about-me">
-                <p class="my-1 my-md-3" style="font-family: 'Josefin Sans', sans-serif;">I’m a young ambitious web developer who seriously cares discipline. On the other hand, I’m an open-minded person to learn new stuffs about technology and software. In addition to the technical matters that I care, I personally take account of everything about the notion “esteem”.</p>
-                <a class="btn btn-outline-dark mt-3 mt-lg-0 mb-0 mb-lg-4" role="button" href="/contact">Contact</a>
+                <p class="my-1 my-md-3" style="font-family: 'Josefin Sans', sans-serif;">
+                    I’m a young ambitious web
+                    developer who seriously cares discipline. On the other hand, I’m an open-minded person to learn new
+                    stuffs about technology and software. In addition to the technical matters that I care, I personally
+                    take account of everything about the notion “esteem”.
+                </p>
+                <a class="btn btn-outline-dark mt-3 mt-lg-0 mb-0 mb-lg-4" role="button" href="/contact">
+                    Contact
+                </a>
             </div>
         </div>
     </section>
     <section class="portfolio-block photography">
         <div class="container">
             <div class="heading mt-0 mb-2 mb-lg-4">
-                <h2>Recent Projects (Outdated)</h2>
+                <h2>
+                    Recent Projects (Outdated)
+                </h2>
             </div>
             <div class="row no-gutters border-top">
                 {% for tamamlananis in site.data.tamamlananisler limit:3 %}
-                {% capture imageurlpng %}assets/vendor/img/logo/{{ tamamlananis.name | slugify: "latin" }}.png{% endcapture %}
-                <div class="col-md-4 item zoom-on-hover"><a href="{{ tamamlananis.url }}"><img class="img-fluid image" title="{{ tamamlananis.name }}" alt="{{ tamamlananis.name }}" src="{{ imageurlpng | relative_url }}"></a></div>
+                {% capture imageurlpng %}assets/vendor/img/logo/{{ tamamlananis.name | slugify: "latin" }}.png{%
+                endcapture %}
+                <div class="col-md-4 item zoom-on-hover"><a href="{{ tamamlananis.url }}"><img class="img-fluid image"
+                            title="{{ tamamlananis.name }}" alt="{{ tamamlananis.name }}"
+                            src="{{ imageurlpng | relative_url }}"></a></div>
                 {% endfor %}
             </div>
-            <div class="text-center mt-2 mb-3 mt-lg-3 mb-lg-4"><a class="btn btn-outline-dark" role="button" href="projects">More!</a></div>
+            <div class="text-center mt-2 mb-3 mt-lg-3 mb-lg-4">
+                <a class="btn btn-outline-dark" role="button" href="projects">
+                    More!
+                </a>
+            </div>
         </div>
     </section>
 </main>
-<script>
-    $('.carousel').carousel({
-        interval: 125
-    })
-</script>
-
