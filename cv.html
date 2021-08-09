@@ -11,7 +11,7 @@ title: CV
                     style="background-image:url({{ 'assets/vendor/img/avatars/avatar.jpg' | relative_url }});"></div>
                 <div class="about-me">
                     <p class="my-1 my-md-3 text-left text-md-center" style="font-family: 'Josefin Sans', sans-serif;">
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I’m a young ambitious web developer who seriously cares
+                        I’m a young ambitious web developer who seriously cares
                         discipline. On the other hand, I’m an open-minded person to learn new stuffs about technology
                         and software. In addition to the technical matters that I care, I personally take account of
                         everything about the notion “esteem”.
@@ -31,12 +31,26 @@ title: CV
                             alt="Laravel">Laravel</td>
                 </tr>
                 <tr>
-                    <td><img src="{{ 'assets/vendor/img/icons/vue.js.png' | relative_url }}" title="Vue.js"
-                            alt="Vue.js">Vue.js</td>
-                </tr>
-                <tr>
                     <td><img src="{{ 'assets/vendor/img/icons/livewire.png' | relative_url }}" title="Livewire"
                             alt="Livewire">Livewire</td>
+                </tr>
+                <tr>
+                    <td><img src="{{ 'assets/vendor/img/icons/mysql.png' | relative_url }}" title="MySQL"
+                            alt="MySQL">MySQL</td>
+                </tr>
+                <tr>
+                    <td><img src="{{ 'assets/vendor/img/icons/postgresql.png' | relative_url }}" title="PostgreSQL"
+                            alt="PostgreSQL">PostgreSQL</td>
+                </tr>
+                <tr>
+                    <td><img src="{{ 'assets/vendor/img/icons/sql.png' | relative_url }}" title="SQL" alt="SQL">SQL</td>
+                </tr>
+                <tr>
+                    <td><img src="{{ 'assets/vendor/img/icons/html.png' | relative_url }}" title="HTML" alt="HTML">HTML
+                    </td>
+                </tr>
+                <tr>
+                    <td><img src="{{ 'assets/vendor/img/icons/css.png' | relative_url }}" title="CSS" alt="CSS">CSS</td>
                 </tr>
                 <tr>
                     <td><img src="{{ 'assets/vendor/img/icons/tailwind.png' | relative_url }}" title="Tailwind"
@@ -47,6 +61,18 @@ title: CV
                             alt="Bootstrap">Bootstrap</td>
                 </tr>
                 <tr>
+                    <td><img src="{{ 'assets/vendor/img/icons/javascript.png' | relative_url }}" title="JavaScript"
+                            alt="JavaScript">JavaScript</td>
+                </tr>
+                <tr>
+                    <td><img src="{{ 'assets/vendor/img/icons/vue.js.png' | relative_url }}" title="Vue.js"
+                            alt="Vue.js">Vue.js</td>
+                </tr>
+                <tr>
+                    <td><img src="{{ 'assets/vendor/img/icons/jekyll.png' | relative_url }}" title="Jekyll"
+                            alt="Jekyll">Jekyll</td>
+                </tr>
+                <tr>
                     <td><img src="{{ 'assets/vendor/img/icons/git.png' | relative_url }}" title="Git" alt="Git">Git</td>
                 </tr>
                 <tr>
@@ -54,30 +80,11 @@ title: CV
                             alt="Docker">Docker</td>
                 </tr>
                 <tr>
-                    <td><img src="{{ 'assets/vendor/img/icons/mysql.png' | relative_url }}" title="MySQL"
-                            alt="MySQL">MySQL</td>
-                </tr>
-                <tr>
-                    <td><img src="{{ 'assets/vendor/img/icons/jekyll.png' | relative_url }}" title="Jekyll"
-                            alt="Jekyll">Jekyll</td>
-                </tr>
-                <tr>
-                    <td><img src="{{ 'assets/vendor/img/icons/html.png' | relative_url }}" title="HTML" alt="HTML">HTML
-                    </td>
-                </tr>
-                <tr>
-                    <td><img src="{{ 'assets/vendor/img/icons/javascript.png' | relative_url }}" title="JavaScript"
-                            alt="JavaScript">JavaScript</td>
-                </tr>
-                <tr>
-                    <td><img src="{{ 'assets/vendor/img/icons/css.png' | relative_url }}" title="CSS" alt="CSS">CSS</td>
-                </tr>
-                <tr>
-                    <td><img src="{{ 'assets/vendor/img/icons/sql.png' | relative_url }}" title="SQL" alt="SQL">SQL</td>
-                </tr>
-                <tr>
                     <td><img src="{{ 'assets/vendor/img/icons/linux.png' | relative_url }}" title="Linux"
                             alt="Linux">Linux</td>
+                </tr>
+                <tr>
+                    <td><img src="{{ 'assets/vendor/img/icons/vim.png' | relative_url }}" title="Vim" alt="Vim">Vim</td>
                 </tr>
                 <tr>
                     <td><img src="{{ 'assets/vendor/img/icons/english.png' | relative_url }}" title="English"
@@ -171,7 +178,7 @@ title: CV
                             <div class="contact-info portfolio-info-card p-0 mt-3 mt-md-0 text-center">
                                 <h2>Contact Information</h2>
                                 <div class="row">
-                                    <div class="col-9">
+                                    <div>
                                         <i class="fas fa-user"></i>
                                         <a target="_blank" class="text-decoration-none text-dark"
                                             href="https://www.linkedin.com/in/emretepedev/">
@@ -182,7 +189,7 @@ title: CV
                                 {% for sosyalmedya in site.data.sosyalmedyalar %}
                                 {% if sosyalmedya.version == 'iletisimsayfasi' %}
                                 <div class="row">
-                                    <div class="col-9">
+                                    <div>
                                         <i class="{{ sosyalmedya.icon }}"></i>
                                         <a target="_blank" class="text-decoration-none text-dark"
                                             href="{{ sosyalmedya.url }}{{ sosyalmedya.username }}">{{
