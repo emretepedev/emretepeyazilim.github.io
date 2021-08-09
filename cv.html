@@ -168,25 +168,22 @@ title: CV
                 <div class="group mt-0">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="contact-info portfolio-info-card p-0 mt-3 mt-md-0">
+                            <div class="contact-info portfolio-info-card p-0 mt-3 mt-md-0 text-center">
                                 <h2>Contact Information</h2>
                                 <div class="row">
-                                    <div class="col-1"><i class="fas fa-user"></i></div>
                                     <div class="col-9">
-                                        <span class="text-dark">
-                                            <a target="_blank" href="https://www.linkedin.com/in/emretepedev/">
-                                                Emre Tepe
-                                            </a>
-                                        </span>
+                                        <i class="fas fa-user"></i>
+                                        <a target="_blank" class="text-decoration-none text-dark"
+                                            href="https://www.linkedin.com/in/emretepedev/">
+                                            Emre Tepe
+                                        </a>
                                     </div>
                                 </div>
                                 {% for sosyalmedya in site.data.sosyalmedyalar %}
                                 {% if sosyalmedya.version == 'iletisimsayfasi' %}
                                 <div class="row">
-                                    <div class="col-1">
-                                        <i class="{{ sosyalmedya.icon }}"></i>
-                                    </div>
                                     <div class="col-9">
+                                        <i class="{{ sosyalmedya.icon }}"></i>
                                         <a target="_blank" class="text-decoration-none text-dark"
                                             href="{{ sosyalmedya.url }}{{ sosyalmedya.username }}">{{
                                             sosyalmedya.iletisimsayfasispan }}</a>

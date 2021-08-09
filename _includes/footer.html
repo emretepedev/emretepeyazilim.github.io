@@ -7,10 +7,13 @@
         </div>
         <div class="social-icons">
             {% for sosyalmedya in site.data.sosyalmedyalar %}
-            <a class="mx-0" target="_blank" href="{{ sosyalmedya.url }}{{ sosyalmedya.username }}"><i class="{{ sosyalmedya.icon }} text-dark"></i></a>
+            <a class="mx-0" target="_blank" href="{{ sosyalmedya.url }}{{ sosyalmedya.username }}"><i
+                    class="{{ sosyalmedya.icon }} text-dark"></i></a>
             {% endfor %}
         </div>
         <p>Latest Update: {{ "now" | date: "%d/%m/%Y - %H:%M" }}</p>
-        <p class="copyright text-muted mb-0">Copyright &copy; <a target="_blank" class="text-decoration-none text-muted mx-0 font-weight-bold" style="font-size: 1rem;" href="https://github.com/emretepedev">{{ site.author }}</a> {{ 'now' | date: "%Y" }}</p>
+        <p class="copyright text-muted mb-0">Copyright &copy; <a target="_blank"
+                class="text-decoration-none text-muted mx-0 font-weight-bold" style="font-size: 1rem;"
+                href="https://github.com/emretepedev">{{ site.author }}</a> {{ 'now' | date: "%Y" }}</p>
     </div>
 </footer>
