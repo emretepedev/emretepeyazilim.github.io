@@ -22,11 +22,6 @@ title: Homepage
     </section>
     <section class="portfolio-block photography">
         <div class="container">
-            <div class="heading mt-0 mb-2 mb-lg-4">
-                <h2>
-                    Recent Projects
-                </h2>
-            </div>
             <div class="row no-gutters border-top">
                 {% for tamamlananis in site.data.tamamlananisler limit:3 %}
                 {% capture imageurlpng %}assets/vendor/img/logo/{{ tamamlananis.name | slugify: "latin" }}.png{%
