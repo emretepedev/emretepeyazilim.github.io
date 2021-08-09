@@ -1,11 +1,11 @@
-- name:         KSP MOTORS
-  description:  Kalite Tesadüf Değildir!
+- name:         /dev/random
+  description:  /dev/random
   url:          '#'
 
-- name:         SanatD
-  description:  Sanatd Kalın!
+- name:         /dev/random
+  description:  /dev/random
   url:          '#'
 
-- name:         Kişiselleştirilebilir Örnek CV
-  description:  İstediğiniz Tarifi Yaparak CV Tadında Web Sitenizi Özelleştirin!
+- name:         /dev/random
+  description:  /dev/random
   url:          '#'

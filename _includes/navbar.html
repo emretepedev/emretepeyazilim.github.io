@@ -1,22 +1,38 @@
 <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-dark portfolio-navbar">
-    <div class="container"><a class="navbar-brand logo" href="{{'/' | relative_url }}">emretepedev</a>
+    <div class="container">
+        <a class="navbar-brand logo" href="{{'/' | relative_url }}">
+            emretepedev
+        </a>
         <button data-toggle="collapse" class="navbar-toggler" data-target="#navbarNav">
-            <span class="sr-only">Menu</span><span class="navbar-toggler-icon"></span>
+            <span class="sr-only">
+                Menu
+            </span>
+            <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="nav navbar-nav ml-auto">
                 {% for kategori in site.data.kategoriler %}
                 {% capture homepage %}/{% endcapture %}
                 {% capture normalurl %}/{{ kategori.name | slugify: "latin" }}.html{% endcapture %}
-                {% capture genisurl %}/{{ kategori.name | slugify: "latin" }}/{% if page.name != 'index.html' %}{{ page.name }}{% endif %}{% endcapture %}
+                {% capture genisurl %}/{{ kategori.name | slugify: "latin" }}/{% if page.name != 'index.html' %}{{
+                page.name }}{% endif %}{% endcapture %}
                 <li class="nav-item {% if kategori.name == 'Homepage' %}{% if page.url == homepage %} active {% endif %}{% elsif kategori.name == 'Blog' || page.name  == 'Blog' %}{% if page.url == genisurl %} active {% endif %}{% else %}{% if page.url == normalurl %} active {% endif %}{% endif %}
-"><a class="nav-link" href="{% if kategori.name == 'Homepage' %} / {% else %} {{ kategori.name | slugify: 'latin' | relative_url }} {% endif %}">{{ kategori.name }}</a></li>
+">
+                    <a class="nav-link"
+                        href="{% if kategori.name == 'Homepage' %} / {% else %} {{ kategori.name | slugify: 'latin' | relative_url }} {% endif %}">
+                        {{ kategori.name }}
+                    </a>
+                </li>
                 {% endfor %}
             </ul>
             <hr class="d-md-none text-white-50">
             <ul class="navbar-nav flex-row flex-wrap text-center d-md-none w-100">
                 {% for sosyalmedya in site.data.sosyalmedyalar %}
-                <li class="{% if sosyalmedya.name == 'Twitter' %} ml-1 {% endif %} nav-item col-1 col-md-auto p-0 mr-1"><a class="nav-link" target="_blank" href="{{ sosyalmedya.url }}{{ sosyalmedya.username }}"><i class="{{ sosyalmedya.icon }}"></i></a></li>
+                <li class="{% if sosyalmedya.name == 'Twitter' %} ml-1 {% endif %} nav-item col-1 col-md-auto p-0 mr-1">
+                    <a class="nav-link" target="_blank" href="{{ sosyalmedya.url }}{{ sosyalmedya.username }}">
+                        <i class="{{ sosyalmedya.icon }}"></i>
+                    </a>
+                </li>
                 {% endfor %}
             </ul>
         </div>

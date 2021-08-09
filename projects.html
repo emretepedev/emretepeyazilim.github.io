@@ -11,9 +11,11 @@ title: Projects
                 {% capture imageurlpng %}assets/vendor/img/logo/{{ tamamlananis.name | slugify: "latin" }}.png{%
                 endcapture %}
                 <div class="col-md-6 col-lg-4">
-                    <div class="card border-0"><a href="{{ tamamlananis.url }}"><img class="card-img-top scale-on-hover"
-                                title="{{ tamamlananis.name }}" src="{{ imageurlpng | relative_url }}"
-                                alt="{{ tamamlananis.name }}"></a>
+                    <div class="card border-0">
+                        <a href="{{ tamamlananis.url }}">
+                            <img class="card-img-top scale-on-hover" title="{{ tamamlananis.name }}"
+                                src="{{ imageurlpng | relative_url }}" alt="{{ tamamlananis.name }}">
+                        </a>
                         <div class="card-body">
                             <h6>
                                 <a target="_blank" href="{{ tamamlananis.url }}" class="text-decoration-none">
