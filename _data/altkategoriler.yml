@@ -6,3 +6,6 @@
   
 - name: Contact
   slug: /contact
+  
+- name: Donate
+  slug: /donate
