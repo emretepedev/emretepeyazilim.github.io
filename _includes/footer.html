@@ -1,9 +1,9 @@
 <footer class="page-footer">
     <div class="container-fluid px-0">
         <div class="links">
-            {% for altkategori in site.data.altkategoriler %}
-            <a class="text-decoration-none" href="{{'altkategori.slug | relative_url }}">
-                {{ altkategori.name }}
+            {% for category in site.data.footerCategories %}
+            <a class="text-decoration-none" href="{{'category.slug | relative_url }}">
+                {{ category.name }}
             </a>
             {% endfor %}
         </div>
