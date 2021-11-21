@@ -8,9 +8,9 @@
             {% endfor %}
         </div>
         <div class="social-icons">
-            {% for sosyalmedya in site.data.sosyalmedyalar %}
-            <a class="mx-0" target="_blank" href="{{ sosyalmedya.url }}{{ sosyalmedya.username }}">
-                <i class="{{ sosyalmedya.icon }} text-dark"></i>
+            {% for social in site.data.socials %}
+            <a class="mx-0" target="_blank" href="{{ social.url }}{{ social.username }}">
+                <i class="{{ social.icon }} text-dark"></i>
             </a>
             {% endfor %}
         </div>

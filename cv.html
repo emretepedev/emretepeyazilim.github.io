@@ -296,14 +296,14 @@ title: CV
                                         </a>
                                     </div>
                                 </div>
-                                {% for sosyalmedya in site.data.sosyalmedyalar %}
-                                {% if sosyalmedya.version == 'iletisimsayfasi' %}
+                                {% for social in site.data.socials %}
+                                {% if social.version == 'credential' %}
                                 <div class="row">
                                     <div>
-                                        <i class="{{ sosyalmedya.icon }}"></i>
+                                        <i class="{{ social.icon }}"></i>
                                         <a target="_blank" class="text-decoration-none text-dark"
-                                            href="{{ sosyalmedya.url }}{{ sosyalmedya.username }}/">
-                                            {{ sosyalmedya.iletisimsayfasispan }}
+                                            href="{{ social.url }}{{ social.username }}/">
+                                            {{ social.extra }}
                                         </a>
                                     </div>
                                 </div>

@@ -18,23 +18,23 @@ layout: default
             <div class="border-bottom my-0">
                 &nbsp;
             </div>
-            {% for yazi in site.data.yazilar %}
-            {% if page.blog == yazi.blog %}
-            {% capture imageurljpg %}assets/vendor/img/blog/{{ yazi.title | slugify: "latin" }}.png{% endcapture %}
+            {% for article in site.data.articles %}
+            {% if page.blog == article.blog %}
+            {% capture imageurljpg %}assets/vendor/img/blog/{{ article.title | slugify: "latin" }}.png{% endcapture %}
             <span class="date d-block text-right text-muted">
-                {{ yazi.tarih }}
+                {{ article.tarih }}
             </span>
             <header>
                 <h2 class="text-center">
-                    <a class="border-0 text-decoration-none" href="{{ yazi.title | slugify: 'latin' }}">
-                        {{ yazi.title }}
+                    <a class="border-0 text-decoration-none" href="{{ article.title | slugify: 'latin' }}">
+                        {{ article.title }}
                     </a>
                 </h2>
             </header>
             <p class="text-center">
-                {{ yazi.kisayazi }}
+                {{ article.introduction }}
             </p>
-            <a href="{{ yazi.title | slugify: 'latin' }}" class="image d-block">
+            <a href="{{ article.title | slugify: 'latin' }}" class="image d-block">
                 <img class="rounded mx-auto d-block img-fluid" src="{{ imageurljpg | relative_url }}">
             </a>
             {% endif %}

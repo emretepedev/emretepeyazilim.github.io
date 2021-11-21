@@ -1,0 +1,9 @@
+- title:        dev/random
+  introduction: /dev/null
+  tarih:        26/10/2020
+  blog:         2
+
+- title:        dev/urandom
+  introduction: /dev/null
+  tarih:        14/09/2020
+  blog:         1
