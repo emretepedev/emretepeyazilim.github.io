@@ -7,19 +7,19 @@ title: Projects
     <section class="portfolio-block projects-cards p-3">
         <div class="container">
             <div class="row">
-                {% for tamamlananis in site.data.tamamlananisler %}
-                {% capture imageurlpng %}assets/vendor/img/logo/{{ tamamlananis.name | slugify: "latin" }}.png{%
+                {% for project in site.data.projects %}
+                {% capture imageurlpng %}assets/vendor/img/logo/{{ project.name | slugify: "latin" }}.png{%
                 endcapture %}
                 <div class="col-md-6 col-lg-4">
                     <div class="card border-0">
-                        <a href="{{ tamamlananis.url }}">
-                            <img class="card-img-top scale-on-hover" title="{{ tamamlananis.name }}"
-                                src="{{ imageurlpng | relative_url }}" alt="{{ tamamlananis.name }}">
+                        <a href="{{ project.url }}">
+                            <img class="card-img-top scale-on-hover" title="{{ project.name }}"
+                                src="{{ imageurlpng | relative_url }}" alt="{{ project.name }}">
                         </a>
                         <div class="card-body">
                             <h6>
-                                <a target="_blank" href="{{ tamamlananis.url }}" class="text-decoration-none">
-                                    {{ tamamlananis.name }}
+                                <a target="_blank" href="{{ project.url }}" class="text-decoration-none">
+                                    {{ project.name }}
                                 </a>
                             </h6>
                             <p class="text-muted card-text">

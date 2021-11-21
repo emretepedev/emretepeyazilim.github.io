@@ -24,11 +24,11 @@ title: Homepage
     <section class="portfolio-block photography">
         <div class="container">
             <div class="row no-gutters border-top">
-                {% for tamamlananis in site.data.tamamlananisler limit:3 %}
-                {% capture imageurlpng %}assets/vendor/img/logo/{{ tamamlananis.name | slugify: "latin" }}.png{%
+                {% for project in site.data.projects limit:3 %}
+                {% capture imageurlpng %}assets/vendor/img/logo/{{ project.name | slugify: "latin" }}.png{%
                 endcapture %}
-                <div class="col-md-4 item zoom-on-hover"><a href="{{ tamamlananis.url }}"><img class="img-fluid image"
-                            title="{{ tamamlananis.name }}" alt="{{ tamamlananis.name }}"
+                <div class="col-md-4 item zoom-on-hover"><a href="{{ project.url }}"><img class="img-fluid image"
+                            title="{{ project.name }}" alt="{{ project.name }}"
                             src="{{ imageurlpng | relative_url }}"></a></div>
                 {% endfor %}
             </div>
