@@ -129,7 +129,7 @@ title: Donate
                 params: [
                     {
                         from: account,
-                        to: '0x93C4C1e86434eA4E831d8A13e64aC288C49B7b76', //'',
+                        to: '0x93C4C1e86434eA4E831d8A13e64aC288C49B7b76',
                         value: toHex(value),
                     },
                 ],
@@ -154,5 +154,9 @@ title: Donate
         accountField.innerHTML = ''
         balanceField.innerHTML = ''
         sendEthButton.disabled = true;
+        valueInput.style.display = 'none'
+        sendEthButton.style.display = 'none'
+        txHash.style.display = 'none'
+        txInfo.style.display = 'none'
     }
 </script>
