@@ -32,18 +32,19 @@ title: Donate
                 <hr>
                 <h1>Or</h1>
                 <br>
-                <br>
                 <button class="ethereumButton btn btn-outline-dark mb-lg-4">Connect Metamask</button>
-                <p>Note: All chain supported. (including Testnets)</p>
+                <p>Note: All chains supported. (including Testnets)</p>
                 <h2 class="accountField"></h2>
                 <h2 class="balanceField"></h2>
                 <input
                     style="display: none; width: 50%; -webkit-appearance: none; margin: 0; -moz-appearance: textfield;"
                     class="valueInput form-control mx-auto" type="number" min="0" pattern="[0-9]*" inputmode="numeric"
                     onkeydown="javascript: return event.keyCode === 8 ||
-                    event.keyCode === 46 || event.keyCode === 190 ? true : !isNaN(Number(event.key))">
+                    event.keyCode === 46 || event.keyCode === 190 ? true : !isNaN(Number(event.key))"
+                    onkeyup="isInputEmpty(this)"
+                    >
                 <br>
-                <button style="display: none;" class="sendEthButton btn btn-outline-dark"></button>
+                <button style="display: none;" disabled class="sendEthButton btn btn-outline-dark"></button>
                 <p class="txHash mt-2"></p>
                 <p class="txInfo" style="display: none;">Thank you! To get transaction details, find it from explorer of the
                     chain which
@@ -105,7 +106,6 @@ title: Donate
         getBalance();
 
         ethereumButton.innerHTML = 'Disconnect Metamask'
-        sendEthButton.disabled = false
         sendEthButton.style.display = ''
         valueInput.style.display = ''
         sendEthButton.innerHTML = 'Send'
@@ -148,12 +148,21 @@ title: Donate
         return "0x" + Number(value).toString(16)
     }
 
+    function isInputEmpty(input) {
+        if (input.value !== '') {
+            sendEthButton.disabled = false;
+        } else {
+            sendEthButton.disabled = true;
+        }
+    }
+
 
     function disconnectWallet() {
         ethereumButton.innerHTML = 'Connect Metamask'
         accountField.innerHTML = ''
         balanceField.innerHTML = ''
         sendEthButton.disabled = true;
+        valueInput.value = ''
         valueInput.style.display = 'none'
         sendEthButton.style.display = 'none'
         txHash.style.display = 'none'
