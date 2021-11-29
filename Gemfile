@@ -13,3 +13,4 @@ gem 'rouge'
 gem 'i18n'
 gem 'jekyll-seo-tag'
 gem 'jekyll-sitemap'
+gem "webrick", "~> 1.7"
