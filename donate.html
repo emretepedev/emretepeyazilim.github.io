@@ -3,6 +3,19 @@ layout: default
 title: Donate
 ---
 
+<style>
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+</style>
+
 <main class="page donate-page">
     <section class="portfolio-block pt-5 pb-5">
         <div class="container">
@@ -14,9 +27,132 @@ title: Donate
                 <div style="font-family: 'Josefin Sans', sans-serif;">
                     <p>If you want to support me,</p>
                     <p>BTC Address: <b>1JegYhbjRyR2sm6RC63gwoBppL2TW2rwB6</b></p>
-                    <p>By the way, i think 1 BTC is equal to 1 BTC. :)</p>
+                    <p>By the way, i think 1 BTC is equal to 1 BTC :)</p>
                 </div>
+                <hr>
+                <h1>Or</h1>
+                <br>
+                <br>
+                <button class="ethereumButton btn btn-outline-dark mb-lg-4">Connect Metamask</button>
+                <p>Note: All chain supported. (including Testnets)</p>
+                <h2 class="accountField"></h2>
+                <h2 class="balanceField"></h2>
+                <input
+                    style="display: none; width: 50%; -webkit-appearance: none; margin: 0; -moz-appearance: textfield;"
+                    class="valueInput form-control mx-auto" type="number" min="0" pattern="[0-9]*" inputmode="numeric"
+                    onkeydown="javascript: return event.keyCode === 8 ||
+                    event.keyCode === 46 || event.keyCode === 190 ? true : !isNaN(Number(event.key))">
+                <br>
+                <button style="display: none;" class="sendEthButton btn btn-outline-dark"></button>
+                <p class="txHash mt-2"></p>
+                <p class="txInfo" style="display: none;">Thank you! To get transaction details, find it from explorer of the
+                    chain which
+                    used in Metamask.</p>
             </div>
         </div>
     </section>
 </main>
+
+<script>
+    if (typeof ethereum === 'undefined') {
+        document.querySelector('.ethereumButton').innerHTML = '<a href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn" target="_blank">install metamask extension</a>'
+    }
+
+    const ethereumButton = document.querySelector('.ethereumButton')
+    const showAccount = document.querySelector('.showAccount')
+    const sendEthButton = document.querySelector('.sendEthButton')
+    const showBalance = document.querySelector('.showBalance')
+    const accountField = document.querySelector('.accountField')
+    const balanceField = document.querySelector('.balanceField')
+    const valueInput = document.querySelector('.valueInput')
+    const txHash = document.querySelector('.txHash')
+    const txInfo = document.querySelector('.txInfo')
+
+    ethereumButton.addEventListener('click', () => {
+        if (ethereumButton.innerHTML !== 'Connect Metamask' && ethereumButton.innerHTML !== 'Disconnect Metamask') {
+            ethereumButton.innerHTML = 'Connect Metamask'
+        }
+
+        if (ethereumButton.innerHTML === 'Connect Metamask') {
+            getAccount();
+        } else if (ethereumButton.innerHTML === 'Disconnect Metamask') {
+            disconnectWallet();
+        }
+    })
+
+    sendEthButton.addEventListener('click', () => {
+        if (!sendEthButton.disabled) {
+            sendTransaction()
+        }
+    })
+
+    async function getAccount() {
+        ethereum.on('accountsChanged', () => {
+            getAccount();
+        });
+
+        ethereum.on('chainChanged', () => {
+            window.location.reload();
+        });
+
+        await ethereum
+            .request({ method: 'eth_requestAccounts' })
+            .then((accounts) => {
+                account = accounts[0];
+                accountField.innerHTML = 'Account: <span class="showAccount">' + account + '</span>'
+            })
+
+        getBalance();
+
+        ethereumButton.innerHTML = 'Disconnect Metamask'
+        sendEthButton.disabled = false
+        sendEthButton.style.display = ''
+        valueInput.style.display = ''
+        sendEthButton.innerHTML = 'Send'
+    }
+
+    async function getBalance() {
+        await ethereum.request({
+            method: 'eth_getBalance',
+            params: [account, "latest"],
+        }).then((balance) => {
+            balanceField.innerHTML = 'Balance: <span class="showBalance">' + parseInt(balance) / 10 ** 18 + '</span>'
+        });
+    }
+
+    async function sendTransaction() {
+        var value = valueInput.value * 10 ** 18
+        var account = document.querySelector('.showAccount').innerHTML
+        await ethereum
+            .request({
+                method: 'eth_sendTransaction',
+                params: [
+                    {
+                        from: account,
+                        to: '0x93C4C1e86434eA4E831d8A13e64aC288C49B7b76', //'',
+                        value: toHex(value),
+                    },
+                ],
+            })
+            .then((hash) => {
+                txHash.innerHTML = 'Tx Hash: ' + hash;
+                txInfo.style.display = ''
+            });
+
+        valueInput.value = ''
+
+        getBalance();
+    }
+
+    function toHex(value) {
+        return "0x" + Number(value).toString(16)
+    }
+
+
+    function disconnectWallet() {
+        ethereumButton.innerHTML = 'Connect Metamask'
+        accountField.innerHTML = ''
+        balanceField.innerHTML = ''
+        sendEthButton.disabled = true;
+    }
+</script>
