@@ -64,7 +64,6 @@ title: Donate
     const ethereumButton = document.querySelector('.ethereumButton')
     const showAccount = document.querySelector('.showAccount')
     const sendEthButton = document.querySelector('.sendEthButton')
-    const showBalance = document.querySelector('.showBalance')
     const accountField = document.querySelector('.accountField')
     const balanceField = document.querySelector('.balanceField')
     const valueInput = document.querySelector('.valueInput')
@@ -96,7 +95,7 @@ title: Donate
         });
 
         ethereum.on('chainChanged', () => {
-            window.location.reload();
+            location.reload();
         });
 
         await ethereum
@@ -106,7 +105,7 @@ title: Donate
                 accountField.innerHTML = 'Account: <span class="showAccount">' + account + '</span>'
             })
 
-        getBalance();
+        getBalance('latest');
 
         ethereumButton.innerHTML = 'Disconnect Metamask'
         sendEthButton.style.display = ''
@@ -114,10 +113,10 @@ title: Donate
         sendEthButton.innerHTML = 'Send'
     }
 
-    async function getBalance() {
+    async function getBalance(status) {
         await ethereum.request({
             method: 'eth_getBalance',
-            params: [account, "latest"],
+            params: [account, status],
         }).then((balance) => {
             balanceField.innerHTML = 'Balance: <span class="showBalance">' + parseInt(balance) / 10 ** 18 + '</span>'
         });
@@ -162,13 +161,13 @@ title: Donate
                         if (receipt) {
                             txStatus.style.display = ''
                             if (parseInt(receipt.status)) {
-                                getBalance();
-                                txStatus.innerHTML = 'Status: ' + Boolean(receipt.status)
+                                txStatus.innerHTML = 'Status: Success'
+                                getBalance('pending')
                             } else {
-                                txStatus.innerHTML = 'Status: false (Something went wrong. The transaction is reverted.)'
+                                txStatus.innerHTML = 'Status: Failed (Something went wrong. The transaction is reverted.)'
                             }
                         } else {
-                            txStatus.innerHTML = 'Status: pending (Please wait a few seconds/minutes. It depends on the chain.)'
+                            txStatus.innerHTML = 'Status: Pending (Please wait a few seconds/minutes. It depends on the chain.)'
                         }
                     });
             }
@@ -180,13 +179,15 @@ title: Donate
     }
 
     function isInputEmpty(input) {
-        if (input.value !== '') {
-            sendEthButton.disabled = false;
-        } else {
+        value = input.value;
+        var balance = document.querySelector('.showBalance').innerHTML;
+
+        if (value == '' || value == 0 || value > balance) {
             sendEthButton.disabled = true;
+        } else {
+            sendEthButton.disabled = false;
         }
     }
-
 
     function disconnectWallet() {
         ethereumButton.innerHTML = 'Connect Metamask'
