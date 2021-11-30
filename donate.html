@@ -41,12 +41,13 @@ title: Donate
                     class="valueInput form-control mx-auto" type="number" min="0" pattern="[0-9]*" inputmode="numeric"
                     onkeydown="javascript: return event.keyCode === 8 ||
                     event.keyCode === 46 || event.keyCode === 190 ? true : !isNaN(Number(event.key))"
-                    onkeyup="isInputEmpty(this)"
-                    >
+                    onkeyup="isInputEmpty(this)">
                 <br>
                 <button style="display: none;" disabled class="sendEthButton btn btn-outline-dark"></button>
-                <p class="txHash mt-2"></p>
-                <p class="txInfo" style="display: none;">Thank you! To get transaction details, find it from explorer of the
+                <p class="txHash mt-2 mb-0"></p>
+                <span class="txStatus"></span>
+                <p class="txInfo mt-2" style="display: none;">Thank you! To get transaction details, find it from explorer of
+                    the
                     chain which
                     used in Metamask.</p>
             </div>
@@ -56,7 +57,7 @@ title: Donate
 
 <script>
     if (typeof ethereum === 'undefined') {
-        document.querySelector('.ethereumButton').innerHTML = '<a href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn" target="_blank">install metamask extension</a>'
+        document.querySelector('.ethereumButton').innerHTML = '<a class="btn" href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn" target="_blank">Install Metamask Extension</a>'
     }
 
     const ethereumButton = document.querySelector('.ethereumButton')
@@ -68,6 +69,7 @@ title: Donate
     const valueInput = document.querySelector('.valueInput')
     const txHash = document.querySelector('.txHash')
     const txInfo = document.querySelector('.txInfo')
+    const txStatus = document.querySelector('.txStatus')
 
     ethereumButton.addEventListener('click', () => {
         if (ethereumButton.innerHTML !== 'Connect Metamask' && ethereumButton.innerHTML !== 'Disconnect Metamask') {
@@ -134,14 +136,47 @@ title: Donate
                     },
                 ],
             })
-            .then((hash) => {
-                txHash.innerHTML = 'Tx Hash: ' + hash;
+            .then((_hash) => {
                 txInfo.style.display = ''
+                txHash.style.display = ''
+                txHash.innerHTML = 'Tx Hash: ' + _hash;
+
+                hash = _hash
             });
 
         valueInput.value = ''
 
+        if (hash) {
+            receipt = null;
+            while (!receipt) {
+                await ethereum
+                    .request({
+                        method: 'eth_getTransactionReceipt',
+                        params: [hash],
+                        id: [ethereum.chainId],
+                    })
+                    .then((_receipt) => {
+                        receipt = _receipt
+
+                        if (receipt) {
+                            txStatus.style.display = ''
+                            if (parseInt(receipt.status)) {
+                                txStatus.innerHTML = 'Status: ' + Boolean(receipt.status)
+                            } else {
+                                txStatus.innerHTML = 'Status: false (Something went wrong. The transaction is reverted.)'
+                            }
+                        } else {
+                            txStatus.innerHTML = 'Status: false (Please wait a few seconds/minutes. It depends on the chain.)'
+                        }
+                    });
+            }
+        }
+
         getBalance();
+    }
+
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
     }
 
     function toHex(value) {
@@ -167,5 +202,6 @@ title: Donate
         sendEthButton.style.display = 'none'
         txHash.style.display = 'none'
         txInfo.style.display = 'none'
+        txStatus.style.display = 'none'
     }
 </script>
