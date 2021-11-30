@@ -46,7 +46,8 @@ title: Donate
                 <button style="display: none;" disabled class="sendEthButton btn btn-outline-dark"></button>
                 <p class="txHash mt-2 mb-0"></p>
                 <span class="txStatus"></span>
-                <p class="txInfo mt-2" style="display: none;">Thank you! To get transaction details, find it from explorer of
+                <p class="txInfo mt-2" style="display: none;">Thank you! To get transaction details, find it from
+                    explorer of
                     the
                     chain which
                     used in Metamask.</p>
@@ -161,22 +162,17 @@ title: Donate
                         if (receipt) {
                             txStatus.style.display = ''
                             if (parseInt(receipt.status)) {
+                                getBalance();
                                 txStatus.innerHTML = 'Status: ' + Boolean(receipt.status)
                             } else {
                                 txStatus.innerHTML = 'Status: false (Something went wrong. The transaction is reverted.)'
                             }
                         } else {
-                            txStatus.innerHTML = 'Status: false (Please wait a few seconds/minutes. It depends on the chain.)'
+                            txStatus.innerHTML = 'Status: pending (Please wait a few seconds/minutes. It depends on the chain.)'
                         }
                     });
             }
         }
-
-        getBalance();
-    }
-
-    function sleep(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
     }
 
     function toHex(value) {
