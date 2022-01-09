@@ -1,6 +1,6 @@
-- name:         /dev/random
-  description:  /dev/random
-  url:          '#'
+- name:         landindex
+  description:  LandIndex provides digital land prices and analytics. Land investing basics, guides and resources. Check out Metaverse land prices.
+  url:          https://landindex.io
 
 - name:         /dev/random
   description:  /dev/random
