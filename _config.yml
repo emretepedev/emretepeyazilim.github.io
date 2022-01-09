@@ -1,11 +1,10 @@
 title:        Emre Tepe | @emretepedev
 email:        emretepedev@gmail.com
-tagline:      Web Sitenizi Oluşturun!
-description:  Web Siteniz İçin Fiyat Alın Ve Bir Web Sitesi Oluşturun!
+tagline:      The Personal Website
+description:  Emre Tepe - emretepedev
 author:       Emre Tepe
 url:          https://emretepedev.github.io
-
-locale:       tr_TR
+locale:       en_US
 google_site_verification:
 social:
   name: Emre Tepe
@@ -15,11 +14,9 @@ social:
     - https://www.linkedin.com/in/emretepedev
     - https://github.com/emretepedev
     - https://instagram.com/emretepedev
-
 plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
-
 twitter:
   username: emretepedev
   card: summary
