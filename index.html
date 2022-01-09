@@ -23,13 +23,18 @@ title: Homepage
     </section>
     <section class="portfolio-block photography">
         <div class="container">
-            <div class="row no-gutters border-top">
+            <div class="row no-gutters border-top" style="height: 300px">
                 {% for project in site.data.projects limit:3 %}
                 {% capture imageurlpng %}assets/vendor/img/logo/{{ project.name | slugify: "latin" }}.png{%
                 endcapture %}
-                <div class="col-md-4 item zoom-on-hover"><a href="{{ project.url }}"><img class="img-fluid image"
-                            title="{{ project.name }}" alt="{{ project.name }}"
-                            src="{{ imageurlpng | relative_url }}"></a></div>
+                <div class="col-md-4 item zoom-on-hover">
+                    <a target="_blank" href="{{ project.url }}">
+                        <img class="img-fluid image"
+                                title="{{ project.name }}" alt="{{ project.name }}"
+                                src="{{ imageurlpng | relative_url }}"
+                                style="height: 100%; width: 100%;">
+                    </a>
+                </div>
                 {% endfor %}
             </div>
             <div class="text-center mt-2 mb-3 mt-lg-3 mb-lg-4">
