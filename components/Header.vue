@@ -5,7 +5,7 @@
             app
             clipped-left
             color="teal"
-            class="md:h-12"
+            class="h-12"
         >
             <v-app-bar-nav-icon
                 @click.stop="drawer = !drawer"
