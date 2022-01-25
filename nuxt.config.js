@@ -85,8 +85,7 @@ export default {
             name: 'Emre Tepe | ' + spaName,
             author: spaName,
             description:
-                spaName +
-                ' provides digital land prices and analytics. Land investing basics, guides and resources. Check out Metaverse land prices.',
+                'I’m a young ambitious web developer who seriously cares discipline. On the other hand, I’m an open-minded person to learn new stuffs about technology and software.',
             theme_color: '#1E1E1E',
             lang: 'en',
             ogType: 'website',
