@@ -68,8 +68,8 @@ typings/
 # nuxt.js build output
 .nuxt
 
-# Nuxt generate
-dist
+# Nuxt generate (to deploy on ghpages)
+#dist
 
 # vuepress build output
 .vuepress/dist
