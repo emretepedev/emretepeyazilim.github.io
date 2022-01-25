@@ -76,7 +76,7 @@ export default {
             mobileApp: true,
             appleStatusBarStyle: 'black',
             favicon: true,
-            name: 'Emre Tepe | ',
+            name: 'Homepage | ' + spaName,
             author: spaName,
             description:
                 'I’m a young ambitious web developer who seriously cares discipline. On the other hand, I’m an open-minded person to learn new stuffs about technology and software.',

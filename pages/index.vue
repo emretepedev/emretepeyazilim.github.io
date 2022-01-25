@@ -50,10 +50,13 @@
 </template>
 
 <script>
-import { defineComponent } from '@nuxtjs/composition-api'
+import { defineComponent, useMeta } from '@nuxtjs/composition-api'
 
 export default defineComponent({
+    head: {},
     setup() {
+        useMeta({ title: 'Homepage | ' })
+
         return {
             projects: [
                 {
