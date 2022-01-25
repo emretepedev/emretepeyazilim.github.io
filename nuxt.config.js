@@ -9,7 +9,7 @@ export default {
     target: 'static',
 
     router: {
-        base: '/',
+        base: '/emretepedev.github.io/',
     },
 
     ssr: true,
