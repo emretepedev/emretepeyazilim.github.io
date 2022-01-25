@@ -15,10 +15,6 @@ export default {
         titleTemplate: '%s' + spaName,
         meta: [
             {
-                name: 'viewport',
-                content: 'width=device-width, initial-scale=1',
-            },
-            {
                 hid: 'keywords',
                 name: 'keywords',
                 content: 'emre tepe, blockchain, developer',
@@ -76,25 +72,17 @@ export default {
             plugin: false,
         },
         meta: {
-            charset: 'utf-8',
-            viewport: 'width=device-width, initial-scale=',
+            viewport: 'width=device-width, initial-scale=1',
             mobileApp: true,
             appleStatusBarStyle: 'black',
             favicon: true,
-            name: 'Emre Tepe | ' + spaName,
+            name: 'Emre Tepe | ',
             author: spaName,
             description:
                 'I’m a young ambitious web developer who seriously cares discipline. On the other hand, I’m an open-minded person to learn new stuffs about technology and software.',
             theme_color: '#1E1E1E',
-            lang: 'en',
-            ogType: 'website',
-            ogSiteName: spaName,
-            ogTitle: 'Emre Tepe | ' + spaName,
-            ogDescription:
-                'I’m a young ambitious web developer who seriously cares discipline. On the other hand, I’m an open-minded person to learn new stuffs about technology and software.',
             ogHost: spaUrl,
             ogImage: true,
-            ogUrl: spaUrl,
             twitterCard: 'summary_large_image',
             twitterSite: spaName,
             twitterCreator: spaName,
