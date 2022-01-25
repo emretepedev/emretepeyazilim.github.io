@@ -72,8 +72,7 @@ export default {
 
     pwa: {
         icon: {
-            fileName: 'logoForManifest.png',
-            targetDir: 'icons',
+            fileName: 'icon.png',
             plugin: false,
         },
         meta: {
