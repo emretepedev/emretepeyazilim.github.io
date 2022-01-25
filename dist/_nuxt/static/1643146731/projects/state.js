@@ -1,1 +1,0 @@
-window.__NUXT__=(function(a){return {staticAssetsBase:"\u002Femretepedev.github.io\u002F_nuxt\u002Fstatic\u002F1643146731",layout:"default",error:a,state:{},serverRendered:true,routePath:"\u002Fprojects",config:{_app:{basePath:"\u002Femretepedev.github.io\u002F",assetsPath:"\u002Femretepedev.github.io\u002F_nuxt\u002F",cdnURL:a}},globalRefs:{}}}(null));

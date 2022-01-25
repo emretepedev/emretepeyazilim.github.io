@@ -8,10 +8,6 @@ const googleAnalyticsId = process.env.GOOGLE_ANALYTICS_ID
 export default {
     target: 'static',
 
-    router: {
-        base: '/emretepedev.github.io/',
-    },
-
     ssr: true,
 
     // Global page headers: https://go.nuxtjs.dev/config-head
