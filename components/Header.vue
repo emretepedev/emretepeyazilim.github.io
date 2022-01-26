@@ -6,12 +6,15 @@
             clipped-left
             class="h-12"
         >
-            <v-app-bar-nav-icon
-                @click.stop="drawer = !drawer"
-            ></v-app-bar-nav-icon>
-            <v-toolbar-title>{{ $config.spaName }}</v-toolbar-title>
+            <v-toolbar-title class="flex justify-between items-center">
+                <v-app-bar-nav-icon
+                    @click.stop="drawer = !drawer"
+                ></v-app-bar-nav-icon>
+                <span>
+                    {{ $config.spaName }}
+                </span>
+            </v-toolbar-title>
         </v-app-bar>
-
         <v-navigation-drawer
             v-model="drawer"
             app
@@ -21,30 +24,35 @@
         >
             <v-list-item>
                 <v-list-item-content>
-                    <v-list-item-title>{{ $config.spaName }}</v-list-item-title>
+                    <v-list-item-title>
+                        <v-icon
+                            v-if="$vuetify.breakpoint.mdAndDown"
+                            @click.stop="drawer = !drawer"
+                        >
+                            {{ mdiClose }}
+                        </v-icon>
+                        <span v-if="!$vuetify.breakpoint.mdAndDown">
+                            {{ $config.spaName }}
+                        </span>
+                    </v-list-item-title>
                 </v-list-item-content>
             </v-list-item>
             <v-divider></v-divider>
-            <v-list v-if="$vuetify.breakpoint.mdAndDown">
-                <v-list-item class="px-2">
-                    <v-icon @click.stop="drawer = !drawer">
-                        {{ mdiClose }}
-                    </v-icon>
-                </v-list-item>
-            </v-list>
-            <v-list nav dense>
-                <div active-class="red" v-for="page in pages" :key="page.title">
-                    <nuxt-link :to="page.to">
-                        <v-list-item link>
-                            <v-list-item-icon>
-                                <v-icon>{{ page.icon }}</v-icon>
-                            </v-list-item-icon>
-                            <v-list-item-title>
-                                {{ page.title }}
-                            </v-list-item-title>
-                        </v-list-item>
-                    </nuxt-link>
-                </div>
+            <v-list nav dense active-class="text--red">
+                <nuxt-link
+                    v-for="page in pages"
+                    :key="page.title"
+                    :to="page.to"
+                >
+                    <v-list-item link>
+                        <v-list-item-icon>
+                            <v-icon>{{ page.icon }}</v-icon>
+                        </v-list-item-icon>
+                        <v-list-item-title>
+                            {{ page.title }}
+                        </v-list-item-title>
+                    </v-list-item>
+                </nuxt-link>
             </v-list>
         </v-navigation-drawer>
     </div>

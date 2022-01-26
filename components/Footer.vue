@@ -56,57 +56,46 @@ export default defineComponent({
         return {
             icons: [
                 {
-                    title: 'Facebook',
-                    href: 'https://facebook.com',
-                    image: mdiFacebook,
-                },
-                {
-                    title: 'Twitter',
-                    href: 'https://twitter.com',
-                    image: mdiTwitter,
-                },
-                {
-                    title: 'Linkedin',
-                    href: 'https://linkedin.com',
-                    image: mdiLinkedin,
-                },
-                {
-                    title: 'Instagram',
-                    href: 'https://instagram.com',
-                    image: mdiInstagram,
-                },
-                {
-                    title: 'Skype',
-                    href: 'https://skype.com',
-                    image: mdiSkype,
-                },
-                {
-                    title: 'Whatsapp',
-                    href: 'https://whatsapp.com',
-                    image: mdiWhatsapp,
-                },
-                {
-                    title: 'Telegram',
-                    href: 'https://telegram.com',
-                    image: mdiSend,
-                },
-                {
-                    title: 'Discord',
-                    href: 'https://discord.com',
-                    image: mdiDiscord,
-                },
-                {
-                    title: 'Github',
-                    href: 'https://github.com',
+                    href: 'https://github.com/emretepedev',
                     image: mdiGithub,
                 },
                 {
-                    title: 'Email',
+                    href: 'https://linkedin.com/in/emretepedev',
+                    image: mdiLinkedin,
+                },
+                {
+                    href: 'https://twitter.com/emretepedev',
+                    image: mdiTwitter,
+                },
+                {
+                    href: 'https://instagram.com/emretepedev',
+                    image: mdiInstagram,
+                },
+                {
+                    href: 'https://facebook.com/emretepedev',
+                    image: mdiFacebook,
+                },
+                {
+                    href: 'https://telegram.me/emretepedev',
+                    image: mdiSend,
+                },
+                {
+                    href: 'https://discordapp.com/users/934538354576490496',
+                    image: mdiDiscord,
+                },
+                {
+                    href: 'https://api.whatsapp.com/send?phone=905522801804&text=Hi%20@emretepedev.',
+                    image: mdiWhatsapp,
+                },
+                {
+                    href: 'skype:live:.cid.ebf04f9e644e1570',
+                    image: mdiSkype,
+                },
+                {
                     href: 'mailto:emretepedev@gmail.com',
                     image: mdiEmail,
                 },
                 {
-                    title: 'Phone',
                     href: 'tel:+905522801804',
                     image: mdiPhone,
                 },
