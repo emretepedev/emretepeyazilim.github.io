@@ -90,6 +90,7 @@ import {
     defineComponent,
     useMeta,
     onMounted,
+    useContext,
     ref,
 } from '@nuxtjs/composition-api'
 
@@ -100,11 +101,13 @@ export default defineComponent({
     setup() {
         useMeta({ title: 'Homepage | ' })
 
+        const { $config } = useContext()
+
         const contributionCount = ref([])
 
         onMounted(() => {
             const headers = {
-                Authorization: `bearer ${process.env.githubPersonalAccessToken}`,
+                Authorization: `bearer ${$config.githubPersonalAccessToken}`,
             }
 
             const body = {
