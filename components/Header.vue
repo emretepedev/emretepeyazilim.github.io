@@ -4,7 +4,6 @@
             v-if="$vuetify.breakpoint.mdAndDown"
             app
             clipped-left
-            color="teal"
             class="h-12"
         >
             <v-app-bar-nav-icon
