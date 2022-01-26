@@ -25,10 +25,10 @@
         "@nuxtjs/pwa": "^3.3.5",
         "@nuxt/image": "^0.6.0",
         "@nuxtjs/tailwindcss": "^4.2.1",
-        "@nuxtjs/vuetify": "^1.12.3"
+        "@nuxtjs/vuetify": "^1.12.3",
+        "@mdi/js": "^6.5.95"
     },
     "devDependencies": {
-        "@mdi/js": "^6.5.95",
         "push-dir": "^0.4.1"
     }
 }
