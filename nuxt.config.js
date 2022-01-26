@@ -41,14 +41,13 @@ export default {
     components: true,
 
     // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-    buildModules: ['@nuxtjs/composition-api/module'],
+    buildModules: ['@nuxtjs/composition-api/module', '@nuxtjs/pwa'],
 
     // Modules: https://go.nuxtjs.dev/config-modules
     modules: [
         '@nuxtjs/dotenv',
         '@nuxtjs/google-analytics',
         '@nuxtjs/google-fonts',
-        '@nuxtjs/pwa',
         '@nuxtjs/robots',
         '@nuxtjs/sitemap',
         '@nuxt/image',
