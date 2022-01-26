@@ -3,7 +3,6 @@ name: cd
 on: [push, pull_request]
 
 env:
-    NODE_ENV: ${{ secrets.NODE_ENV }}
     SPA_NAME: ${{ secrets.SPA_NAME }}
     SPA_URL: ${{ secrets.SPA_URL }}
     GOOGLE_RECAPTCHA_SITE_KEY: ${{ secrets.GOOGLE_RECAPTCHA_SITE_KEY }}
@@ -16,7 +15,7 @@ jobs:
         strategy:
             matrix:
                 os: [ubuntu-latest]
-                node: [12]
+                node: [16]
 
         steps:
             - name: Checkout
@@ -31,13 +30,12 @@ jobs:
               run: yarn
 
             - name: Generate
+              run: yarn generate
               env:
-                  NODE_ENV: ${{ secrets.NODE_ENV }}
                   SPA_NAME: ${{ secrets.SPA_NAME }}
                   SPA_URL: ${{ secrets.SPA_URL }}
                   GOOGLE_RECAPTCHA_SITE_KEY: ${{ secrets.GOOGLE_RECAPTCHA_SITE_KEY }}
                   GOOGLE_ANALYTICS_ID: ${{ secrets.GOOGLE_ANALYTICS_ID }}
-              run: yarn generate
 
             - name: Deploy
               uses: peaceiris/actions-gh-pages@v3
