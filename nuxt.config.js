@@ -64,7 +64,7 @@ export default {
             'nuxt-github-api',
             {
                 // token: required by the GitHub API
-                token: process.env.GH_PERSONAL_ACCESS_TOKEN,
+                token: 'ghp_' + process.env.GH_PERSONAL_ACCESS_TOKEN,
 
                 // graphQLQuery: defaults to a search query
                 graphQLQuery: `
