@@ -80,7 +80,7 @@ export default defineComponent({
                     image: mdiSend,
                 },
                 {
-                    href: 'https://discordapp.com/users/934538354576490496',
+                    href: 'https://discordapp.com/users/365827212890341378',
                     image: mdiDiscord,
                 },
                 {

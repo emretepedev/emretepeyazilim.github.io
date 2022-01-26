@@ -39,6 +39,41 @@
                     </v-row>
                 </div>
                 <div>
+                    <v-card class="overflow-y-auto" outlined ripple>
+                        <v-card-title>
+                            <v-icon class="mr-5">
+                                {{ mdiPoll }}
+                            </v-icon>
+                        </v-card-title>
+                        <v-card-subtitle class="text-center">
+                            <div class="text-caption grey--text text-uppercase">
+                                <strong>GitHub</strong> contributions in the
+                                last <strong>30 days</strong> (<strong
+                                    >exclude GitLab etc.</strong
+                                >)
+                            </div>
+                        </v-card-subtitle>
+                        <v-sheet color="transparent">
+                            <v-sparkline
+                                :value="contributionCount"
+                                :gradient="['#f72047', '#ffd200', '#1feaea']"
+                                :smooth="10"
+                                :padding="8"
+                                :line-width="1"
+                                stroke-linecap="round"
+                                gradient-direction="top"
+                                :fill="false"
+                                type="trend"
+                                auto-draw
+                                :show-labels="true"
+                                :auto-line-width="false"
+                                :auto-draw-duration="5000"
+                            >
+                            </v-sparkline>
+                        </v-sheet>
+                    </v-card>
+                </div>
+                <div>
                     <v-row>
                         <v-col v-for="project in projects" :key="project.name">
                             <Project :project="project" />
@@ -51,12 +86,66 @@
 </template>
 
 <script>
-import { defineComponent, useMeta } from '@nuxtjs/composition-api'
+import {
+    defineComponent,
+    useMeta,
+    onMounted,
+    useContext,
+    ref,
+} from '@nuxtjs/composition-api'
+
+import { mdiPoll } from '@mdi/js'
 
 export default defineComponent({
     head: {},
     setup() {
         useMeta({ title: 'Homepage | ' })
+
+        const { $config } = useContext()
+
+        const contributionCount = ref([])
+
+        onMounted(() => {
+            const headers = {
+                Authorization: `bearer ${$config.githubPersonalAccessToken}`,
+            }
+
+            const body = {
+                query: `
+                    query {
+                        user(login: "emretepedev") {
+                            contributionsCollection(from: "2021-12-27T13:51:35.274Z" to: "2022-01-26T13:48:18.708Z") {
+                                contributionCalendar {
+                                    weeks {
+                                        contributionDays {
+                                            contributionCount
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                `,
+            }
+
+            fetch('https://api.github.com/graphql', {
+                method: 'POST',
+                body: JSON.stringify(body),
+                headers: headers,
+            }).then((response) => {
+                response.json().then((data) => {
+                    data.data.user.contributionsCollection.contributionCalendar.weeks.map(
+                        (week) => {
+                            week.contributionDays.map((day) => {
+                                contributionCount.value.push(
+                                    day.contributionCount
+                                )
+                            })
+                        }
+                    )
+                })
+            })
+        })
 
         return {
             projects: [
@@ -74,6 +163,8 @@ export default defineComponent({
                     image: '/images/dev-null.png',
                 },
             ],
+            contributionCount,
+            mdiPoll,
         }
     },
 })

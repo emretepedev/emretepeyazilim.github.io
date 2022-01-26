@@ -27,6 +27,7 @@ export default {
     publicRuntimeConfig: {
         spaName: process.env.SPA_NAME,
         spaUrl: process.env.SPA_URL,
+        githubPersonalAccessToken: process.env.GITHUB_PERSONAL_ACCESS_TOKEN,
     },
 
     privateRuntimeConfig: {},
@@ -45,7 +46,6 @@ export default {
 
     // Modules: https://go.nuxtjs.dev/config-modules
     modules: [
-        '@nuxtjs/dotenv',
         '@nuxtjs/google-analytics',
         '@nuxtjs/google-fonts',
         '@nuxtjs/robots',
