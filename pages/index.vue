@@ -32,7 +32,7 @@
                                     stuffs about technology and software. In
                                     addition to the technical matters that I
                                     care, I personally take account of
-                                    everything about the notion “esteem”..
+                                    everything about the notion “esteem”.
                                 </div>
                             </v-card-text>
                         </v-card>
@@ -47,8 +47,8 @@
                         </v-card-title>
                         <v-card-subtitle class="text-center">
                             <div class="text-caption grey--text text-uppercase">
-                                <strong>GitHub</strong> contributions in the
-                                last <strong>30 days</strong> (<strong
+                                <strong>GitHub</strong> contributions 30D one of
+                                the recent months (<strong
                                     >exclude GitLab etc.</strong
                                 >)
                             </div>
@@ -89,9 +89,8 @@
 import {
     defineComponent,
     useMeta,
-    onMounted,
-    useContext,
     ref,
+    onMounted,
 } from '@nuxtjs/composition-api'
 
 import { mdiPoll } from '@mdi/js'
@@ -102,18 +101,13 @@ export default defineComponent({
     setup() {
         useMeta({ title: 'Homepage | ' })
 
-        const { $github } = useContext()
-
         const contributionCount = ref([])
 
         onMounted(() => {
-            $github.user.contributionsCollection.contributionCalendar.weeks.map(
-                (week) => {
-                    week.contributionDays.map((day) => {
-                        contributionCount.value.push(day.contributionCount)
-                    })
-                }
-            )
+            contributionCount.value = [
+                4, 3, 4, 0, 4, 3, 0, 1, 2, 5, 6, 1, 3, 0, 10, 6, 5, 12, 24, 10,
+                0, 12, 19, 8, 27, 11, 13, 2, 8, 4,
+            ]
         })
 
         return {
