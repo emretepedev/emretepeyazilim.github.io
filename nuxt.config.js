@@ -200,8 +200,4 @@ export default {
         siteKey: siteKey,
         version: 2,
     },
-
-    image: {
-        domains: ['https://landindex.io'],
-    },
 }

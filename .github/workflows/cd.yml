@@ -3,6 +3,7 @@ name: cd
 on: [push, pull_request]
 
 env:
+    NODE_ENV: ${{ secrets.NODE_ENV }}
     SPA_NAME: ${{ secrets.SPA_NAME }}
     SPA_URL: ${{ secrets.SPA_URL }}
     GOOGLE_RECAPTCHA_SITE_KEY: ${{ secrets.GOOGLE_RECAPTCHA_SITE_KEY }}
@@ -31,11 +32,6 @@ jobs:
 
             - name: Generate
               run: yarn generate
-              env:
-                  SPA_NAME: ${{ secrets.SPA_NAME }}
-                  SPA_URL: ${{ secrets.SPA_URL }}
-                  GOOGLE_RECAPTCHA_SITE_KEY: ${{ secrets.GOOGLE_RECAPTCHA_SITE_KEY }}
-                  GOOGLE_ANALYTICS_ID: ${{ secrets.GOOGLE_ANALYTICS_ID }}
 
             - name: Deploy
               uses: peaceiris/actions-gh-pages@v3
