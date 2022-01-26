@@ -9,7 +9,7 @@
             <v-app-bar-nav-icon
                 @click.stop="drawer = !drawer"
             ></v-app-bar-nav-icon>
-            <v-toolbar-title>{{ spaName }}</v-toolbar-title>
+            <v-toolbar-title>{{ $config.spaName }}</v-toolbar-title>
         </v-app-bar>
 
         <v-navigation-drawer
@@ -21,7 +21,7 @@
         >
             <v-list-item>
                 <v-list-item-content>
-                    <v-list-item-title>{{ spaName }}</v-list-item-title>
+                    <v-list-item-title>{{ $config.spaName }}</v-list-item-title>
                 </v-list-item-content>
             </v-list-item>
             <v-divider></v-divider>
@@ -77,7 +77,6 @@ export default defineComponent({
                 { title: 'Contact', to: '/contact', icon: mdiCardAccountMail },
                 { title: 'Coffee', to: '/coffee-with-crypto', icon: mdiCoffee },
             ],
-            spaName: process.env.SPA_NAME,
             mdiClose,
         }
     },

@@ -1,18 +1,20 @@
-require('dotenv').config()
-
-const spaName = process.env.SPA_NAME
-const spaUrl = process.env.SPA_URL
-const siteKey = process.env.GOOGLE_RECAPTCHA_SITE_KEY
-const googleAnalyticsId = process.env.GOOGLE_ANALYTICS_ID
-
 export default {
     target: 'static',
 
     ssr: true,
 
+    dev: false,
+
+    telemetry: false,
+
+    loading: false,
+
+    // Auto import components: https://go.nuxtjs.dev/config-components
+    components: true,
+
     // Global page headers: https://go.nuxtjs.dev/config-head
     head: {
-        titleTemplate: '%s' + spaName,
+        titleTemplate: '%s' + process.env.SPA_NAME,
         meta: [
             {
                 hid: 'keywords',
@@ -22,11 +24,12 @@ export default {
         ],
     },
 
-    dev: false,
+    publicRuntimeConfig: {
+        spaName: process.env.SPA_NAME,
+        spaUrl: process.env.SPA_URL,
+    },
 
-    telemetry: false,
-
-    loading: false,
+    privateRuntimeConfig: {},
 
     // Global CSS: https://go.nuxtjs.dev/config-css
     css: ['@/assets/css/main.css'],
@@ -36,9 +39,6 @@ export default {
         '~/plugins/vee-validate',
         { src: '~/plugins/vue-toastify', mode: 'client' },
     ],
-
-    // Auto import components: https://go.nuxtjs.dev/config-components
-    components: true,
 
     // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
     buildModules: ['@nuxtjs/composition-api/module', '@nuxtjs/pwa'],
@@ -75,20 +75,20 @@ export default {
             mobileApp: true,
             appleStatusBarStyle: 'black',
             favicon: true,
-            name: 'Homepage | ' + spaName,
-            author: spaName,
+            name: 'Homepage | ' + process.env.SPA_NAME,
+            author: process.env.SPA_NAME,
             description:
                 'I’m a young ambitious web developer who seriously cares discipline. On the other hand, I’m an open-minded person to learn new stuffs about technology and software.',
             theme_color: '#1E1E1E',
-            ogHost: spaUrl,
+            ogHost: process.env.SPA_URL,
             ogImage: true,
             twitterCard: 'summary_large_image',
-            twitterSite: spaName,
-            twitterCreator: spaName,
+            twitterSite: process.env.SPA_NAME,
+            twitterCreator: process.env.SPA_NAME,
         },
         manifest: {
-            name: 'Homepage | ' + spaName,
-            short_name: spaName,
+            name: 'Homepage | ' + process.env.SPA_NAME,
+            short_name: process.env.SPA_NAME,
             description:
                 'I’m a young ambitious web developer who seriously cares discipline. On the other hand, I’m an open-minded person to learn new stuffs about technology and software.',
             background_color: '#1E1E1E',
@@ -96,7 +96,7 @@ export default {
     },
 
     sitemap: {
-        hostname: spaUrl,
+        hostname: process.env.SPA_URL,
         gzip: true,
         exclude: [],
         defaults: {
@@ -120,7 +120,7 @@ export default {
             Allow: '/',
         },
         {
-            Sitemap: spaUrl + '/sitemap.xml',
+            Sitemap: process.env.SPA_URL + '/sitemap.xml',
         },
     ],
 
@@ -135,7 +135,7 @@ export default {
     googleFonts: {
         families: {
             Roboto: {
-                wght: [100, 300, 400, 500, 700, 900],
+                wght: [100, 200, 300, 400, 500, 600, 700, 800, 900],
             },
         },
         display: 'swap',
@@ -191,13 +191,13 @@ export default {
     },
 
     googleAnalytics: {
-        id: googleAnalyticsId,
+        id: process.env.GOOGLE_ANALYTICS_ID,
     },
 
     recaptcha: {
         hideBadge: false,
         language: 'en',
-        siteKey: siteKey,
+        siteKey: process.env.GOOGLE_RECAPTCHA_SITE_KEY,
         version: 2,
     },
 }

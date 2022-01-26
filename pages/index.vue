@@ -18,6 +18,7 @@
                                     class="rounded-full inline"
                                     src="/images/avatar.jpg"
                                     width="150"
+                                    height="150"
                                     title="@emretepedev"
                                     alt="@emretepedev"
                                     provider="static"

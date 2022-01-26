@@ -27,7 +27,7 @@
                 <v-divider></v-divider>
                 <v-card-text class="white--text">
                     {{ new Date().getFullYear() }} —
-                    <strong>{{ spaName }}</strong>
+                    <strong>{{ $config.spaName }}</strong>
                 </v-card-text>
             </v-card>
         </v-footer>
@@ -111,7 +111,6 @@ export default defineComponent({
                     image: mdiPhone,
                 },
             ],
-            spaName: process.env.SPA_NAME,
         }
     },
 })
