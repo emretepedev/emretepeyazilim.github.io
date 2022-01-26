@@ -31,7 +31,7 @@
                                     stuffs about technology and software. In
                                     addition to the technical matters that I
                                     care, I personally take account of
-                                    everything about the notion “esteem”.....
+                                    everything about the notion “esteem”......
                                 </div>
                             </v-card-text>
                         </v-card>
