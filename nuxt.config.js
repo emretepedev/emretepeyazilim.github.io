@@ -88,15 +88,11 @@ export default {
             twitterCreator: spaName,
         },
         manifest: {
-            name: 'Emre Tepe | ' + spaName,
+            name: 'Homepage | ' + spaName,
             short_name: spaName,
             description:
                 'I’m a young ambitious web developer who seriously cares discipline. On the other hand, I’m an open-minded person to learn new stuffs about technology and software.',
-            lang: 'en',
-            useWebmanifestExtension: false,
-            display: 'standalone',
             background_color: '#1E1E1E',
-            dir: 'ltr',
         },
     },
 
