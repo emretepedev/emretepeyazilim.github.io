@@ -3,7 +3,6 @@ name: cd
 on: [push, pull_request]
 
 env:
-    NODE_ENV: ${{ secrets.NODE_ENV }}
     SPA_NAME: ${{ secrets.SPA_NAME }}
     SPA_URL: ${{ secrets.SPA_URL }}
     GOOGLE_RECAPTCHA_SITE_KEY: ${{ secrets.GOOGLE_RECAPTCHA_SITE_KEY }}
@@ -33,7 +32,6 @@ jobs:
             - name: Generate
               run: yarn generate
               env:
-                  NODE_ENV: ${{ secrets.NODE_ENV }}
                   SPA_NAME: ${{ secrets.SPA_NAME }}
                   SPA_URL: ${{ secrets.SPA_URL }}
                   GOOGLE_RECAPTCHA_SITE_KEY: ${{ secrets.GOOGLE_RECAPTCHA_SITE_KEY }}
