@@ -102,54 +102,18 @@ export default defineComponent({
     setup() {
         useMeta({ title: 'Homepage | ' })
 
-        const { $config } = useContext()
+        const { $github } = useContext()
 
         const contributionCount = ref([])
 
-        const from = new Date()
-        const to = new Date()
-        from.setDate(to.getDate() - 30)
-
         onMounted(() => {
-            const headers = {
-                Authorization: `bearer ${$config.githubPersonalAccessToken}`,
-            }
-
-            const body = {
-                query: `
-                    query {
-                        user(login: "emretepedev") {
-                            contributionsCollection(from: "${from.toISOString()}" to: "${to.toISOString()}") {
-                                contributionCalendar {
-                                    weeks {
-                                        contributionDays {
-                                            contributionCount
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                `,
-            }
-
-            fetch('https://api.github.com/graphql', {
-                method: 'POST',
-                body: JSON.stringify(body),
-                headers: headers,
-            }).then((response) => {
-                response.json().then((data) => {
-                    data.data.user.contributionsCollection.contributionCalendar.weeks.map(
-                        (week) => {
-                            week.contributionDays.map((day) => {
-                                contributionCount.value.push(
-                                    day.contributionCount
-                                )
-                            })
-                        }
-                    )
-                })
-            })
+            $github.user.contributionsCollection.contributionCalendar.weeks.map(
+                (week) => {
+                    week.contributionDays.map((day) => {
+                        contributionCount.value.push(day.contributionCount)
+                    })
+                }
+            )
         })
 
         return {

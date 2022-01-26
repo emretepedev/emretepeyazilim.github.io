@@ -1,3 +1,7 @@
+const from = new Date()
+const to = new Date()
+from.setDate(to.getDate() - 30)
+
 export default {
     target: 'static',
 
@@ -57,6 +61,30 @@ export default {
         '@nuxtjs/tailwindcss',
         '@nuxtjs/vuetify',
         '@nuxtjs/recaptcha',
+        [
+            'nuxt-github-api',
+            {
+                // token: required by the GitHub API
+                token: process.env.GH_PERSONAL_ACCESS_TOKEN,
+
+                // graphQLQuery: defaults to a search query
+                graphQLQuery: `
+                                query {
+                                    user(login: "emretepedev") {
+                                        contributionsCollection(from: "${from.toISOString()}" to: "${to.toISOString()}") {
+                                            contributionCalendar {
+                                                weeks {
+                                                    contributionDays {
+                                                        contributionCount
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            `,
+            },
+        ],
     ],
 
     // Build Configuration: https://go.nuxtjs.dev/config-build
