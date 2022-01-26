@@ -24,6 +24,10 @@ export default {
         ],
     },
 
+    env: {
+        githubPersonalAccessToken: process.env.GITHUB_PERSONAL_ACCESS_TOKEN,
+    },
+
     publicRuntimeConfig: {
         spaName: process.env.SPA_NAME,
         spaUrl: process.env.SPA_URL,
@@ -49,6 +53,7 @@ export default {
         '@nuxtjs/google-analytics',
         '@nuxtjs/google-fonts',
         '@nuxtjs/robots',
+        '@nuxtjs/dotenv',
         '@nuxtjs/sitemap',
         '@nuxt/image',
         'nuxt-purgecss',
