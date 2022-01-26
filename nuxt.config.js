@@ -32,7 +32,6 @@ export default {
     publicRuntimeConfig: {
         spaName: process.env.SPA_NAME,
         spaUrl: process.env.SPA_URL,
-        githubPersonalAccessToken: process.env.GH_PERSONAL_ACCESS_TOKEN,
     },
 
     privateRuntimeConfig: {},

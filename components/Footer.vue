@@ -1,5 +1,6 @@
 <template>
     <v-container>
+        <v-divider></v-divider>
         <v-footer padless>
             <v-card flat tile ripple class="white--text text-center w-full">
                 <v-card-text>
