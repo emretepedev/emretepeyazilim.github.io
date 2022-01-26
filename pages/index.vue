@@ -98,12 +98,17 @@ import { mdiPoll } from '@mdi/js'
 
 export default defineComponent({
     head: {},
+
     setup() {
         useMeta({ title: 'Homepage | ' })
 
         const { $config } = useContext()
 
         const contributionCount = ref([])
+
+        const from = new Date()
+        const to = new Date()
+        from.setDate(to.getDate() - 30)
 
         onMounted(() => {
             const headers = {
@@ -114,7 +119,7 @@ export default defineComponent({
                 query: `
                     query {
                         user(login: "emretepedev") {
-                            contributionsCollection(from: "2021-12-27T13:51:35.274Z" to: "2022-01-26T13:48:18.708Z") {
+                            contributionsCollection(from: "${from.toISOString()}" to: "${to.toISOString()}") {
                                 contributionCalendar {
                                     weeks {
                                         contributionDays {

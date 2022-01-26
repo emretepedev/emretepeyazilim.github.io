@@ -14,6 +14,7 @@ export default {
 
     // Global page headers: https://go.nuxtjs.dev/config-head
     head: {
+        title: 'Homepage | ',
         titleTemplate: '%s' + process.env.SPA_NAME,
         meta: [
             {
@@ -42,12 +43,13 @@ export default {
     ],
 
     // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-    buildModules: ['@nuxtjs/composition-api/module', '@nuxtjs/pwa'],
+    buildModules: ['@nuxtjs/composition-api/module'],
 
     // Modules: https://go.nuxtjs.dev/config-modules
     modules: [
         '@nuxtjs/google-analytics',
         '@nuxtjs/google-fonts',
+        '@nuxtjs/pwa',
         '@nuxtjs/robots',
         '@nuxtjs/sitemap',
         '@nuxt/image',
