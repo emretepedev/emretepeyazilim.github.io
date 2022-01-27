@@ -28,6 +28,7 @@ export default {
     publicRuntimeConfig: {
         spaName: process.env.SPA_NAME,
         spaUrl: process.env.SPA_URL,
+        pageclipActionUrl: process.env.PAGECLIP_ACTION_URL,
     },
 
     privateRuntimeConfig: {},
@@ -42,7 +43,7 @@ export default {
     ],
 
     // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-    buildModules: ['@nuxtjs/composition-api/module'],
+    buildModules: [],
 
     // Modules: https://go.nuxtjs.dev/config-modules
     modules: [
@@ -56,6 +57,7 @@ export default {
         '@nuxtjs/tailwindcss',
         '@nuxtjs/vuetify',
         '@nuxtjs/recaptcha',
+        '@nuxtjs/composition-api/module',
     ],
 
     // Build Configuration: https://go.nuxtjs.dev/config-build

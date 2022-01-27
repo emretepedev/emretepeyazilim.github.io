@@ -6828,11 +6828,6 @@ number-is-nan@^1.0.0:
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
   integrity sha1-CXtgK1NCKlIsGvuHkDGDNpQaAR0=
 
-nuxt-github-api@^0.1.6:
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/nuxt-github-api/-/nuxt-github-api-0.1.6.tgz#2273adf9485c2fac6d4328268cbf13ad775bd287"
-  integrity sha512-ZsLRwqadrSY3OJ9zdbGCKhRE7dDVl9eD/zlqX3kDn/KVi9DANgVvaimbTlkxL7xQELMY+1m4dlhLB7OVVDXbKw==
-
 nuxt-purgecss@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/nuxt-purgecss/-/nuxt-purgecss-1.0.0.tgz#7c275205f0b727a5822781908d684f2e094ff5e7"

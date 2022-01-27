@@ -8,6 +8,7 @@ env:
     SPA_URL: ${{ secrets.SPA_URL }}
     GOOGLE_RECAPTCHA_SITE_KEY: ${{ secrets.GOOGLE_RECAPTCHA_SITE_KEY }}
     GOOGLE_ANALYTICS_ID: ${{ secrets.GOOGLE_ANALYTICS_ID }}
+    PAGECLIP_ACTION_URL: ${{ secrets.PAGECLIP_ACTION_URL }}
 
 jobs:
     cd:
