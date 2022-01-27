@@ -4,6 +4,7 @@
             <v-container>
                 <validation-observer ref="observer" v-slot="{ invalid }">
                     <form
+                        ref="form"
                         :action="$config.pageclipActionUrl"
                         @submit.prevent="onSubmit"
                         class="pageclip-form"
@@ -136,6 +137,7 @@ export default defineComponent({
 
         // refs
         const observer = ref(null)
+        const form = ref(null)
 
         // consts
         const name = ref('')
@@ -157,6 +159,8 @@ export default defineComponent({
                 await recaptcha.getResponse().catch(() => {
                     throw new Error('reCAPTCHA Verification: Token not found.')
                 })
+
+                await form.submit()
 
                 vToastify.info('Mail sent successfully.')
             } catch (error) {
@@ -204,6 +208,7 @@ export default defineComponent({
             checkbox,
             items: ['Item 1', 'Item 2', 'Item 3', 'Item 4'],
             observer,
+            form,
             isRecaptched,
             submit,
             onSubmit,
