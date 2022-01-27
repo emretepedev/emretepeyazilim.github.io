@@ -90,6 +90,7 @@ import {
     defineComponent,
     useMeta,
     ref,
+    useContext,
     onMounted,
 } from '@nuxtjs/composition-api'
 
@@ -101,13 +102,63 @@ export default defineComponent({
     setup() {
         useMeta({ title: 'Homepage | ' })
 
+        const { $config } = useContext()
+
         const contributionCount = ref([])
 
+        const from = new Date()
+        const to = new Date()
+        from.setDate(to.getDate() - 30)
+
+        const hexToString = (hex) => {
+            var string = ''
+            for (var i = 0; i < hex.length; i += 2) {
+                string += String.fromCharCode(parseInt(hex.substr(i, 2), 16))
+            }
+
+            return string
+        }
+
         onMounted(() => {
-            contributionCount.value = [
-                4, 3, 4, 0, 4, 3, 0, 1, 2, 5, 6, 1, 3, 0, 10, 6, 5, 12, 24, 10,
-                0, 12, 19, 8, 27, 11, 13, 2, 8, 4,
-            ]
+            console.log(hexToString($config.g))
+
+            const headers = {
+                Authorization: `bearer ${hexToString($config.g)}`,
+            }
+            const body = {
+                query: `
+                    query {
+                        user(login: "emretepedev") {
+                            contributionsCollection(from: "${from.toISOString()}" to: "${to.toISOString()}") {
+                                contributionCalendar {
+                                    weeks {
+                                        contributionDays {
+                                            contributionCount
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                `,
+            }
+            fetch('https://api.github.com/graphql', {
+                method: 'POST',
+                body: JSON.stringify(body),
+                headers: headers,
+            }).then((response) => {
+                response.json().then((data) => {
+                    data.data.user.contributionsCollection.contributionCalendar.weeks.map(
+                        (week) => {
+                            week.contributionDays.map((day) => {
+                                contributionCount.value.push(
+                                    day.contributionCount
+                                )
+                            })
+                        }
+                    )
+                })
+            })
         })
 
         return {

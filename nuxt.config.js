@@ -27,7 +27,7 @@ export default {
 
     publicRuntimeConfig: {
         spaName: process.env.SPA_NAME,
-        spaUrl: process.env.SPA_URL,
+        g: process.env.G,
         pageclipActionUrl: process.env.PAGECLIP_ACTION_URL,
     },
 
