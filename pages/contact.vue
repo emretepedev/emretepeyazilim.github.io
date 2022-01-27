@@ -2,15 +2,12 @@
     <div>
         <div class="flex justify-center mt-12">
             <v-container>
-                <validation-observer
-                    @submit.prevent="submit"
-                    ref="observer"
-                    v-slot="{ invalid }"
-                >
+                <validation-observer ref="observer" v-slot="{ invalid }">
                     <form
                         :action="$config.pageclipActionUrl"
+                        @submit.prevent="onSubmit"
                         class="pageclip-form"
-                        method="post"
+                        method="POST"
                     >
                         <validation-provider
                             v-slot="{ errors }"
@@ -22,7 +19,6 @@
                                 :counter="10"
                                 :error-messages="errors"
                                 label="Name"
-                                required
                                 name="name"
                             ></v-text-field>
                         </validation-provider>
@@ -38,7 +34,6 @@
                                 :counter="7"
                                 :error-messages="errors"
                                 label="Phone Number"
-                                required
                                 name="phoneNumber"
                             ></v-text-field>
                         </validation-provider>
@@ -51,7 +46,6 @@
                                 v-model="email"
                                 :error-messages="errors"
                                 label="E-mail"
-                                required
                                 name="email"
                             ></v-text-field>
                         </validation-provider>
@@ -65,8 +59,6 @@
                                 :items="items"
                                 :error-messages="errors"
                                 label="Select"
-                                data-vv-name="select"
-                                required
                                 name="select"
                             ></v-select>
                         </validation-provider>
@@ -81,15 +73,21 @@
                                 value="1"
                                 label="Option"
                                 type="checkbox"
-                                required
                                 name="checkbox"
                             ></v-checkbox>
                         </validation-provider>
 
+                        <recaptcha
+                            @error="onError"
+                            @success="onSuccess"
+                            @expired="onExpired"
+                        />
+
                         <v-btn
                             class="mr-4 pageclip-form__submit"
                             type="submit"
-                            :disabled="invalid"
+                            :disabled="invalid || !isRecaptched"
+                            @click="submit"
                         >
                             Submit
                         </v-btn>
@@ -112,7 +110,7 @@ export default defineComponent({
         ValidationObserver,
     },
 
-    setup() {
+    setup(_, context) {
         //meta
         useMeta({
             title: 'Contact | ',
@@ -132,17 +130,69 @@ export default defineComponent({
             ],
         })
 
-        // consts
+        // root variables
+        const recaptcha = context.root.$recaptcha
+        const vToastify = context.root.$vToastify
+
+        // refs
         const observer = ref(null)
+
+        // consts
         const name = ref('')
         const phoneNumber = ref('')
         const email = ref('')
         const select = ref(null)
         const checkbox = ref(null)
+        const isRecaptched = ref(false)
 
         // methods
-        const submit = async () => {
-            observer.value.validate()
+        const submit = async (event) => {
+            try {
+                await observer.value.validate().then((result) => {
+                    if (!result) {
+                        throw new Error('Form Validation: Failed.')
+                    }
+                })
+
+                await recaptcha.getResponse().catch(() => {
+                    throw new Error('reCAPTCHA Verification: Token not found.')
+                })
+
+                vToastify.info('Mail sent successfully.')
+            } catch (error) {
+                vToastify.error(String(error))
+
+                event.preventDefault()
+            }
+        }
+
+        const onSubmit = async () => {
+            await resetForm()
+        }
+
+        const resetForm = async () => {
+            await recaptcha.reset()
+            name.value = ''
+            phoneNumber.value = ''
+            email.value = ''
+            select.value = null
+            checkbox.value = null
+            observer.value.reset()
+        }
+
+        const onError = () => {
+            vToastify.error('reCAPTCHA Verification: Error.')
+            isRecaptched.value = false
+        }
+
+        const onSuccess = () => {
+            vToastify.success('reCAPTCHA Verification: Success.')
+            isRecaptched.value = true
+        }
+
+        const onExpired = () => {
+            vToastify.warning('reCAPTCHA Verification: Expired.')
+            isRecaptched.value = false
         }
 
         // return to template
@@ -154,7 +204,12 @@ export default defineComponent({
             checkbox,
             items: ['Item 1', 'Item 2', 'Item 3', 'Item 4'],
             observer,
+            isRecaptched,
             submit,
+            onSubmit,
+            onError,
+            onSuccess,
+            onExpired,
         }
     },
 })

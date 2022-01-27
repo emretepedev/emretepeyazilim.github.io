@@ -199,6 +199,7 @@ export default {
 
     recaptcha: {
         hideBadge: false,
+        size: 'normal',
         language: 'en',
         siteKey: process.env.GOOGLE_RECAPTCHA_SITE_KEY,
         version: 2,
