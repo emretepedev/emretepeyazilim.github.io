@@ -27,7 +27,7 @@ export default {
 
     publicRuntimeConfig: {
         spaName: process.env.SPA_NAME,
-        g: process.env.G,
+        githubPersonalAccessToken: process.env.GH_PERSONAL_ACCESS_TOKEN,
         pageclipActionUrl: process.env.PAGECLIP_ACTION_URL,
     },
 

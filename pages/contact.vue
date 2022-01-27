@@ -106,11 +106,14 @@ import { ValidationObserver, ValidationProvider } from 'vee-validate'
 
 export default defineComponent({
     head: {},
+
     components: {
         ValidationProvider,
         ValidationObserver,
     },
+
     setup() {
+        //meta
         useMeta({
             title: 'Contact | ',
             script: [
@@ -129,18 +132,20 @@ export default defineComponent({
             ],
         })
 
+        // consts
         const observer = ref(null)
-
         const name = ref('')
         const phoneNumber = ref('')
         const email = ref('')
         const select = ref(null)
         const checkbox = ref(null)
 
+        // methods
         const submit = async () => {
             observer.value.validate()
         }
 
+        // return to template
         return {
             name,
             phoneNumber,

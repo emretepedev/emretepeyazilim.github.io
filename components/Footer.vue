@@ -54,6 +54,7 @@ import {
 
 export default defineComponent({
     setup() {
+        // return to template
         return {
             icons: [
                 {

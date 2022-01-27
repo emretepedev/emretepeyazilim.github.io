@@ -19,8 +19,10 @@ export default defineComponent({
     head: {},
 
     setup() {
+        // meta
         useMeta({ title: 'Projects | ' })
 
+        // return to template
         return {
             projects: [
                 {

@@ -41,16 +41,20 @@
                 <div>
                     <v-card class="overflow-y-auto" outlined ripple>
                         <v-card-title>
-                            <v-icon class="mr-5">
+                            <v-spacer
+                                v-if="$vuetify.breakpoint.mdAndDown"
+                            ></v-spacer>
+                            <v-icon>
                                 {{ mdiPoll }}
                             </v-icon>
                         </v-card-title>
                         <v-card-subtitle class="text-center">
                             <div class="text-caption grey--text text-uppercase">
-                                <strong>GitHub</strong> contributions 30D one of
-                                the recent months (<strong
-                                    >exclude GitLab etc.</strong
-                                >)
+                                <strong>GitHub</strong> contributions in the
+                                last <strong>30 days</strong> (<strong
+                                    >exclude</strong
+                                >
+                                GitLab etc.)
                             </div>
                         </v-card-subtitle>
                         <v-sheet color="transparent">
@@ -100,16 +104,20 @@ export default defineComponent({
     head: {},
 
     setup() {
+        // meta
         useMeta({ title: 'Homepage | ' })
 
+        // context
         const { $config } = useContext()
 
+        // consts
         const contributionCount = ref([])
-
         const from = new Date()
         const to = new Date()
+
         from.setDate(to.getDate() - 30)
 
+        // methods
         const hexToString = (hex) => {
             var string = ''
             for (var i = 0; i < hex.length; i += 2) {
@@ -119,12 +127,13 @@ export default defineComponent({
             return string
         }
 
-        onMounted(() => {
-            console.log(hexToString($config.g))
-
+        const getContributionCount = () => {
             const headers = {
-                Authorization: `bearer ${hexToString($config.g)}`,
+                Authorization: `bearer ${hexToString(
+                    $config.githubPersonalAccessToken
+                )}`,
             }
+
             const body = {
                 query: `
                     query {
@@ -142,6 +151,7 @@ export default defineComponent({
                     }
                 `,
             }
+
             fetch('https://api.github.com/graphql', {
                 method: 'POST',
                 body: JSON.stringify(body),
@@ -159,8 +169,14 @@ export default defineComponent({
                     )
                 })
             })
+        }
+
+        // hooks
+        onMounted(() => {
+            getContributionCount()
         })
 
+        // return to template
         return {
             projects: [
                 {

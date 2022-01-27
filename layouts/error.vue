@@ -38,8 +38,10 @@ import { mdiArrowRightThin } from '@mdi/js'
 export default defineComponent({
     head: {},
     setup() {
+        // meta
         useMeta({ title: 'Page not found | ' })
 
+        // return to template
         return {
             mdiArrowRightThin,
         }
