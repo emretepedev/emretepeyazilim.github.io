@@ -1,12 +1,12 @@
 import { extend, setInteractionMode } from 'vee-validate'
 import {
     required,
-    alpha_dash,
     max,
     min,
-    email,
     oneOf,
     regex,
+    is_not,
+    integer,
 } from 'vee-validate/dist/rules'
 
 setInteractionMode('eager')
@@ -14,12 +14,6 @@ setInteractionMode('eager')
 extend('required', {
     ...required,
     message: 'The {_field_} field is required.',
-})
-
-extend('alpha_dash', {
-    ...alpha_dash,
-    message:
-        'The {_field_} must only contain letters, numbers, dashes and underscores.',
 })
 
 extend('max', {
@@ -32,17 +26,23 @@ extend('min', {
     message: 'The {_field_} must be at least {length} characters.',
 })
 
-extend('email', {
-    ...email,
-    message: 'The {_field_} must be a valid email address.',
-})
-
 extend('oneOf', {
     ...oneOf,
-    message: 'The selected {_field_} is invalid.',
+    message: 'The {_field_} must be included in the list of values.',
 })
 
 extend('regex', {
     ...regex,
-    message: 'The {_field_} format is invalid.',
+    message: 'The {_field_} must not match the regular expression. `{regex}`',
+})
+
+extend('integer', {
+    ...integer,
+    message: 'The {_field_} must be numbers only.',
+})
+
+extend('is_not', {
+    ...is_not,
+    message:
+        'The {_field_} must not be included in the given list of values. `{other}`',
 })

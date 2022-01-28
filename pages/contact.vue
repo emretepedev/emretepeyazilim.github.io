@@ -4,7 +4,6 @@
             <v-container>
                 <validation-observer ref="observer" v-slot="{ invalid }">
                     <form
-                        ref="form"
                         :action="$config.pageclipActionUrl"
                         @submit.prevent="onSubmit"
                         class="pageclip-form"
@@ -12,86 +11,104 @@
                     >
                         <validation-provider
                             v-slot="{ errors }"
-                            name="Name"
-                            rules="required|max:10"
+                            name="name"
+                            rules="required|min:2|max:30"
                         >
                             <v-text-field
                                 v-model="name"
-                                :counter="10"
+                                :counter="30"
                                 :error-messages="errors"
-                                label="Name"
+                                label="Name*"
                                 name="name"
-                            ></v-text-field>
-                        </validation-provider>
-                        <validation-provider
-                            v-slot="{ errors }"
-                            name="phoneNumber"
-                            :rules="{
-                                required: true,
-                            }"
-                        >
-                            <v-text-field
-                                v-model="phoneNumber"
-                                :counter="7"
-                                :error-messages="errors"
-                                label="Phone Number"
-                                name="phoneNumber"
+                                :prepend-inner-icon="mdiFormTextbox"
                             ></v-text-field>
                         </validation-provider>
                         <validation-provider
                             v-slot="{ errors }"
                             name="email"
-                            rules="required|email"
+                            :rules="{
+                                required: true,
+                                min: 5,
+                                max: 30,
+                                regex: /^[a-zA-Z0-9_\-.+]+@[a-zA-Z0-9]+.[a-zA-Z]+/,
+                                is_not: 'emretepedev@gmail.com',
+                            }"
                         >
                             <v-text-field
                                 v-model="email"
+                                :counter="30"
                                 :error-messages="errors"
-                                label="E-mail"
+                                label="E-mail*"
                                 name="email"
+                                :prepend-inner-icon="mdiAt"
                             ></v-text-field>
                         </validation-provider>
                         <validation-provider
                             v-slot="{ errors }"
-                            name="select"
-                            rules="required"
+                            name="subject"
+                            :rules="`required|oneOf:${items}`"
                         >
                             <v-select
-                                v-model="select"
+                                v-model="subject"
                                 :items="items"
                                 :error-messages="errors"
-                                label="Select"
-                                name="select"
+                                label="Subject*"
+                                name="subject"
+                                :prepend-inner-icon="mdiFormSelect"
                             ></v-select>
                         </validation-provider>
                         <validation-provider
                             v-slot="{ errors }"
-                            rules="required"
-                            name="checkbox"
+                            name="phone"
+                            rules="integer|min:7|max:20"
                         >
-                            <v-checkbox
-                                v-model="checkbox"
+                            <v-text-field
+                                v-model="phone"
+                                :counter="20"
                                 :error-messages="errors"
-                                value="1"
-                                label="Option"
-                                type="checkbox"
-                                name="checkbox"
-                            ></v-checkbox>
+                                label="Phone"
+                                name="phone"
+                                :prepend-inner-icon="mdiPhone"
+                            ></v-text-field>
                         </validation-provider>
-
+                        <validation-provider
+                            v-slot="{ errors }"
+                            name="message"
+                            rules="required|min:10|max:1000"
+                        >
+                            <v-textarea
+                                v-model="message"
+                                :counter="1000"
+                                :error-messages="errors"
+                                label="Message*"
+                                name="message"
+                                clearable
+                                :clear-icon="mdiCloseCircle"
+                                :prepend-inner-icon="mdiComment"
+                            ></v-textarea>
+                        </validation-provider>
+                        <v-checkbox
+                            v-model="asap"
+                            :value="Boolean(asap)"
+                            :label="`ASAP: ${Boolean(asap)}`"
+                            type="checkbox"
+                            name="asap"
+                        ></v-checkbox>
                         <recaptcha
                             @error="onError"
                             @success="onSuccess"
                             @expired="onExpired"
                         />
-
-                        <v-btn
-                            class="mr-4 pageclip-form__submit"
-                            type="submit"
-                            :disabled="invalid || !isRecaptched"
-                            @click="submit"
-                        >
-                            Submit
-                        </v-btn>
+                        <div class="text-center mt-5">
+                            <v-btn
+                                class="pageclip-form__submit"
+                                type="submit"
+                                :disabled="invalid || !isRecaptched"
+                                @click="submit"
+                            >
+                                Submit
+                            </v-btn>
+                        </div>
                     </form>
                 </validation-observer>
             </v-container>
@@ -100,8 +117,21 @@
 </template>
 
 <script>
-import { defineComponent, ref, useMeta } from '@nuxtjs/composition-api'
+import {
+    defineComponent,
+    ref,
+    useMeta,
+    onMounted,
+} from '@nuxtjs/composition-api'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
+import {
+    mdiCloseCircle,
+    mdiComment,
+    mdiFormSelect,
+    mdiPhone,
+    mdiAt,
+    mdiFormTextbox,
+} from '@mdi/js'
 
 export default defineComponent({
     head: {},
@@ -137,15 +167,21 @@ export default defineComponent({
 
         // refs
         const observer = ref(null)
-        const form = ref(null)
 
         // consts
         const name = ref('')
-        const phoneNumber = ref('')
+        const phone = ref('')
         const email = ref('')
-        const select = ref(null)
-        const checkbox = ref(null)
+        const subject = ref(null)
+        const message = ref('')
+        const asap = ref(false)
         const isRecaptched = ref(false)
+
+        // hooks
+
+        onMounted(() => {
+            styleToRecaptcha()
+        })
 
         // methods
         const submit = async (event) => {
@@ -160,7 +196,7 @@ export default defineComponent({
                     throw new Error('reCAPTCHA Verification: Token not found.')
                 })
 
-                await form.submit()
+                await recaptcha.reset()
 
                 vToastify.info('Mail sent successfully.')
             } catch (error) {
@@ -170,17 +206,18 @@ export default defineComponent({
             }
         }
 
-        const onSubmit = async () => {
-            await resetForm()
+        const onSubmit = () => {
+            // @TODO: cozulecek
+            // resetForm()
         }
 
-        const resetForm = async () => {
-            await recaptcha.reset()
+        const resetForm = () => {
             name.value = ''
-            phoneNumber.value = ''
+            phone.value = ''
             email.value = ''
-            select.value = null
-            checkbox.value = null
+            subject.value = null
+            message.value = ''
+            asap.value = false
             observer.value.reset()
         }
 
@@ -199,25 +236,46 @@ export default defineComponent({
             isRecaptched.value = false
         }
 
+        const styleToRecaptcha = () => {
+            const _recaptcha = document.querySelector('.g-recaptcha')
+            _recaptcha.style.display = 'flex'
+            _recaptcha.style.justifyContent = 'center'
+        }
+
         // return to template
         return {
             name,
-            phoneNumber,
+            phone,
             email,
-            select,
-            checkbox,
-            items: ['Item 1', 'Item 2', 'Item 3', 'Item 4'],
+            subject,
+            message,
+            asap,
+            items: ['Proposal', 'Hire', 'Suggestion', 'Other'],
             observer,
-            form,
             isRecaptched,
             submit,
             onSubmit,
             onError,
             onSuccess,
             onExpired,
+            mdiCloseCircle,
+            mdiComment,
+            mdiFormSelect,
+            mdiPhone,
+            mdiAt,
+            mdiFormTextbox,
         }
     },
 })
 </script>
 
-<style></style>
+<style scoped>
+.g-recaptcha {
+    display: flex !important;
+    justify-content: center !important;
+    transform: scale(0.77);
+    -webkit-transform: scale(0.77);
+    transform-origin: 0 0;
+    -webkit-transform-origin: 0 0;
+}
+</style>
