@@ -269,13 +269,4 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
-.g-recaptcha {
-    display: flex !important;
-    justify-content: center !important;
-    transform: scale(0.77);
-    -webkit-transform: scale(0.77);
-    transform-origin: 0 0;
-    -webkit-transform-origin: 0 0;
-}
-</style>
+<style></style>
