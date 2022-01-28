@@ -28,7 +28,9 @@ export default {
     publicRuntimeConfig: {
         spaName: process.env.SPA_NAME,
         githubPersonalAccessToken: process.env.GH_PERSONAL_ACCESS_TOKEN,
-        pageclipActionUrl: process.env.PAGECLIP_ACTION_URL,
+        pageclipActionUrl: Boolean(parseInt(process.env.ON_TEST))
+            ? process.env.TEST_PAGECLIP_ACTION_URL
+            : process.env.PAGECLIP_ACTION_URL,
     },
 
     privateRuntimeConfig: {},
@@ -57,6 +59,7 @@ export default {
         '@nuxtjs/tailwindcss',
         '@nuxtjs/vuetify',
         '@nuxtjs/recaptcha',
+        '@nuxtjs/gtm',
         '@nuxtjs/composition-api/module',
     ],
 
@@ -194,14 +197,28 @@ export default {
     },
 
     googleAnalytics: {
-        id: process.env.GOOGLE_ANALYTICS_ID,
+        id: Boolean(parseInt(process.env.ON_TEST))
+            ? process.env.TEST_GOOGLE_ANALYTICS_ID
+            : process.env.GOOGLE_ANALYTICS_ID,
     },
 
     recaptcha: {
+        siteKey: Boolean(parseInt(process.env.ON_TEST))
+            ? process.env.TEST_GOOGLE_RECAPTCHA_SITE_KEY
+            : process.env.GOOGLE_RECAPTCHA_SITE_KEY,
         hideBadge: false,
         size: 'normal',
         language: 'en',
-        siteKey: process.env.GOOGLE_RECAPTCHA_SITE_KEY,
         version: 2,
+    },
+
+    gtm: {
+        id: Boolean(parseInt(process.env.ON_TEST))
+            ? process.env.TEST_GOOGLE_TAG_MANAGER_ID
+            : process.env.GOOGLE_TAG_MANAGER_ID,
+        debug: Boolean(parseInt(process.env.ON_TEST)),
+        enabled: true,
+        scriptDefer: true,
+        pageTracking: true,
     },
 }

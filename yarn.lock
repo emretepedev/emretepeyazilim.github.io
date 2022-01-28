@@ -1442,6 +1442,14 @@
     consola "^2.15.3"
     google-fonts-helper "^1.2.0"
 
+"@nuxtjs/gtm@^2.4.0":
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/@nuxtjs/gtm/-/gtm-2.4.0.tgz#d7f5bb05b0306c564674831eab17b4e25cfdc1f6"
+  integrity sha512-Of5KuBBFwRjyJ6AuRrIQsh8J6ksIN2UegJDE8nBiTAanbwQBsAJ0hZibV9SjhKdGvGvWpbShQ4yR2bmQgY6XKA==
+  dependencies:
+    chalk "^4.1.0"
+    semver "^7.3.2"
+
 "@nuxtjs/pwa@^3.3.5":
   version "3.3.5"
   resolved "https://registry.yarnpkg.com/@nuxtjs/pwa/-/pwa-3.3.5.tgz#db7c905536ebe8a464a347b6ae3215810642c044"
@@ -2623,9 +2631,9 @@ bytes@3.0.0:
   integrity sha1-0ygVQE1olpn4Wk6k+odV3ROpYEg=
 
 bytes@^3.0.0:
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/bytes/-/bytes-3.1.1.tgz#3f018291cb4cbad9accb6e6970bca9c8889e879a"
-  integrity sha512-dWe4nWO/ruEOY7HkUJ5gFt1DCFV9zPRoJr8pV0/ASQermOZjtq8jMjOprC0Kd10GLN+l7xaUPvxzJFWtxGu8Fg==
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/bytes/-/bytes-3.1.2.tgz#8b0beeb98605adf1b128fa4386403c009e0221a5"
+  integrity sha512-/Nf7TyzTx6S3yRJObOAV7956r8cr2+Oj8AC5dt8wSP3BQAoeX58NoHyCU8P8zGkNXStjTSi6fzO6F0pBdcYbEg==
 
 cacache@^12.0.2:
   version "12.0.4"
@@ -3782,6 +3790,11 @@ detect-libc@^1.0.3:
   resolved "https://registry.yarnpkg.com/detect-libc/-/detect-libc-1.0.3.tgz#fa137c4bd698edf55cd5cd02ac559f91a4c4ba9b"
   integrity sha1-+hN8S9aY7fVc1c0CrFWfkaTEups=
 
+detect-libc@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/detect-libc/-/detect-libc-2.0.0.tgz#c528bc09bc6d1aa30149228240917c225448f204"
+  integrity sha512-S55LzUl8HUav8l9E2PBTlC5PAJrHK7tkM+XXFGD+fbsbkTzhCpG6K05LxJcUOEWzMa4v6ptcMZ9s3fOdJDu0Zw==
+
 detective@^5.2.0:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/detective/-/detective-5.2.0.tgz#feb2a77e85b904ecdea459ad897cc90a99bd2a7b"
@@ -3947,9 +3960,9 @@ ee-first@1.1.1:
   integrity sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
 
 electron-to-chromium@^1.4.17:
-  version "1.4.55"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.55.tgz#a7fa3b49b2c4cb0ae68505cf304a9666fdd8fd9f"
-  integrity sha512-AoCDEVElLY8mwe4TuDDkr1jxvSh/Ih5PFlEXCpmwFkq9JOXn4K58CScgBl+R1ghFW9cPJ7VeWo30nAHSRCe6rw==
+  version "1.4.56"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.56.tgz#f660fd2c6739b341d8922fe3a441a5a2804911a1"
+  integrity sha512-0k/S0FQqRRpJbX7YUjwCcLZ8D42RqGKtaiq90adXBOYgTIWwLA/g3toO8k9yEpqU8iC4QyaWYYWSTBIna8WV4g==
 
 elliptic@^6.5.3:
   version "6.5.4"
@@ -5829,9 +5842,9 @@ jimp-compact@^0.16.1:
   integrity sha512-F/r0L283J46xiGUEvUb3jxUsei7aB94g3NRIMuJ4WhbpEcJV2U5GpaUNJLnBiOP2+x4lLTI4UiRVrmbrXQAOMA==
 
 jiti@^1.9.2:
-  version "1.12.14"
-  resolved "https://registry.yarnpkg.com/jiti/-/jiti-1.12.14.tgz#001e583136fce21d62585491aab96c9be1ea1f16"
-  integrity sha512-rR+9GYXtYiIod1x+EHFYcTyqIPG4cAHG3WYGHkk71MVjzPCJwOI4E27BPOXQhUf1viglcLtqj3WotFIOJQwM+g==
+  version "1.12.15"
+  resolved "https://registry.yarnpkg.com/jiti/-/jiti-1.12.15.tgz#8f6a141c06524ab32e05d5e3c9b33eeda54ae775"
+  integrity sha512-/+K89y6KJA2nISbWrlc/773XdpDgSQq/LdQ+ZZyw2jRxUNyquPtbsDCCCMRzzNORUgroUGc4nAXxJEnQvpViCA==
 
 js-tokens@^4.0.0:
   version "4.0.0"
@@ -8095,11 +8108,11 @@ postcss@^8.1.10, postcss@^8.1.6, postcss@^8.2.15, postcss@^8.3.5:
     source-map-js "^1.0.1"
 
 prebuild-install@^7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/prebuild-install/-/prebuild-install-7.0.0.tgz#3c5ce3902f1cb9d6de5ae94ca53575e4af0c1574"
-  integrity sha512-IvSenf33K7JcgddNz2D5w521EgO+4aMMjFt73Uk9FRzQ7P+QZPKrp7qPsDydsSwjGt3T5xRNnM1bj1zMTD5fTA==
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/prebuild-install/-/prebuild-install-7.0.1.tgz#c10075727c318efe72412f333e0ef625beaf3870"
+  integrity sha512-QBSab31WqkyxpnMWQxubYAHR5S9B2+r81ucocew34Fkl98FhvKIF50jIJnNOBmAZfyNV7vE5T6gd3hTVWgY6tg==
   dependencies:
-    detect-libc "^1.0.3"
+    detect-libc "^2.0.0"
     expand-template "^2.0.3"
     github-from-package "0.0.0"
     minimist "^1.2.3"

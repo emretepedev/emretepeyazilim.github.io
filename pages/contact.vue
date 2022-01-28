@@ -90,7 +90,7 @@
                         <v-checkbox
                             v-model="asap"
                             :value="Boolean(asap)"
-                            :label="`ASAP: ${Boolean(asap)}`"
+                            :label="`ASAP: ${Boolean(asap) ? 'yes' : 'no'}`"
                             type="checkbox"
                             name="asap"
                         ></v-checkbox>
@@ -178,7 +178,6 @@ export default defineComponent({
         const isRecaptched = ref(false)
 
         // hooks
-
         onMounted(() => {
             styleToRecaptcha()
         })
