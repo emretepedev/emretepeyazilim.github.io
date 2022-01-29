@@ -2,10 +2,10 @@ import { extend, setInteractionMode } from 'vee-validate'
 
 import {
     required,
+    email,
     max,
     min,
     oneOf,
-    regex,
     is_not,
     integer,
 } from 'vee-validate/dist/rules'
@@ -15,6 +15,11 @@ setInteractionMode('aggressive')
 extend('required', {
     ...required,
     message: 'The {_field_} field is required.',
+})
+
+extend('email', {
+    ...email,
+    message: 'The {_field_} must be a valid email address.',
 })
 
 extend('max', {
@@ -32,18 +37,13 @@ extend('oneOf', {
     message: 'The {_field_} must be included in the list of values.',
 })
 
-extend('regex', {
-    ...regex,
-    message: 'The {_field_} must not match the regular expression. `{regex}`',
+extend('is_not', {
+    ...is_not,
+    message:
+        'The {_field_} must not be included in the given list of values. `{other}`',
 })
 
 extend('integer', {
     ...integer,
     message: 'The {_field_} must be numbers only.',
-})
-
-extend('is_not', {
-    ...is_not,
-    message:
-        'The {_field_} must not be included in the given list of values. `{other}`',
 })

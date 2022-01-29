@@ -5,7 +5,6 @@
                 <validation-observer ref="observer" v-slot="{ invalid }">
                     <form
                         :action="$config.pageclipActionUrl"
-                        @submit.prevent="onSubmit"
                         class="pageclip-form"
                         method="POST"
                     >
@@ -42,9 +41,9 @@
                             name="email"
                             :rules="{
                                 required: true,
+                                email: true,
                                 min: 5,
                                 max: 30,
-                                regex: /^[a-zA-Z0-9_\-.+]+@[a-zA-Z0-9]+.[a-zA-Z]+/,
                                 is_not: 'emretepedev@gmail.com',
                             }"
                         >
@@ -160,7 +159,8 @@
                         </validation-provider>
                         <v-checkbox
                             v-model="asap"
-                            :value="Boolean(asap)"
+                            :false-value="false"
+                            :true-value="true"
                             :label="`ASAP: ${Boolean(asap) ? 'yes' : 'no'}`"
                             type="checkbox"
                             name="asap"
@@ -179,7 +179,7 @@
 
                         <div class="text-center mt-5">
                             <v-btn
-                                class="pageclip-form__submit"
+                                class="pageclip-form__submit pageclip-form__submit--dark-loader"
                                 type="submit"
                                 :disabled="invalid || !isRecaptched"
                                 @click="submit"
@@ -274,6 +274,8 @@ export default defineComponent({
             })
 
             styleToRecaptcha()
+
+            styleToPageclip()
         })
 
         onBeforeUnmount(() => {
@@ -302,18 +304,11 @@ export default defineComponent({
                 })
 
                 await recaptcha.reset(widgetId.value)
-
-                vToastify.info('Mail sent successfully.')
             } catch (error) {
                 vToastify.error(String(error))
 
                 event.preventDefault()
             }
-        }
-
-        const onSubmit = () => {
-            // @TODO: cozulecek
-            // resetForm()
         }
 
         const resetForm = () => {
@@ -339,6 +334,26 @@ export default defineComponent({
         const onExpired = () => {
             vToastify.warning('reCAPTCHA Verification: Expired.')
             isRecaptched.value = false
+        }
+
+        const onResponse = (error, response) => {
+            if (error) {
+                vToastify.error('Form Validation: Form has errors.')
+
+                return
+            }
+
+            if ('ok' != response.data) {
+                vToastify.error(
+                    'Form Verification: Server Error. Try again later.'
+                )
+
+                return
+            }
+
+            resetForm()
+
+            vToastify.success('Mail sent successfully.')
         }
 
         const styleToRecaptcha = () => {
@@ -368,6 +383,17 @@ export default defineComponent({
             }, frequency)
         }
 
+        const styleToPageclip = () => {
+            var form = document.querySelector('.pageclip-form')
+
+            window.Pageclip.form(form, {
+                onResponse: function (error, response) {
+                    onResponse(error, response)
+                },
+                successTemplate: 'I`ll reply to you ASAP. - @emretepedev',
+            })
+        }
+
         // return
         return {
             name,
@@ -380,7 +406,6 @@ export default defineComponent({
             observer,
             isRecaptched,
             submit,
-            onSubmit,
             onError,
             onSuccess,
             onExpired,
