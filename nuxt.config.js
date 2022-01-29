@@ -49,18 +49,17 @@ export default {
 
     // Modules: https://go.nuxtjs.dev/config-modules
     modules: [
-        '@nuxtjs/google-analytics',
         '@nuxtjs/google-fonts',
+        '@nuxtjs/gtm',
+        '@nuxtjs/recaptcha',
         '@nuxtjs/pwa',
         '@nuxtjs/robots',
         '@nuxtjs/sitemap',
         '@nuxt/image',
         'nuxt-purgecss',
+        '@nuxtjs/composition-api/module',
         '@nuxtjs/tailwindcss',
         '@nuxtjs/vuetify',
-        '@nuxtjs/recaptcha',
-        '@nuxtjs/gtm',
-        '@nuxtjs/composition-api/module',
     ],
 
     // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -194,12 +193,6 @@ export default {
                 extensions: ['html', 'vue', 'js'],
             },
         ],
-    },
-
-    googleAnalytics: {
-        id: Boolean(parseInt(process.env.ON_TEST))
-            ? process.env.TEST_GOOGLE_ANALYTICS_ID
-            : process.env.GOOGLE_ANALYTICS_ID,
     },
 
     recaptcha: {
