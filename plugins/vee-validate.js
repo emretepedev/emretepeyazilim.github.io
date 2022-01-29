@@ -1,4 +1,5 @@
 import { extend, setInteractionMode } from 'vee-validate'
+
 import {
     required,
     max,
@@ -9,7 +10,7 @@ import {
     integer,
 } from 'vee-validate/dist/rules'
 
-setInteractionMode('eager')
+setInteractionMode('aggressive')
 
 extend('required', {
     ...required,

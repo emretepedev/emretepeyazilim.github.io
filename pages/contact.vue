@@ -18,9 +18,21 @@
                                 v-model="name"
                                 :counter="30"
                                 :error-messages="errors"
+                                :success="
+                                    !Boolean(Object.keys(errors).length) &&
+                                    Boolean(name)
+                                "
                                 label="Name*"
+                                placeholder="Your name"
+                                :hint="
+                                    !Boolean(name)
+                                        ? 'For example, `John Doe`'
+                                        : ''
+                                "
                                 name="name"
                                 :prepend-inner-icon="mdiFormTextbox"
+                                outlined
+                                rounded
                             ></v-text-field>
                         </validation-provider>
                         <validation-provider
@@ -38,9 +50,21 @@
                                 v-model="email"
                                 :counter="30"
                                 :error-messages="errors"
+                                :success="
+                                    !Boolean(Object.keys(errors).length) &&
+                                    Boolean(email)
+                                "
                                 label="E-mail*"
+                                placeholder="Your mail address"
+                                :hint="
+                                    !Boolean(email)
+                                        ? 'For example, `mail@example.com`'
+                                        : ''
+                                "
                                 name="email"
                                 :prepend-inner-icon="mdiAt"
+                                outlined
+                                rounded
                             ></v-text-field>
                         </validation-provider>
                         <validation-provider
@@ -48,14 +72,26 @@
                             name="subject"
                             :rules="`required|oneOf:${items}`"
                         >
-                            <v-select
+                            <v-autocomplete
                                 v-model="subject"
                                 :items="items"
                                 :error-messages="errors"
+                                :success="
+                                    !Boolean(Object.keys(errors).length) &&
+                                    Boolean(subject)
+                                "
                                 label="Subject*"
+                                placeholder="Your subject"
+                                :hint="
+                                    !Boolean(subject)
+                                        ? 'For example, `Proposal`'
+                                        : ''
+                                "
                                 name="subject"
                                 :prepend-inner-icon="mdiFormSelect"
-                            ></v-select>
+                                outlined
+                                rounded
+                            ></v-autocomplete>
                         </validation-provider>
                         <validation-provider
                             v-slot="{ errors }"
@@ -66,9 +102,21 @@
                                 v-model="phone"
                                 :counter="20"
                                 :error-messages="errors"
+                                :success="
+                                    !Boolean(Object.keys(errors).length) &&
+                                    Boolean(phone)
+                                "
                                 label="Phone"
+                                placeholder="Your phone"
+                                :hint="
+                                    !Boolean(phone)
+                                        ? 'For example, `123456789`'
+                                        : ''
+                                "
                                 name="phone"
                                 :prepend-inner-icon="mdiPhone"
+                                outlined
+                                rounded
                             ></v-text-field>
                         </validation-provider>
                         <validation-provider
@@ -80,11 +128,24 @@
                                 v-model="message"
                                 :counter="1000"
                                 :error-messages="errors"
+                                :success="
+                                    !Boolean(Object.keys(errors).length) &&
+                                    Boolean(message)
+                                "
                                 label="Message*"
+                                placeholder="Your message"
+                                :hint="
+                                    !Boolean(message)
+                                        ? 'For example, `Hi @emretepedev!`'
+                                        : ''
+                                "
                                 name="message"
                                 clearable
                                 :clear-icon="mdiCloseCircle"
                                 :prepend-inner-icon="mdiComment"
+                                maxlength="1000"
+                                outlined
+                                rounded
                             ></v-textarea>
                         </validation-provider>
                         <v-checkbox
@@ -129,6 +190,7 @@ import {
     onBeforeUnmount,
 } from '@nuxtjs/composition-api'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
+
 import {
     mdiCloseCircle,
     mdiComment,
