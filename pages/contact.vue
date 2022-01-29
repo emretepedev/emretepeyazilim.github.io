@@ -33,6 +33,8 @@
                                 :prepend-inner-icon="mdiFormTextbox"
                                 outlined
                                 rounded
+                                dense
+                                shaped
                             ></v-text-field>
                         </validation-provider>
                         <validation-provider
@@ -65,6 +67,8 @@
                                 :prepend-inner-icon="mdiAt"
                                 outlined
                                 rounded
+                                dense
+                                shaped
                             ></v-text-field>
                         </validation-provider>
                         <validation-provider
@@ -91,6 +95,8 @@
                                 :prepend-inner-icon="mdiFormSelect"
                                 outlined
                                 rounded
+                                dense
+                                shaped
                             ></v-autocomplete>
                         </validation-provider>
                         <validation-provider
@@ -117,6 +123,8 @@
                                 :prepend-inner-icon="mdiPhone"
                                 outlined
                                 rounded
+                                dense
+                                shaped
                             ></v-text-field>
                         </validation-provider>
                         <validation-provider
@@ -146,6 +154,8 @@
                                 maxlength="1000"
                                 outlined
                                 rounded
+                                dense
+                                shaped
                             ></v-textarea>
                         </validation-provider>
                         <v-checkbox
@@ -154,6 +164,10 @@
                             :label="`ASAP: ${Boolean(asap) ? 'yes' : 'no'}`"
                             type="checkbox"
                             name="asap"
+                            :off-icon="mdiCheckboxBlankCircleOutline"
+                            :on-icon="mdiCheckboxMarkedCircle"
+                            dense
+                            shaped
                         ></v-checkbox>
                         <recaptcha
                             :id="$config.googleRecaptchaV2Size"
@@ -189,6 +203,7 @@ import {
     onMounted,
     onBeforeUnmount,
 } from '@nuxtjs/composition-api'
+
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 
 import {
@@ -198,6 +213,8 @@ import {
     mdiPhone,
     mdiAt,
     mdiFormTextbox,
+    mdiCheckboxBlankCircleOutline,
+    mdiCheckboxMarkedCircle,
 } from '@mdi/js'
 
 export default defineComponent({
@@ -372,6 +389,8 @@ export default defineComponent({
             mdiPhone,
             mdiAt,
             mdiFormTextbox,
+            mdiCheckboxBlankCircleOutline,
+            mdiCheckboxMarkedCircle,
         }
     },
 })
