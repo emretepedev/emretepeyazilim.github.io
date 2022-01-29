@@ -212,5 +212,6 @@ export default {
         debug: Boolean(parseInt(process.env.ON_TEST)),
         enabled: true,
         scriptDefer: true,
+        pageTracking: true,
     },
 }
