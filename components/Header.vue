@@ -72,7 +72,7 @@ import {
 
 export default defineComponent({
     setup() {
-        // return to template
+        // return
         return {
             drawer: ref(null),
             pages: [

@@ -41,7 +41,7 @@ export default defineComponent({
         // meta
         useMeta({ title: 'Page not found | ' })
 
-        // return to template
+        // return
         return {
             mdiArrowRightThin,
         }

@@ -176,7 +176,7 @@ export default defineComponent({
             getContributionCount()
         })
 
-        // return to template
+        // return
         return {
             projects: [
                 {

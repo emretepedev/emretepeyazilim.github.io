@@ -343,15 +343,16 @@ export default defineComponent({
 
         const styleToRecaptcha = () => {
             let count = 0
-            const limit = 10 * 2 // 10 seconds
+            const frequency = 1000 / 4 // 0.25 sec
+            const maxTime = (1000 / frequency) * 10 // 10 sec
 
             const interval = setInterval(() => {
                 const _recaptcha = document.querySelector('.g-recaptcha')
 
-                if (Boolean(_recaptcha) || count == limit) {
+                if (Boolean(_recaptcha) || count == maxTime) {
                     clearInterval(interval)
 
-                    if (count == limit) {
+                    if (count == maxTime) {
                         vToastify.error(
                             'reCAPTCHA Verification: Server Error. Try again later.'
                         )
@@ -364,10 +365,10 @@ export default defineComponent({
                 }
 
                 count++
-            }, 500)
+            }, frequency)
         }
 
-        // return to template
+        // return
         return {
             name,
             phone,

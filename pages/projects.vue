@@ -22,7 +22,7 @@ export default defineComponent({
         // meta
         useMeta({ title: 'Projects | ' })
 
-        // return to template
+        // return
         return {
             projects: [
                 {
