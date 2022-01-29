@@ -29,6 +29,8 @@ export default {
         spaName: process.env.SPA_NAME,
         githubPersonalAccessToken: process.env.GH_PERSONAL_ACCESS_TOKEN,
         pageclipActionUrl: process.env.PAGECLIP_ACTION_URL,
+        googleRecaptchaV2SiteKey: process.env.GOOGLE_RECAPTCHA_V2_SITE_KEY,
+        googleRecaptchaV2Size: 'v2-normal',
     },
 
     privateRuntimeConfig: {},
@@ -194,18 +196,17 @@ export default {
     },
 
     recaptcha: {
-        siteKey: process.env.GOOGLE_RECAPTCHA_SITE_KEY,
+        siteKey: process.env.GOOGLE_RECAPTCHA_V3_SITE_KEY,
         hideBadge: false,
-        size: 'normal',
         language: 'en',
-        version: 2,
+        version: 3,
     },
 
     gtm: {
         id: process.env.GOOGLE_TAG_MANAGER_ID,
-        debug: false,
         enabled: true,
         scriptDefer: true,
         pageTracking: true,
+        pageViewEventName: 'nuxtRoute',
     },
 }

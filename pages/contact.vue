@@ -95,10 +95,13 @@
                             name="asap"
                         ></v-checkbox>
                         <recaptcha
+                            :id="$config.googleRecaptchaV2Size"
+                            :site-key="$config.googleRecaptchaV2SiteKey"
                             @error="onError"
                             @success="onSuccess"
                             @expired="onExpired"
                         />
+
                         <div class="text-center mt-5">
                             <v-btn
                                 class="pageclip-form__submit"
@@ -121,7 +124,9 @@ import {
     defineComponent,
     ref,
     useMeta,
+    useContext,
     onMounted,
+    onBeforeUnmount,
 } from '@nuxtjs/composition-api'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 import {
@@ -161,6 +166,9 @@ export default defineComponent({
             ],
         })
 
+        // context
+        const { $config } = useContext()
+
         // root variables
         const recaptcha = context.root.$recaptcha
         const vToastify = context.root.$vToastify
@@ -176,10 +184,21 @@ export default defineComponent({
         const message = ref('')
         const asap = ref(false)
         const isRecaptched = ref(false)
+        const widgetId = ref(0)
 
         // hooks
-        onMounted(() => {
+        onMounted(async () => {
+            await recaptcha.init()
+
+            widgetId.value = recaptcha.render($config.googleRecaptchaV2Size, {
+                sitekey: $config.googleRecaptchaV2SiteKey,
+            })
+
             styleToRecaptcha()
+        })
+
+        onBeforeUnmount(() => {
+            recaptcha.destroy()
         })
 
         // methods
@@ -191,11 +210,19 @@ export default defineComponent({
                     }
                 })
 
-                await recaptcha.getResponse().catch(() => {
-                    throw new Error('reCAPTCHA Verification: Token not found.')
+                await recaptcha.getResponse(widgetId.value).catch(() => {
+                    throw new Error(
+                        'reCAPTCHA v2 Verification: Token not found.'
+                    )
                 })
 
-                await recaptcha.reset()
+                await recaptcha.execute('login').catch(() => {
+                    throw new Error(
+                        'reCAPTCHA v3 Verification: Token not found.'
+                    )
+                })
+
+                await recaptcha.reset(widgetId.value)
 
                 vToastify.info('Mail sent successfully.')
             } catch (error) {
@@ -236,9 +263,29 @@ export default defineComponent({
         }
 
         const styleToRecaptcha = () => {
-            const _recaptcha = document.querySelector('.g-recaptcha')
-            _recaptcha.style.display = 'flex'
-            _recaptcha.style.justifyContent = 'center'
+            let count = 0
+            const limit = 10 * 2 // 10 seconds
+
+            const interval = setInterval(() => {
+                const _recaptcha = document.querySelector('.g-recaptcha')
+
+                if (Boolean(_recaptcha) || count == limit) {
+                    clearInterval(interval)
+
+                    if (count == limit) {
+                        vToastify.error(
+                            'reCAPTCHA Verification: Server Error. Try again later.'
+                        )
+
+                        return
+                    }
+
+                    _recaptcha.style.display = 'flex'
+                    _recaptcha.style.justifyContent = 'center'
+                }
+
+                count++
+            }, 500)
         }
 
         // return to template
