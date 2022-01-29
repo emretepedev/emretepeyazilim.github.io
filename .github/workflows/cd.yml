@@ -6,11 +6,10 @@ env:
     NODE_ENV: ${{ secrets.NODE_ENV }}
     SPA_NAME: ${{ secrets.SPA_NAME }}
     SPA_URL: ${{ secrets.SPA_URL }}
+    GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
     GOOGLE_RECAPTCHA_SITE_KEY: ${{ secrets.GOOGLE_RECAPTCHA_SITE_KEY }}
-    GOOGLE_ANALYTICS_ID: ${{ secrets.GOOGLE_ANALYTICS_ID }}
     GOOGLE_TAG_MANAGER_ID: ${{ secrets.GOOGLE_TAG_MANAGER_ID }}
     PAGECLIP_ACTION_URL: ${{ secrets.PAGECLIP_ACTION_URL }}
-    GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
 
 jobs:
     cd:

@@ -28,9 +28,7 @@ export default {
     publicRuntimeConfig: {
         spaName: process.env.SPA_NAME,
         githubPersonalAccessToken: process.env.GH_PERSONAL_ACCESS_TOKEN,
-        pageclipActionUrl: Boolean(parseInt(process.env.ON_TEST))
-            ? process.env.TEST_PAGECLIP_ACTION_URL
-            : process.env.PAGECLIP_ACTION_URL,
+        pageclipActionUrl: process.env.PAGECLIP_ACTION_URL,
     },
 
     privateRuntimeConfig: {},
@@ -196,9 +194,7 @@ export default {
     },
 
     recaptcha: {
-        siteKey: Boolean(parseInt(process.env.ON_TEST))
-            ? process.env.TEST_GOOGLE_RECAPTCHA_SITE_KEY
-            : process.env.GOOGLE_RECAPTCHA_SITE_KEY,
+        siteKey: process.env.GOOGLE_RECAPTCHA_SITE_KEY,
         hideBadge: false,
         size: 'normal',
         language: 'en',
@@ -206,11 +202,10 @@ export default {
     },
 
     gtm: {
-        id: Boolean(parseInt(process.env.ON_TEST))
-            ? process.env.TEST_GOOGLE_TAG_MANAGER_ID
-            : process.env.GOOGLE_TAG_MANAGER_ID,
-        debug: Boolean(parseInt(process.env.ON_TEST)),
+        id: process.env.GOOGLE_TAG_MANAGER_ID,
+        debug: false,
         enabled: true,
         scriptDefer: true,
+        pageTracking: true,
     },
 }
