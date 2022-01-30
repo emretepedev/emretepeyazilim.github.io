@@ -58,6 +58,7 @@ export default {
         '@nuxt/image',
         'nuxt-purgecss',
         '@nuxtjs/composition-api/module',
+        '@nuxtjs/axios',
         '@nuxtjs/tailwindcss',
         '@nuxtjs/vuetify',
     ],

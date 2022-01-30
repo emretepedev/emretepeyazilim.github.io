@@ -95,7 +95,7 @@ import {
     useMeta,
     ref,
     useContext,
-    onMounted,
+    useAsync,
 } from '@nuxtjs/composition-api'
 
 import { mdiPoll } from '@mdi/js'
@@ -108,7 +108,7 @@ export default defineComponent({
         useMeta({ title: 'Homepage | ' })
 
         // context
-        const { $config } = useContext()
+        const { $config, $axios } = useContext()
 
         // consts
         const contributionCount = ref([])
@@ -127,14 +127,17 @@ export default defineComponent({
             return string
         }
 
-        const getContributionCount = () => {
+        const getContributionCount = () => {}
+
+        // hooks
+        useAsync(() => {
             const headers = {
                 Authorization: `bearer ${hexToString(
                     $config.githubPersonalAccessToken
                 )}`,
             }
 
-            const body = {
+            const data = {
                 query: `
                     query {
                         user(login: "emretepedev") {
@@ -152,13 +155,10 @@ export default defineComponent({
                 `,
             }
 
-            fetch('https://api.github.com/graphql', {
-                method: 'POST',
-                body: JSON.stringify(body),
-                headers: headers,
-            }).then((response) => {
-                response.json().then((data) => {
-                    data.data.user.contributionsCollection.contributionCalendar.weeks.map(
+            $axios
+                .$post('https://api.github.com/graphql', data, { headers })
+                .then((response) => {
+                    response.data.user.contributionsCollection.contributionCalendar.weeks.map(
                         (week) => {
                             week.contributionDays.map((day) => {
                                 contributionCount.value.push(
@@ -168,12 +168,6 @@ export default defineComponent({
                         }
                     )
                 })
-            })
-        }
-
-        // hooks
-        onMounted(() => {
-            getContributionCount()
         })
 
         // return
