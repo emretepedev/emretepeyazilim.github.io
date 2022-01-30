@@ -1,3 +1,5 @@
+/* eslint-disable camelcase */
+
 import { extend, setInteractionMode } from 'vee-validate'
 
 import {
