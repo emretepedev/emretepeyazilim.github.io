@@ -209,6 +209,7 @@ export default defineComponent({
           src: 'https://s.pageclip.co/v1/pageclip.js',
           body: true,
           ssr: false,
+          defer: true,
           callback: () => {
             isPageclipLoaded.value = true
           },
