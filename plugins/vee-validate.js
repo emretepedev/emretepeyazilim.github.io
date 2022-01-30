@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 
-import { extend, setInteractionMode } from 'vee-validate'
+import { extend } from 'vee-validate'
 
 import {
     required,
@@ -11,8 +11,6 @@ import {
     is_not,
     integer,
 } from 'vee-validate/dist/rules'
-
-setInteractionMode('aggressive')
 
 extend('required', {
     ...required,
