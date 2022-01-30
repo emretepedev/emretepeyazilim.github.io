@@ -51,6 +51,7 @@ import {
   mdiSend,
   mdiDiscord,
   mdiGithub,
+  mdiGitlab,
   mdiEmail,
   mdiPhone,
 } from '@mdi/js'
@@ -69,6 +70,10 @@ export default defineComponent({
         {
           href: 'https://github.com/emretepedev',
           image: mdiGithub,
+        },
+        {
+          href: 'https://gitlab.com/emretepedev',
+          image: mdiGitlab,
         },
         {
           href: 'https://linkedin.com/in/emretepedev',
