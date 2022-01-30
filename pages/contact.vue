@@ -3,7 +3,7 @@
         <div class="flex justify-center mt-12">
             <v-container>
                 <validation-observer ref="observer" v-slot="{ invalid }">
-                    <form
+                    <v-form
                         :action="$config.pageclipActionUrl"
                         class="pageclip-form"
                         method="POST"
@@ -186,7 +186,7 @@
                                 Submit
                             </v-btn>
                         </div>
-                    </form>
+                    </v-form>
                 </validation-observer>
             </v-container>
         </div>
