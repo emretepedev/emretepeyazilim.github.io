@@ -205,7 +205,8 @@ export default defineComponent({
         {
           charset: 'utf-8',
           src: 'https://s.pageclip.co/v1/pageclip.js',
-          defer: true,
+          body: true,
+          ssr: false,
         },
       ],
       link: [
@@ -213,6 +214,7 @@ export default defineComponent({
           rel: 'stylesheet',
           href: 'https://s.pageclip.co/v1/pageclip.css',
           media: 'screen',
+          ssr: false,
         },
       ],
     })
@@ -353,7 +355,8 @@ export default defineComponent({
     const styleToPageclip = () => {
       const form = document.querySelector('.pageclip-form')
 
-      window.Pageclip.form(form, {
+      /* eslint-disable-next-line */
+      Pageclip.form(form, {
         onResponse(error, response) {
           onResponse(error, response)
         },
