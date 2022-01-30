@@ -159,10 +159,9 @@
                         </validation-provider>
                         <v-checkbox
                             v-model="asap"
+                            :value="asap"
                             :false-value="false"
-                            :true-value="true"
-                            :label="`ASAP: ${Boolean(asap) ? 'yes' : 'no'}`"
-                            type="checkbox"
+                            :label="`ASAP: ${asap ? 'yes' : 'no'}`"
                             name="asap"
                             :off-icon="mdiCheckboxBlankCircleOutline"
                             :on-icon="mdiCheckboxMarkedCircle"
@@ -246,10 +245,9 @@ export default defineComponent({
         })
 
         // context
-        const { $config } = useContext()
+        const { $config, $recaptcha } = useContext()
 
         // root variables
-        const recaptcha = context.root.$recaptcha
         const vToastify = context.root.$vToastify
 
         // refs
@@ -267,9 +265,9 @@ export default defineComponent({
 
         // hooks
         onMounted(async () => {
-            await recaptcha.init()
+            await $recaptcha.init()
 
-            widgetId.value = recaptcha.render($config.googleRecaptchaV2Size, {
+            widgetId.value = $recaptcha.render($config.googleRecaptchaV2Size, {
                 sitekey: $config.googleRecaptchaV2SiteKey,
             })
 
@@ -279,7 +277,7 @@ export default defineComponent({
         })
 
         onBeforeUnmount(() => {
-            recaptcha.destroy()
+            $recaptcha.destroy()
         })
 
         // methods
@@ -291,19 +289,19 @@ export default defineComponent({
                     }
                 })
 
-                await recaptcha.getResponse(widgetId.value).catch(() => {
+                await $recaptcha.getResponse(widgetId.value).catch(() => {
                     throw new Error(
                         'reCAPTCHA v2 Verification: Token not found.'
                     )
                 })
 
-                await recaptcha.execute('login').catch(() => {
+                await $recaptcha.execute('login').catch(() => {
                     throw new Error(
                         'reCAPTCHA v3 Verification: Token not found.'
                     )
                 })
 
-                await recaptcha.reset(widgetId.value)
+                await $recaptcha.reset(widgetId.value)
             } catch (error) {
                 vToastify.error(String(error))
 
@@ -338,14 +336,16 @@ export default defineComponent({
 
         const onResponse = (error, response) => {
             if (error) {
-                vToastify.error('Form Validation: Form has errors.')
+                vToastify.error(
+                    "Mail didn't send because of `Form has errors`."
+                )
 
                 return
             }
 
             if ('ok' != response.data) {
                 vToastify.error(
-                    'Form Verification: Server Error. Try again later.'
+                    "Mail didn't send because of `Server Error`. Try again later."
                 )
 
                 return
