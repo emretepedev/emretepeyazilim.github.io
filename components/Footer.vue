@@ -25,6 +25,9 @@
           <strong>Material Design Icons</strong> (Icon Pack) on
           <strong>GH Pages</strong>.
         </v-card-text>
+        <v-card-subtitle>
+          Last Modified At: {{ lastModifiedAt }}
+        </v-card-subtitle>
         <v-divider></v-divider>
         <v-card-text class="white--text">
           {{ new Date().getFullYear() }} —
@@ -36,7 +39,7 @@
 </template>
 
 <script>
-import { defineComponent } from '@nuxtjs/composition-api'
+import { defineComponent, useContext } from '@nuxtjs/composition-api'
 
 import {
   mdiFacebook,
@@ -54,6 +57,12 @@ import {
 
 export default defineComponent({
   setup() {
+    // context
+    const { $config } = useContext()
+
+    // consts
+    const lastModifiedAt = $config.lastModifiedAt
+
     // return
     return {
       icons: [
@@ -102,6 +111,7 @@ export default defineComponent({
           image: mdiPhone,
         },
       ],
+      lastModifiedAt,
     }
   },
 })

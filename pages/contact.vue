@@ -245,6 +245,7 @@ export default defineComponent({
     const widgetId = ref(0)
     const isPageclipLoaded = ref(false)
 
+    // watch
     watch(isPageclipLoaded, (currentValue) => {
       if (currentValue) {
         styleToPageclip()

@@ -31,6 +31,7 @@ export default {
         pageclipActionUrl: process.env.PAGECLIP_ACTION_URL,
         googleRecaptchaV2SiteKey: process.env.GOOGLE_RECAPTCHA_V2_SITE_KEY,
         googleRecaptchaV2Size: 'v2-normal',
+        lastModifiedAt: new Date().toUTCString().replace('GMT', 'UTC'),
     },
 
     privateRuntimeConfig: {},
