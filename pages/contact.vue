@@ -7,6 +7,7 @@
             :action="$config.pageclipActionUrl"
             class="pageclip-form"
             method="POST"
+            :disabled="!isPageclipLoaded"
           >
             <validation-provider
               v-slot="{ errors }"
@@ -176,6 +177,7 @@ import {
   useContext,
   onMounted,
   onBeforeUnmount,
+  watch,
 } from '@nuxtjs/composition-api'
 
 import {
@@ -207,6 +209,9 @@ export default defineComponent({
           src: 'https://s.pageclip.co/v1/pageclip.js',
           body: true,
           ssr: false,
+          callback: () => {
+            isPageclipLoaded.value = true
+          },
         },
       ],
       link: [
@@ -237,6 +242,13 @@ export default defineComponent({
     const asap = ref(false)
     const isRecaptched = ref(false)
     const widgetId = ref(0)
+    const isPageclipLoaded = ref(false)
+
+    watch(isPageclipLoaded, (currentValue) => {
+      if (currentValue) {
+        styleToPageclip()
+      }
+    })
 
     // hooks
     onMounted(async () => {
@@ -248,7 +260,9 @@ export default defineComponent({
 
       styleToRecaptcha()
 
-      styleToPageclip()
+      if (isPageclipLoaded.value) {
+        styleToPageclip()
+      }
     })
 
     onBeforeUnmount(() => {
@@ -375,6 +389,7 @@ export default defineComponent({
       items: ['Proposal', 'Hire', 'Suggestion', 'Other'],
       observer,
       isRecaptched,
+      isPageclipLoaded,
       submit,
       onError,
       onSuccess,
