@@ -96,12 +96,12 @@ export default defineComponent({
           image: mdiSend,
         },
         {
-          href: 'https://discordapp.com/users/365827212890341378',
-          image: mdiDiscord,
-        },
-        {
           href: 'https://api.whatsapp.com/send?phone=905522801804&text=Hi%20@emretepedev.',
           image: mdiWhatsapp,
+        },
+        {
+          href: 'https://discordapp.com/users/365827212890341378',
+          image: mdiDiscord,
         },
         {
           href: 'skype:live:.cid.ebf04f9e644e1570',
