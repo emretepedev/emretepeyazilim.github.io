@@ -31,6 +31,7 @@ export default {
         pageclipActionUrl: process.env.PAGECLIP_ACTION_URL,
         googleRecaptchaV2SiteKey: process.env.GOOGLE_RECAPTCHA_V2_SITE_KEY,
         googleRecaptchaV2Size: 'v2-normal',
+        googleAnalytics4Id: process.env.GOOGLE_ANALYTICS_4_ID,
         lastModifiedAt: new Date().toUTCString().replace('GMT', 'UTC'),
     },
 
@@ -42,6 +43,7 @@ export default {
     // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
     plugins: [
         '~/plugins/vee-validate',
+        '~/plugins/vue-gtag',
         { src: '~/plugins/vue-toastify', mode: 'client' },
     ],
 
@@ -85,7 +87,7 @@ export default {
             name: 'Homepage | ' + process.env.SPA_NAME,
             author: process.env.SPA_NAME,
             description:
-                'I’m a young ambitious web developer who seriously cares discipline. On the other hand, I’m an open-minded person to learn new stuffs about technology and software.',
+                'Emre Tepe is a young, ambitious and open-minded Web and Blockchain developer who seriously cares about discipline. He likes following the pace of new technology.',
             theme_color: '#1E1E1E',
             ogHost: process.env.SPA_URL,
             ogImage: true,
@@ -97,7 +99,7 @@ export default {
             name: 'Homepage | ' + process.env.SPA_NAME,
             short_name: process.env.SPA_NAME,
             description:
-                'I’m a young ambitious web developer who seriously cares discipline. On the other hand, I’m an open-minded person to learn new stuffs about technology and software.',
+                'Emre Tepe is a young, ambitious and open-minded Web and Blockchain developer who seriously cares about discipline. He likes following the pace of new technology.',
             background_color: '#1E1E1E',
         },
     },
@@ -198,6 +200,7 @@ export default {
     },
 
     recaptcha: {
+        // to access all options https://github.com/nuxt-community/recaptcha-module#configuration
         siteKey: process.env.GOOGLE_RECAPTCHA_V3_SITE_KEY,
         hideBadge: false,
         language: 'en',
@@ -205,8 +208,10 @@ export default {
     },
 
     gtm: {
+        // to access all options https://github.com/nuxt-community/gtm-module#options
         id: process.env.GOOGLE_TAG_MANAGER_ID,
         enabled: true,
+        debug: false,
         scriptDefer: true,
         pageTracking: true,
         pageViewEventName: 'nuxtRoute',

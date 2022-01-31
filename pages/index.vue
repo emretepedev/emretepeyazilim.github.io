@@ -18,11 +18,12 @@
               </v-banner>
               <v-card-text>
                 <div>
-                  I’m a young ambitious web developer who seriously cares
-                  discipline. On the other hand, I’m an open-minded person to
-                  learn new stuffs about technology and software. In addition to
-                  the technical matters that I care, I personally take account
-                  of everything about the notion “esteem”.
+                  I’m a young ambitious Web and Blockchain developer who
+                  seriously cares discipline. On the other hand, I’m an
+                  open-minded person to learn new stuffs about technology and
+                  software. In addition to the technical matters that I care, I
+                  personally take account of everything about the notion
+                  “esteem”.
                 </div>
               </v-card-text>
             </v-card>
