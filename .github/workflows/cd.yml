@@ -32,7 +32,7 @@ jobs:
                   node-version: ${{ matrix.node }}
 
             - name: Install dependencies
-              run: yarn
+              run: yarn install --production=false
 
             - name: Generate
               run: yarn generate
