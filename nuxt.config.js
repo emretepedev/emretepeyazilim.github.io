@@ -1,7 +1,8 @@
 export default {
+    // Target property: https://go.nuxtjs.dev/config-target
     target: 'static',
 
-    // SSR: https://go.nuxtjs.dev/config-ssr
+    // SSR property: https://go.nuxtjs.dev/config-ssr
     ssr: true,
 
     // Dev property: https://nuxtjs.org/docs/configuration-glossary/configuration-dev
@@ -18,7 +19,7 @@ export default {
 
     // Build Configuration: https://go.nuxtjs.dev/config-build
     build: {
-        // all options https://github.com/kangax/html-minifier#options-quick-reference
+        // All options https://github.com/kangax/html-minifier#options-quick-reference
         html: {
             minify: {
                 collapseBooleanAttributes: true,
@@ -89,125 +90,43 @@ export default {
     ],
 
     // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-    buildModules: [],
-
-    // Modules: https://go.nuxtjs.dev/config-modules
-    modules: [
+    buildModules: [
         '@nuxtjs/composition-api/module',
         '@nuxtjs/google-fonts',
-        '@nuxtjs/gtm',
-        '@nuxtjs/recaptcha',
-        '@nuxtjs/pwa',
-        '@nuxtjs/robots',
-        '@nuxtjs/sitemap',
         'nuxt-purgecss',
+        '@nuxtjs/pwa',
         '@nuxt/image',
         '@nuxtjs/tailwindcss',
         '@nuxtjs/vuetify',
+    ],
+
+    // Modules: https://go.nuxtjs.dev/config-modules
+    modules: [
+        '@nuxtjs/gtm',
+        '@nuxtjs/recaptcha',
+        '@nuxtjs/robots',
+        '@nuxtjs/sitemap',
         '@nuxtjs/axios',
     ],
 
-    // all options https://github.com/nuxt-community/google-fonts-module/blob/master/src/module.ts#L23
+    // All options https://github.com/nuxt-community/google-fonts-module/blob/master/src/module.ts#L23
     googleFonts: {
         families: {
-            Roboto: {
-                wght: [100, 200, 300, 400, 500, 600, 700, 800, 900],
-            },
+            Roboto: true,
         },
         display: 'swap',
-        subsets: 'latin',
+        subsets: ['latin'],
         prefetch: false,
         preconnect: false,
         preload: false,
+        useStylesheet: false,
         download: true,
-        overwriting: true,
+        overwriting: false,
         inject: true,
         base64: false,
     },
 
-    // all options https://github.com/nuxt-community/gtm-module#options
-    gtm: {
-        id: process.env.GOOGLE_TAG_MANAGER_ID,
-        enabled: true,
-        debug: false,
-        scriptDefer: true,
-        pageTracking: true,
-        pageViewEventName: 'nuxtRoute',
-    },
-
-    // all options https://github.com/nuxt-community/recaptcha-module#configuration
-    recaptcha: {
-        siteKey: process.env.GOOGLE_RECAPTCHA_V3_SITE_KEY,
-        hideBadge: false,
-        language: 'en',
-        version: 3,
-    },
-
-    pwa: {
-        // all options https://github.com/nuxt-community/pwa-module/blob/main/src/icon.ts#L11
-        icon: {
-            fileName: 'icon.png',
-            plugin: false,
-        },
-        // all options https://github.com/nuxt-community/pwa-module/blob/main/src/meta.ts#L8
-        meta: {
-            viewport: 'width=device-width, initial-scale=1',
-            mobileApp: true,
-            appleStatusBarStyle: 'black',
-            favicon: true,
-            name: 'Homepage | ' + process.env.SPA_NAME,
-            author: process.env.SPA_NAME,
-            description:
-                'Emre Tepe is a young, ambitious and open-minded Web and Blockchain developer who seriously cares about discipline. He likes following the pace of new technology.',
-            theme_color: '#1E1E1E',
-            ogHost: process.env.SPA_URL,
-            ogImage: true,
-            twitterCard: 'summary_large_image',
-            twitterSite: process.env.SPA_NAME,
-            twitterCreator: process.env.SPA_NAME,
-        },
-        // all options https://github.com/nuxt-community/pwa-module/blob/main/src/manifest.ts#L8
-        manifest: {
-            name: 'Homepage | ' + process.env.SPA_NAME,
-            short_name: process.env.SPA_NAME,
-            description:
-                'Emre Tepe is a young, ambitious and open-minded Web and Blockchain developer who seriously cares about discipline. He likes following the pace of new technology.',
-            background_color: '#1E1E1E',
-        },
-    },
-
-    // all options https://github.com/nuxt-community/robots-module#the-keys-and-values-available
-    robots: [
-        {
-            UserAgent: '*',
-            Allow: '/',
-        },
-        {
-            Sitemap: process.env.SPA_URL + '/sitemap.xml',
-        },
-    ],
-
-    // all options https://github.com/nuxt-community/sitemap-module/blob/dev/lib/options.js#L15
-    sitemap: {
-        hostname: process.env.SPA_URL,
-        gzip: true,
-        exclude: [],
-        defaults: {
-            changefreq: 'monthly',
-            priority: 0.5,
-            lastmod: new Date(),
-        },
-        routes: [
-            {
-                url: '/',
-                changefreq: 'weekly',
-                priority: 1,
-                lastmod: new Date(),
-            },
-        ],
-    },
-
-    // all options https://github.com/Developmint/nuxt-purgecss/blob/master/lib/utils.js#L10
+    // All options https://github.com/Developmint/nuxt-purgecss/blob/master/lib/utils.js#L10
     purgeCSS: {
         enabled: true,
         paths: ['./node_modules/vuetify/src/**/*.ts'],
@@ -226,7 +145,40 @@ export default {
         ],
     },
 
-    // all options https://github.com/nuxt-community/vuetify-module/blob/master/src/options.ts#L37
+    pwa: {
+        // All options https://github.com/nuxt-community/pwa-module/blob/main/src/icon.ts#L11
+        icon: {
+            fileName: 'icon.png',
+            plugin: false,
+        },
+        // All options https://github.com/nuxt-community/pwa-module/blob/main/src/meta.ts#L8
+        meta: {
+            viewport: 'width=device-width, initial-scale=1',
+            mobileApp: true,
+            appleStatusBarStyle: 'black',
+            favicon: true,
+            name: 'Homepage | ' + process.env.SPA_NAME,
+            author: process.env.SPA_NAME,
+            description:
+                'Emre Tepe is a young, ambitious and open-minded Web and Blockchain developer who seriously cares about discipline. He likes following the pace of new technology.',
+            theme_color: '#1E1E1E',
+            ogHost: process.env.SPA_URL,
+            ogImage: true,
+            twitterCard: 'summary_large_image',
+            twitterSite: process.env.SPA_NAME,
+            twitterCreator: process.env.SPA_NAME,
+        },
+        // All options https://github.com/nuxt-community/pwa-module/blob/main/src/manifest.ts#L8
+        manifest: {
+            name: 'Homepage | ' + process.env.SPA_NAME,
+            short_name: process.env.SPA_NAME,
+            description:
+                'Emre Tepe is a young, ambitious and open-minded Web and Blockchain developer who seriously cares about discipline. He likes following the pace of new technology.',
+            background_color: '#1E1E1E',
+        },
+    },
+
+    // All options https://github.com/nuxt-community/vuetify-module/blob/master/src/options.ts#L37
     vuetify: {
         defaultAssets: false,
         icons: {
@@ -236,5 +188,54 @@ export default {
         theme: {
             dark: true,
         },
+    },
+
+    // All options https://github.com/nuxt-community/gtm-module#options
+    gtm: {
+        id: process.env.GOOGLE_TAG_MANAGER_ID,
+        enabled: true,
+        debug: false,
+        scriptDefer: true,
+        pageTracking: true,
+        pageViewEventName: 'nuxtRoute',
+    },
+
+    // All options https://github.com/nuxt-community/recaptcha-module#configuration
+    recaptcha: {
+        siteKey: process.env.GOOGLE_RECAPTCHA_V3_SITE_KEY,
+        hideBadge: false,
+        language: 'en',
+        version: 3,
+    },
+
+    // All options https://github.com/nuxt-community/robots-module#the-keys-and-values-available
+    robots: [
+        {
+            UserAgent: '*',
+            Allow: '/',
+        },
+        {
+            Sitemap: process.env.SPA_URL + '/sitemap.xml',
+        },
+    ],
+
+    // All options https://github.com/nuxt-community/sitemap-module/blob/dev/lib/options.js#L15
+    sitemap: {
+        hostname: process.env.SPA_URL,
+        gzip: true,
+        exclude: [],
+        defaults: {
+            changefreq: 'monthly',
+            priority: 0.5,
+            lastmod: new Date(),
+        },
+        routes: [
+            {
+                url: '/',
+                changefreq: 'weekly',
+                priority: 1,
+                lastmod: new Date(),
+            },
+        ],
     },
 }

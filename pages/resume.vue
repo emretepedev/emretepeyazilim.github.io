@@ -93,7 +93,6 @@
 </template>
 
 <script>
-import { defineComponent, useMeta, ref } from '@nuxtjs/composition-api'
 import {
   mdiLink,
   mdiMagnify,
@@ -102,6 +101,7 @@ import {
   mdiArrowCollapseRight,
 } from '@mdi/js'
 
+import { defineComponent, useMeta, ref } from '@nuxtjs/composition-api'
 import skills from '~/data/resume/skills.json'
 import headers from '~/data/resume/headers.json'
 
@@ -132,4 +132,18 @@ export default defineComponent({
 })
 </script>
 
-<style></style>
+<style>
+.v-data-table-header th {
+  white-space: nowrap !important;
+}
+
+.v-data-table-header th.hide-icon-to-sortable:hover .v-data-table-header__icon {
+  display: inline-flex !important;
+}
+.v-data-table-header
+  tr
+  > th.hide-icon-to-sortable
+  > .v-data-table-header__icon {
+  display: none !important;
+}
+</style>
