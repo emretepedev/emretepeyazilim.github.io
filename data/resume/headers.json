@@ -1,0 +1,37 @@
+[
+    {
+        "text": "",
+        "value": "image",
+        "divider": true,
+        "align": "center",
+        "width": "5.6%",
+        "sortable": false,
+        "filterable": false
+    },
+    {
+        "text": "Name",
+        "value": "name",
+        "divider": true,
+        "align": "center"
+    },
+    {
+        "text": "Level",
+        "value": "level",
+        "divider": true,
+        "align": "center"
+    },
+    {
+        "text": "Group",
+        "value": "group",
+        "divider": true,
+        "align": "center"
+    },
+    {
+        "text": "Actions",
+        "value": "actions",
+        "divider": true,
+        "align": "center",
+        "sortable": false,
+        "filterable": false
+    }
+]

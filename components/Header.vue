@@ -76,7 +76,7 @@ export default defineComponent({
           to: '/projects',
           icon: mdiSourceRepositoryMultiple,
         },
-        { title: 'CV', to: '/cv', icon: mdiFileAccount },
+        { title: 'Resume', to: '/resume', icon: mdiFileAccount },
         { title: 'Contact', to: '/contact', icon: mdiCardAccountMail },
         { title: 'Coffee', to: '/coffee-with-crypto', icon: mdiCoffee },
       ],
