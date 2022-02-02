@@ -1,16 +1,55 @@
 export default {
     target: 'static',
 
+    // SSR: https://go.nuxtjs.dev/config-ssr
     ssr: true,
 
+    // Dev property: https://nuxtjs.org/docs/configuration-glossary/configuration-dev
     dev: false,
 
+    // Telemetry property: https://nuxtjs.org/docs/configuration-glossary/configuration-telemetry
     telemetry: false,
-
-    loading: false,
 
     // Auto import components: https://go.nuxtjs.dev/config-components
     components: true,
+
+    // Loading property: https://nuxtjs.org/docs/configuration-glossary/configuration-loading
+    loading: false,
+
+    // Build Configuration: https://go.nuxtjs.dev/config-build
+    build: {
+        // all options https://github.com/kangax/html-minifier#options-quick-reference
+        html: {
+            minify: {
+                collapseBooleanAttributes: true,
+                decodeEntities: true,
+                minifyCSS: true,
+                minifyJS: true,
+                processConditionalComments: true,
+                removeEmptyAttributes: true,
+                removeRedundantAttributes: true,
+                trimCustomFragments: true,
+                useShortDoctype: true,
+                minifyURLs: true,
+                removeComments: true,
+                removeEmptyElements: true,
+            },
+        },
+        devtools: false,
+        transpile: ['vee-validate/dist/rules'],
+        extractCSS: {
+            ignoreOrder: true,
+        },
+    },
+
+    // Render property: https://nuxtjs.org/docs/configuration-glossary/configuration-render
+    render: {
+        // Setting up cache for 'static' directory and  https://web.dev/uses-long-cache-ttl
+        static: {
+            // toSec * toMin * toHour * toDay * toMonth * toSixMonth
+            maxAge: 1000 * 60 * 60 * 24 * 30 * 6,
+        },
+    },
 
     // Global page headers: https://go.nuxtjs.dev/config-head
     head: {
@@ -25,6 +64,10 @@ export default {
         ],
     },
 
+    // Global CSS: https://go.nuxtjs.dev/config-css
+    css: ['@/assets/css/main.css'],
+
+    // Use Runtime Config instead of env https://nuxtjs.org/docs/directory-structure/nuxt-config/#publicruntimeconfig
     publicRuntimeConfig: {
         spaName: process.env.SPA_NAME,
         githubPersonalAccessToken: process.env.GH_PERSONAL_ACCESS_TOKEN,
@@ -35,15 +78,13 @@ export default {
         lastModifiedAt: new Date().toUTCString().replace('GMT', 'UTC'),
     },
 
+    // Use Runtime Config instead of env https://nuxtjs.org/docs/directory-structure/nuxt-config/#privateruntimeconfig
     privateRuntimeConfig: {},
-
-    // Global CSS: https://go.nuxtjs.dev/config-css
-    css: ['@/assets/css/main.css'],
 
     // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
     plugins: [
-        '~/plugins/vee-validate',
         '~/plugins/vue-gtag',
+        '~/plugins/vee-validate',
         { src: '~/plugins/vue-toastify', mode: 'client' },
     ],
 
@@ -52,33 +93,63 @@ export default {
 
     // Modules: https://go.nuxtjs.dev/config-modules
     modules: [
+        '@nuxtjs/composition-api/module',
         '@nuxtjs/google-fonts',
         '@nuxtjs/gtm',
         '@nuxtjs/recaptcha',
         '@nuxtjs/pwa',
         '@nuxtjs/robots',
         '@nuxtjs/sitemap',
-        '@nuxt/image',
         'nuxt-purgecss',
-        '@nuxtjs/composition-api/module',
-        '@nuxtjs/axios',
+        '@nuxt/image',
         '@nuxtjs/tailwindcss',
         '@nuxtjs/vuetify',
+        '@nuxtjs/axios',
     ],
 
-    // Build Configuration: https://go.nuxtjs.dev/config-build
-    build: {
-        transpile: ['vee-validate/dist/rules'],
-        extractCSS: {
-            ignoreOrder: true,
+    // all options https://github.com/nuxt-community/google-fonts-module/blob/master/src/module.ts#L23
+    googleFonts: {
+        families: {
+            Roboto: {
+                wght: [100, 200, 300, 400, 500, 600, 700, 800, 900],
+            },
         },
+        display: 'swap',
+        subsets: 'latin',
+        prefetch: false,
+        preconnect: false,
+        preload: false,
+        download: true,
+        overwriting: true,
+        inject: true,
+        base64: false,
+    },
+
+    // all options https://github.com/nuxt-community/gtm-module#options
+    gtm: {
+        id: process.env.GOOGLE_TAG_MANAGER_ID,
+        enabled: true,
+        debug: false,
+        scriptDefer: true,
+        pageTracking: true,
+        pageViewEventName: 'nuxtRoute',
+    },
+
+    // all options https://github.com/nuxt-community/recaptcha-module#configuration
+    recaptcha: {
+        siteKey: process.env.GOOGLE_RECAPTCHA_V3_SITE_KEY,
+        hideBadge: false,
+        language: 'en',
+        version: 3,
     },
 
     pwa: {
+        // all options https://github.com/nuxt-community/pwa-module/blob/main/src/icon.ts#L11
         icon: {
             fileName: 'icon.png',
             plugin: false,
         },
+        // all options https://github.com/nuxt-community/pwa-module/blob/main/src/meta.ts#L8
         meta: {
             viewport: 'width=device-width, initial-scale=1',
             mobileApp: true,
@@ -95,6 +166,7 @@ export default {
             twitterSite: process.env.SPA_NAME,
             twitterCreator: process.env.SPA_NAME,
         },
+        // all options https://github.com/nuxt-community/pwa-module/blob/main/src/manifest.ts#L8
         manifest: {
             name: 'Homepage | ' + process.env.SPA_NAME,
             short_name: process.env.SPA_NAME,
@@ -104,6 +176,18 @@ export default {
         },
     },
 
+    // all options https://github.com/nuxt-community/robots-module#the-keys-and-values-available
+    robots: [
+        {
+            UserAgent: '*',
+            Allow: '/',
+        },
+        {
+            Sitemap: process.env.SPA_URL + '/sitemap.xml',
+        },
+    ],
+
+    // all options https://github.com/nuxt-community/sitemap-module/blob/dev/lib/options.js#L15
     sitemap: {
         hostname: process.env.SPA_URL,
         gzip: true,
@@ -123,61 +207,10 @@ export default {
         ],
     },
 
-    robots: [
-        {
-            UserAgent: '*',
-            Allow: '/',
-        },
-        {
-            Sitemap: process.env.SPA_URL + '/sitemap.xml',
-        },
-    ],
-
-    render: {
-        // Setting up cache for 'static' directory
-        // https://web.dev/uses-long-cache-ttl
-        static: {
-            maxAge: 1000 * 60 * 60 * 24 * 180,
-        },
-    },
-
-    googleFonts: {
-        families: {
-            Roboto: {
-                wght: [100, 200, 300, 400, 500, 600, 700, 800, 900],
-            },
-        },
-        display: 'swap',
-        subsets: 'latin',
-        prefetch: false,
-        preconnect: false,
-        preload: false,
-        download: true,
-        overwriting: false,
-        inject: true,
-        base64: false,
-    },
-
-    vuetify: {
-        defaultAssets: false,
-        icons: {
-            iconfont: 'mdiSvg',
-        },
-        treeShake: true,
-        theme: {
-            dark: true,
-        },
-    },
-
+    // all options https://github.com/Developmint/nuxt-purgecss/blob/master/lib/utils.js#L10
     purgeCSS: {
         enabled: true,
-        paths: [
-            'components/**/*.vue',
-            'layouts/**/*.vue',
-            'pages/**/*.vue',
-            'plugins/**/*.js',
-            './node_modules/vuetify/src/**/*.ts',
-        ],
+        paths: ['./node_modules/vuetify/src/**/*.ts'],
         whitelist: ['v-app', 'v-app--wrap'],
         whitelistPatterns: [
             /^v-((?!app).)*$/,
@@ -191,29 +224,17 @@ export default {
             /^text--*/,
             /--text$/,
         ],
-        extractors: [
-            {
-                extractor: (content) => content.match(/[A-z0-9-:\\/]+/g) || [],
-                extensions: ['html', 'vue', 'js'],
-            },
-        ],
     },
 
-    recaptcha: {
-        // to access all options https://github.com/nuxt-community/recaptcha-module#configuration
-        siteKey: process.env.GOOGLE_RECAPTCHA_V3_SITE_KEY,
-        hideBadge: false,
-        language: 'en',
-        version: 3,
-    },
-
-    gtm: {
-        // to access all options https://github.com/nuxt-community/gtm-module#options
-        id: process.env.GOOGLE_TAG_MANAGER_ID,
-        enabled: true,
-        debug: false,
-        scriptDefer: true,
-        pageTracking: true,
-        pageViewEventName: 'nuxtRoute',
+    // all options https://github.com/nuxt-community/vuetify-module/blob/master/src/options.ts#L37
+    vuetify: {
+        defaultAssets: false,
+        icons: {
+            iconfont: 'mdiSvg',
+        },
+        treeShake: true,
+        theme: {
+            dark: true,
+        },
     },
 }
