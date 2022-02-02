@@ -5,6 +5,7 @@
         "divider": true,
         "align": "center",
         "width": "5.6%",
+        "groupable": false,
         "sortable": false,
         "filterable": false
     },
@@ -12,17 +13,19 @@
         "text": "Name",
         "value": "name",
         "divider": true,
-        "align": "center"
+        "align": "center",
+        "groupable": false
     },
     {
         "text": "Level",
         "value": "level",
         "divider": true,
-        "align": "center"
+        "align": "center",
+        "groupable": false
     },
     {
-        "text": "Group",
-        "value": "group",
+        "text": "Category",
+        "value": "category",
         "divider": true,
         "align": "center"
     },
@@ -31,6 +34,7 @@
         "value": "actions",
         "divider": true,
         "align": "center",
+        "groupable": false,
         "sortable": false,
         "filterable": false
     }

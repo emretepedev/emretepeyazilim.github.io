@@ -2,7 +2,7 @@
     {
         "name": "PHP",
         "image": "php.svg",
-        "group": "Backend",
+        "category": "Backend",
         "level": 4,
         "url": "https://www.php.net/",
         "color": "invert(53%) sepia(8%) saturate(2152%) hue-rotate(198deg) brightness(92%) contrast(81%);",
@@ -11,7 +11,7 @@
     {
         "name": "Laravel",
         "image": "laravel.svg",
-        "group": "Backend",
+        "category": "Backend",
         "level": 4.5,
         "url": "https://laravel.com/",
         "color": "invert(26%) sepia(39%) saturate(5823%) hue-rotate(349deg) brightness(106%) contrast(104%);",
@@ -20,7 +20,7 @@
     {
         "name": "Solidity",
         "image": "solidity.svg",
-        "group": "Blockchain",
+        "category": "Blockchain",
         "level": 4,
         "url": "https://docs.soliditylang.org/",
         "color": "invert(18%) sepia(0%) saturate(3261%) hue-rotate(238deg) brightness(85%) contrast(82%);",
@@ -29,7 +29,7 @@
     {
         "name": "Web3.js",
         "image": "web3js.svg",
-        "group": "Blockchain",
+        "category": "Blockchain",
         "level": 4.5,
         "url": "https://web3js.readthedocs.io/",
         "color": "invert(50%) sepia(51%) saturate(3349%) hue-rotate(348deg) brightness(98%) contrast(92%);",
@@ -38,7 +38,7 @@
     {
         "name": "Vue",
         "image": "vue.svg",
-        "group": "Frontend",
+        "category": "Frontend",
         "level": 3.5,
         "url": "https://vuejs.org/",
         "color": "invert(65%) sepia(8%) saturate(2407%) hue-rotate(101deg) brightness(100%) contrast(89%);",
@@ -47,7 +47,7 @@
     {
         "name": "Nuxt",
         "image": "nuxt.svg",
-        "group": "Frontend",
+        "category": "Frontend",
         "level": 4.5,
         "url": "https://nuxtjs.org/",
         "color": "invert(60%) sepia(93%) saturate(1112%) hue-rotate(106deg) brightness(94%) contrast(104%);",
@@ -56,7 +56,7 @@
     {
         "name": "Vuetify",
         "image": "vuetify.svg",
-        "group": "Frontend",
+        "category": "Frontend",
         "level": 4,
         "url": "https://vuetifyjs.com/",
         "color": "invert(25%) sepia(68%) saturate(1741%) hue-rotate(192deg) brightness(107%) contrast(88%);",
@@ -65,7 +65,7 @@
     {
         "name": "Tailwind",
         "image": "tailwind.svg",
-        "group": "Frontend",
+        "category": "Frontend",
         "level": 3.5,
         "url": "https://tailwindcss.com/",
         "color": "invert(58%) sepia(64%) saturate(1994%) hue-rotate(146deg) brightness(93%) contrast(95%);",
@@ -74,7 +74,7 @@
     {
         "name": "Redis",
         "image": "redis.svg",
-        "group": "Database",
+        "category": "Database",
         "level": 0,
         "url": "https://redis.io/",
         "color": "invert(25%) sepia(69%) saturate(3268%) hue-rotate(349deg) brightness(93%) contrast(85%);",
@@ -83,7 +83,7 @@
     {
         "name": "PostgreSQL",
         "image": "postgresql.svg",
-        "group": "Database",
+        "category": "Database",
         "level": 0,
         "url": "https://www.postgresql.org/",
         "color": "invert(37%) sepia(14%) saturate(7150%) hue-rotate(208deg) brightness(95%) contrast(86%);",
@@ -92,7 +92,7 @@
     {
         "name": "MySQL",
         "image": "mysql.svg",
-        "group": "Database",
+        "category": "Database",
         "level": 0,
         "url": "https://www.mysql.com/",
         "color": "invert(41%) sepia(87%) saturate(279%) hue-rotate(163deg) brightness(90%) contrast(92%);",
@@ -101,7 +101,7 @@
     {
         "name": "Livewire",
         "image": "livewire.svg",
-        "group": "Backend",
+        "category": "Backend",
         "level": 0,
         "url": "https://laravel-livewire.com/",
         "color": "invert(35%) sepia(18%) saturate(2107%) hue-rotate(197deg) brightness(89%) contrast(83%);",
@@ -110,7 +110,7 @@
     {
         "name": "Bootstrap",
         "image": "bootstrap.svg",
-        "group": "Frontend",
+        "category": "Frontend",
         "level": 0,
         "url": "https://getbootstrap.com/",
         "color": "invert(39%) sepia(11%) saturate(4338%) hue-rotate(227deg) brightness(86%) contrast(80%);",
@@ -119,7 +119,7 @@
     {
         "name": "Docker",
         "image": "docker.svg",
-        "group": "System",
+        "category": "System",
         "level": 0,
         "url": "https://www.docker.com/",
         "color": "invert(46%) sepia(95%) saturate(1723%) hue-rotate(183deg) brightness(97%) contrast(91%);",
@@ -128,7 +128,7 @@
     {
         "name": "Nginx",
         "image": "nginx.svg",
-        "group": "System",
+        "category": "System",
         "level": 0,
         "url": "https://nginx.org/",
         "color": "invert(31%) sepia(100%) saturate(1269%) hue-rotate(121deg) brightness(94%) contrast(101%);",
@@ -137,7 +137,7 @@
     {
         "name": "Git",
         "image": "git.svg",
-        "group": "Tool",
+        "category": "Tool",
         "level": 0,
         "url": "https://git-scm.com/",
         "color": "invert(39%) sepia(85%) saturate(2528%) hue-rotate(343deg) brightness(98%) contrast(93%);",
@@ -146,7 +146,7 @@
     {
         "name": "Google Tag Manager",
         "image": "googletagmanager.svg",
-        "group": "Tool",
+        "category": "Tool",
         "level": 0,
         "url": "https://tagmanager.google.com/",
         "color": "invert(40%) sepia(99%) saturate(610%) hue-rotate(179deg) brightness(87%) contrast(100%);",
@@ -155,7 +155,7 @@
     {
         "name": "Google Analytics",
         "image": "googleanalytics.svg",
-        "group": "Tool",
+        "category": "Tool",
         "level": 0,
         "url": "https://analytics.google.com/",
         "color": "invert(50%) sepia(40%) saturate(3959%) hue-rotate(8deg) brightness(96%) contrast(103%);",
@@ -164,7 +164,7 @@
     {
         "name": "Vim",
         "image": "vim.svg",
-        "group": "Personal",
+        "category": "Personal",
         "level": 0,
         "url": "https://www.vim.org/",
         "color": "invert(23%) sepia(98%) saturate(2803%) hue-rotate(139deg) brightness(101%) contrast(101%);",
@@ -173,7 +173,7 @@
     {
         "name": "Linux",
         "image": "linux.svg",
-        "group": "Personal",
+        "category": "Personal",
         "level": 0,
         "url": null,
         "color": "invert(89%) sepia(17%) saturate(3166%) hue-rotate(338deg) brightness(103%) contrast(98%);",

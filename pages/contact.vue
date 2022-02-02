@@ -62,11 +62,11 @@
             <validation-provider
               v-slot="{ errors }"
               name="subject"
-              :rules="`required|oneOf:${items}`"
+              :rules="`required|oneOf:${subjects}`"
             >
               <v-autocomplete
                 v-model="subject"
-                :items="items"
+                :items="subjects"
                 :error-messages="errors"
                 :success="
                   !Boolean(Object.keys(errors).length) && Boolean(subject)
@@ -388,7 +388,7 @@ export default defineComponent({
       subject,
       message,
       asap,
-      items: ['Proposal', 'Hire', 'Suggestion', 'Other'],
+      subjects: ['Proposal', 'Hire', 'Suggestion', 'Other'],
       observer,
       isRecaptched,
       isPageclipLoaded,

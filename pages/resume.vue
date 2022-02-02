@@ -11,6 +11,7 @@
           multi-sort
           show-expand
           dense
+          show-group-by
           :footer-props="{
             showFirstLastPage: true,
             firstIcon: mdiArrowCollapseLeft,
@@ -51,21 +52,14 @@
           </template>
           <template #item.level="{ item }">
             <div class="flex justify-center items-center" v-if="item.level > 0">
-              <v-tooltip bottom>
-                <template v-slot:activator="{ on, attrs }">
-                  <v-rating
-                    readonly
-                    half-increments
-                    dense
-                    small
-                    background-color="grey"
-                    :value="item.level"
-                    v-bind="attrs"
-                    v-on="on"
-                  ></v-rating>
-                </template>
-                <span>a</span>
-              </v-tooltip>
+              <v-rating
+                readonly
+                half-increments
+                dense
+                small
+                background-color="grey"
+                :value="item.level"
+              ></v-rating>
             </div>
           </template>
           <template #item.actions="{ item }">

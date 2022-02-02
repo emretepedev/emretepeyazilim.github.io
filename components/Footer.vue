@@ -5,18 +5,18 @@
       <v-card flat tile ripple class="white--text text-center w-full">
         <v-card-text>
           <v-btn
-            v-for="icon in icons"
-            :key="icon.href"
+            v-for="social in socials"
+            :key="social.href"
             class="mx-4 white--text"
             icon
-            :href="icon.href"
+            :href="social.href"
             target="_blank"
           >
             <v-icon
               :x-large="!$vuetify.breakpoint.mdAndDown"
-              :color="icon.color"
+              :color="social.color"
             >
-              {{ icon.image }}
+              {{ social.image }}
             </v-icon>
           </v-btn>
         </v-card-text>
@@ -69,7 +69,7 @@ export default defineComponent({
 
     // return
     return {
-      icons: [
+      socials: [
         {
           href: 'https://github.com/emretepedev',
           image: mdiGithub,
