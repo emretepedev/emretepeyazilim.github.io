@@ -199,7 +199,7 @@ export default defineComponent({
     ValidationObserver,
   },
 
-  setup(_, context) {
+  setup(_, { root }) {
     // meta
     useMeta({
       title: 'Contact | ',
@@ -229,7 +229,7 @@ export default defineComponent({
     const { $config, $recaptcha } = useContext()
 
     // root variables
-    const $vToastify = context.root.$vToastify
+    const $vToastify = root.$vToastify
 
     // refs
     const observer = ref(null)
