@@ -1,6 +1,8 @@
-name: cd
+name: Fetch recent contributions count
 
-on: [push, pull_request]
+on:
+    schedule:
+        - cron: '0 0 * * *'
 
 env:
     NODE_ENV: ${{ secrets.NODE_ENV }}
@@ -15,7 +17,7 @@ env:
     PAGECLIP_ACTION_URL: ${{ secrets.PAGECLIP_ACTION_URL }}
 
 jobs:
-    cd:
+    fetch-recent-contributions-count:
         runs-on: ${{ matrix.os }}
 
         strategy:

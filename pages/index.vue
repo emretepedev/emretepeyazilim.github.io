@@ -46,7 +46,7 @@
             </v-card-subtitle>
             <v-sheet color="transparent">
               <v-sparkline
-                :value="contributionCount"
+                :value="graphData"
                 :gradient="['#f72047', '#ffd200', '#1feaea']"
                 :smooth="10"
                 :padding="8"
@@ -77,85 +77,36 @@
 </template>
 
 <script>
-import {
-  defineComponent,
-  useMeta,
-  ref,
-  useContext,
-  useAsync,
-} from '@nuxtjs/composition-api'
+import { defineComponent, useMeta, ref } from '@nuxtjs/composition-api'
 
 import { mdiPoll } from '@mdi/js'
 import projects from '~/data/index/projects.json'
+import contributionsCount from '~/data/index/contributionsCount.json'
 
 export default defineComponent({
   setup() {
     // meta
     useMeta({ title: 'Homepage | ' })
 
-    // context
-    const { $config, $axios } = useContext()
-
     // consts
-    const contributionCount = ref([])
+    const graphData = ref([])
     const from = new Date()
     const to = new Date()
 
     from.setDate(to.getDate() - 30)
 
-    // methods
-    const hexToString = (hex) => {
-      let string = ''
-      for (let i = 0; i < hex.length; i += 2) {
-        string += String.fromCharCode(parseInt(hex.substr(i, 2), 16))
-      }
-
-      return string
-    }
-
-    // hooks
-    useAsync(() => {
-      const headers = {
-        Authorization: `bearer ${hexToString(
-          $config.githubPersonalAccessToken
-        )}`,
-      }
-
-      const data = {
-        query: `
-                    query {
-                        user(login: "emretepedev") {
-                            contributionsCollection(from: "${from.toISOString()}" to: "${to.toISOString()}") {
-                                contributionCalendar {
-                                    weeks {
-                                        contributionDays {
-                                            contributionCount
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                `,
-      }
-
-      $axios
-        .$post('https://api.github.com/graphql', data, { headers })
-        .then((response) => {
-          response.data.user.contributionsCollection.contributionCalendar.weeks.forEach(
-            (week) => {
-              week.contributionDays.forEach((day) => {
-                contributionCount.value.push(day.contributionCount)
-              })
-            }
-          )
+    contributionsCount.data.user.contributionsCollection.contributionCalendar.weeks.forEach(
+      (week) => {
+        week.contributionDays.forEach((day) => {
+          graphData.value.push(day.contributionCount)
         })
-    })
+      }
+    )
 
     // return
     return {
       projects,
-      contributionCount,
+      graphData,
       mdiPoll,
     }
   },

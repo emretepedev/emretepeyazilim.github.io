@@ -1,23 +1,5 @@
 [
     {
-        "name": "PHP",
-        "image": "php.svg",
-        "category": "Backend",
-        "level": 4,
-        "url": "https://www.php.net/",
-        "color": "invert(53%) sepia(8%) saturate(2152%) hue-rotate(198deg) brightness(92%) contrast(81%);",
-        "description": "PHP is a popular general-purpose scripting language that is especially suited to web development. Fast, flexible and pragmatic, PHP powers everything from your blog to the most popular websites in the world."
-    },
-    {
-        "name": "Laravel",
-        "image": "laravel.svg",
-        "category": "Backend",
-        "level": 4.5,
-        "url": "https://laravel.com/",
-        "color": "invert(26%) sepia(39%) saturate(5823%) hue-rotate(349deg) brightness(106%) contrast(104%);",
-        "description": "Laravel is a web application framework with expressive, elegant syntax. We’ve already laid the foundation — freeing you to create without sweating the small things."
-    },
-    {
         "name": "Solidity",
         "image": "solidity.svg",
         "category": "Blockchain",
@@ -34,6 +16,24 @@
         "url": "https://web3js.readthedocs.io/",
         "color": "invert(50%) sepia(51%) saturate(3349%) hue-rotate(348deg) brightness(98%) contrast(92%);",
         "description": "web3.js is a collection of libraries that allow you to interact with a local or remote ethereum node using HTTP, IPC or WebSocket."
+    },
+    {
+        "name": "PHP",
+        "image": "php.svg",
+        "category": "Backend",
+        "level": 4,
+        "url": "https://www.php.net/",
+        "color": "invert(53%) sepia(8%) saturate(2152%) hue-rotate(198deg) brightness(92%) contrast(81%);",
+        "description": "PHP is a popular general-purpose scripting language that is especially suited to web development. Fast, flexible and pragmatic, PHP powers everything from your blog to the most popular websites in the world."
+    },
+    {
+        "name": "Laravel",
+        "image": "laravel.svg",
+        "category": "Backend",
+        "level": 4.5,
+        "url": "https://laravel.com/",
+        "color": "invert(26%) sepia(39%) saturate(5823%) hue-rotate(349deg) brightness(106%) contrast(104%);",
+        "description": "Laravel is a web application framework with expressive, elegant syntax. We’ve already laid the foundation — freeing you to create without sweating the small things."
     },
     {
         "name": "Vue",
@@ -144,22 +144,22 @@
         "description": "Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency."
     },
     {
-        "name": "Google Tag Manager",
+        "name": "G***** Tag Manager",
         "image": "googletagmanager.svg",
         "category": "Tool",
         "level": 0,
         "url": "https://tagmanager.google.com/",
         "color": "invert(40%) sepia(99%) saturate(610%) hue-rotate(179deg) brightness(87%) contrast(100%);",
-        "description": "Google Tag Manager is a tag management system that allows you to quickly and easily update measurement codes and related code fragments collectively known as tags on your website or mobile app."
+        "description": "G***** Tag Manager is a tag management system that allows you to quickly and easily update measurement codes and related code fragments collectively known as tags on your website or mobile app."
     },
     {
-        "name": "Google Analytics",
+        "name": "G***** Analytics",
         "image": "googleanalytics.svg",
         "category": "Tool",
         "level": 0,
         "url": "https://analytics.google.com/",
         "color": "invert(50%) sepia(40%) saturate(3959%) hue-rotate(8deg) brightness(96%) contrast(103%);",
-        "description": "Google Analytics lets you measure your advertising ROI as well as track your Flash, video, and social networking sites and applications."
+        "description": "G***** Analytics lets you measure your advertising ROI as well as track your Flash, video, and social networking sites and applications."
     },
     {
         "name": "Vim",

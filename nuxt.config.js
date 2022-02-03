@@ -55,7 +55,7 @@ export default {
     // Global page headers: https://go.nuxtjs.dev/config-head
     head: {
         title: 'Homepage | ',
-        titleTemplate: '%s' + process.env.SPA_NAME,
+        titleTemplate: '%s' + process.env.SPA_NAME + ' - Emre Tepe',
         meta: [
             {
                 hid: 'keywords',
@@ -160,7 +160,7 @@ export default {
             name: 'Homepage | ' + process.env.SPA_NAME,
             author: process.env.SPA_NAME,
             description:
-                'Emre Tepe is a young, ambitious and open-minded Web and Blockchain developer who seriously cares about discipline. He likes following the pace of new technology.',
+                'Emre Tepe is a young, ambitious and open-minded Web and Blockchain Developer who seriously cares about discipline. He likes following the pace of new technology.',
             theme_color: '#1E1E1E',
             ogHost: process.env.SPA_URL,
             ogImage: true,
@@ -173,7 +173,7 @@ export default {
             name: 'Homepage | ' + process.env.SPA_NAME,
             short_name: process.env.SPA_NAME,
             description:
-                'Emre Tepe is a young, ambitious and open-minded Web and Blockchain developer who seriously cares about discipline. He likes following the pace of new technology.',
+                'Emre Tepe is a young, ambitious and open-minded Web and Blockchain Developer who seriously cares about discipline. He likes following the pace of new technology.',
             background_color: '#1E1E1E',
         },
     },
@@ -277,7 +277,7 @@ export default {
         routes: [
             {
                 url: '/',
-                changefreq: 'weekly',
+                changefreq: 'daily',
                 priority: 1,
                 lastmod: new Date(),
             },
