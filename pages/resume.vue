@@ -2,6 +2,17 @@
   <div>
     <div class="flex justify-center mt-12">
       <v-container>
+        <v-row justify="center" align="center" class="mb-1">
+          <div
+            class="badge-base LI-profile-badge"
+            data-locale="en_US"
+            data-size="large"
+            data-theme="dark"
+            data-type="HORIZONTAL"
+            data-vanity="emretepedev"
+            data-version="v1"
+          ></div>
+        </v-row>
         <v-data-table
           :headers="headers"
           :items="skills"
@@ -108,11 +119,48 @@ import headers from '~/data/resume/headers.json'
 export default defineComponent({
   setup() {
     // meta
-    useMeta({ title: 'Resume | ' })
+    useMeta({
+      title: 'Resume | ',
+      script: [
+        {
+          src: 'https://platform.linkedin.com/badges/js/profile.js',
+          async: true,
+          defer: true,
+          callback: () => {
+            styleToLinkedInBadge()
+          },
+        },
+      ],
+    })
 
-    //consts
+    // consts
     const search = ref('')
     const expanded = ref([])
+
+    // methods
+    const styleToLinkedInBadge = () => {
+      let count = 0
+      const frequency = 1000 / 2 // 0.5 sec
+      const maxTime = (1000 / frequency) * 30 // 30 sec
+
+      const interval = setInterval(() => {
+        const linkedInIframe = document.querySelector('iframe')
+
+        if (Boolean(linkedInIframe) || count === maxTime) {
+          clearInterval(interval)
+
+          if (count === maxTime) {
+            return
+          }
+
+          linkedInIframe.contentWindow.document.querySelector(
+            'html'
+          ).style.textAlign = 'center'
+        }
+
+        count++
+      }, frequency)
+    }
 
     // return
     return {
@@ -145,5 +193,17 @@ export default defineComponent({
   > th.hide-icon-to-sortable
   > .v-data-table-header__icon {
   display: none !important;
+}
+
+@media (max-width: 425px) {
+  .v-data-footer__pagination {
+    width: 100% !important;
+  }
+
+  .v-data-footer__icons-before,
+  .v-data-footer__icons-after,
+  .v-data-footer__select {
+    margin: auto !important;
+  }
 }
 </style>

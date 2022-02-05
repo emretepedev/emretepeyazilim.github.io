@@ -7,7 +7,6 @@
             :action="$config.pageclipActionUrl"
             class="pageclip-form"
             method="POST"
-            :disabled="!isPageclipLoaded"
           >
             <validation-provider
               v-slot="{ errors }"
@@ -66,7 +65,7 @@
             >
               <v-autocomplete
                 v-model="subject"
-                :items="subjects"
+                :items="form.subjects"
                 :error-messages="errors"
                 :success="
                   !Boolean(Object.keys(errors).length) && Boolean(subject)
@@ -176,8 +175,6 @@ import {
   useMeta,
   useContext,
   onMounted,
-  onBeforeUnmount,
-  watch,
 } from '@nuxtjs/composition-api'
 
 import {
@@ -192,6 +189,7 @@ import {
 } from '@mdi/js'
 
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
+import form from '~/data/contact/form.json'
 
 export default defineComponent({
   components: {
@@ -208,10 +206,9 @@ export default defineComponent({
           charset: 'utf-8',
           src: 'https://s.pageclip.co/v1/pageclip.js',
           body: true,
-          ssr: false,
           defer: true,
           callback: () => {
-            isPageclipLoaded.value = true
+            styleToPageclip()
           },
         },
       ],
@@ -220,7 +217,6 @@ export default defineComponent({
           rel: 'stylesheet',
           href: 'https://s.pageclip.co/v1/pageclip.css',
           media: 'screen',
-          ssr: false,
         },
       ],
     })
@@ -243,14 +239,6 @@ export default defineComponent({
     const asap = ref(false)
     const isRecaptched = ref(false)
     const widgetId = ref(0)
-    const isPageclipLoaded = ref(false)
-
-    // watch
-    watch(isPageclipLoaded, (currentValue) => {
-      if (currentValue) {
-        styleToPageclip()
-      }
-    })
 
     // hooks
     onMounted(async () => {
@@ -261,14 +249,6 @@ export default defineComponent({
       })
 
       styleToRecaptcha()
-
-      if (isPageclipLoaded.value) {
-        styleToPageclip()
-      }
-    })
-
-    onBeforeUnmount(() => {
-      $recaptcha.destroy()
     })
 
     // methods
@@ -388,10 +368,9 @@ export default defineComponent({
       subject,
       message,
       asap,
-      subjects: ['Proposal', 'Hire', 'Suggestion', 'Other'],
+      form,
       observer,
       isRecaptched,
-      isPageclipLoaded,
       submit,
       onError,
       onSuccess,
