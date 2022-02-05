@@ -90,5 +90,5 @@ sw.*
 *.swp
 
 # Fetch data to GitHub
-#data/index/contributionsCount.json
-#contributionsCount.js
+data/index/contributionsCount.json
+contributionsCount.js
