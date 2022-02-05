@@ -117,6 +117,15 @@
         "description": "Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins."
     },
     {
+        "name": "Git",
+        "image": "git.svg",
+        "category": "Tool",
+        "level": 0,
+        "url": "https://git-scm.com/",
+        "color": "invert(39%) sepia(85%) saturate(2528%) hue-rotate(343deg) brightness(98%) contrast(93%);",
+        "description": "Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency."
+    },
+    {
         "name": "Docker",
         "image": "docker.svg",
         "category": "System",
@@ -135,15 +144,6 @@
         "description": "Nginx is a web server that can also be used as a reverse proxy, load balancer, mail proxy and HTTP cache."
     },
     {
-        "name": "Git",
-        "image": "git.svg",
-        "category": "Tool",
-        "level": 0,
-        "url": "https://git-scm.com/",
-        "color": "invert(39%) sepia(85%) saturate(2528%) hue-rotate(343deg) brightness(98%) contrast(93%);",
-        "description": "Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency."
-    },
-    {
         "name": "G***** Tag Manager",
         "image": "googletagmanager.svg",
         "category": "Tool",
@@ -151,15 +151,6 @@
         "url": "https://tagmanager.google.com/",
         "color": "invert(40%) sepia(99%) saturate(610%) hue-rotate(179deg) brightness(87%) contrast(100%);",
         "description": "G***** Tag Manager is a tag management system that allows you to quickly and easily update measurement codes and related code fragments collectively known as tags on your website or mobile app."
-    },
-    {
-        "name": "G***** Analytics",
-        "image": "googleanalytics.svg",
-        "category": "Tool",
-        "level": 0,
-        "url": "https://analytics.google.com/",
-        "color": "invert(50%) sepia(40%) saturate(3959%) hue-rotate(8deg) brightness(96%) contrast(103%);",
-        "description": "G***** Analytics lets you measure your advertising ROI as well as track your Flash, video, and social networking sites and applications."
     },
     {
         "name": "Vim",

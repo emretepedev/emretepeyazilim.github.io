@@ -71,37 +71,37 @@ export default defineComponent({
     return {
       socials: [
         {
-          href: 'https://github.com/emretepedev',
+          href: 'https://github.com/emretepedev/',
           image: mdiGithub,
           color: '#181717',
         },
         {
-          href: 'https://gitlab.com/emretepedev',
+          href: 'https://gitlab.com/emretepedev/',
           image: mdiGitlab,
           color: '#FCA121',
         },
         {
-          href: 'https://linkedin.com/in/emretepedev',
+          href: 'https://linkedin.com/in/emretepedev/',
           image: mdiLinkedin,
           color: '#0A66C2',
         },
         {
-          href: 'https://twitter.com/emretepedev',
+          href: 'https://twitter.com/emretepedev/',
           image: mdiTwitter,
           color: '#1DA1F2',
         },
         {
-          href: 'https://instagram.com/emretepedev',
+          href: 'https://instagram.com/emretepedev/',
           image: mdiInstagram,
           color: '#E4405F',
         },
         {
-          href: 'https://facebook.com/emretepedev',
+          href: 'https://facebook.com/emretepedev/',
           image: mdiFacebook,
           color: '#1877F2',
         },
         {
-          href: 'https://telegram.me/emretepedev',
+          href: 'https://telegram.me/emretepedev/',
           image: mdiSend,
           color: '#26A5E4',
         },
@@ -111,7 +111,7 @@ export default defineComponent({
           color: '#25D366',
         },
         {
-          href: 'https://discordapp.com/users/365827212890341378',
+          href: 'https://discordapp.com/users/365827212890341378/',
           image: mdiDiscord,
           color: '#5865F2',
         },

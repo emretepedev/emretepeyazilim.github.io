@@ -47,7 +47,7 @@ export default {
     render: {
         // Setting up cache for 'static' directory and  https://web.dev/uses-long-cache-ttl
         static: {
-            // toSec * toMin * toHour * toDay * toMonth * toSixMonth
+            // toSec * toMin * toHour * toDay * toMonth * toSixMonths
             maxAge: 1000 * 60 * 60 * 24 * 30 * 6,
         },
     },
@@ -157,8 +157,8 @@ export default {
             mobileApp: true,
             appleStatusBarStyle: 'black',
             favicon: true,
-            name: 'Homepage | ' + process.env.SPA_NAME,
-            author: process.env.SPA_NAME,
+            name: 'Homepage | ' + process.env.SPA_NAME + ' - Emre Tepe',
+            author: 'emretepedev',
             description:
                 'Emre Tepe is a young, ambitious and open-minded Web and Blockchain Developer who seriously cares about discipline. He likes following the pace of new technology.',
             theme_color: '#1E1E1E',

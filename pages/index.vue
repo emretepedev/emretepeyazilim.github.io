@@ -77,7 +77,7 @@
 </template>
 
 <script>
-import { defineComponent, useMeta, ref } from '@nuxtjs/composition-api'
+import { defineComponent, ref, useMeta } from '@nuxtjs/composition-api'
 
 import { mdiPoll } from '@mdi/js'
 import projects from '~/data/index/projects.json'
@@ -86,7 +86,14 @@ import contributionsCount from '~/data/index/contributionsCount.json'
 export default defineComponent({
   setup() {
     // meta
-    useMeta({ title: 'Homepage | ' })
+    useMeta({
+      meta: [
+        {
+          name: 'google-site-verification',
+          content: 'd4yezmSdB2cAwtSSzAyPg7B3u9JidcIhNUVs-HI-w_0',
+        },
+      ],
+    })
 
     // consts
     const graphData = ref([])
