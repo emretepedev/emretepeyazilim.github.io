@@ -48,7 +48,7 @@
               ></v-text-field>
             </v-toolbar>
           </template>
-          <template #item.image="{ item }">
+          <template #[`item.image`]="{ item }">
             <div class="flex items-center justify-center">
               <nuxt-img
                 :src="`/icons/skills/${item.image}`"
@@ -61,8 +61,8 @@
               />
             </div>
           </template>
-          <template #item.level="{ item }">
-            <div class="flex justify-center items-center" v-if="item.level > 0">
+          <template #[`item.level`]="{ item }">
+            <div v-if="item.level > 0" class="flex justify-center items-center">
               <v-rating
                 readonly
                 half-increments
@@ -73,12 +73,12 @@
               ></v-rating>
             </div>
           </template>
-          <template #item.actions="{ item }">
-            <a :href="item.url" target="_blank" v-if="item.url">
+          <template #[`item.actions`]="{ item }">
+            <a v-if="item.url" :href="item.url" target="_blank">
               <v-icon color="blue">{{ mdiLink }}</v-icon>
             </a>
           </template>
-          <template #expanded-item="{ headers, item }">
+          <template #[`expanded-item`]="{ headers, item }">
             <td :colspan="headers.length">
               <v-textarea
                 v-if="item.description"
