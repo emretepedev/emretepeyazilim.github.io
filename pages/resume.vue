@@ -2,17 +2,6 @@
   <div>
     <div class="flex justify-center mt-12">
       <v-container>
-        <v-row justify="center" align="center" class="mb-1">
-          <div
-            class="badge-base LI-profile-badge"
-            data-locale="en_US"
-            data-size="large"
-            data-theme="dark"
-            data-type="HORIZONTAL"
-            data-vanity="emretepedev"
-            data-version="v1"
-          ></div>
-        </v-row>
         <v-data-table
           :headers="headers"
           :items="skills"
@@ -121,46 +110,11 @@ export default defineComponent({
     // meta
     useMeta({
       title: 'Resume | ',
-      script: [
-        {
-          src: 'https://platform.linkedin.com/badges/js/profile.js',
-          async: true,
-          defer: true,
-          callback: () => {
-            styleToLinkedInBadge()
-          },
-        },
-      ],
     })
 
     // consts
     const search = ref('')
     const expanded = ref([])
-
-    // methods
-    const styleToLinkedInBadge = () => {
-      let count = 0
-      const frequency = 1000 / 2 // 0.5 sec
-      const maxTime = (1000 / frequency) * 30 // 30 sec
-
-      const interval = setInterval(() => {
-        const linkedInIframe = document.querySelector('iframe')
-
-        if (Boolean(linkedInIframe) || count === maxTime) {
-          clearInterval(interval)
-
-          if (count === maxTime) {
-            return
-          }
-
-          linkedInIframe.contentWindow.document.querySelector(
-            'html'
-          ).style.textAlign = 'center'
-        }
-
-        count++
-      }, frequency)
-    }
 
     // return
     return {
@@ -175,7 +129,6 @@ export default defineComponent({
       mdiArrowCollapseRight,
     }
   },
-
   head: {},
 })
 </script>
