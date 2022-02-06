@@ -47,7 +47,7 @@
             <v-sheet color="transparent">
               <v-sparkline
                 :value="graphData"
-                :gradient="['#f72047', '#ffd200', '#1feaea']"
+                :gradient="data.sparkline.gradients"
                 :smooth="10"
                 :padding="8"
                 :line-width="1"
@@ -66,7 +66,7 @@
         </div>
         <div>
           <v-row>
-            <v-col v-for="project in projects" :key="project.name">
+            <v-col v-for="project in data.projects" :key="project.name">
               <Project :project="project" />
             </v-col>
           </v-row>
@@ -80,7 +80,7 @@
 import { defineComponent, ref, useMeta } from '@nuxtjs/composition-api'
 
 import { mdiPoll } from '@mdi/js'
-import projects from '~/data/index/projects.json'
+import data from '~/data/index/index.json'
 import contributionsCount from '~/data/index/contributionsCount.json'
 
 export default defineComponent({
@@ -112,7 +112,7 @@ export default defineComponent({
 
     // return
     return {
-      projects,
+      data,
       graphData,
       mdiPoll,
     }

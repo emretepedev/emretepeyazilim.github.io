@@ -3,8 +3,8 @@
     <div class="flex justify-center mt-12">
       <v-container>
         <v-data-table
-          :headers="headers"
-          :items="skills"
+          :headers="data.headers"
+          :items="data.skills"
           :search="search"
           :items-per-page="-1"
           item-key="name"
@@ -102,8 +102,7 @@ import {
 } from '@mdi/js'
 
 import { defineComponent, useMeta, ref } from '@nuxtjs/composition-api'
-import skills from '~/data/resume/skills.json'
-import headers from '~/data/resume/headers.json'
+import data from '~/data/resume/resume.json'
 
 export default defineComponent({
   setup() {
@@ -118,8 +117,7 @@ export default defineComponent({
 
     // return
     return {
-      headers,
-      skills,
+      data,
       search,
       expanded,
       mdiLink,

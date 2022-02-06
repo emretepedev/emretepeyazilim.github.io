@@ -61,11 +61,11 @@
             <validation-provider
               v-slot="{ errors }"
               name="subject"
-              :rules="`required|oneOf:${subjects}`"
+              :rules="`required|oneOf:${data.subjects}`"
             >
               <v-autocomplete
                 v-model="subject"
-                :items="form.subjects"
+                :items="data.subjects"
                 :error-messages="errors"
                 :success="
                   !Boolean(Object.keys(errors).length) && Boolean(subject)
@@ -189,7 +189,7 @@ import {
 } from '@mdi/js'
 
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
-import form from '~/data/contact/form.json'
+import data from '~/data/contact/contact.json'
 
 export default defineComponent({
   components: {
@@ -368,7 +368,7 @@ export default defineComponent({
       subject,
       message,
       asap,
-      form,
+      data,
       observer,
       isRecaptched,
       submit,

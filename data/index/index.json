@@ -12,5 +12,8 @@
             "href": "#",
             "image": "/images/dev-null.png"
         }
-    ]
+    ],
+    "sparkline": {
+        "gradients": ["#f72047", "#ffd200", "#1feaea"]
+    }
 }
