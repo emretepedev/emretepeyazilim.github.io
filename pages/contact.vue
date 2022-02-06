@@ -192,11 +192,13 @@ import { ValidationObserver, ValidationProvider } from 'vee-validate'
 import data from '~/data/contact/contact.json'
 
 export default defineComponent({
+  // components
   components: {
     ValidationProvider,
     ValidationObserver,
   },
 
+  // setup
   setup(_, { root }) {
     // meta
     useMeta({
@@ -385,6 +387,8 @@ export default defineComponent({
       mdiCheckboxMarkedCircle,
     }
   },
+
+  // head
   head: {},
 })
 </script>

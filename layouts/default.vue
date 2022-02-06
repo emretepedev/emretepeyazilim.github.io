@@ -8,6 +8,15 @@
   </v-app>
 </template>
 
-<script></script>
+<script>
+import { defineComponent } from '@nuxtjs/composition-api'
+import Footer from '~/components/Footer.vue'
+import Header from '~/components/Header.vue'
+
+export default defineComponent({
+  // components
+  components: { Footer, Header },
+})
+</script>
 
 <style></style>

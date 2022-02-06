@@ -26,10 +26,10 @@
 </template>
 <script>
 import { defineComponent, useMeta } from '@nuxtjs/composition-api'
-
 import { mdiArrowRightThin } from '@mdi/js'
 
 export default defineComponent({
+  // setup
   setup() {
     // meta
     useMeta({ title: 'Page not found | ' })

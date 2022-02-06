@@ -60,6 +60,7 @@ import {
 } from '@mdi/js'
 
 export default defineComponent({
+  // setup
   setup() {
     // context
     const { $config } = useContext()

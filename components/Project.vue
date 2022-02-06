@@ -34,7 +34,9 @@ export default defineComponent({
   props: {
     project: {
       type: Object,
-      default: null,
+      default() {
+        return {}
+      },
     },
   },
 })

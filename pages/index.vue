@@ -30,39 +30,10 @@
           </v-row>
         </div>
         <div>
-          <v-card class="overflow-y-auto" outlined ripple>
-            <v-card-title>
-              <v-spacer v-if="$vuetify.breakpoint.mdAndDown"></v-spacer>
-              <v-icon>
-                {{ mdiPoll }}
-              </v-icon>
-            </v-card-title>
-            <v-card-subtitle class="text-center">
-              <div class="text-caption grey--text text-uppercase">
-                <strong>GitHub</strong> contributions in the last
-                <strong>30 days</strong> (<strong>exclude</strong>
-                GitLab etc.)
-              </div>
-            </v-card-subtitle>
-            <v-sheet color="transparent">
-              <v-sparkline
-                :value="graphData"
-                :gradient="data.sparkline.gradients"
-                :smooth="10"
-                :padding="8"
-                :line-width="1"
-                stroke-linecap="round"
-                gradient-direction="top"
-                :fill="false"
-                type="trend"
-                auto-draw
-                :show-labels="true"
-                :auto-line-width="false"
-                :auto-draw-duration="5000"
-              >
-              </v-sparkline>
-            </v-sheet>
-          </v-card>
+          <Sparkline
+            :graph-data="graphData"
+            :gradients="data.sparkline.gradients"
+          />
         </div>
         <div>
           <v-row>
@@ -79,11 +50,16 @@
 <script>
 import { defineComponent, ref, useMeta } from '@nuxtjs/composition-api'
 
-import { mdiPoll } from '@mdi/js'
 import data from '~/data/index/index.json'
 import contributionsCount from '~/data/index/contributionsCount.json'
+import Sparkline from '~/components/Sparkline.vue'
+import Project from '~/components/Project.vue'
 
 export default defineComponent({
+  // components
+  components: { Sparkline, Project },
+
+  // setup
   setup() {
     // meta
     useMeta({
@@ -99,7 +75,6 @@ export default defineComponent({
     const graphData = ref([])
     const from = new Date()
     const to = new Date()
-
     from.setDate(to.getDate() - 30)
 
     contributionsCount.data.user.contributionsCollection.contributionCalendar.weeks.forEach(
@@ -114,9 +89,10 @@ export default defineComponent({
     return {
       data,
       graphData,
-      mdiPoll,
     }
   },
+
+  // head
   head: {},
 })
 </script>

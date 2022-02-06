@@ -15,8 +15,13 @@
 <script>
 import { defineComponent, useMeta } from '@nuxtjs/composition-api'
 import data from '~/data/projects/projects.json'
+import Project from '~/components/Project.vue'
 
 export default defineComponent({
+  // components
+  components: { Project },
+
+  // setup
   setup() {
     // meta
     useMeta({ title: 'Projects | ' })
@@ -27,6 +32,7 @@ export default defineComponent({
     }
   },
 
+  // head
   head: {},
 })
 </script>

@@ -12,7 +12,7 @@ export default {
     telemetry: false,
 
     // Auto import components: https://go.nuxtjs.dev/config-components
-    components: true,
+    components: false,
 
     // Loading property: https://nuxtjs.org/docs/configuration-glossary/configuration-loading
     loading: false,
