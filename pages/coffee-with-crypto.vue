@@ -99,19 +99,50 @@
                 }`"
               >
                 <v-btn
-                  :disabled="invalid"
+                  :disabled="invalid || spinner"
                   :class="`${!$vuetify.breakpoint.xsOnly ? '' : 'w-full'}`"
                   @click="send"
-                  >Send</v-btn
-                >
+                  ><svg
+                    v-if="spinner"
+                    class="animate-spin h-5 w-5 mr-3 text-white"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      class="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      stroke-width="4"
+                    />
+                    <path
+                      class="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    />
+                  </svg>
+                  <span>Send</span>
+                </v-btn>
                 <v-btn @click="disconnectWeb3">Disconnect to Metamask</v-btn>
               </v-row>
             </validation-observer>
-            <div v-if="txHash">Transaction Hash: {{ txHash }}</div>
-            <div v-if="txStatus">Status: {{ txStatus }}</div>
-            <div v-if="confirmationCount">
-              Confirmation Progress:
-              {{ confirmationCount }}/{{ totalConfirmationCount }}
+            <div
+              class="
+                mt-5
+                flex flex-col
+                items-center
+                text-center text-sm
+                space-y-1
+              "
+            >
+              <div v-if="txHash" class="break-words">
+                Transaction Hash: {{ txHash }}
+              </div>
+              <div v-if="txStatus">Status: {{ txStatus }}</div>
+              <div v-if="confirmationCount">
+                Confirmation Progress:
+                {{ confirmationCount }}/{{ totalConfirmationCount }}
+              </div>
             </div>
           </div>
           <div v-else class="flex justify-center items-center">
@@ -176,6 +207,7 @@ export default defineComponent({
     const confirmationCount = ref(null)
     const txHash = ref(null)
     const totalConfirmationCount = ref(null)
+    const spinner = ref(false)
 
     // hooks
     onMounted(async () => {
@@ -221,12 +253,13 @@ export default defineComponent({
           $vToastify.info(
             'Transaction Status: Awaiting transaction confirmation.'
           )
+          spinner.value = true
+          resetInputs()
         })
         .on('receipt', async () => {
           txStatus.value = 'Awaiting block confirmation.'
           $vToastify.success('Transaction Status: Awaiting block confirmation.')
           $vToastify.info('Thank You For Your Support! - @emretepedev')
-          resetInputs()
           await updateUserInfo()
         })
         .on('confirmation', (_confirmationCount) => {
@@ -283,6 +316,7 @@ export default defineComponent({
       txHash.value = null
       totalConfirmationCount.value = null
       confirmationCount.value = null
+      spinner.value = false
     }
 
     const checkProvider = async () => {
@@ -320,6 +354,7 @@ export default defineComponent({
       observer,
       txStatus,
       confirmationCount,
+      spinner,
       txHash,
       totalConfirmationCount,
       web3,
