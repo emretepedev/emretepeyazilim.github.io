@@ -160,7 +160,7 @@ export default defineComponent({
         .on('receipt', () => {
           txStatus.value = 'Awaiting block confirmation.'
           $vToastify.success('Transaction Status: Awaiting block confirmation.')
-          $vToastify.info('Thank You For Your Support!')
+          $vToastify.info('Thank You For Your Support! - @emretepedev')
           resetInputs()
         })
         .on('confirmation', (_confirmationCount) => {
