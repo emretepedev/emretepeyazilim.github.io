@@ -4,55 +4,121 @@
       <v-container>
         <div v-if="provider">
           <div v-if="isConnected">
-            <v-input disabled>{{ formatAddressToDisplay(address) }}</v-input>
-            <v-input disabled>{{ formatBalanceToDisplay(balance) }}</v-input>
-            <validation-observer ref="observer" v-slot="{ invalid }">
-              <validation-provider
-                v-slot="{ errors }"
-                name="amount"
-                :rules="{
-                  required: true,
-                  decimal: true,
-                  min: 1,
-                  max: 8,
-                  min_value: 0.000001,
-                  max_value: formatBalanceToDisplay(balance),
-                }"
+            <v-row
+              justify="center"
+              align="center"
+              :class="`my-5 ${
+                !$vuetify.breakpoint.xsOnly
+                  ? 'space-x-6'
+                  : 'space-x-0 grid grid-cols-1 gap-y-5 mx-2'
+              }`"
+            >
+              <v-tooltip bottom content-class="text-xs">
+                <template #activator="{ on, attrs }">
+                  <span
+                    v-ripple="{ center: true }"
+                    v-bind="attrs"
+                    class="
+                      p-3
+                      text-center
+                      my-auto
+                      cursor-pointer
+                      text-gray-100
+                      border-2 border-transparent border-solid
+                      rounded-md
+                      shadow-xl
+                      app-title
+                      border-gradient-br-blue-green-gray-900
+                    "
+                    v-on="on"
+                    @click="copyText(address)"
+                  >
+                    Address: {{ formatAddressToDisplay(address) }}
+                  </span>
+                </template>
+                <span>
+                  {{ address }}
+                </span>
+              </v-tooltip>
+              <span
+                class="
+                  p-3
+                  my-auto
+                  text-center text-gray-100
+                  border-2 border-transparent border-solid
+                  rounded-md
+                  app-title
+                  border-gradient-br-blue-green-gray-900
+                "
               >
-                <v-text-field
-                  v-model="amount"
-                  :counter="8"
-                  :error-messages="errors"
-                  :success="
-                    !Boolean(Object.keys(errors).length) && Boolean(amount)
-                  "
-                  label="Amount"
-                  placeholder="Your amount"
-                  :hint="!Boolean(amount) ? 'For example, `0.01`' : ''"
+                Balance: {{ formatBalanceToDisplay(balance) }}
+              </span>
+            </v-row>
+            <validation-observer ref="observer" v-slot="{ invalid }">
+              <v-row>
+                <validation-provider
+                  v-slot="{ errors }"
                   name="amount"
-                  :prepend-inner-icon="mdiCurrencyUsdOff"
-                  outlined
-                  rounded
-                  dense
-                  shaped
-                ></v-text-field>
-              </validation-provider>
-              <v-btn :disabled="invalid" @click="send">Send anything</v-btn>
+                  :rules="{
+                    required: true,
+                    decimal: true,
+                    min: 1,
+                    max: 8,
+                    min_value: 0.000001,
+                    max_value: formatBalanceToDisplay(balance),
+                  }"
+                  class="flex justify-center"
+                >
+                  <v-text-field
+                    v-model="amount"
+                    :counter="8"
+                    :error-messages="errors"
+                    :success="
+                      !Boolean(Object.keys(errors).length) && Boolean(amount)
+                    "
+                    label="Amount"
+                    placeholder="Your amount"
+                    :hint="!Boolean(amount) ? 'For example, `0.01`' : ''"
+                    name="amount"
+                    :prepend-inner-icon="mdiCurrencyUsdOff"
+                    outlined
+                    rounded
+                    dense
+                    shaped
+                    class="max-w-sm mx-4 mt-4"
+                  ></v-text-field>
+                </validation-provider>
+              </v-row>
+              <v-row
+                justify="center"
+                align="center"
+                :class="`${
+                  !$vuetify.breakpoint.xsOnly
+                    ? 'space-x-6'
+                    : 'space-x-0 space-y-1 px-5 grid grid-cols-1 gap-y-2 my-4'
+                }`"
+              >
+                <v-btn
+                  :disabled="invalid"
+                  :class="`${!$vuetify.breakpoint.xsOnly ? '' : 'w-full'}`"
+                  @click="send"
+                  >Send</v-btn
+                >
+                <v-btn @click="disconnectWeb3">Disconnect to Metamask</v-btn>
+              </v-row>
             </validation-observer>
-            <v-btn @click="disconnectWeb3">Disconnect to Metamask</v-btn>
             <div v-if="txHash">Transaction Hash: {{ txHash }}</div>
             <div v-if="txStatus">Status: {{ txStatus }}</div>
             <div v-if="confirmationCount">
-              Confirmation Progress: {{ confirmationCount }}/{{
-                totalConfirmationCount
-              }}
+              Confirmation Progress:
+              {{ confirmationCount }}/{{ totalConfirmationCount }}
             </div>
           </div>
-          <div v-else>
-            <v-btn @click="getUserInfo"> Connect to Metamask </v-btn>
+          <div v-else class="flex justify-center items-center">
+            <v-btn @click="connectWeb3">Connect to Metamask</v-btn>
           </div>
         </div>
-        <div v-else>
+        <div v-else class="flex justify-center items-center">
           <v-btn
             target="_blank"
             href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn"
@@ -99,8 +165,8 @@ export default defineComponent({
     const observer = ref(null)
 
     // consts
-    const provider = ref(null)
     let web3 = null
+    const provider = ref(null)
     const isConnected = ref(false)
     const address = ref(null)
     const balance = ref(0)
@@ -121,7 +187,7 @@ export default defineComponent({
     })
 
     // methods
-    const getUserInfo = async () => {
+    const connectWeb3 = async () => {
       // if No web3 provider
       if (!provider.value) {
         $vToastify.error('No web3 provider detected.')
@@ -132,8 +198,7 @@ export default defineComponent({
       try {
         // Ask to connect
         await web3.eth.requestAccounts()
-        address.value = await web3.eth.getCoinbase()
-        balance.value = await web3.eth.getBalance(address.value)
+        await updateUserInfo()
 
         // Connected
         isConnected.value = await web3.eth.net.isListening()
@@ -157,21 +222,19 @@ export default defineComponent({
             'Transaction Status: Awaiting transaction confirmation.'
           )
         })
-        .on('receipt', () => {
+        .on('receipt', async () => {
           txStatus.value = 'Awaiting block confirmation.'
           $vToastify.success('Transaction Status: Awaiting block confirmation.')
           $vToastify.info('Thank You For Your Support! - @emretepedev')
           resetInputs()
+          await updateUserInfo()
         })
         .on('confirmation', (_confirmationCount) => {
           totalConfirmationCount.value = web3.eth.transactionConfirmationBlocks
           confirmationCount.value = _confirmationCount
           $vToastify.info('Confirmation Status: New block found.')
 
-          if (
-            web3.eth.transactionConfirmationBlocks - _confirmationCount ===
-            0
-          ) {
+          if (totalConfirmationCount.value - _confirmationCount === 0) {
             txStatus.value = 'Confirmed.'
             $vToastify.success('Transaction Status: Confirmed.')
             resetTxDetails()
@@ -197,6 +260,15 @@ export default defineComponent({
 
       // inputs
       resetInputs()
+    }
+
+    const updateUserInfo = async () => {
+      // Get user address and balance
+      address.value = await web3.eth.getCoinbase()
+      balance.value = web3.utils.fromWei(
+        await web3.eth.getBalance(address.value),
+        'ether'
+      )
     }
 
     const resetInputs = () => {
@@ -229,7 +301,13 @@ export default defineComponent({
     }
 
     const formatBalanceToDisplay = (balance) => {
-      return (balance / 10 ** 18).toFixed(6)
+      return (+balance).toFixed(6)
+    }
+
+    const copyText = async (text) => {
+      await navigator.clipboard.writeText(text).catch(() => {
+        $vToastify.error('Something went wrong.')
+      })
     }
 
     // return
@@ -244,7 +322,9 @@ export default defineComponent({
       confirmationCount,
       txHash,
       totalConfirmationCount,
-      getUserInfo,
+      web3,
+      copyText,
+      connectWeb3,
       disconnectWeb3,
       formatBalanceToDisplay,
       formatAddressToDisplay,
@@ -283,5 +363,19 @@ export default defineComponent({
   .v-data-footer__select {
     margin: auto !important;
   }
+}
+
+.border-gradient-br-blue-green-gray-900 {
+  background: linear-gradient(to right, #18181b, #18181b),
+    linear-gradient(to bottom right, #60a5fa, #4ade80);
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box;
+}
+
+.hover\:border-gradient-tl-blue-green-gray-900:hover {
+  background: linear-gradient(to right, #18181b, #18181b),
+    linear-gradient(to top left, #60a5fa, #4ade80);
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box;
 }
 </style>
