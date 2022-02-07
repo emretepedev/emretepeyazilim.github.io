@@ -79,7 +79,11 @@ export default defineComponent({
         },
         { title: 'Resume', to: '/resume', icon: mdiFileAccount },
         { title: 'Contact', to: '/contact', icon: mdiCardAccountMail },
-        { title: 'Coffee', to: '/coffee-with-crypto', icon: mdiCoffee },
+        {
+          title: 'Coffee With Crypto',
+          to: '/coffee-with-crypto',
+          icon: mdiCoffee,
+        },
       ],
       mdiClose,
     }

@@ -19,5 +19,6 @@ module.exports = {
     rules: {
         'vue/multi-word-component-names': 'off',
         'vue/no-template-shadow': 'off',
+        'no-console': 'off', // @TODO: silmeyi unutma
     },
 }

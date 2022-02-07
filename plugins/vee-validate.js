@@ -12,6 +12,8 @@ import {
     oneOf,
     is_not,
     integer,
+    min_value,
+    max_value,
 } from 'vee-validate/dist/rules'
 
 export default defineNuxtPlugin(() => {
@@ -49,5 +51,39 @@ export default defineNuxtPlugin(() => {
     extend('integer', {
         ...integer,
         message: 'The {_field_} must be numbers only.',
+    })
+
+    extend('min_value', {
+        ...min_value,
+        message: 'The {_field_} must be {min} or more.',
+    })
+
+    extend('max_value', {
+        ...max_value,
+        message: 'The {_field_} must be {max} or less.',
+    })
+
+    extend('decimal', {
+        validate: (value, { decimals = '*', separator = '.' } = {}) => {
+            if (value === null || value === undefined || value === '') {
+                return {
+                    valid: false,
+                }
+            }
+            if (Number(decimals) === 0) {
+                return {
+                    valid: /^-?\d*$/.test(value),
+                }
+            }
+            const regexPart = decimals === '*' ? '+' : `{1,${decimals}}`
+            const regex = new RegExp(
+                `^[-+]?\\d*(\\${separator}\\d${regexPart})?([eE]{1}[-]?\\d+)?$`
+            )
+
+            return {
+                valid: regex.test(value),
+            }
+        },
+        message: 'The {_field_} must contain only decimal values',
     })
 })
