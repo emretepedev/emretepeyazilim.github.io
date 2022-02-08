@@ -249,43 +249,28 @@ export default defineComponent({
     }
 
     const send = async () => {
-      await web3.eth
-        .sendTransaction({
-          from: address.value.toLowerCase(),
-          to: ownerAddress.toLowerCase(),
-          value: web3.utils.toWei(amount.value, 'ether'),
-        })
-        .on('transactionHash', (_txHash) => {
-          txHash.value = _txHash
-          txStatus.value = 'Awaiting transaction confirmation.'
-          $vToastify.info(
-            'Transaction Status: Awaiting transaction confirmation.'
-          )
-          spinner.value = true
-          resetInputs()
-        })
-        .on('receipt', async () => {
-          await updateUserInfo()
-          txStatus.value = 'Awaiting block confirmation.'
-          $vToastify.success('Transaction Status: Awaiting block confirmation.')
-          $vToastify.info('Thank You For Your Support! - @emretepedev')
-        })
-        .on('confirmation', (_confirmationCount) => {
-          if (totalConfirmationCount.value - _confirmationCount === 0) {
-            resetTxDetails()
-            txStatus.value = 'Confirmed.'
-            $vToastify.success('Transaction Status: Confirmed.')
-          }
+      try {
+        const validate = await observer.value.validate()
 
-          totalConfirmationCount.value = web3.eth.transactionConfirmationBlocks
-          confirmationCount.value = _confirmationCount
-          $vToastify.info('Confirmation Status: New block found.')
-        })
-        .on('error', () => {
-          resetTxDetails()
-          txStatus.value = 'Failed.'
-          $vToastify.error('Transaction Status: Failed.')
-        })
+        if (!validate) {
+          throw new Error('Validation Error.')
+        }
+
+        await web3.eth
+          .sendTransaction({
+            from: address.value.toLowerCase(),
+            to: ownerAddress.toLowerCase(),
+            value: web3.utils.toWei(amount.value, 'ether'),
+          })
+          .on('transactionHash', handleTransactionHash)
+          .on('receipt', handleTransactionReceipt)
+          .on('confirmation', handleTransactionConfirmation)
+          .on('error', handleTransactionError)
+      } catch (error) {
+        if (error) {
+          $vToastify.error(String(error?.message))
+        }
+      }
     }
 
     const disconnectWeb3 = () => {
@@ -333,16 +318,57 @@ export default defineComponent({
       provider.value.removeListener('accountsChanged', handleAccountsChanged)
     }
 
+    // tx events
+    const handleTransactionConfirmation = (_confirmationCount) => {
+      totalConfirmationCount.value = web3.eth.transactionConfirmationBlocks
+      confirmationCount.value = _confirmationCount
+      $vToastify.info('Confirmation Status: New block found.')
+
+      if (
+        totalConfirmationCount !== null &&
+        totalConfirmationCount.value - _confirmationCount === 0
+      ) {
+        txStatus.value = 'Confirmed.'
+        resetTxDetails()
+        $vToastify.success('Transaction Status: Confirmed.')
+      }
+    }
+
+    const handleTransactionHash = (_txHash) => {
+      txHash.value = _txHash
+      txStatus.value = 'Awaiting transaction confirmation.'
+      $vToastify.info('Transaction Status: Awaiting transaction confirmation.')
+      spinner.value = true
+      resetInputs()
+    }
+
+    const handleTransactionReceipt = async () => {
+      await updateUserInfo()
+      txStatus.value = 'Awaiting block confirmation.'
+      $vToastify.success('Transaction Status: Awaiting block confirmation.')
+      $vToastify.info('Thank You For Your Support! - @emretepedev')
+    }
+
+    const handleTransactionError = () => {
+      txStatus.value = 'Failed.'
+      resetTxDetails()
+      $vToastify.error('Transaction Status: Failed.')
+    }
+
+    // eth events
     const handleAccountsChanged = async (accounts) => {
       if (accounts.length > 0) {
         await updateUserInfo()
+        $vToastify.success(`Linked account changed to '${accounts[0]}'`)
       } else {
+        $vToastify.warning('Linked account not found. Page will be reloaded.')
         location.reload()
       }
     }
 
     const handleChainChanged = async () => {
       await updateUserInfo()
+      $vToastify.success('Chain has changed.')
     }
 
     const handleDisconnect = () => {
@@ -384,9 +410,11 @@ export default defineComponent({
     }
 
     const copyText = async (text) => {
-      await navigator.clipboard.writeText(text).catch(() => {
-        $vToastify.error('Something went wrong.')
-      })
+      try {
+        await navigator.clipboard.writeText(text)
+      } catch (error) {
+        return null
+      }
     }
 
     // return

@@ -256,11 +256,11 @@ export default defineComponent({
     // methods
     const submit = async (event) => {
       try {
-        await observer.value.validate().then((result) => {
-          if (!result) {
-            throw new Error('Form Validation: Failed.')
-          }
-        })
+        const validate = await observer.value.validate()
+
+        if (!validate) {
+          throw new Error('Form Validation: Failed.')
+        }
 
         await $recaptcha.getResponse(widgetId.value).catch(() => {
           throw new Error('reCAPTCHA v2 Verification: Token not found.')
