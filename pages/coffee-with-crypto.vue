@@ -126,6 +126,10 @@
                 <v-btn @click="disconnectWeb3">Disconnect to Metamask</v-btn>
               </v-row>
             </validation-observer>
+            <div class="text-center text-sm mt-5">
+              Note: All chains are supported. (Including Testnets for testing
+              Web3 feature.)
+            </div>
             <div
               class="
                 mt-5
@@ -201,7 +205,7 @@ export default defineComponent({
     const isConnected = ref(false)
     const address = ref(null)
     const balance = ref(0)
-    const amount = ref(0)
+    const amount = ref('')
     const ownerAddress = '0x93C4C1e86434eA4E831d8A13e64aC288C49B7b76'
     const txStatus = ref(null)
     const confirmationCount = ref(null)
@@ -233,7 +237,11 @@ export default defineComponent({
         await updateUserInfo()
 
         // Connected
-        isConnected.value = await web3.eth.net.isListening()
+        isConnected.value = await web3.eth.net.isListening() // eger ozel aglarda hata verirse provider.isConnected()
+
+        startEthEvents()
+
+        $vToastify.success('Connected.')
       } catch (error) {
         // User denied account access
         $vToastify.error(String(error.message))
@@ -257,32 +265,31 @@ export default defineComponent({
           resetInputs()
         })
         .on('receipt', async () => {
+          await updateUserInfo()
           txStatus.value = 'Awaiting block confirmation.'
           $vToastify.success('Transaction Status: Awaiting block confirmation.')
           $vToastify.info('Thank You For Your Support! - @emretepedev')
-          await updateUserInfo()
         })
         .on('confirmation', (_confirmationCount) => {
+          if (totalConfirmationCount.value - _confirmationCount === 0) {
+            resetTxDetails()
+            txStatus.value = 'Confirmed.'
+            $vToastify.success('Transaction Status: Confirmed.')
+          }
+
           totalConfirmationCount.value = web3.eth.transactionConfirmationBlocks
           confirmationCount.value = _confirmationCount
           $vToastify.info('Confirmation Status: New block found.')
-
-          if (totalConfirmationCount.value - _confirmationCount === 0) {
-            txStatus.value = 'Confirmed.'
-            $vToastify.success('Transaction Status: Confirmed.')
-            resetTxDetails()
-          }
         })
         .on('error', () => {
+          resetTxDetails()
           txStatus.value = 'Failed.'
           $vToastify.error('Transaction Status: Failed.')
-          resetTxDetails()
         })
     }
 
-    const disconnectWeb3 = async () => {
-      // Check for web3 provider
-      await checkProvider()
+    const disconnectWeb3 = () => {
+      $vToastify.success('Disconnected.')
 
       // Disconnect
       isConnected.value = false
@@ -293,6 +300,15 @@ export default defineComponent({
 
       // inputs
       resetInputs()
+
+      // reset tx details
+      resetTxDetails()
+
+      // reset events
+      stopEthEvents()
+
+      // reload to
+      location.reload()
     }
 
     const updateUserInfo = async () => {
@@ -304,10 +320,39 @@ export default defineComponent({
       )
     }
 
+    const startEthEvents = () => {
+      // Start eth events
+      provider.value.on('chainChanged', handleChainChanged)
+      provider.value.on('accountsChanged', handleAccountsChanged)
+      provider.value.on('disconnect', handleDisconnect)
+    }
+
+    const stopEthEvents = () => {
+      // Start eth events
+      provider.value.removeListener('chainChanged', handleChainChanged)
+      provider.value.removeListener('accountsChanged', handleAccountsChanged)
+    }
+
+    const handleAccountsChanged = async (accounts) => {
+      if (accounts.length > 0) {
+        await updateUserInfo()
+      } else {
+        location.reload()
+      }
+    }
+
+    const handleChainChanged = async () => {
+      await updateUserInfo()
+    }
+
+    const handleDisconnect = () => {
+      location.reload()
+    }
+
     const resetInputs = () => {
       // removed fields and validate
       observer.value.reset()
-      amount.value = 0
+      amount.value = ''
     }
 
     const resetTxDetails = () => {
@@ -354,10 +399,9 @@ export default defineComponent({
       observer,
       txStatus,
       confirmationCount,
-      spinner,
       txHash,
       totalConfirmationCount,
-      web3,
+      spinner,
       copyText,
       connectWeb3,
       disconnectWeb3,
