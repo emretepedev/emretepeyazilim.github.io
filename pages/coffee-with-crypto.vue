@@ -234,11 +234,15 @@ export default defineComponent({
       try {
         // Ask to connect
         await web3.eth.requestAccounts()
+
+        // get address, balance etc.
         await updateUserInfo()
 
-        // Connected
-        isConnected.value = await web3.eth.net.isListening() // eger ozel aglarda hata verirse provider.isConnected()
+        // Check connecting
+        // @TODO: [investigate] eger ozel aglarda hata verirse provider.isConnected()
+        isConnected.value = await web3.eth.net.isListening()
 
+        // started eth events
         startEthEvents()
 
         $vToastify.success('Connected.')
@@ -250,12 +254,18 @@ export default defineComponent({
 
     const send = async () => {
       try {
+        // validate
         const validate = await observer.value.validate()
 
         if (!validate) {
           throw new Error('Validation Error.')
         }
 
+        // set total confirmation count
+        web3.eth.transactionConfirmationBlocks = 5
+        totalConfirmationCount.value = web3.eth.transactionConfirmationBlocks
+
+        // send tx
         await web3.eth
           .sendTransaction({
             from: address.value.toLowerCase(),
@@ -318,23 +328,8 @@ export default defineComponent({
       provider.value.removeListener('accountsChanged', handleAccountsChanged)
     }
 
-    // tx events
-    const handleTransactionConfirmation = (_confirmationCount) => {
-      totalConfirmationCount.value = web3.eth.transactionConfirmationBlocks
-      confirmationCount.value = _confirmationCount
-      $vToastify.info('Confirmation Status: New block found.')
-
-      if (
-        totalConfirmationCount !== null &&
-        totalConfirmationCount.value - _confirmationCount === 0
-      ) {
-        txStatus.value = 'Confirmed.'
-        resetTxDetails()
-        $vToastify.success('Transaction Status: Confirmed.')
-      }
-    }
-
     const handleTransactionHash = (_txHash) => {
+      // tx created event
       txHash.value = _txHash
       txStatus.value = 'Awaiting transaction confirmation.'
       $vToastify.info('Transaction Status: Awaiting transaction confirmation.')
@@ -343,20 +338,39 @@ export default defineComponent({
     }
 
     const handleTransactionReceipt = async () => {
+      // tx created successfully event
       await updateUserInfo()
       txStatus.value = 'Awaiting block confirmation.'
       $vToastify.success('Transaction Status: Awaiting block confirmation.')
       $vToastify.info('Thank You For Your Support! - @emretepedev')
     }
 
+    const handleTransactionConfirmation = (_confirmationCount) => {
+      // tx confirmation event
+      if (
+        _confirmationCount > 0 &&
+        _confirmationCount <= totalConfirmationCount.value
+      ) {
+        confirmationCount.value = _confirmationCount
+        $vToastify.info('Confirmation Status: New block found.')
+      }
+
+      if (totalConfirmationCount.value - _confirmationCount === 0) {
+        txStatus.value = 'Confirmed.'
+        resetTxDetails()
+        $vToastify.success('Transaction Status: Confirmed.')
+      }
+    }
+
     const handleTransactionError = () => {
+      // tx error event
       txStatus.value = 'Failed.'
       resetTxDetails()
       $vToastify.error('Transaction Status: Failed.')
     }
 
-    // eth events
     const handleAccountsChanged = async (accounts) => {
+      // eth change account event
       if (accounts.length > 0) {
         await updateUserInfo()
         $vToastify.success(`Linked account changed to '${accounts[0]}'`)
@@ -367,11 +381,13 @@ export default defineComponent({
     }
 
     const handleChainChanged = async () => {
+      // eth change chain event
       await updateUserInfo()
       $vToastify.success('Chain has changed.')
     }
 
     const handleDisconnect = () => {
+      // eth disconnect event
       location.reload()
     }
 
@@ -400,19 +416,23 @@ export default defineComponent({
     }
 
     const formatAddressToDisplay = (address) => {
+      // address value formatted to user
       return (
         address.substring(0, 6) + '...' + address.substring(address.length - 4)
       )
     }
 
     const formatBalanceToDisplay = (balance) => {
+      // balance value formatted to user
       return (+balance).toFixed(6)
     }
 
     const copyText = async (text) => {
+      // copy to clipboard
       try {
         await navigator.clipboard.writeText(text)
       } catch (error) {
+        // suppressed error
         return null
       }
     }
