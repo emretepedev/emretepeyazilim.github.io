@@ -360,7 +360,6 @@ export default defineComponent({
         resetTxDetails()
         $vToastify.success('Transaction Status: Confirmed.')
       }
-      console.log('calisti: ', _confirmationCount)
     }
 
     const handleTransactionError = () => {
