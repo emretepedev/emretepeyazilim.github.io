@@ -32,7 +32,16 @@ export default defineComponent({
   // setup
   setup() {
     // meta
-    useMeta({ title: 'Page not found | ' })
+    useMeta({
+      title: 'Page not found | ',
+      meta: [
+        {
+          hid: 'robots',
+          name: 'robots',
+          content: 'noindex, nofollow',
+        },
+      ],
+    })
 
     // return
     return {

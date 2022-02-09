@@ -47,8 +47,7 @@ export default {
     render: {
         // Setting up cache for 'static' directory and  https://web.dev/uses-long-cache-ttl
         static: {
-            // toSec * toMin * toHour * toDay * toMonth * toSixMonths
-            maxAge: 1000 * 60 * 60 * 24 * 30 * 6,
+            maxAge: 1000 * 60 * 60 * 24 * 30 * 6, // six months
         },
     },
 
@@ -81,6 +80,10 @@ export default {
 
     // Use Runtime Config instead of env https://nuxtjs.org/docs/directory-structure/nuxt-config/#privateruntimeconfig
     privateRuntimeConfig: {},
+
+    router: {
+        trailingSlash: false,
+    },
 
     // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
     plugins: [
@@ -268,7 +271,8 @@ export default {
     sitemap: {
         hostname: process.env.SPA_URL,
         gzip: true,
-        exclude: [],
+        trailingSlash: false,
+        cacheTime: 1000 * 60 * 15, // 15 mins
         defaults: {
             changefreq: 'monthly',
             priority: 0.5,
