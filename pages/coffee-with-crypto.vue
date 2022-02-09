@@ -128,7 +128,7 @@
             </validation-observer>
             <div class="text-center text-sm mt-5">
               Note: All chains are supported. (Including Testnets for testing
-              Web3 feature.)
+              this feature.)
             </div>
             <div
               class="
@@ -355,11 +355,12 @@ export default defineComponent({
         $vToastify.info('Confirmation Status: New block found.')
       }
 
-      if (confirmationCount.value >= totalConfirmationCount.value) {
+      if (_confirmationCount >= totalConfirmationCount.value) {
         txStatus.value = 'Confirmed.'
         resetTxDetails()
         $vToastify.success('Transaction Status: Confirmed.')
       }
+      console.log('calisti: ', _confirmationCount)
     }
 
     const handleTransactionError = () => {
