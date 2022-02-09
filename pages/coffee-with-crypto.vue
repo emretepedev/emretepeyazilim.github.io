@@ -355,7 +355,7 @@ export default defineComponent({
         $vToastify.info('Confirmation Status: New block found.')
       }
 
-      if (totalConfirmationCount.value - _confirmationCount === 0) {
+      if (confirmationCount.value >= totalConfirmationCount.value) {
         txStatus.value = 'Confirmed.'
         resetTxDetails()
         $vToastify.success('Transaction Status: Confirmed.')
