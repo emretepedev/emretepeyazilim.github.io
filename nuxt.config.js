@@ -1,25 +1,25 @@
 export default {
-    // Target property: https://go.nuxtjs.dev/config-target
+    // target property: https://go.nuxtjs.dev/config-target
     target: 'static',
 
-    // SSR property: https://go.nuxtjs.dev/config-ssr
+    // ssr property: https://go.nuxtjs.dev/config-ssr
     ssr: true,
 
-    // Dev property: https://nuxtjs.org/docs/configuration-glossary/configuration-dev
+    // dev property: https://nuxtjs.org/docs/configuration-glossary/configuration-dev
     dev: false,
 
-    // Telemetry property: https://nuxtjs.org/docs/configuration-glossary/configuration-telemetry
+    // telemetry property: https://nuxtjs.org/docs/configuration-glossary/configuration-telemetry
     telemetry: false,
 
-    // Auto import components: https://go.nuxtjs.dev/config-components
+    // auto import components: https://go.nuxtjs.dev/config-components
     components: false,
 
-    // Loading property: https://nuxtjs.org/docs/configuration-glossary/configuration-loading
+    // loading property: https://nuxtjs.org/docs/configuration-glossary/configuration-loading
     loading: false,
 
-    // Build Configuration: https://go.nuxtjs.dev/config-build
+    // build configuration: https://go.nuxtjs.dev/config-build
     build: {
-        // All options https://github.com/kangax/html-minifier#options-quick-reference
+        // all options https://github.com/kangax/html-minifier#options-quick-reference
         html: {
             minify: {
                 collapseBooleanAttributes: true,
@@ -43,15 +43,15 @@ export default {
         },
     },
 
-    // Render property: https://nuxtjs.org/docs/configuration-glossary/configuration-render
+    // render property: https://nuxtjs.org/docs/configuration-glossary/configuration-render
     render: {
-        // Setting up cache for 'static' directory and  https://web.dev/uses-long-cache-ttl
+        // setting up cache for 'static' directory and  https://web.dev/uses-long-cache-ttl
         static: {
             maxAge: 1000 * 60 * 60 * 24 * 30 * 6, // six months
         },
     },
 
-    // Global page headers: https://go.nuxtjs.dev/config-head
+    // global page headers: https://go.nuxtjs.dev/config-head
     head: {
         title: 'Homepage | ',
         titleTemplate: '%s' + process.env.SPA_NAME + ' - Emre Tepe',
@@ -64,10 +64,10 @@ export default {
         ],
     },
 
-    // Global CSS: https://go.nuxtjs.dev/config-css
+    // global css: https://go.nuxtjs.dev/config-css
     css: ['@/assets/css/main.css'],
 
-    // Use Runtime Config instead of env https://nuxtjs.org/docs/directory-structure/nuxt-config/#publicruntimeconfig
+    // use runtime config instead of env https://nuxtjs.org/docs/directory-structure/nuxt-config/#publicruntimeconfig
     publicRuntimeConfig: {
         spaName: process.env.SPA_NAME,
         githubPersonalAccessToken: process.env.GH_PERSONAL_ACCESS_TOKEN,
@@ -78,21 +78,27 @@ export default {
         lastModifiedAt: new Date().toUTCString().replace('GMT', 'UTC'),
     },
 
-    // Use Runtime Config instead of env https://nuxtjs.org/docs/directory-structure/nuxt-config/#privateruntimeconfig
+    // use runtime config instead of env https://nuxtjs.org/docs/directory-structure/nuxt-config/#privateruntimeconfig
     privateRuntimeConfig: {},
 
+    // router: https://nuxtjs.org/docs/configuration-glossary/configuration-router/
     router: {
         trailingSlash: false,
     },
 
-    // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
+    // generate: https://nuxtjs.org/docs/configuration-glossary/configuration-generate/
+    generate: {
+        subFolders: false,
+    },
+
+    // plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
     plugins: [
         '~/plugins/vue-gtag',
         '~/plugins/vee-validate',
         { src: '~/plugins/vue-toastify', mode: 'client' },
     ],
 
-    // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
+    // modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
     buildModules: [
         '@nuxtjs/composition-api/module',
         '@nuxtjs/google-fonts',
@@ -103,7 +109,7 @@ export default {
         '@nuxtjs/vuetify',
     ],
 
-    // Modules: https://go.nuxtjs.dev/config-modules
+    // modules: https://go.nuxtjs.dev/config-modules
     modules: [
         '@nuxtjs/gtm',
         '@nuxtjs/recaptcha',
@@ -112,7 +118,7 @@ export default {
         '@nuxtjs/axios',
     ],
 
-    // All options https://github.com/nuxt-community/google-fonts-module/blob/master/src/module.ts#L23
+    // all options https://github.com/nuxt-community/google-fonts-module/blob/master/src/module.ts#L23
     googleFonts: {
         families: {
             Roboto: true,
@@ -129,7 +135,7 @@ export default {
         base64: false,
     },
 
-    // All options https://github.com/Developmint/nuxt-purgecss/blob/master/lib/utils.js#L10
+    // all options https://github.com/Developmint/nuxt-purgecss/blob/master/lib/utils.js#L10
     purgeCSS: {
         enabled: true,
         paths: ['./node_modules/vuetify/src/**/*.ts'],
@@ -149,12 +155,12 @@ export default {
     },
 
     pwa: {
-        // All options https://github.com/nuxt-community/pwa-module/blob/main/src/icon.ts#L11
+        // all options https://github.com/nuxt-community/pwa-module/blob/main/src/icon.ts#L11
         icon: {
             fileName: 'icon.png',
             plugin: false,
         },
-        // All options https://github.com/nuxt-community/pwa-module/blob/main/src/meta.ts#L8
+        // all options https://github.com/nuxt-community/pwa-module/blob/main/src/meta.ts#L8
         meta: {
             viewport: 'width=device-width, initial-scale=1',
             mobileApp: true,
@@ -171,7 +177,7 @@ export default {
             twitterSite: process.env.SPA_NAME,
             twitterCreator: process.env.SPA_NAME,
         },
-        // All options https://github.com/nuxt-community/pwa-module/blob/main/src/manifest.ts#L8
+        // all options https://github.com/nuxt-community/pwa-module/blob/main/src/manifest.ts#L8
         manifest: {
             name: 'Homepage | ' + process.env.SPA_NAME,
             short_name: process.env.SPA_NAME,
@@ -181,7 +187,7 @@ export default {
         },
     },
 
-    // All options https://tailwindcss.nuxtjs.org/options/
+    // all options https://tailwindcss.nuxtjs.org/options/
     tailwindcss: {
         viewer: false,
         config: {
@@ -226,7 +232,7 @@ export default {
         },
     },
 
-    // All options https://github.com/nuxt-community/vuetify-module/blob/master/src/options.ts#L37
+    // all options https://github.com/nuxt-community/vuetify-module/blob/master/src/options.ts#L37
     vuetify: {
         defaultAssets: false,
         icons: {
@@ -238,7 +244,7 @@ export default {
         },
     },
 
-    // All options https://github.com/nuxt-community/gtm-module#options
+    // all options https://github.com/nuxt-community/gtm-module#options
     gtm: {
         id: process.env.GOOGLE_TAG_MANAGER_ID,
         enabled: true,
@@ -248,7 +254,7 @@ export default {
         pageViewEventName: 'nuxtRoute',
     },
 
-    // All options https://github.com/nuxt-community/recaptcha-module#configuration
+    // all options https://github.com/nuxt-community/recaptcha-module#configuration
     recaptcha: {
         siteKey: process.env.GOOGLE_RECAPTCHA_V3_SITE_KEY,
         hideBadge: false,
@@ -256,7 +262,7 @@ export default {
         version: 3,
     },
 
-    // All options https://github.com/nuxt-community/robots-module#the-keys-and-values-available
+    // all options https://github.com/nuxt-community/robots-module#the-keys-and-values-available
     robots: [
         {
             UserAgent: '*',
@@ -267,7 +273,7 @@ export default {
         },
     ],
 
-    // All options https://github.com/nuxt-community/sitemap-module/blob/dev/lib/options.js#L15
+    // all options https://github.com/nuxt-community/sitemap-module/blob/dev/lib/options.js#L15
     sitemap: {
         hostname: process.env.SPA_URL,
         gzip: true,
