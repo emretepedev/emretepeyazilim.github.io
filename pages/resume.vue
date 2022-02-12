@@ -11,6 +11,7 @@
 
 <script>
 import { defineComponent, useMeta } from '@nuxtjs/composition-api'
+
 import {
   mdiNetworkStrengthOffOutline,
   mdiNetworkStrengthOutline,
@@ -20,6 +21,7 @@ import {
   mdiNetworkStrength2,
   mdiNetworkStrength3,
 } from '@mdi/js'
+
 import data from '~/data/resume/resume.json'
 import Timeline from '~/components/Timeline.vue'
 import DataTable from '~/components/DataTable.vue'

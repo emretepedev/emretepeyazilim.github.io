@@ -36,11 +36,7 @@
           />
         </div>
         <div>
-          <v-row>
-            <v-col v-for="project in data.projects" :key="project.name">
-              <Project :project="project" />
-            </v-col>
-          </v-row>
+          <Project :projects="data.projects" />
         </div>
       </v-container>
     </div>

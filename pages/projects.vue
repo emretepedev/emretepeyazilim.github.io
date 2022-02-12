@@ -2,11 +2,7 @@
   <div>
     <div class="flex justify-center mt-12">
       <v-container>
-        <v-row>
-          <v-col v-for="project in data.projects" :key="project.name">
-            <Project :project="project" />
-          </v-col>
-        </v-row>
+        <Project :projects="data.projects" />
       </v-container>
     </div>
   </div>
