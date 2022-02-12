@@ -8,7 +8,7 @@
               justify="center"
               align="center"
               :class="`my-5 ${
-                !$vuetify.breakpoint.xsOnly
+                !$vuetify.breakpoint.smAndDown
                   ? 'space-x-6'
                   : 'space-x-0 grid grid-cols-1 gap-y-5 mx-2'
               }`"
@@ -93,14 +93,14 @@
                 justify="center"
                 align="center"
                 :class="`${
-                  !$vuetify.breakpoint.xsOnly
+                  !$vuetify.breakpoint.smAndDown
                     ? 'space-x-6'
                     : 'space-x-0 space-y-1 px-5 grid grid-cols-1 gap-y-2 my-4'
                 }`"
               >
                 <v-btn
                   :disabled="invalid || spinner"
-                  :class="`${!$vuetify.breakpoint.xsOnly ? '' : 'w-full'}`"
+                  :class="`${!$vuetify.breakpoint.smAndDown ? '' : 'w-full'}`"
                   @click="send"
                   ><svg
                     v-if="spinner"
@@ -392,7 +392,7 @@ export default defineComponent({
     }
 
     const resetInputs = () => {
-      // removed fields and validate
+      // removed fields and reset validate
       observer.value.reset()
       amount.value = ''
     }

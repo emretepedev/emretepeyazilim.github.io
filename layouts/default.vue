@@ -18,5 +18,3 @@ export default defineComponent({
   components: { Footer, Header },
 })
 </script>
-
-<style></style>

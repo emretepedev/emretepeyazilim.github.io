@@ -36,5 +36,3 @@ export default defineComponent({
   head: {},
 })
 </script>
-
-<style></style>

@@ -15,8 +15,7 @@
         "static",
         "dist",
         "plugins",
-        "nuxt.config.js",
-        "old.js"
+        "nuxt.config.js"
     ],
     "files": ["contributionsCount.ts"]
 }
