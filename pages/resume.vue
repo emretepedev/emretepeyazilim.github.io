@@ -2,6 +2,7 @@
   <div>
     <div class="flex justify-center mt-12">
       <v-container>
+        <Timeline :items="experience" />
         <DataTable :headers="data.headers" :items="data.skills" />
       </v-container>
     </div>
@@ -10,12 +11,22 @@
 
 <script>
 import { defineComponent, useMeta } from '@nuxtjs/composition-api'
+import {
+  mdiNetworkStrengthOffOutline,
+  mdiNetworkStrengthOutline,
+  mdiNetworkStrength1Alert,
+  mdiNetworkStrength1,
+  mdiNetworkStrength2Alert,
+  mdiNetworkStrength2,
+  mdiNetworkStrength3,
+} from '@mdi/js'
 import data from '~/data/resume/resume.json'
+import Timeline from '~/components/Timeline.vue'
 import DataTable from '~/components/DataTable.vue'
 
 export default defineComponent({
   // components
-  components: { DataTable },
+  components: { Timeline, DataTable },
 
   // setup
   setup() {
@@ -26,8 +37,62 @@ export default defineComponent({
 
     // return
     return {
-      DataTable,
       data,
+      experience: [
+        {
+          detail: 'Blockchain Developer',
+          name: 'Bixos Incorporation',
+          icon: mdiNetworkStrength3,
+          year: '2021 - Present',
+          type: 'Remote',
+          description:
+            'Cryptocurrency asset management and investment company.',
+        },
+        {
+          detail: 'Full Stack Developer',
+          name: 'LandIndex',
+          icon: mdiNetworkStrength2,
+          year: '2021 - Present',
+          type: 'Remote',
+          description:
+            'LandIndex provides digital land prices and analytics. Land investing basics, guides and resources.',
+        },
+        {
+          detail: 'Backend Developer',
+          name: 'Bixos Incorporation',
+          icon: mdiNetworkStrength2Alert,
+          year: '2021 - Present',
+          type: 'Remote',
+          description:
+            'Cryptocurrency asset management and investment company.',
+        },
+        {
+          detail: 'Backend Developer',
+          name: 'Q Digital Agency',
+          icon: mdiNetworkStrength1,
+          year: '2020 - 2021',
+          description:
+            'Getting online is easy. Succeeding online is a different story. You’ll need more than just a beautiful website to stand out these days. Online marketing solutions. Conversion-based web design coupled with a lead generating marketing plan, your online success is inevitable.',
+        },
+        {
+          detail: 'Intern',
+          name: 'E-Yaz',
+          icon: mdiNetworkStrength1Alert,
+          year: '2019 - 2020',
+        },
+        {
+          detail: 'Intern',
+          name: 'MyData',
+          icon: mdiNetworkStrengthOutline,
+          year: '2018 - 2019',
+        },
+        {
+          detail: 'Mathematics and Computer Science',
+          name: 'Eskisehir Osmangazi University',
+          icon: mdiNetworkStrengthOffOutline,
+          year: '2016 - 2022',
+        },
+      ],
     }
   },
 
