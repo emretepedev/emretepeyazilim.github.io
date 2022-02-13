@@ -6,7 +6,7 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[vue]": {
-        "editor.defaultFormatter": "octref.vetur"
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "vetur.validation.template": false,
     "editor.codeActionsOnSave": {

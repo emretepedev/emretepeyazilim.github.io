@@ -94,3 +94,7 @@ sw.*
 
 # Vim swap files
 *.swp
+
+# Fetch data to GitHub
+data/index/contributionsCount.json
+contributionsCount.js

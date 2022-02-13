@@ -4,7 +4,7 @@
 //
 // To get the plain CSS rules just plug
 // it into an online converter
-@use "sass:math";
+@use 'sass:math';
 
 .vt-success {
     & > .vt-icon > svg {
@@ -131,7 +131,7 @@
     transition-timing-function: ease-in-out;
     transition-property: all;
     transition-duration: 200ms;
-    &[data-delayed="true"] {
+    &[data-delayed='true'] {
         transition-delay: 200ms !important; // this should be set to the same as the transition leave duration
     }
 }
@@ -173,9 +173,9 @@
 }
 @function luminance($color) {
     $colors: (
-        "red": red($color),
-        "green": green($color),
-        "blue": blue($color),
+        'red': red($color),
+        'green': green($color),
+        'blue': blue($color),
     );
 
     @each $name, $value in $colors {
@@ -197,9 +197,9 @@
         );
     }
 
-    @return (map-get($colors, "red") * 0.2126) +
-        (map-get($colors, "green") * 0.7152) +
-        (map-get($colors, "blue") * 0.0722);
+    @return (map-get($colors, 'red') * 0.2126) +
+        (map-get($colors, 'green') * 0.7152) +
+        (map-get($colors, 'blue') * 0.0722);
 }
 @function color-change($color, $percentage) {
     @if (luminance($color) > 0.4) {
@@ -210,8 +210,8 @@
     @return $color;
 }
 $themes: (
-    "dark": #1d1d1d,
-    "light": #f0f0f0,
+    'dark': #1d1d1d,
+    'light': #f0f0f0,
 );
 @each $name, $color in $themes {
     .vt-theme-#{$name} {

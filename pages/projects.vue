@@ -1,11 +1,11 @@
 <template>
-  <div>
-    <div class="flex justify-center mt-12">
-      <v-container>
-        <Project :projects="data.projects" />
-      </v-container>
+    <div>
+        <div class="flex justify-center mt-12">
+            <v-container>
+                <Project :projects="data.projects" />
+            </v-container>
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -14,21 +14,21 @@ import data from '~/data/projects/projects.json'
 import Project from '~/components/Project.vue'
 
 export default defineComponent({
-  // components
-  components: { Project },
+    // components
+    components: { Project },
 
-  // setup
-  setup() {
-    // meta
-    useMeta({ title: 'Projects | ' })
+    // setup
+    setup() {
+        // meta
+        useMeta({ title: 'Projects | ' })
 
-    // return
-    return {
-      data,
-    }
-  },
+        // return
+        return {
+            data,
+        }
+    },
 
-  // head
-  head: {},
+    // head
+    head: {},
 })
 </script>
