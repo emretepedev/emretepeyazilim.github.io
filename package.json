@@ -8,6 +8,7 @@
         "start": "nuxt start",
         "generate": "nuxt generate",
         "analyze": "nuxt build --analyze",
+        "lint:prettier": "prettier --check .",
         "fetch": "tsc --project . && node contributionsCount.js",
         "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup"
     },
@@ -35,8 +36,7 @@
         "@nuxtjs/pwa": "^3.3.5",
         "@nuxtjs/tailwindcss": "^4.2.1",
         "@nuxtjs/vuetify": "^1.12.3",
-        "@types/node": "^17.0.15",
-        "eslint": "^8.8.0",
+        "eslint": "^8.9.0",
         "eslint-config-prettier": "^8.3.0",
         "eslint-plugin-nuxt": "^3.1.0",
         "eslint-plugin-prettier": "^4.0.0",
