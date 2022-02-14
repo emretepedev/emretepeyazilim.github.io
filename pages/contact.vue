@@ -2,13 +2,13 @@
     <div>
         <div class="flex justify-center mt-12">
             <v-container>
-                <validation-observer ref="observer" v-slot="{ invalid }">
+                <ValidationObserver ref="observer" v-slot="{ invalid }">
                     <v-form
                         :action="$config.pageclipActionUrl"
                         class="pageclip-form"
                         method="POST"
                     >
-                        <validation-provider
+                        <ValidationProvider
                             v-slot="{ errors }"
                             name="name"
                             rules="required|min:2|max:30"
@@ -35,8 +35,8 @@
                                 dense
                                 shaped
                             ></v-text-field>
-                        </validation-provider>
-                        <validation-provider
+                        </ValidationProvider>
+                        <ValidationProvider
                             v-slot="{ errors }"
                             name="email"
                             :rules="{
@@ -69,8 +69,8 @@
                                 dense
                                 shaped
                             ></v-text-field>
-                        </validation-provider>
-                        <validation-provider
+                        </ValidationProvider>
+                        <ValidationProvider
                             v-slot="{ errors }"
                             name="subject"
                             :rules="`required|oneOf:${data.subjects}`"
@@ -97,8 +97,8 @@
                                 dense
                                 shaped
                             ></v-autocomplete>
-                        </validation-provider>
-                        <validation-provider
+                        </ValidationProvider>
+                        <ValidationProvider
                             v-slot="{ errors }"
                             name="phone"
                             rules="integer|min:7|max:20"
@@ -125,8 +125,8 @@
                                 dense
                                 shaped
                             ></v-text-field>
-                        </validation-provider>
-                        <validation-provider
+                        </ValidationProvider>
+                        <ValidationProvider
                             v-slot="{ errors }"
                             name="message"
                             rules="required|min:10|max:1000"
@@ -157,7 +157,7 @@
                                 dense
                                 shaped
                             ></v-textarea>
-                        </validation-provider>
+                        </ValidationProvider>
                         <v-checkbox
                             v-model="asap"
                             :value="asap"
@@ -188,7 +188,7 @@
                             </v-btn>
                         </div>
                     </v-form>
-                </validation-observer>
+                </ValidationObserver>
             </v-container>
         </div>
     </div>

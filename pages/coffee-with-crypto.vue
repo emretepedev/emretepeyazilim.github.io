@@ -36,12 +36,9 @@
                                 Balance: {{ formatBalanceToDisplay(balance) }}
                             </span>
                         </v-row>
-                        <validation-observer
-                            ref="observer"
-                            v-slot="{ invalid }"
-                        >
+                        <ValidationObserver ref="observer" v-slot="{ invalid }">
                             <v-row>
-                                <validation-provider
+                                <ValidationProvider
                                     v-slot="{ errors }"
                                     name="amount"
                                     :rules="{
@@ -79,7 +76,7 @@
                                         shaped
                                         class="max-w-sm mx-4 mt-4"
                                     ></v-text-field>
-                                </validation-provider>
+                                </ValidationProvider>
                             </v-row>
                             <v-row
                                 justify="center"
@@ -123,7 +120,7 @@
                                     >Disconnect to Metamask</v-btn
                                 >
                             </v-row>
-                        </validation-observer>
+                        </ValidationObserver>
                         <div class="text-center text-sm mt-5">
                             Note: All chains are supported. (Including Testnets
                             for testing this feature.)

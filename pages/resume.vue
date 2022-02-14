@@ -2,90 +2,7 @@
     <div>
         <div class="flex justify-center mt-12">
             <v-container>
-                <div class="flex items-center justify-center">
-                    <div
-                        class="flex flex-col items-center justify-center max-w-xl"
-                    >
-                        <div
-                            class="flex justify-center w-full py-2 md:py-5 rounded-t-xl card-header"
-                        >
-                            <nuxt-img
-                                src="/images/linkedin.svg"
-                                :width="
-                                    $vuetify.breakpoint.smAndDown
-                                        ? '100'
-                                        : '150'
-                                "
-                                :height="
-                                    $vuetify.breakpoint.smAndDown
-                                        ? '25'
-                                        : '37.5'
-                                "
-                                alt="LinkedIn"
-                                title="LinkedIn"
-                                style="
-                                    filter: invert(100%) sepia(0%)
-                                        saturate(7500%) hue-rotate(87deg)
-                                        brightness(99%) contrast(104%);
-                                "
-                                provider="static"
-                            />
-                        </div>
-                        <div
-                            class="flex flex-col items-center justify-center w-full p-5 bg-black rounded-b-xl"
-                        >
-                            <nuxt-img
-                                class="rounded-full inline"
-                                src="/images/avatar.jpg"
-                                width="100"
-                                height="100"
-                                title="@emretepedev"
-                                alt="@emretepedev"
-                                provider="static"
-                            />
-                            <h1
-                                class="my-4 text-lg md:text-xl font-bold card-title"
-                            >
-                                <a
-                                    href="https://www.linkedin.com/in/emretepedev/"
-                                    target="_blank"
-                                    class="px-2 my-2 text-center"
-                                >
-                                    Emre Tepe
-                                </a>
-                            </h1>
-                            <h2
-                                class="text-sm md:text-xl text-center mb-3 md:mb-0"
-                            >
-                                Blockchain Developer at Bixos Incorporation
-                            </h2>
-                            <div
-                                class="flex flex-col text-base md:text-lg sm:divide-x-2 sm:flex-row"
-                            >
-                                <a
-                                    href="https://www.linkedin.com/company/bixosinc/"
-                                    target="_blank"
-                                    class="px-2 my-1 md:my-4 text-center"
-                                >
-                                    Bixos Incorporation
-                                </a>
-                                <a
-                                    href="https://www.linkedin.com/school/esogu/"
-                                    target="_blank"
-                                    class="px-2 my-1 md:my-4 text-center card-title"
-                                >
-                                    Eskisehir Osmangazi University
-                                </a>
-                            </div>
-                            <a
-                                href="https://www.linkedin.com/in/emretepedev/"
-                                target="_blank"
-                                class="px-8 py-2 my-3 text-lg md:text-xl font-bold text-white border-2 rounded-full"
-                                >View Profile</a
-                            >
-                        </div>
-                    </div>
-                </div>
+                <LinkedInBadge />
                 <Timeline :items="experience" />
                 <DataTable :headers="data.headers" :items="data.skills" />
             </v-container>
@@ -109,10 +26,11 @@ import {
 import data from '~/data/resume/resume.json'
 import Timeline from '~/components/Timeline.vue'
 import DataTable from '~/components/DataTable.vue'
+import LinkedInBadge from '~/components/LinkedInBadge.vue'
 
 export default defineComponent({
     // components
-    components: { Timeline, DataTable },
+    components: { Timeline, DataTable, LinkedInBadge },
 
     // setup
     setup() {
@@ -188,13 +106,6 @@ export default defineComponent({
 </script>
 
 <style>
-.card-header {
-    background: #39424f;
-}
-.card-title {
-    color: #2c9dec;
-}
-
 .v-data-table-header th {
     white-space: nowrap !important;
 }
