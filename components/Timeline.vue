@@ -19,10 +19,10 @@
                 <v-card-title>{{ item.detail }}</v-card-title>
                 <v-card-subtitle>
                     {{ item.name }}
+                    <span v-if="item.type"> ({{ item.type }})</span>
                     <div v-if="$vuetify.breakpoint.smAndDown" class="block">
                         {{ item.year }}
                     </div>
-                    <div v-if="item.type" class="block">({{ item.type }})</div>
                 </v-card-subtitle>
                 <v-card-text v-if="item.description">
                     {{ item.description }}

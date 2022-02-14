@@ -152,6 +152,7 @@
                                 :prepend-inner-icon="mdiComment"
                                 maxlength="1000"
                                 outlined
+                                auto-grow
                                 rounded
                                 dense
                                 shaped

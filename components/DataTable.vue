@@ -68,23 +68,46 @@
             </a>
         </template>
         <template #[`expanded-item`]="{ headers, item }">
-            <td :colspan="headers.length">
+            <td v-if="!$vuetify.breakpoint.xsOnly" :colspan="headers.length">
                 <v-textarea
-                    v-if="item.description"
-                    :value="item.description"
+                    :value="
+                        item.description
+                            ? item.description
+                            : 'Description not found.'
+                    "
                     :prepend-icon="mdiComment"
                     class="mt-1"
                     rows="1"
+                    auto-grow
                     filled
                     dense
-                    auto-grow
+                    full-width
                     solo
                     readonly
                     disabled
                 >
                 </v-textarea>
-                <span v-else>Description not found.</span>
             </td>
+            <div v-else>
+                <v-textarea
+                    :value="
+                        item.description
+                            ? item.description
+                            : 'Description not found.'
+                    "
+                    :prepend-icon="mdiComment"
+                    class="mt-1"
+                    rows="1"
+                    auto-grow
+                    filled
+                    dense
+                    full-width
+                    solo
+                    readonly
+                    disabled
+                >
+                </v-textarea>
+            </div>
         </template>
     </v-data-table>
 </template>
