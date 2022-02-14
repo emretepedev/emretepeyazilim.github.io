@@ -21,6 +21,8 @@
             clipped
             :permanent="!$vuetify.breakpoint.mdAndDown"
             :expand-on-hover="!$vuetify.breakpoint.mdAndDown"
+            :right="isOnRight"
+            style="z-index: 99999 !important"
         >
             <v-list-item>
                 <v-list-item-content>
@@ -31,8 +33,14 @@
                         >
                             {{ mdiClose }}
                         </v-icon>
-                        <span v-if="!$vuetify.breakpoint.mdAndDown">
+                        <span
+                            v-if="!$vuetify.breakpoint.mdAndDown"
+                            class="flex justify-between"
+                        >
                             {{ $config.spaName }}
+                            <v-icon @click="isOnRight = !isOnRight">
+                                {{ mdiSwapHorizontal }}
+                            </v-icon>
                         </span>
                     </v-list-item-title>
                 </v-list-item-content>
@@ -68,6 +76,7 @@ import {
     mdiCardAccountMail,
     mdiCoffee,
     mdiClose,
+    mdiSwapHorizontal,
 } from '@mdi/js'
 
 export default defineComponent({
@@ -75,6 +84,7 @@ export default defineComponent({
     setup() {
         // return
         return {
+            isOnRight: ref(false),
             drawer: ref(null),
             pages: [
                 { title: 'Home', to: '/', icon: mdiXml },
@@ -92,6 +102,7 @@ export default defineComponent({
                 },
             ],
             mdiClose,
+            mdiSwapHorizontal,
         }
     },
 })
