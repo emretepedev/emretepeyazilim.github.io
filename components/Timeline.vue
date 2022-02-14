@@ -40,9 +40,7 @@ export default defineComponent({
     props: {
         items: {
             type: Array,
-            default() {
-                return []
-            },
+            required: true,
         },
     },
 })

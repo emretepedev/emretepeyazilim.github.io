@@ -127,15 +127,11 @@ export default defineComponent({
     props: {
         headers: {
             type: Array,
-            default() {
-                return []
-            },
+            required: true,
         },
         items: {
             type: Array,
-            default() {
-                return []
-            },
+            required: true,
         },
     },
     setup() {

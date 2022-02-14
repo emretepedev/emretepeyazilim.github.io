@@ -43,15 +43,11 @@ export default defineComponent({
     props: {
         graphData: {
             type: Array,
-            default() {
-                return []
-            },
+            required: true,
         },
         gradients: {
             type: Array,
-            default() {
-                return []
-            },
+            required: true,
         },
     },
     setup() {
