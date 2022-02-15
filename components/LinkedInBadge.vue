@@ -16,6 +16,7 @@
                             hue-rotate(87deg) brightness(99%) contrast(104%);
                     "
                     provider="static"
+                    class="select-none"
                 />
             </div>
             <div
