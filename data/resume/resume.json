@@ -172,13 +172,13 @@
             "description": "HTML (HyperText Markup Language) is the most basic building block of the Web. It defines the meaning and structure of web content."
         },
         {
-            "name": "G***** Tag Manager",
+            "name": "G. Tag Manager",
             "image": "googletagmanager.svg",
             "category": "Tool",
             "level": 0,
             "url": "https://tagmanager.google.com/",
             "color": "invert(24%) sepia(76%) saturate(4421%) hue-rotate(212deg) brightness(105%) contrast(72%);",
-            "description": "G***** Tag Manager is a tag management system that allows you to quickly and easily update measurement codes and related code fragments collectively known as tags on your website or mobile app."
+            "description": "G. Tag Manager is a tag management system that allows you to quickly and easily update measurement codes and related code fragments collectively known as tags on your website or mobile app."
         },
         {
             "name": "Vim",
