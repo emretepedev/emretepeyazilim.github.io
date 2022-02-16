@@ -44,6 +44,7 @@
                     width="32"
                     height="32"
                     fix="cover"
+                    class="select-none"
                 />
             </div>
         </template>
