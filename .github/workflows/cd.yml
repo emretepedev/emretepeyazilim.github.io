@@ -40,7 +40,7 @@ jobs:
               with:
                   node-version: ${{ matrix.node }}
 
-            - name: Install dependencies with devs
+            - name: Install dependencies with dev deps
               run: yarn install --production=false
 
             - name: Fetch recent contributions count

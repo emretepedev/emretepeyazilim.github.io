@@ -68,16 +68,8 @@
 
 <script>
 import { defineComponent, ref } from '@nuxtjs/composition-api'
-
-import {
-    mdiXml,
-    mdiSourceRepositoryMultiple,
-    mdiFileAccount,
-    mdiCardAccountMail,
-    mdiCoffee,
-    mdiClose,
-    mdiSwapHorizontal,
-} from '@mdi/js'
+import { mdiClose, mdiSwapHorizontal } from '@mdi/js'
+import pages from '~/data/components/header'
 
 export default defineComponent({
     // setup
@@ -86,21 +78,7 @@ export default defineComponent({
         return {
             isOnRight: ref(false),
             drawer: ref(null),
-            pages: [
-                { title: 'Home', to: '/', icon: mdiXml },
-                {
-                    title: 'Projects',
-                    to: '/projects',
-                    icon: mdiSourceRepositoryMultiple,
-                },
-                { title: 'Resume', to: '/resume', icon: mdiFileAccount },
-                { title: 'Contact', to: '/contact', icon: mdiCardAccountMail },
-                {
-                    title: 'Coffee With Crypto',
-                    to: '/coffee-with-crypto',
-                    icon: mdiCoffee,
-                },
-            ],
+            pages,
             mdiClose,
             mdiSwapHorizontal,
         }
