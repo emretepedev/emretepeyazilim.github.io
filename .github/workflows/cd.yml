@@ -29,10 +29,11 @@ jobs:
 
             - name: Bump version and push tag
               id: tag_version
-              uses: mathieudutour/github-tag-action@v6.0
-              with:
-                  github_token: ${{ secrets.GITHUB_TOKEN }}
-                  default_bump: false
+              uses: anothrNick/github-tag-action@1.36.0
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  WITH_V: true
+                  default_bump: none
 
             - name: Setup node
               uses: actions/setup-node@v2
@@ -59,8 +60,7 @@ jobs:
                   publish_branch: gh-pages
 
             - name: Create a GitHub release
-              uses: ncipollo/release-action@v1
+              uses: softprops/action-gh-release@v1
               with:
-                  tag: ${{ steps.tag_version.outputs.new_tag }}
                   name: Release ${{ steps.tag_version.outputs.new_tag }}
-                  body: ${{ steps.tag_version.outputs.changelog }}
+                  tag_name: ${{ steps.tag_version.outputs.new_tag }}
