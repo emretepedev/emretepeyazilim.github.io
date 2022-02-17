@@ -34,13 +34,6 @@ jobs:
                   github_token: ${{ secrets.GITHUB_TOKEN }}
                   default_bump: false
 
-            - name: Create a GitHub release
-              uses: ncipollo/release-action@v1
-              with:
-                  tag: ${{ steps.tag_version.outputs.new_tag }}
-                  name: Release ${{ steps.tag_version.outputs.new_tag }}
-                  body: ${{ steps.tag_version.outputs.changelog }}
-
             - name: Setup node
               uses: actions/setup-node@v2
               with:
@@ -64,3 +57,10 @@ jobs:
                   github_token: ${{ secrets.GITHUB_TOKEN }}
                   publish_dir: ./dist
                   publish_branch: gh-pages
+
+            - name: Create a GitHub release
+              uses: ncipollo/release-action@v1
+              with:
+                  tag: ${{ steps.tag_version.outputs.new_tag }}
+                  name: Release ${{ steps.tag_version.outputs.new_tag }}
+                  body: ${{ steps.tag_version.outputs.changelog }}
