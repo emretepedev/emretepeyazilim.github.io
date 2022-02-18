@@ -172,7 +172,7 @@
                         <recaptcha
                             :id="$config.googleRecaptchaV2Size"
                             :site-key="$config.googleRecaptchaV2SiteKey"
-                            data-theme="dark"
+                            :data-theme="`dark`"
                             @error="onError"
                             @success="onSuccess"
                             @expired="onExpired"
