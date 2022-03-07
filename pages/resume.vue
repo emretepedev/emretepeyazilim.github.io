@@ -13,7 +13,7 @@
 <script>
 import { defineComponent, useMeta } from '@nuxtjs/composition-api'
 
-import data from '~/data/resume/resume.js'
+import data from '~/data/pages/resume'
 import Timeline from '~/components/Timeline.vue'
 import DataTable from '~/components/DataTable.vue'
 import LinkedInBadge from '~/components/LinkedInBadge.vue'

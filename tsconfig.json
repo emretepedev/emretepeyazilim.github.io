@@ -1,21 +1,21 @@
 {
-    "compilerOptions": {
-        "target": "ES6",
-        "module": "CommonJS",
-        "rootDir": ".",
-        "moduleResolution": "node",
-        "esModuleInterop": true,
-        "resolveJsonModule": true,
-        "strict": true,
-        "allowJs": true
-    },
-    "exclude": [
-        "node_modules",
-        ".nuxt",
-        "static",
-        "dist",
-        "plugins",
-        "nuxt.config.js"
-    ],
-    "files": ["contributionsCount.ts"]
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "CommonJS",
+    "rootDir": ".",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "strict": true,
+    "allowJs": true
+  },
+  "exclude": [
+    "node_modules",
+    ".nuxt",
+    "static",
+    "dist",
+    "plugins",
+    "nuxt.config.js"
+  ],
+  "files": ["contributionsCount.ts"]
 }
