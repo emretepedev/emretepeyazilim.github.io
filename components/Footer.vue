@@ -42,23 +42,23 @@
 </template>
 
 <script>
-import { defineComponent, useContext } from '@nuxtjs/composition-api'
-import data from '~/data/components/footer'
+  import { defineComponent, useContext } from '@nuxtjs/composition-api'
+  import data from '~/data/components/footer'
 
-export default defineComponent({
-  // setup
-  setup() {
-    // context
-    const { $config } = useContext()
+  export default defineComponent({
+    // setup
+    setup() {
+      // context
+      const { $config } = useContext()
 
-    // consts
-    const lastModifiedAt = $config.lastModifiedAt
+      // consts
+      const lastModifiedAt = $config.lastModifiedAt
 
-    // return
-    return {
-      data,
-      lastModifiedAt,
-    }
-  },
-})
+      // return
+      return {
+        data,
+        lastModifiedAt,
+      }
+    },
+  })
 </script>

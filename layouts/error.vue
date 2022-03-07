@@ -25,42 +25,42 @@
   </div>
 </template>
 <script>
-import { defineComponent, useMeta } from '@nuxtjs/composition-api'
-import { mdiArrowRightThin } from '@mdi/js'
+  import { defineComponent, useMeta } from '@nuxtjs/composition-api'
+  import { mdiArrowRightThin } from '@mdi/js'
 
-export default defineComponent({
-  // setup
-  setup() {
-    // meta
-    useMeta({
-      title: 'Page not found | ',
-      meta: [
-        {
-          hid: 'robots',
-          name: 'robots',
-          content: 'noindex, nofollow',
-        },
-      ],
-    })
+  export default defineComponent({
+    // setup
+    setup() {
+      // meta
+      useMeta({
+        title: 'Page not found | ',
+        meta: [
+          {
+            hid: 'robots',
+            name: 'robots',
+            content: 'noindex, nofollow',
+          },
+        ],
+      })
 
-    // return
-    return {
-      mdiArrowRightThin,
-    }
-  },
-  head: {},
-})
+      // return
+      return {
+        mdiArrowRightThin,
+      }
+    },
+    head: {},
+  })
 </script>
 
 <style scoped>
-@media (min-width: 320px) {
-  .error-text {
-    font-size: 40px;
+  @media (min-width: 320px) {
+    .error-text {
+      font-size: 40px;
+    }
   }
-}
-@media (min-width: 768px) {
-  .error-text {
-    font-size: 90px;
+  @media (min-width: 768px) {
+    .error-text {
+      font-size: 90px;
+    }
   }
-}
 </style>

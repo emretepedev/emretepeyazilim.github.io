@@ -32,15 +32,15 @@
 </template>
 
 <script>
-import { defineComponent } from '@nuxtjs/composition-api'
+  import { defineComponent } from '@nuxtjs/composition-api'
 
-export default defineComponent({
-  // props
-  props: {
-    projects: {
-      type: Array,
-      required: true,
+  export default defineComponent({
+    // props
+    props: {
+      projects: {
+        type: Array,
+        required: true,
+      },
     },
-  },
-})
+  })
 </script>

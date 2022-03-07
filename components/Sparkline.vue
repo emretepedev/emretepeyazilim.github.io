@@ -35,26 +35,26 @@
 </template>
 
 <script>
-import { defineComponent } from '@nuxtjs/composition-api'
-import { mdiPoll } from '@mdi/js'
+  import { defineComponent } from '@nuxtjs/composition-api'
+  import { mdiPoll } from '@mdi/js'
 
-export default defineComponent({
-  // props
-  props: {
-    graphData: {
-      type: Array,
-      required: true,
+  export default defineComponent({
+    // props
+    props: {
+      graphData: {
+        type: Array,
+        required: true,
+      },
+      gradients: {
+        type: Array,
+        required: true,
+      },
     },
-    gradients: {
-      type: Array,
-      required: true,
+    setup() {
+      // return
+      return {
+        mdiPoll,
+      }
     },
-  },
-  setup() {
-    // return
-    return {
-      mdiPoll,
-    }
-  },
-})
+  })
 </script>

@@ -170,226 +170,226 @@
 </template>
 
 <script>
-import {
-  defineComponent,
-  ref,
-  useMeta,
-  useContext,
-  onMounted,
-} from '@nuxtjs/composition-api'
+  import {
+    defineComponent,
+    ref,
+    useMeta,
+    useContext,
+    onMounted,
+  } from '@nuxtjs/composition-api'
 
-import {
-  mdiCloseCircle,
-  mdiComment,
-  mdiFormSelect,
-  mdiPhone,
-  mdiAt,
-  mdiFormTextbox,
-  mdiCheckboxBlankCircleOutline,
-  mdiCheckboxMarkedCircle,
-} from '@mdi/js'
+  import {
+    mdiCloseCircle,
+    mdiComment,
+    mdiFormSelect,
+    mdiPhone,
+    mdiAt,
+    mdiFormTextbox,
+    mdiCheckboxBlankCircleOutline,
+    mdiCheckboxMarkedCircle,
+  } from '@mdi/js'
 
-import { ValidationObserver, ValidationProvider } from 'vee-validate'
-import data from '~/data/pages/contact'
+  import { ValidationObserver, ValidationProvider } from 'vee-validate'
+  import data from '~/data/pages/contact'
 
-export default defineComponent({
-  // components
-  components: {
-    ValidationProvider,
-    ValidationObserver,
-  },
+  export default defineComponent({
+    // components
+    components: {
+      ValidationProvider,
+      ValidationObserver,
+    },
 
-  // setup
-  setup(_, { root }) {
-    // meta
-    useMeta({
-      title: 'Contact | ',
-      script: [
-        {
-          charset: 'utf-8',
-          src: 'https://s.pageclip.co/v1/pageclip.js',
-          body: true,
-          defer: true,
-          callback: () => {
-            styleToPageclip()
+    // setup
+    setup(_, { root }) {
+      // meta
+      useMeta({
+        title: 'Contact | ',
+        script: [
+          {
+            charset: 'utf-8',
+            src: 'https://s.pageclip.co/v1/pageclip.js',
+            body: true,
+            defer: true,
+            callback: () => {
+              styleToPageclip()
+            },
           },
-        },
-      ],
-      link: [
-        {
-          rel: 'stylesheet',
-          href: 'https://s.pageclip.co/v1/pageclip.css',
-          media: 'screen',
-        },
-      ],
-    })
-
-    // context
-    const { $config, $recaptcha } = useContext()
-
-    // root variables
-    const $vToastify = root.$vToastify
-
-    // refs
-    const observer = ref(null)
-
-    // consts
-    const name = ref('')
-    const phone = ref('')
-    const email = ref('')
-    const subject = ref(null)
-    const message = ref('')
-    const asap = ref(false)
-    const isRecaptched = ref(false)
-    const widgetId = ref(0)
-
-    // hooks
-    onMounted(async () => {
-      await $recaptcha.init()
-
-      widgetId.value = $recaptcha.render($config.googleRecaptchaV2Size, {
-        sitekey: $config.googleRecaptchaV2SiteKey,
+        ],
+        link: [
+          {
+            rel: 'stylesheet',
+            href: 'https://s.pageclip.co/v1/pageclip.css',
+            media: 'screen',
+          },
+        ],
       })
 
-      styleToRecaptcha()
-    })
+      // context
+      const { $config, $recaptcha } = useContext()
 
-    // methods
-    const submit = async (event) => {
-      try {
-        const validate = await observer.value.validate()
+      // root variables
+      const $vToastify = root.$vToastify
 
-        if (!validate) {
-          throw new Error('Form Validation: Failed.')
-        }
+      // refs
+      const observer = ref(null)
 
-        await $recaptcha.getResponse(widgetId.value).catch(() => {
-          throw new Error('reCAPTCHA v2 Verification: Token not found.')
+      // consts
+      const name = ref('')
+      const phone = ref('')
+      const email = ref('')
+      const subject = ref(null)
+      const message = ref('')
+      const asap = ref(false)
+      const isRecaptched = ref(false)
+      const widgetId = ref(0)
+
+      // hooks
+      onMounted(async () => {
+        await $recaptcha.init()
+
+        widgetId.value = $recaptcha.render($config.googleRecaptchaV2Size, {
+          sitekey: $config.googleRecaptchaV2SiteKey,
         })
 
-        await $recaptcha.execute('login').catch(() => {
-          throw new Error('reCAPTCHA v3 Verification: Token not found.')
-        })
+        styleToRecaptcha()
+      })
 
-        await $recaptcha.reset(widgetId.value)
-      } catch (error) {
-        $vToastify.error(String(error))
+      // methods
+      const submit = async (event) => {
+        try {
+          const validate = await observer.value.validate()
 
-        event.preventDefault()
-      }
-    }
-
-    const resetForm = () => {
-      name.value = ''
-      phone.value = ''
-      email.value = ''
-      subject.value = null
-      message.value = ''
-      asap.value = false
-      observer.value.reset()
-    }
-
-    const onError = () => {
-      $vToastify.error('reCAPTCHA Verification: Error.')
-      isRecaptched.value = false
-    }
-
-    const onSuccess = () => {
-      $vToastify.success('reCAPTCHA Verification: Success.')
-      isRecaptched.value = true
-    }
-
-    const onExpired = () => {
-      $vToastify.warning('reCAPTCHA Verification: Expired.')
-      isRecaptched.value = false
-    }
-
-    const onResponse = (error, response) => {
-      if (error) {
-        $vToastify.error("Mail didn't send because of `Form has errors`.")
-
-        return
-      }
-
-      if (response.data !== 'ok') {
-        $vToastify.error(
-          "Mail didn't send because of `Server Error`. Try again later."
-        )
-
-        return
-      }
-
-      resetForm()
-
-      $vToastify.success('Mail sent successfully.')
-    }
-
-    const styleToRecaptcha = () => {
-      let count = 0
-      const frequency = 1000 / 4 // 0.25 sec
-      const maxTime = (1000 / frequency) * 10 // 10 sec
-
-      const interval = setInterval(() => {
-        const _recaptcha = document.querySelector('.g-recaptcha')
-
-        if (Boolean(_recaptcha) || count === maxTime) {
-          clearInterval(interval)
-
-          if (count === maxTime) {
-            $vToastify.error(
-              'reCAPTCHA Verification: Server Error. Try again later.'
-            )
-
-            return
+          if (!validate) {
+            throw new Error('Form Validation: Failed.')
           }
 
-          _recaptcha.style.display = 'flex'
-          _recaptcha.style.justifyContent = 'center'
+          await $recaptcha.getResponse(widgetId.value).catch(() => {
+            throw new Error('reCAPTCHA v2 Verification: Token not found.')
+          })
+
+          await $recaptcha.execute('login').catch(() => {
+            throw new Error('reCAPTCHA v3 Verification: Token not found.')
+          })
+
+          await $recaptcha.reset(widgetId.value)
+        } catch (error) {
+          $vToastify.error(String(error))
+
+          event.preventDefault()
+        }
+      }
+
+      const resetForm = () => {
+        name.value = ''
+        phone.value = ''
+        email.value = ''
+        subject.value = null
+        message.value = ''
+        asap.value = false
+        observer.value.reset()
+      }
+
+      const onError = () => {
+        $vToastify.error('reCAPTCHA Verification: Error.')
+        isRecaptched.value = false
+      }
+
+      const onSuccess = () => {
+        $vToastify.success('reCAPTCHA Verification: Success.')
+        isRecaptched.value = true
+      }
+
+      const onExpired = () => {
+        $vToastify.warning('reCAPTCHA Verification: Expired.')
+        isRecaptched.value = false
+      }
+
+      const onResponse = (error, response) => {
+        if (error) {
+          $vToastify.error("Mail didn't send because of `Form has errors`.")
+
+          return
         }
 
-        count++
-      }, frequency)
-    }
+        if (response.data !== 'ok') {
+          $vToastify.error(
+            "Mail didn't send because of `Server Error`. Try again later."
+          )
 
-    const styleToPageclip = () => {
-      const form = document.querySelector('.pageclip-form')
+          return
+        }
 
-      /* eslint-disable-next-line */
-      Pageclip.form(form, {
-        onResponse(error, response) {
-          onResponse(error, response)
-        },
-        successTemplate: 'I`ll reply to you ASAP. - @emretepedev',
-      })
-    }
+        resetForm()
 
-    // return
-    return {
-      name,
-      phone,
-      email,
-      subject,
-      message,
-      asap,
-      data,
-      observer,
-      isRecaptched,
-      submit,
-      onError,
-      onSuccess,
-      onExpired,
-      mdiCloseCircle,
-      mdiComment,
-      mdiFormSelect,
-      mdiPhone,
-      mdiAt,
-      mdiFormTextbox,
-      mdiCheckboxBlankCircleOutline,
-      mdiCheckboxMarkedCircle,
-    }
-  },
+        $vToastify.success('Mail sent successfully.')
+      }
 
-  // head
-  head: {},
-})
+      const styleToRecaptcha = () => {
+        let count = 0
+        const frequency = 1000 / 4 // 0.25 sec
+        const maxTime = (1000 / frequency) * 10 // 10 sec
+
+        const interval = setInterval(() => {
+          const _recaptcha = document.querySelector('.g-recaptcha')
+
+          if (Boolean(_recaptcha) || count === maxTime) {
+            clearInterval(interval)
+
+            if (count === maxTime) {
+              $vToastify.error(
+                'reCAPTCHA Verification: Server Error. Try again later.'
+              )
+
+              return
+            }
+
+            _recaptcha.style.display = 'flex'
+            _recaptcha.style.justifyContent = 'center'
+          }
+
+          count++
+        }, frequency)
+      }
+
+      const styleToPageclip = () => {
+        const form = document.querySelector('.pageclip-form')
+
+        /* eslint-disable-next-line */
+        Pageclip.form(form, {
+          onResponse(error, response) {
+            onResponse(error, response)
+          },
+          successTemplate: 'I`ll reply to you ASAP. - @emretepedev',
+        })
+      }
+
+      // return
+      return {
+        name,
+        phone,
+        email,
+        subject,
+        message,
+        asap,
+        data,
+        observer,
+        isRecaptched,
+        submit,
+        onError,
+        onSuccess,
+        onExpired,
+        mdiCloseCircle,
+        mdiComment,
+        mdiFormSelect,
+        mdiPhone,
+        mdiAt,
+        mdiFormTextbox,
+        mdiCheckboxBlankCircleOutline,
+        mdiCheckboxMarkedCircle,
+      }
+    },
+
+    // head
+    head: {},
+  })
 </script>

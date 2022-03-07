@@ -9,26 +9,26 @@
 </template>
 
 <script>
-import { defineComponent, useMeta } from '@nuxtjs/composition-api'
-import data from '~/data/pages/projects'
-import Project from '~/components/Project.vue'
+  import { defineComponent, useMeta } from '@nuxtjs/composition-api'
+  import data from '~/data/pages/projects'
+  import Project from '~/components/Project.vue'
 
-export default defineComponent({
-  // components
-  components: { Project },
+  export default defineComponent({
+    // components
+    components: { Project },
 
-  // setup
-  setup() {
-    // meta
-    useMeta({ title: 'Projects | ' })
+    // setup
+    setup() {
+      // meta
+      useMeta({ title: 'Projects | ' })
 
-    // return
-    return {
-      data,
-    }
-  },
+      // return
+      return {
+        data,
+      }
+    },
 
-  // head
-  head: {},
-})
+    // head
+    head: {},
+  })
 </script>

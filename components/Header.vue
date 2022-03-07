@@ -61,21 +61,21 @@
 </template>
 
 <script>
-import { defineComponent, ref } from '@nuxtjs/composition-api'
-import { mdiClose, mdiSwapHorizontal } from '@mdi/js'
-import data from '~/data/components/header'
+  import { defineComponent, ref } from '@nuxtjs/composition-api'
+  import { mdiClose, mdiSwapHorizontal } from '@mdi/js'
+  import data from '~/data/components/header'
 
-export default defineComponent({
-  // setup
-  setup() {
-    // return
-    return {
-      isOnRight: ref(false),
-      drawer: ref(null),
-      data,
-      mdiClose,
-      mdiSwapHorizontal,
-    }
-  },
-})
+  export default defineComponent({
+    // setup
+    setup() {
+      // return
+      return {
+        isOnRight: ref(false),
+        drawer: ref(null),
+        data,
+        mdiClose,
+        mdiSwapHorizontal,
+      }
+    },
+  })
 </script>

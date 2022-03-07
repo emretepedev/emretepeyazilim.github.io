@@ -44,51 +44,51 @@
 </template>
 
 <script>
-import { defineComponent, ref, useMeta } from '@nuxtjs/composition-api'
+  import { defineComponent, ref, useMeta } from '@nuxtjs/composition-api'
 
-import data from '~/data/pages/index'
-import contributionsCount from '~/data/contributionsCount.json'
-import Sparkline from '~/components/Sparkline.vue'
-import Project from '~/components/Project.vue'
+  import data from '~/data/pages/index'
+  import contributionsCount from '~/data/contributionsCount.json'
+  import Sparkline from '~/components/Sparkline.vue'
+  import Project from '~/components/Project.vue'
 
-export default defineComponent({
-  // components
-  components: { Sparkline, Project },
+  export default defineComponent({
+    // components
+    components: { Sparkline, Project },
 
-  // setup
-  setup() {
-    // meta
-    useMeta({
-      meta: [
-        {
-          name: 'google-site-verification',
-          content: 'd4yezmSdB2cAwtSSzAyPg7B3u9JidcIhNUVs-HI-w_0',
-        },
-      ],
-    })
+    // setup
+    setup() {
+      // meta
+      useMeta({
+        meta: [
+          {
+            name: 'google-site-verification',
+            content: 'd4yezmSdB2cAwtSSzAyPg7B3u9JidcIhNUVs-HI-w_0',
+          },
+        ],
+      })
 
-    // consts
-    const graphData = ref([])
-    const from = new Date()
-    const to = new Date()
-    from.setDate(to.getDate() - 30)
+      // consts
+      const graphData = ref([])
+      const from = new Date()
+      const to = new Date()
+      from.setDate(to.getDate() - 30)
 
-    contributionsCount.data.user.contributionsCollection.contributionCalendar.weeks.forEach(
-      (week) => {
-        week.contributionDays.forEach((day) => {
-          graphData.value.push(day.contributionCount)
-        })
+      contributionsCount.data.user.contributionsCollection.contributionCalendar.weeks.forEach(
+        (week) => {
+          week.contributionDays.forEach((day) => {
+            graphData.value.push(day.contributionCount)
+          })
+        }
+      )
+
+      // return
+      return {
+        data,
+        graphData,
       }
-    )
+    },
 
-    // return
-    return {
-      data,
-      graphData,
-    }
-  },
-
-  // head
-  head: {},
-})
+    // head
+    head: {},
+  })
 </script>

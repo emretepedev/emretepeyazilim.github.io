@@ -110,42 +110,42 @@
 </template>
 
 <script>
-import { defineComponent, ref } from '@nuxtjs/composition-api'
-import {
-  mdiArrowCollapseLeft,
-  mdiArrowCollapseRight,
-  mdiMagnify,
-  mdiLink,
-  mdiComment,
-} from '@mdi/js'
+  import { defineComponent, ref } from '@nuxtjs/composition-api'
+  import {
+    mdiArrowCollapseLeft,
+    mdiArrowCollapseRight,
+    mdiMagnify,
+    mdiLink,
+    mdiComment,
+  } from '@mdi/js'
 
-export default defineComponent({
-  // props
-  props: {
-    headers: {
-      type: Array,
-      required: true,
+  export default defineComponent({
+    // props
+    props: {
+      headers: {
+        type: Array,
+        required: true,
+      },
+      items: {
+        type: Array,
+        required: true,
+      },
     },
-    items: {
-      type: Array,
-      required: true,
-    },
-  },
-  setup() {
-    // consts
-    const search = ref('')
-    const expanded = ref([])
+    setup() {
+      // consts
+      const search = ref('')
+      const expanded = ref([])
 
-    // return
-    return {
-      search,
-      expanded,
-      mdiArrowCollapseLeft,
-      mdiArrowCollapseRight,
-      mdiMagnify,
-      mdiLink,
-      mdiComment,
-    }
-  },
-})
+      // return
+      return {
+        search,
+        expanded,
+        mdiArrowCollapseLeft,
+        mdiArrowCollapseRight,
+        mdiMagnify,
+        mdiLink,
+        mdiComment,
+      }
+    },
+  })
 </script>

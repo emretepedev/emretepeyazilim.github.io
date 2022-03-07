@@ -33,35 +33,35 @@
 </template>
 
 <script>
-import { defineComponent } from '@nuxtjs/composition-api'
+  import { defineComponent } from '@nuxtjs/composition-api'
 
-export default defineComponent({
-  // props
-  props: {
-    items: {
-      type: Array,
-      required: true,
+  export default defineComponent({
+    // props
+    props: {
+      items: {
+        type: Array,
+        required: true,
+      },
     },
-  },
-})
+  })
 </script>
 
 <style>
-@media (max-width: 425px) {
-  div.v-card__title {
-    word-break: break-word !important;
-    font-size: 1rem !important;
-    line-height: 1.5rem !important;
-  }
+  @media (max-width: 425px) {
+    div.v-card__title {
+      word-break: break-word !important;
+      font-size: 1rem !important;
+      line-height: 1.5rem !important;
+    }
 
-  div.v-card__subtitle {
-    font-size: 0.875rem !important;
-    line-height: 1.25rem !important;
-  }
+    div.v-card__subtitle {
+      font-size: 0.875rem !important;
+      line-height: 1.25rem !important;
+    }
 
-  div.v-card__text {
-    font-size: 0.75rem !important;
-    line-height: 1rem !important;
+    div.v-card__text {
+      font-size: 0.75rem !important;
+      line-height: 1rem !important;
+    }
   }
-}
 </style>
