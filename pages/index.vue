@@ -47,7 +47,7 @@
 import { defineComponent, ref, useMeta } from '@nuxtjs/composition-api'
 
 import data from '~/data/pages/index'
-import contributionsCount from '~/data/index/contributionsCount.json'
+import contributionsCount from '~/data/contributionsCount.json'
 import Sparkline from '~/components/Sparkline.vue'
 import Project from '~/components/Project.vue'
 
