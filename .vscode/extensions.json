@@ -1,0 +1,13 @@
+{
+    "recommendations": [
+        "dbaeumer.vscode-eslint",
+        "rvest.vs-code-prettier-eslint",
+        "esbenp.prettier-vscode",
+        "pflannery.vscode-versionlens",
+        "usernamehw.errorlens",
+        "joeberria.statusbarerror",
+        "octref.vetur",
+        "streetsidesoftware.code-spell-checker",
+        "emeraldwalk.RunOnSave"
+    ]
+}

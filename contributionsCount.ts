@@ -68,6 +68,6 @@ const fetchData = async (): Promise<string | null> => {
 ;(async () => {
   const data = await fetchData()
   if (data) {
-    saveFile('./data/index/contributionsCount.json', data)
+    saveFile('./data/contributionsCount.json', data)
   }
 })()
