@@ -132,7 +132,7 @@
       },
     },
     setup() {
-      // consts
+      // constants
       const search = ref('')
       const expanded = ref([])
 
