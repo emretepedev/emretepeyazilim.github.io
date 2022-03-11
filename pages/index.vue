@@ -67,7 +67,7 @@
         ],
       })
 
-      // consts
+      // constants
       const graphData = ref([])
       const from = new Date()
       const to = new Date()

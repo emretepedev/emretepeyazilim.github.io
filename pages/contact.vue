@@ -233,7 +233,7 @@
       // refs
       const observer = ref(null)
 
-      // consts
+      // constants
       const name = ref('')
       const phone = ref('')
       const email = ref('')

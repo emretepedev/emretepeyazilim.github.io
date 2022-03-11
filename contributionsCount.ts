@@ -2,7 +2,7 @@ import fs from 'fs'
 import axios from 'axios'
 import 'dotenv/config'
 
-// consts
+// constants
 const from: Date = new Date()
 const to: Date = new Date()
 from.setDate(to.getDate() - 30)

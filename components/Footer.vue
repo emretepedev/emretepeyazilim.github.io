@@ -51,7 +51,7 @@
       // context
       const { $config } = useContext()
 
-      // consts
+      // constants
       const lastModifiedAt = $config.lastModifiedAt
 
       // return
