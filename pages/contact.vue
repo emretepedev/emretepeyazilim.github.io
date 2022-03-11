@@ -152,7 +152,7 @@
               @expired="onExpired"
             />
 
-            <div class="text-center mt-5">
+            <div class="mt-5 text-center">
               <v-btn
                 class="pageclip-form__submit pageclip-form__submit--dark-loader"
                 type="submit"
