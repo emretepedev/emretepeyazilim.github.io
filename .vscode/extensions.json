@@ -1,13 +1,27 @@
 {
-    "recommendations": [
-        "dbaeumer.vscode-eslint",
-        "rvest.vs-code-prettier-eslint",
-        "esbenp.prettier-vscode",
-        "pflannery.vscode-versionlens",
-        "usernamehw.errorlens",
-        "joeberria.statusbarerror",
-        "octref.vetur",
-        "streetsidesoftware.code-spell-checker",
-        "emeraldwalk.RunOnSave"
-    ]
+  "recommendations": [
+    "streetsidesoftware.code-spell-checker",
+    "usernamehw.errorlens",
+    "eamodio.gitlens",
+    "pflannery.vscode-versionlens",
+    "mikestead.dotenv",
+    "syler.ignore",
+    "timonwong.shellcheck",
+    "foxundermoon.shell-format",
+    "wayou.vscode-todo-highlight",
+    "christian-kohler.path-intellisense",
+    "ms-azuretools.vscode-docker",
+    "emeraldwalk.runonsave",
+    "simonsiefke.svg-preview",
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "stylelint.vscode-stylelint",
+    "rehfres.colored-console-log",
+    "abumalick.vscode-nvm",
+    "eg2.vscode-npm-script",
+    "bradlc.vscode-tailwindcss",
+    "heybourn.headwind",
+    "octref.vetur",
+    "johnsoncodehk.volar"
+  ]
 }

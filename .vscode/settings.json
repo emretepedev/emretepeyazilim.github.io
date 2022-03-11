@@ -1,93 +1,165 @@
 {
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/*/**": true,
+    "**/dist/*/**": true,
+    "**/.nuxt/*/**": true
+  },
+  "files.associations": {
+    "*.json": "javascript",
+    "package.json": "json"
+  },
   "files.saveConflictResolution": "overwriteFileOnDisk",
+  "editor.quickSuggestions": {
+    "strings": true
+  },
   "editor.bracketPairColorization.enabled": true,
   "editor.guides.bracketPairs": "active",
   "editor.formatOnSave": true,
+  "editor.detectIndentation": false,
+  "editor.insertSpaces": true,
   "json.format.enable": false,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "javascript.validate.enable": false,
+  "javascript.format.enable": false,
+  "javascript.suggest.paths": false,
+  "typescript.suggest.paths": false,
+  "css.validate": false,
+  "less.validate": false,
+  "scss.validate": false,
   "cSpell.language": "en",
   "cSpell.words": [
-    "Arrayable",
-    "Authenticatable",
-    "Autoloaded",
     "axios",
-    "backoff",
-    "beanstalkd",
     "camelcase",
+    "changefreq",
     "Cooldown",
     "destroywhitelists",
-    "Dispatchable",
     "encrypter",
-    "Foundable",
-    "Laravel",
-    "mailgun",
+    "Googlebot",
+    "googleusercontent",
+    "laravel",
+    "lastmod",
     "Metaverse",
-    "Middlewares",
     "mimetypes",
     "Moralis",
     "noindex",
     "nuxt",
+    "nuxtjs",
     "PAPERTRAIL",
-    "phpcs",
-    "phpredis",
-    "Queueable",
-    "Relationable",
+    "prefetch",
+    "purgecss",
+    "Roboto",
     "semibold",
     "sparkline",
-    "sslmode",
-    "Swoole",
+    "stylelint",
     "tailwindcss",
     "templating",
     "Toastify",
-    "tokenable",
     "vuejs",
     "vuetify",
-    "websockets"
+    "websockets",
+    "wght"
   ],
   "cSpell.ignorePaths": [
     "package.json",
     "package-lock.json",
     "yarn.lock",
-    "composer.json",
-    "composer.lock",
-    "node_modules",
-    "vendor",
-    "storage",
-    "public",
-    "bootstrap",
-    "database/seeders",
-    "build",
-    "dist",
-    "server.php",
-    "_ide_helper.php",
-    ".php_cs.dist.php",
-    "phpcs.xml",
-    "phpunit.xml",
+    "node_modules/",
+    ".nuxt/",
+    "dist/",
     "docker-compose.yml",
     "Dockerfile",
-    ".insomnia",
-    ".git",
+    ".insomnia/",
+    ".git/",
     ".gitignore",
     ".dockerignore",
     ".prettierignore",
-    ".vscode",
-    "vscode-extension",
-    ".vscode-insiders"
+    ".eslintignore",
+    ".vscode/"
   ],
-  "errorLens.severityText": ["ERROR", "WARNING"],
-  "errorLens.enabledDiagnosticLevels": ["error", "warning"],
+  "[dotenv]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "[ignore]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "[shellscript]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2
+  },
   "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2
   },
   "[vue]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2
   },
-  "[json]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "versionlens.caching.duration": 0,
+  "versionlens.composer.caching.duration": 0,
+  "versionlens.npm.caching.duration": 0,
+  "errorLens.enabledDiagnosticLevels": ["error", "warning"],
+  "errorLens.fontWeight": "900",
+  "errorLens.margin": "2ch",
+  "errorLens.messageTemplate": "$count $severity: $message -($code) -$source",
+  "errorLens.statusBarMessageTemplate": "$message $source $severity $code",
+  "errorLens.statusBarMessageEnabled": true,
+  "errorLens.statusBarCommand": "copyMessage",
+  "errorLens.statusBarColorsEnabled": true,
+  "errorLens.statusBarIconsEnabled": true,
+  "errorLens.statusBarMessageType": "closestProblem",
+  "errorLens.gutterIconsEnabled": true,
+  "errorLens.gutterIconsFollowCursorOverride": false,
+  "errorLens.onSave": true,
+  "emeraldwalk.runonsave": {
+    "commands": [
+      {
+        "match": "\\.css$",
+        "cmd": "yarn run stylelint ${file} --fix; yarn run prettier ${file} --write;",
+        "isAsync": true
+      },
+      {
+        "match": "\\.scss$",
+        "cmd": "yarn run stylelint ${file} --fix; yarn run prettier ${file} --write;",
+        "isAsync": true
+      },
+      {
+        "match": "\\.json$",
+        "cmd": "yarn run eslint ${file} --fix; yarn run prettier ${file} --write;",
+        "isAsync": true
+      },
+      {
+        "match": "\\.js$",
+        "cmd": "yarn run eslint ${file} --fix; yarn run prettier ${file} --write;",
+        "isAsync": true
+      },
+      {
+        "match": "\\.vue$",
+        "cmd": "yarn run eslint ${file} --fix; yarn run stylelint ${file} --fix; yarn run prettier ${file} --write;",
+        "isAsync": true
+      }
+    ]
   },
+  "stylelint.configFile": ".stylelintrc.js",
+  "stylelint.validate": ["css", "less", "postcss", "scss", "sass", "vue"],
+  "tailwindCSS.files.exclude": [
+    "**/.git/**",
+    "**/node_modules/**",
+    "**/.hg/**",
+    "**/dist/**",
+    "**/.nuxt/**"
+  ],
   "vetur.validation.template": false,
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
-  },
-  "emeraldwalk.runonsave": {}
+  "vetur.format.enable": false
 }
