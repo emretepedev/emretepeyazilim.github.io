@@ -231,6 +231,48 @@ export default {
         'G. Tag Manager is a tag management system that allows you to quickly and easily update measurement codes and related code fragments collectively known as tags on your website or mobile app.',
     },
     {
+      name: 'ESLint',
+      image: 'eslint.svg',
+      category: 'Personal',
+      level: 0,
+      url: 'https://eslint.org/',
+      color:
+        'invert(23%) sepia(65%) saturate(2196%) hue-rotate(236deg) brightness(89%) contrast(111%);',
+      description:
+        'ESLint statically analyzes your code to quickly find problems. ESLint is built into most text editors and you can run ESLint as part of your continuous integration pipeline.',
+    },
+    {
+      name: 'Solhint',
+      image: 'solhint.svg',
+      category: 'Personal',
+      level: 0,
+      url: 'https://protofire.github.io/solhint/',
+      color: '',
+      description:
+        'Solhint is an open source project for linting Solidity code. Solhint provides both Security and Style Guide validations.',
+    },
+    {
+      name: 'Stylelint',
+      image: 'stylelint.svg',
+      category: 'Personal',
+      level: 0,
+      url: 'https://stylelint.io/',
+      color:
+        'invert(15%) sepia(12%) saturate(1013%) hue-rotate(155deg) brightness(97%) contrast(90%);',
+      description:
+        'A mighty, modern linter that helps you avoid errors and enforce conventions in your styles.',
+    },
+    {
+      name: 'Prettier',
+      image: 'prettier.svg',
+      category: 'Personal',
+      level: 0,
+      url: 'https://prettier.io/',
+      color:
+        'invert(78%) sepia(25%) saturate(1276%) hue-rotate(343deg) brightness(101%) contrast(94%);',
+      description: 'Prettier is an opinionated code formatter.',
+    },
+    {
       name: 'Vim',
       image: 'vim.svg',
       category: 'Personal',

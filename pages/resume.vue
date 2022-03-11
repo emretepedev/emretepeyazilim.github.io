@@ -46,10 +46,13 @@
   }
 
   .v-data-table-header
+    tr
     th.hide-icon-to-sortable:hover
     .v-data-table-header__icon {
     display: inline-flex !important;
   }
+
+  /* stylelint-disable-next-line no-descending-specificity */
   .v-data-table-header
     tr
     > th.hide-icon-to-sortable
