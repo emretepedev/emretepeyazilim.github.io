@@ -6,17 +6,19 @@ module.exports = {
     node: true,
   },
 
-  parserOptions: {
-    parser: '@babel/eslint-parser',
-    requireConfigFile: false,
-  },
+  extends: [
+    'eslint:recommended',
+    'plugin:json/recommended',
+    'plugin:nuxt/recommended',
+    '@nuxtjs',
+    'prettier',
+    /* 'plugin:vue/vue3-recommended', */
+  ],
 
-  extends: ['@nuxtjs', 'prettier', 'plugin:nuxt/recommended'],
+  plugins: ['json', 'prettier', 'nuxt'],
 
-  plugins: ['prettier'],
-
-  // add your custom rules here
   rules: {
+    'prettier/prettier': ['warn'],
     'vue/multi-word-component-names': 'off',
     'vue/no-template-shadow': 'off',
   },
