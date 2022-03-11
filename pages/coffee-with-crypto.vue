@@ -175,7 +175,7 @@
       // refs
       const observer = ref(null)
 
-      // consts
+      // constants
       let web3 = null
       const provider = ref(null)
       const isConnected = ref(false)
@@ -446,34 +446,6 @@
 </script>
 
 <style>
-  .v-data-table-header th {
-    white-space: nowrap !important;
-  }
-
-  .v-data-table-header
-    th.hide-icon-to-sortable:hover
-    .v-data-table-header__icon {
-    display: inline-flex !important;
-  }
-  .v-data-table-header
-    tr
-    > th.hide-icon-to-sortable
-    > .v-data-table-header__icon {
-    display: none !important;
-  }
-
-  @media (max-width: 425px) {
-    .v-data-footer__pagination {
-      width: 100% !important;
-    }
-
-    .v-data-footer__icons-before,
-    .v-data-footer__icons-after,
-    .v-data-footer__select {
-      margin: auto !important;
-    }
-  }
-
   .border-gradient-br-blue-green-gray-900 {
     background: linear-gradient(to right, #18181b, #18181b),
       linear-gradient(to bottom right, #60a5fa, #4ade80);
