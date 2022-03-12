@@ -18,7 +18,7 @@
                   <span
                     v-ripple="{ center: true }"
                     v-bind="attrs"
-                    class="p-3 text-center my-auto cursor-pointer text-gray-100 border-2 border-transparent border-solid rounded-md shadow-xl app-title border-gradient-br-blue-green-gray-900"
+                    class="p-3 my-auto text-center text-gray-100 border-2 border-transparent border-solid rounded-md shadow-xl cursor-pointer app-title border-gradient-br-blue-green-gray-900"
                     v-on="on"
                     @click="copyText(address)"
                   >
@@ -86,7 +86,7 @@
                   @click="send"
                   ><svg
                     v-if="spinner"
-                    class="animate-spin h-5 w-5 mr-3 text-white"
+                    class="w-5 h-5 mr-3 text-white animate-spin"
                     viewBox="0 0 24 24"
                   >
                     <circle
@@ -108,12 +108,12 @@
                 <v-btn @click="disconnectWeb3">Disconnect to Metamask</v-btn>
               </v-row>
             </ValidationObserver>
-            <div class="text-center text-sm mt-5">
+            <div class="mt-5 text-sm text-center">
               Note: All chains are supported. (Including Testnets for testing
               this feature.)
             </div>
             <div
-              class="mt-5 flex flex-col items-center text-center text-sm space-y-1"
+              class="flex flex-col items-center mt-5 space-y-1 text-sm text-center"
             >
               <div v-if="txHash" class="break-words">
                 Transaction Hash: {{ txHash }}
@@ -125,11 +125,11 @@
               </div>
             </div>
           </div>
-          <div v-else class="flex justify-center items-center">
+          <div v-else class="flex items-center justify-center">
             <v-btn @click="connectWeb3">Connect to Metamask</v-btn>
           </div>
         </div>
-        <div v-else class="flex justify-center items-center">
+        <div v-else class="flex items-center justify-center">
           <v-btn
             target="_blank"
             href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn"
@@ -215,7 +215,6 @@
           await updateUserInfo()
 
           // Check connecting
-          // @TODO: [investigate] eger ozel aglarda hata verirse provider.isConnected()
           isConnected.value = await web3.eth.net.isListening()
 
           // started eth events

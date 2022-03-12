@@ -2,12 +2,12 @@
   <div>
     <div class="flex justify-center mt-12">
       <v-container class="space-y-5">
-        <div class="text-center flex flex-col items-center">
+        <div class="flex flex-col items-center text-center">
           <v-row justify="center" align="center">
             <v-card class="overflow-y-auto" outlined max-height="400" ripple>
               <v-banner class="justify-center text-h5 font-weight-light" sticky>
                 <nuxt-img
-                  class="rounded-full inline"
+                  class="inline rounded-full"
                   src="/images/avatar.jpg"
                   width="150"
                   height="150"
@@ -44,7 +44,7 @@
 </template>
 
 <script>
-  import { defineComponent, ref, useMeta } from '@nuxtjs/composition-api'
+  import { defineComponent, ref } from '@nuxtjs/composition-api'
 
   import data from '~/data/pages/index'
   import contributionsCount from '~/data/contributionsCount.json'
@@ -57,16 +57,6 @@
 
     // setup
     setup() {
-      // meta
-      useMeta({
-        meta: [
-          {
-            name: 'google-site-verification',
-            content: 'd4yezmSdB2cAwtSSzAyPg7B3u9JidcIhNUVs-HI-w_0',
-          },
-        ],
-      })
-
       // constants
       const graphData = ref([])
       const from = new Date()

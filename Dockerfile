@@ -7,7 +7,7 @@ WORKDIR /app
 # Copy node packages
 COPY package.json yarn.lock /app/
 
-# Install requried libraries
+# Install required libraries
 RUN yarn install
 
 # Copy config file

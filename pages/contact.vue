@@ -156,7 +156,7 @@
               <v-btn
                 class="pageclip-form__submit pageclip-form__submit--dark-loader"
                 type="submit"
-                :disabled="invalid || !isRecaptched"
+                :disabled="invalid || !passRecaptcha"
                 @click="submit"
               >
                 Submit
@@ -240,7 +240,7 @@
       const subject = ref(null)
       const message = ref('')
       const asap = ref(false)
-      const isRecaptched = ref(false)
+      const passRecaptcha = ref(false)
       const widgetId = ref(0)
 
       // hooks
@@ -291,17 +291,17 @@
 
       const onError = () => {
         $vToastify.error('reCAPTCHA Verification: Error.')
-        isRecaptched.value = false
+        passRecaptcha.value = false
       }
 
       const onSuccess = () => {
         $vToastify.success('reCAPTCHA Verification: Success.')
-        isRecaptched.value = true
+        passRecaptcha.value = true
       }
 
       const onExpired = () => {
         $vToastify.warning('reCAPTCHA Verification: Expired.')
-        isRecaptched.value = false
+        passRecaptcha.value = false
       }
 
       const onResponse = (error, response) => {
@@ -373,7 +373,7 @@
         asap,
         data,
         observer,
-        isRecaptched,
+        passRecaptcha,
         submit,
         onError,
         onSuccess,
