@@ -2,6 +2,7 @@ module.exports = {
   version: '0.2',
   language: 'en',
   words: [
+    // general
     'nuxt',
     'nuxtjs',
     'vuetify',
@@ -10,8 +11,8 @@ module.exports = {
     'purgecss',
     'toastify',
     'tailwindcss',
+    // plugins
     'pageclip',
-    'workdir',
     'changefreq',
     'noindex',
     'inbug',
