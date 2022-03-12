@@ -28,55 +28,8 @@
   "less.validate": false,
   "scss.validate": false,
   "cSpell.language": "en",
-  "cSpell.words": [
-    "axios",
-    "camelcase",
-    "changefreq",
-    "Cooldown",
-    "destroywhitelists",
-    "encrypter",
-    "Googlebot",
-    "googleusercontent",
-    "laravel",
-    "lastmod",
-    "Metaverse",
-    "mimetypes",
-    "Moralis",
-    "noindex",
-    "nuxt",
-    "nuxtjs",
-    "PAPERTRAIL",
-    "prefetch",
-    "purgecss",
-    "Roboto",
-    "semibold",
-    "sparkline",
-    "stylelint",
-    "tailwindcss",
-    "templating",
-    "Toastify",
-    "vuejs",
-    "vuetify",
-    "websockets",
-    "wght"
-  ],
-  "cSpell.ignorePaths": [
-    "package.json",
-    "package-lock.json",
-    "yarn.lock",
-    "node_modules/",
-    ".nuxt/",
-    "dist/",
-    "docker-compose.yml",
-    "Dockerfile",
-    ".insomnia/",
-    ".git/",
-    ".gitignore",
-    ".dockerignore",
-    ".prettierignore",
-    ".eslintignore",
-    ".vscode/"
-  ],
+  "cSpell.diagnosticLevel": "Warning",
+  "cSpell.enableFiletypes": ["dotenv", "dockerfile", "ignore", "shellscript"],
   "[dotenv]": {
     "editor.defaultFormatter": "foxundermoon.shell-format"
   },
@@ -84,6 +37,9 @@
     "editor.defaultFormatter": "foxundermoon.shell-format"
   },
   "[shellscript]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "[dockerfile]": {
     "editor.defaultFormatter": "foxundermoon.shell-format"
   },
   "[scss]": {

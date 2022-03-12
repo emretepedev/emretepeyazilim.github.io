@@ -15,9 +15,9 @@
     "format:json": "eslint '**/*.json' --fix; prettier '**/*.json' --write;",
     "format:js": "eslint '**/*.js' --fix; prettier '**/*.js' --write;",
     "format:vue": "eslint '**/*.vue' --fix; stylelint '**/*.vue' --fix; prettier '**/*.vue' --write;",
-    "lint": "eslint '**/*.{json,js,vue}'; stylelint '**/*.{css,scss,vue}'; prettier '**/*.{css,scss,json,js,vue}' --check;",
+    "lint": "eslint '**/*.{json,js,vue}'; stylelint '**/*.{css,scss,vue}'; prettier '**/*.{css,scss,json,js,vue}' --check; cspell lint --gitignore '**/{*,''}{.,''}*';",
     "fetch": "tsc --project . && node contributionsCount.js",
-    "hook:pre-push": "eslint '**/*.{json,js,vue}' && stylelint '**/*.{css,scss,vue}' && prettier '**/*.{css,scss,json,js,vue}' --check",
+    "hook:pre-push": "cspell lint --gitignore '**/{*,''}{.,''}*' && eslint '**/*.{json,js,vue}' && prettier '**/*.{css,scss,json,js,vue}' --check && stylelint '**/*.{css,scss,vue}'",
     "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup"
   },
   "husky": {
@@ -47,6 +47,7 @@
     "@nuxtjs/pwa": "^3.3.5",
     "@nuxtjs/tailwindcss": "^5.0.0",
     "@nuxtjs/vuetify": "^1.12.3",
+    "cspell": "^5.18.5",
     "eslint": "^8.10.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-json": "^3.1.0",
