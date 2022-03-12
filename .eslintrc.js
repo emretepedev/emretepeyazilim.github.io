@@ -18,7 +18,7 @@ module.exports = {
   plugins: ['json', 'prettier', 'nuxt'],
 
   rules: {
-    'prettier/prettier': ['warn'],
+    'prettier/prettier': 'warn',
     'vue/multi-word-component-names': 'off',
     'vue/no-template-shadow': 'off',
   },
