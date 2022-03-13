@@ -22,6 +22,7 @@
   "json.format.enable": false,
   "javascript.validate.enable": false,
   "javascript.format.enable": false,
+  "typescript.format.enable": false,
   "typescript.validate.enable": false,
   "typescript.surveys.enabled": false,
   "css.validate": false,
@@ -115,7 +116,5 @@
     "**/.hg/**",
     "**/dist/**",
     "**/.nuxt/**"
-  ],
-  "vetur.validation.template": false,
-  "vetur.format.enable": false
+  ]
 }

@@ -11,17 +11,25 @@
     "wayou.vscode-todo-highlight",
     "christian-kohler.path-intellisense",
     "ms-azuretools.vscode-docker",
+    "sleistner.vscode-fileutils",
     "emeraldwalk.runonsave",
+    "shd101wyy.markdown-preview-enhanced",
     "simonsiefke.svg-preview",
+    "vincaslt.highlight-matching-tag",
+    "formulahendry.auto-rename-tag",
+    "formulahendry.auto-close-tag",
     "esbenp.prettier-vscode",
     "dbaeumer.vscode-eslint",
     "stylelint.vscode-stylelint",
     "rehfres.colored-console-log",
     "abumalick.vscode-nvm",
     "eg2.vscode-npm-script",
+    "christian-kohler.npm-intellisense",
+    "syler.sass-indented",
     "bradlc.vscode-tailwindcss",
     "heybourn.headwind",
-    "octref.vetur",
-    "johnsoncodehk.volar"
+    "dariofuzinato.vue-peek",
+    "Wscats.vue",
+    "vuetifyjs.vuetify-vscode"
   ]
 }
