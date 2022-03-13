@@ -2,25 +2,25 @@
   <v-container>
     <v-divider></v-divider>
     <v-footer padless>
-      <v-card flat tile ripple class="white--text text-center w-full">
+      <v-card class="w-full text-center white--text" flat ripple tile>
         <v-card-text>
           <v-btn
             v-for="social in data.socials"
             :key="social.href"
             class="mx-4 white--text"
-            icon
             :href="social.href"
+            icon
             target="_blank"
           >
             <v-icon
-              :x-large="!$vuetify.breakpoint.mdAndDown"
               :color="social.color"
+              :x-large="!$vuetify.breakpoint.mdAndDown"
             >
               {{ social.image }}
             </v-icon>
           </v-btn>
         </v-card-text>
-        <v-card-text class="white--text pt-0">
+        <v-card-text class="pt-0 white--text">
           This website made with <strong>Vue</strong> (JavaScript Framework),
           <strong>Tailwind</strong> (CSS Framework),
           <strong>Vuetify</strong> (UI Framework), <strong>Nuxt</strong> (Meta
@@ -51,13 +51,10 @@
       // context
       const { $config } = useContext()
 
-      // constants
-      const lastModifiedAt = $config.lastModifiedAt
-
       // return
       return {
+        lastModifiedAt: $config.lastModifiedAt,
         data,
-        lastModifiedAt,
       }
     },
   })

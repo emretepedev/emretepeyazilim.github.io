@@ -3,17 +3,17 @@
     <div class="flex justify-center mt-12">
       <v-container class="space-y-5">
         <div class="flex flex-col items-center text-center">
-          <v-row justify="center" align="center">
-            <v-card class="overflow-y-auto" outlined max-height="400" ripple>
+          <v-row align="center" justify="center">
+            <v-card class="overflow-y-auto" max-height="400" outlined ripple>
               <v-banner class="justify-center text-h5 font-weight-light" sticky>
                 <nuxt-img
-                  class="inline rounded-full"
-                  src="/images/avatar.jpg"
-                  width="150"
-                  height="150"
-                  title="@emretepedev"
                   alt="@emretepedev"
+                  class="inline rounded-full"
+                  height="150"
                   provider="static"
+                  src="/images/avatar.jpg"
+                  title="@emretepedev"
+                  width="150"
                 />
               </v-banner>
               <v-card-text>
@@ -31,8 +31,8 @@
         </div>
         <div>
           <Sparkline
-            :graph-data="graphData"
             :gradients="data.sparkline.gradients"
+            :graph-data="graphData"
           />
         </div>
         <div>
@@ -45,7 +45,6 @@
 
 <script>
   import { defineComponent, ref } from '@nuxtjs/composition-api'
-
   import data from '~/data/pages/index'
   import contributionsCount from '~/data/contributionsCount.json'
   import Sparkline from '~/components/Sparkline.vue'

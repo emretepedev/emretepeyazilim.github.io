@@ -16,17 +16,17 @@
               <v-text-field
                 v-model="name"
                 :counter="30"
-                :error-messages="errors"
-                :success="!Boolean(Object.keys(errors).length) && Boolean(name)"
-                label="Name*"
-                placeholder="Your name"
-                :hint="!Boolean(name) ? 'For example, `John Doe`' : ''"
-                name="name"
-                :prepend-inner-icon="mdiFormTextbox"
-                outlined
-                rounded
                 dense
+                :error-messages="errors"
+                :hint="!Boolean(name) ? 'For example, `John Doe`' : ''"
+                label="Name*"
+                name="name"
+                outlined
+                placeholder="Your name"
+                :prepend-inner-icon="mdiFormTextbox"
+                rounded
                 shaped
+                :success="!Boolean(Object.keys(errors).length) && Boolean(name)"
               ></v-text-field>
             </ValidationProvider>
             <ValidationProvider
@@ -43,19 +43,19 @@
               <v-text-field
                 v-model="email"
                 :counter="30"
+                dense
                 :error-messages="errors"
+                :hint="!Boolean(email) ? 'For example, `mail@example.com`' : ''"
+                label="E-mail*"
+                name="email"
+                outlined
+                placeholder="Your mail address"
+                :prepend-inner-icon="mdiAt"
+                rounded
+                shaped
                 :success="
                   !Boolean(Object.keys(errors).length) && Boolean(email)
                 "
-                label="E-mail*"
-                placeholder="Your mail address"
-                :hint="!Boolean(email) ? 'For example, `mail@example.com`' : ''"
-                name="email"
-                :prepend-inner-icon="mdiAt"
-                outlined
-                rounded
-                dense
-                shaped
               ></v-text-field>
             </ValidationProvider>
             <ValidationProvider
@@ -65,20 +65,20 @@
             >
               <v-autocomplete
                 v-model="subject"
-                :items="data.subjects"
+                dense
                 :error-messages="errors"
+                :hint="!Boolean(subject) ? 'For example, `Proposal`' : ''"
+                :items="data.subjects"
+                label="Subject*"
+                name="subject"
+                outlined
+                placeholder="Your subject"
+                :prepend-inner-icon="mdiFormSelect"
+                rounded
+                shaped
                 :success="
                   !Boolean(Object.keys(errors).length) && Boolean(subject)
                 "
-                label="Subject*"
-                placeholder="Your subject"
-                :hint="!Boolean(subject) ? 'For example, `Proposal`' : ''"
-                name="subject"
-                :prepend-inner-icon="mdiFormSelect"
-                outlined
-                rounded
-                dense
-                shaped
               ></v-autocomplete>
             </ValidationProvider>
             <ValidationProvider
@@ -89,19 +89,19 @@
               <v-text-field
                 v-model="phone"
                 :counter="20"
+                dense
                 :error-messages="errors"
+                :hint="!Boolean(phone) ? 'For example, `123456789`' : ''"
+                label="Phone"
+                name="phone"
+                outlined
+                placeholder="Your phone"
+                :prepend-inner-icon="mdiPhone"
+                rounded
+                shaped
                 :success="
                   !Boolean(Object.keys(errors).length) && Boolean(phone)
                 "
-                label="Phone"
-                placeholder="Your phone"
-                :hint="!Boolean(phone) ? 'For example, `123456789`' : ''"
-                name="phone"
-                :prepend-inner-icon="mdiPhone"
-                outlined
-                rounded
-                dense
-                shaped
               ></v-text-field>
             </ValidationProvider>
             <ValidationProvider
@@ -111,52 +111,51 @@
             >
               <v-textarea
                 v-model="message"
+                auto-grow
+                :clear-icon="mdiCloseCircle"
+                clearable
                 :counter="1000"
+                dense
                 :error-messages="errors"
-                :success="
-                  !Boolean(Object.keys(errors).length) && Boolean(message)
-                "
-                label="Message*"
-                placeholder="Your message"
                 :hint="
                   !Boolean(message) ? 'For example, `Hi @emretepedev!`' : ''
                 "
-                name="message"
-                clearable
-                :clear-icon="mdiCloseCircle"
-                :prepend-inner-icon="mdiComment"
+                label="Message*"
                 maxlength="1000"
+                name="message"
                 outlined
-                auto-grow
+                placeholder="Your message"
+                :prepend-inner-icon="mdiComment"
                 rounded
-                dense
                 shaped
+                :success="
+                  !Boolean(Object.keys(errors).length) && Boolean(message)
+                "
               ></v-textarea>
             </ValidationProvider>
             <v-checkbox
               v-model="asap"
-              :value="asap"
+              dense
               :false-value="false"
               :label="`ASAP: ${asap ? 'yes' : 'no'}`"
               name="asap"
               :off-icon="mdiCheckboxBlankCircleOutline"
               :on-icon="mdiCheckboxMarkedCircle"
-              dense
               shaped
+              :value="asap"
             ></v-checkbox>
             <recaptcha
               :id="$config.googleRecaptchaV2Size"
               :site-key="$config.googleRecaptchaV2SiteKey"
               @error="onError"
-              @success="onSuccess"
               @expired="onExpired"
+              @success="onSuccess"
             />
-
             <div class="mt-5 text-center">
               <v-btn
                 class="pageclip-form__submit pageclip-form__submit--dark-loader"
+                :disabled="invalid || !Boolean(passRecaptcha)"
                 type="submit"
-                :disabled="invalid || !passRecaptcha"
                 @click="submit"
               >
                 Submit
@@ -172,21 +171,21 @@
 <script>
   import {
     defineComponent,
-    ref,
-    useMeta,
-    useContext,
     onMounted,
+    ref,
+    useContext,
+    useMeta,
   } from '@nuxtjs/composition-api'
 
   import {
+    mdiAt,
+    mdiCheckboxBlankCircleOutline,
+    mdiCheckboxMarkedCircle,
     mdiCloseCircle,
     mdiComment,
     mdiFormSelect,
-    mdiPhone,
-    mdiAt,
     mdiFormTextbox,
-    mdiCheckboxBlankCircleOutline,
-    mdiCheckboxMarkedCircle,
+    mdiPhone,
   } from '@mdi/js'
 
   import { ValidationObserver, ValidationProvider } from 'vee-validate'
@@ -195,33 +194,33 @@
   export default defineComponent({
     // components
     components: {
-      ValidationProvider,
       ValidationObserver,
+      ValidationProvider,
     },
 
     // setup
     setup(_, { root }) {
       // meta
       useMeta({
-        title: 'Contact | ',
+        link: [
+          {
+            href: 'https://s.pageclip.co/v1/pageclip.css',
+            media: 'screen',
+            rel: 'stylesheet',
+          },
+        ],
         script: [
           {
-            charset: 'utf-8',
-            src: 'https://s.pageclip.co/v1/pageclip.js',
             body: true,
-            defer: true,
             callback: () => {
               styleToPageclip()
             },
+            charset: 'utf-8',
+            defer: true,
+            src: 'https://s.pageclip.co/v1/pageclip.js',
           },
         ],
-        link: [
-          {
-            rel: 'stylesheet',
-            href: 'https://s.pageclip.co/v1/pageclip.css',
-            media: 'screen',
-          },
-        ],
+        title: 'Contact | ',
       })
 
       // context
@@ -236,10 +235,10 @@
       // constants
       const name = ref('')
       const phone = ref('')
-      const email = ref('')
-      const subject = ref(null)
+      const subject = ref('')
       const message = ref('')
       const asap = ref(false)
+      const email = ref('')
       const passRecaptcha = ref(false)
       const widgetId = ref(0)
 
@@ -247,11 +246,7 @@
       onMounted(async () => {
         await $recaptcha.init()
 
-        widgetId.value = $recaptcha.render($config.googleRecaptchaV2Size, {
-          sitekey: $config.googleRecaptchaV2SiteKey,
-        })
-
-        styleToRecaptcha()
+        renderToRecaptcha()
       })
 
       // methods
@@ -283,7 +278,7 @@
         name.value = ''
         phone.value = ''
         email.value = ''
-        subject.value = null
+        subject.value = ''
         message.value = ''
         asap.value = false
         observer.value.reset()
@@ -324,16 +319,20 @@
         $vToastify.success('Mail sent successfully.')
       }
 
-      const styleToRecaptcha = () => {
+      const renderToRecaptcha = () => {
         let count = 0
         const frequency = 1000 / 4 // 0.25 sec
         const maxTime = (1000 / frequency) * 10 // 10 sec
 
-        const interval = setInterval(() => {
-          const _recaptcha = document.querySelector('.g-recaptcha')
+        const recaptchaInterval = setInterval(() => {
+          const recaptcha = document.querySelector('.g-recaptcha')
 
-          if (Boolean(_recaptcha) || count === maxTime) {
-            clearInterval(interval)
+          if (Boolean(recaptcha) || count === maxTime) {
+            clearInterval(recaptchaInterval)
+
+            widgetId.value = $recaptcha.render($config.googleRecaptchaV2Size, {
+              sitekey: $config.googleRecaptchaV2SiteKey,
+            })
 
             if (count === maxTime) {
               $vToastify.error(
@@ -343,8 +342,8 @@
               return
             }
 
-            _recaptcha.style.display = 'flex'
-            _recaptcha.style.justifyContent = 'center'
+            recaptcha.style.display = 'flex'
+            recaptcha.style.justifyContent = 'center'
           }
 
           count++
@@ -365,27 +364,27 @@
 
       // return
       return {
-        name,
-        phone,
-        email,
-        subject,
-        message,
         asap,
         data,
-        observer,
-        passRecaptcha,
-        submit,
-        onError,
-        onSuccess,
-        onExpired,
+        email,
+        mdiAt,
+        mdiCheckboxBlankCircleOutline,
+        mdiCheckboxMarkedCircle,
         mdiCloseCircle,
         mdiComment,
         mdiFormSelect,
-        mdiPhone,
-        mdiAt,
         mdiFormTextbox,
-        mdiCheckboxBlankCircleOutline,
-        mdiCheckboxMarkedCircle,
+        mdiPhone,
+        message,
+        name,
+        observer,
+        onError,
+        onExpired,
+        onSuccess,
+        passRecaptcha,
+        phone,
+        subject,
+        submit,
       }
     },
 

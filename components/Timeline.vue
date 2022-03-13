@@ -1,7 +1,7 @@
 <template>
   <v-timeline
-    :reverse="$vuetify.breakpoint.smAndDown"
     :dense="$vuetify.breakpoint.smAndDown"
+    :reverse="$vuetify.breakpoint.smAndDown"
   >
     <v-timeline-item
       v-for="item in items"
@@ -40,6 +40,9 @@
     props: {
       items: {
         type: Array,
+        default() {
+          return []
+        },
         required: true,
       },
     },

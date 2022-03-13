@@ -5,15 +5,15 @@ import { defineNuxtPlugin } from '@nuxtjs/composition-api'
 import { extend } from 'vee-validate'
 
 import {
-  required,
   email,
-  max,
-  min,
-  oneOf,
-  is_not,
   integer,
-  min_value,
+  is_not,
+  max,
   max_value,
+  min,
+  min_value,
+  oneOf,
+  required,
 } from 'vee-validate/dist/rules'
 
 export default defineNuxtPlugin(() => {

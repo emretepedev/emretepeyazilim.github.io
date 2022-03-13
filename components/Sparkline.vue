@@ -15,19 +15,19 @@
     </v-card-subtitle>
     <v-sheet color="transparent">
       <v-sparkline
-        :value="graphData"
-        :gradient="gradients"
-        :smooth="10"
-        :padding="8"
-        :line-width="1"
-        stroke-linecap="round"
-        gradient-direction="top"
-        :fill="false"
-        type="trend"
         auto-draw
-        :show-labels="true"
-        :auto-line-width="false"
         :auto-draw-duration="5000"
+        :auto-line-width="false"
+        :fill="false"
+        :gradient="gradients"
+        gradient-direction="top"
+        :line-width="1"
+        :padding="8"
+        :show-labels="true"
+        :smooth="10"
+        stroke-linecap="round"
+        type="trend"
+        :value="graphData"
       >
       </v-sparkline>
     </v-sheet>
@@ -43,10 +43,16 @@
     props: {
       graphData: {
         type: Array,
+        default() {
+          return []
+        },
         required: true,
       },
       gradients: {
         type: Array,
+        default() {
+          return []
+        },
         required: true,
       },
     },

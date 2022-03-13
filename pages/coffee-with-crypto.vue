@@ -3,15 +3,15 @@
     <div class="flex justify-center mt-12">
       <v-container>
         <div v-if="provider">
-          <div v-if="isConnected">
+          <div v-if="Boolean(isConnected)">
             <v-row
-              justify="center"
               align="center"
               :class="`my-5 ${
                 !$vuetify.breakpoint.smAndDown
                   ? 'space-x-6'
                   : 'space-x-0 grid grid-cols-1 gap-y-5 mx-2'
               }`"
+              justify="center"
             >
               <v-tooltip bottom content-class="text-xs">
                 <template #activator="{ on, attrs }">
@@ -40,6 +40,7 @@
               <v-row>
                 <ValidationProvider
                   v-slot="{ errors }"
+                  class="flex justify-center"
                   name="amount"
                   :rules="{
                     required: true,
@@ -49,40 +50,39 @@
                     min_value: 0.000001,
                     max_value: formatBalanceToDisplay(balance),
                   }"
-                  class="flex justify-center"
                 >
                   <v-text-field
                     v-model="amount"
+                    class="max-w-sm mx-4 mt-4"
                     :counter="8"
+                    dense
                     :error-messages="errors"
+                    :hint="!Boolean(amount) ? 'For example, `0.01`' : ''"
+                    label="Amount"
+                    name="amount"
+                    outlined
+                    placeholder="Your amount"
+                    :prepend-inner-icon="mdiCurrencyUsdOff"
+                    rounded
+                    shaped
                     :success="
                       !Boolean(Object.keys(errors).length) && Boolean(amount)
                     "
-                    label="Amount"
-                    placeholder="Your amount"
-                    :hint="!Boolean(amount) ? 'For example, `0.01`' : ''"
-                    name="amount"
-                    :prepend-inner-icon="mdiCurrencyUsdOff"
-                    outlined
-                    rounded
-                    dense
-                    shaped
-                    class="max-w-sm mx-4 mt-4"
                   ></v-text-field>
                 </ValidationProvider>
               </v-row>
               <v-row
-                justify="center"
                 align="center"
                 :class="`${
                   !$vuetify.breakpoint.smAndDown
                     ? 'space-x-6'
                     : 'space-x-0 space-y-1 px-5 grid grid-cols-1 gap-y-2 my-4'
                 }`"
+                justify="center"
               >
                 <v-btn
-                  :disabled="invalid || spinner"
                   :class="`${!$vuetify.breakpoint.smAndDown ? '' : 'w-full'}`"
+                  :disabled="invalid || Boolean(spinner)"
                   @click="send"
                   ><svg
                     v-if="spinner"
@@ -99,8 +99,8 @@
                     />
                     <path
                       class="opacity-75"
-                      fill="currentColor"
                       d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      fill="currentColor"
                     />
                   </svg>
                   <span>Send</span>
@@ -131,8 +131,8 @@
         </div>
         <div v-else class="flex items-center justify-center">
           <v-btn
-            target="_blank"
             href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn"
+            target="_blank"
           >
             Install Metamask
           </v-btn>
@@ -145,9 +145,9 @@
 <script>
   import {
     defineComponent,
-    useMeta,
     onMounted,
     ref,
+    useMeta,
   } from '@nuxtjs/composition-api'
 
   import Web3 from 'web3'
@@ -176,17 +176,17 @@
       const observer = ref(null)
 
       // constants
+      const ownerAddress = '0x93C4C1e86434eA4E831d8A13e64aC288C49B7b76'
       let web3 = null
       const provider = ref(null)
       const isConnected = ref(false)
       const address = ref(null)
       const balance = ref(0)
       const amount = ref('')
-      const ownerAddress = '0x93C4C1e86434eA4E831d8A13e64aC288C49B7b76'
-      const txStatus = ref(null)
-      const confirmationCount = ref(null)
-      const txHash = ref(null)
-      const totalConfirmationCount = ref(null)
+      const txStatus = ref('')
+      const confirmationCount = ref(0)
+      const totalConfirmationCount = ref(0)
+      const txHash = ref('')
       const spinner = ref(false)
 
       // hooks
@@ -376,10 +376,10 @@
 
       const resetTxDetails = () => {
         // removed tx details for sustainability
-        txStatus.value = null
-        txHash.value = null
-        totalConfirmationCount.value = null
-        confirmationCount.value = null
+        txStatus.value = ''
+        txHash.value = ''
+        totalConfirmationCount.value = 0
+        confirmationCount.value = 0
         spinner.value = false
       }
 
@@ -395,7 +395,7 @@
       const formatAddressToDisplay = (address) => {
         // address value formatted to user
         return (
-          address.substring(0, 6) +
+          address.substring(0, 4) +
           '...' +
           address.substring(address.length - 4)
         )

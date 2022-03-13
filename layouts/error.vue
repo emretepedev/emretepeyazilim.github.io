@@ -17,7 +17,7 @@
         <span class="text-logo-green hover:text-dark-logo-green"
           >Go back home</span
         >
-        <v-btn text icon color="green darken-2">
+        <v-btn color="green darken-2" icon text>
           <v-icon>{{ mdiArrowRightThin }}</v-icon>
         </v-btn>
       </nuxt-link>

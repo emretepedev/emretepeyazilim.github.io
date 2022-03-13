@@ -1,16 +1,16 @@
 import {
-  mdiFacebook,
-  mdiTwitter,
-  mdiLinkedin,
-  mdiInstagram,
-  mdiSkype,
-  mdiWhatsapp,
-  mdiSend,
   mdiDiscord,
+  mdiEmail,
+  mdiFacebook,
   mdiGithub,
   mdiGitlab,
-  mdiEmail,
+  mdiInstagram,
+  mdiLinkedin,
   mdiPhone,
+  mdiSend,
+  mdiSkype,
+  mdiTwitter,
+  mdiWhatsapp,
 } from '@mdi/js'
 
 export default {

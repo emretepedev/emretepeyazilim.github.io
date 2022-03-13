@@ -3,11 +3,13 @@
     <v-app-bar
       v-if="$vuetify.breakpoint.mdAndDown"
       app
-      clipped-left
       class="h-12"
+      clipped-left
     >
-      <v-toolbar-title class="flex justify-between items-center">
-        <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-toolbar-title class="flex items-center justify-between">
+        <v-app-bar-nav-icon
+          @click.stop="drawer = !Boolean(drawer)"
+        ></v-app-bar-nav-icon>
         <span>
           {{ $config.spaName }}
         </span>
@@ -17,9 +19,9 @@
       v-model="drawer"
       app
       clipped
-      :permanent="!$vuetify.breakpoint.mdAndDown"
       :expand-on-hover="!$vuetify.breakpoint.mdAndDown"
-      :right="isOnRight"
+      :permanent="!$vuetify.breakpoint.mdAndDown"
+      :right="Boolean(isOnRight)"
       style="z-index: 99999 !important"
     >
       <v-list-item>
@@ -27,7 +29,7 @@
           <v-list-item-title>
             <v-icon
               v-if="$vuetify.breakpoint.mdAndDown"
-              @click.stop="drawer = !drawer"
+              @click.stop="drawer = !Boolean(drawer)"
             >
               {{ mdiClose }}
             </v-icon>
@@ -36,7 +38,7 @@
               class="flex justify-between"
             >
               {{ $config.spaName }}
-              <v-icon @click="isOnRight = !isOnRight">
+              <v-icon @click="isOnRight = !Boolean(isOnRight)">
                 {{ mdiSwapHorizontal }}
               </v-icon>
             </span>
@@ -44,7 +46,7 @@
         </v-list-item-content>
       </v-list-item>
       <v-divider></v-divider>
-      <v-list nav dense active-class="text--red">
+      <v-list active-class="text--red" dense nav>
         <nuxt-link v-for="page in data.pages" :key="page.title" :to="page.to">
           <v-list-item link>
             <v-list-item-icon>
@@ -61,7 +63,7 @@
 </template>
 
 <script>
-  import { defineComponent, ref } from '@nuxtjs/composition-api'
+  import { defineComponent } from '@nuxtjs/composition-api'
   import { mdiClose, mdiSwapHorizontal } from '@mdi/js'
   import data from '~/data/components/header'
 
@@ -70,9 +72,9 @@
     setup() {
       // return
       return {
-        isOnRight: ref(false),
-        drawer: ref(null),
         data,
+        drawer: false,
+        isOnRight: false,
         mdiClose,
         mdiSwapHorizontal,
       }

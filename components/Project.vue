@@ -3,12 +3,12 @@
     <v-col v-for="project in projects" :key="project.name">
       <v-hover>
         <template #default="{ hover }">
-          <v-card class="mx-auto" max-width="344" height="275" shaped outlined>
+          <v-card class="mx-auto" height="275" max-width="344" outlined shaped>
             <v-img
-              :src="project.image"
-              :title="project.name"
               :alt="project.name"
               height="128"
+              :src="project.image"
+              :title="project.name"
             >
             </v-img>
             <v-card-title class="pb-1">
@@ -39,6 +39,9 @@
     props: {
       projects: {
         type: Array,
+        default() {
+          return []
+        },
         required: true,
       },
     },

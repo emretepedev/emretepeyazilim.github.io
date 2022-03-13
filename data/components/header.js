@@ -1,9 +1,9 @@
 import {
-  mdiXml,
-  mdiSourceRepositoryMultiple,
-  mdiFileAccount,
   mdiCardAccountMail,
   mdiCoffee,
+  mdiFileAccount,
+  mdiSourceRepositoryMultiple,
+  mdiXml,
 } from '@mdi/js'
 
 export default {

@@ -1,11 +1,11 @@
 import {
-  mdiNetworkStrength3,
-  mdiNetworkStrength2,
-  mdiNetworkStrength2Alert,
   mdiNetworkStrength1,
   mdiNetworkStrength1Alert,
-  mdiNetworkStrengthOutline,
+  mdiNetworkStrength2,
+  mdiNetworkStrength2Alert,
+  mdiNetworkStrength3,
   mdiNetworkStrengthOffOutline,
+  mdiNetworkStrengthOutline,
 } from '@mdi/js'
 
 export default {
