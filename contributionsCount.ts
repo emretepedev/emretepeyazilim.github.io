@@ -1,4 +1,4 @@
-import fs from 'fs'
+import * as fs from 'fs'
 import axios from 'axios'
 import 'dotenv/config'
 
