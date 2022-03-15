@@ -1,13 +1,13 @@
 <template>
-  <div class="flex justify-center h-screen">
+  <div class="flex h-screen justify-center">
     <div class="mx-5">
       <div class="mt-40 mb-10 md:flex">
-        <div class="flex items-center font-black text-center error-text">
+        <div class="error-text flex items-center text-center font-black">
           404
         </div>
-        <h2 class="hidden mx-5 border-l-4 md:block border-logo-green"></h2>
+        <h2 class="mx-5 hidden border-l-4 border-logo-green md:block"></h2>
         <div>
-          <div class="flex items-center error-text">Page not found</div>
+          <div class="error-text flex items-center">Page not found</div>
           <div class="flex items-center text-xl">
             Please check the URL in the address bar and try again.
           </div>

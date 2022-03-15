@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <div class="bg-dark-gray h-full">
+    <div class="h-full bg-dark-gray">
       <Header />
       <Nuxt />
       <Footer />

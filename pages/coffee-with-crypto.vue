@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="flex justify-center mt-12">
+    <div class="mt-12 flex justify-center">
       <v-container>
         <div v-if="provider">
           <div v-if="Boolean(isConnected)">
@@ -9,7 +9,7 @@
               :class="`my-5 ${
                 !$vuetify.breakpoint.smAndDown
                   ? 'space-x-6'
-                  : 'space-x-0 grid grid-cols-1 gap-y-5 mx-2'
+                  : 'mx-2 grid grid-cols-1 gap-y-5 space-x-0'
               }`"
               justify="center"
             >
@@ -18,7 +18,7 @@
                   <span
                     v-ripple="{ center: true }"
                     v-bind="attrs"
-                    class="p-3 my-auto text-center text-gray-100 border-2 border-transparent border-solid rounded-md shadow-xl cursor-pointer app-title border-gradient-br-blue-green-gray-900"
+                    class="app-title border-gradient-br-blue-green-gray-900 my-auto cursor-pointer rounded-md border-2 border-solid border-transparent p-3 text-center text-gray-100 shadow-xl"
                     v-on="on"
                     @click="copyText(address)"
                   >
@@ -31,7 +31,7 @@
                 </span>
               </v-tooltip>
               <span
-                class="p-3 my-auto text-center text-gray-100 border-2 border-transparent border-solid rounded-md app-title border-gradient-br-blue-green-gray-900"
+                class="app-title border-gradient-br-blue-green-gray-900 my-auto rounded-md border-2 border-solid border-transparent p-3 text-center text-gray-100"
               >
                 Balance: {{ formatBalanceToDisplay(balance) }}
               </span>
@@ -53,7 +53,7 @@
                 >
                   <v-text-field
                     v-model="amount"
-                    class="max-w-sm mx-4 mt-4"
+                    class="mx-4 mt-4 max-w-sm"
                     :counter="8"
                     dense
                     :error-messages="errors"
@@ -76,7 +76,7 @@
                 :class="`${
                   !$vuetify.breakpoint.smAndDown
                     ? 'space-x-6'
-                    : 'space-x-0 space-y-1 px-5 grid grid-cols-1 gap-y-2 my-4'
+                    : 'my-4 grid grid-cols-1 gap-y-2 space-x-0 space-y-1 px-5'
                 }`"
                 justify="center"
               >
@@ -86,7 +86,7 @@
                   @click="send"
                   ><svg
                     v-if="spinner"
-                    class="w-5 h-5 mr-3 text-white animate-spin"
+                    class="mr-3 h-5 w-5 animate-spin text-white"
                     viewBox="0 0 24 24"
                   >
                     <circle
@@ -108,12 +108,12 @@
                 <v-btn @click="disconnectWeb3">Disconnect to Metamask</v-btn>
               </v-row>
             </ValidationObserver>
-            <div class="mt-5 text-sm text-center">
+            <div class="mt-5 text-center text-sm">
               Note: All chains are supported. (Including Testnets for testing
               this feature.)
             </div>
             <div
-              class="flex flex-col items-center mt-5 space-y-1 text-sm text-center"
+              class="mt-5 flex flex-col items-center space-y-1 text-center text-sm"
             >
               <div v-if="txHash" class="break-words">
                 Transaction Hash: {{ txHash }}
