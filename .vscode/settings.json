@@ -28,9 +28,6 @@
   "css.validate": false,
   "less.validate": false,
   "scss.validate": false,
-  "cSpell.language": "en",
-  "cSpell.diagnosticLevel": "Warning",
-  "cSpell.enableFiletypes": ["dotenv", "dockerfile", "ignore", "shellscript"],
   "[dotenv]": {
     "editor.defaultFormatter": "foxundermoon.shell-format"
   },
@@ -108,6 +105,9 @@
       }
     ]
   },
+  "cSpell.language": "en",
+  "cSpell.diagnosticLevel": "Warning",
+  "cSpell.enableFiletypes": ["dotenv", "dockerfile", "ignore", "shellscript"],
   "stylelint.configFile": ".stylelintrc.js",
   "stylelint.validate": ["css", "less", "postcss", "scss", "sass", "vue"],
   "tailwindCSS.files.exclude": [
@@ -116,5 +116,6 @@
     "**/.hg/**",
     "**/dist/**",
     "**/.nuxt/**"
-  ]
+  ],
+  "headwind.runOnSave": false
 }

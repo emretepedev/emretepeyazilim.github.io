@@ -1,6 +1,5 @@
 {
   "recommendations": [
-    "streetsidesoftware.code-spell-checker",
     "usernamehw.errorlens",
     "eamodio.gitlens",
     "pflannery.vscode-versionlens",
@@ -18,6 +17,7 @@
     "vincaslt.highlight-matching-tag",
     "formulahendry.auto-rename-tag",
     "formulahendry.auto-close-tag",
+    "streetsidesoftware.code-spell-checker",
     "esbenp.prettier-vscode",
     "dbaeumer.vscode-eslint",
     "stylelint.vscode-stylelint",
@@ -27,7 +27,6 @@
     "christian-kohler.npm-intellisense",
     "syler.sass-indented",
     "bradlc.vscode-tailwindcss",
-    "heybourn.headwind",
     "dariofuzinato.vue-peek",
     "Wscats.vue",
     "vuetifyjs.vuetify-vscode"
