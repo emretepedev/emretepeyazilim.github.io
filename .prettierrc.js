@@ -10,4 +10,5 @@ module.exports = {
   printWidth: 80,
   vueIndentScriptAndStyle: true,
   quoteProps: 'as-needed',
+  plugins: [require('prettier-plugin-tailwindcss')],
 }
