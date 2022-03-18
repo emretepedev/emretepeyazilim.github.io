@@ -2,12 +2,12 @@
   <v-container>
     <v-divider></v-divider>
     <v-footer padless>
-      <v-card class="white--text w-full text-center" flat ripple tile>
+      <v-card class="w-full text-center white--text" flat ripple tile>
         <v-card-text>
           <v-btn
             v-for="social in data.socials"
             :key="social.href"
-            class="white--text mx-4"
+            class="mx-4 white--text"
             :href="social.href"
             icon
             target="_blank"
@@ -20,7 +20,7 @@
             </v-icon>
           </v-btn>
         </v-card-text>
-        <v-card-text class="white--text pt-0">
+        <v-card-text class="pt-0 white--text">
           This website made with <strong>Vue</strong> (JavaScript Framework),
           <strong>Tailwind</strong> (CSS Framework),
           <strong>Vuetify</strong> (UI Framework), <strong>Nuxt</strong> (Meta

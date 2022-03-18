@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="mt-12 flex justify-center">
+    <div class="flex justify-center mt-12">
       <v-container>
         <ValidationObserver ref="observer" v-slot="{ invalid }">
           <v-form

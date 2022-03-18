@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="mt-12 flex justify-center">
+    <div class="flex justify-center mt-12">
       <v-container>
         <div v-if="provider">
           <div v-if="Boolean(isConnected)">
@@ -18,7 +18,7 @@
                   <span
                     v-ripple="{ center: true }"
                     v-bind="attrs"
-                    class="app-title border-gradient-br-blue-green-gray-900 my-auto cursor-pointer rounded-md border-2 border-solid border-transparent p-3 text-center text-gray-100 shadow-xl"
+                    class="p-3 my-auto text-center text-gray-100 border-2 border-transparent border-solid rounded-md shadow-xl cursor-pointer app-title border-gradient-br-blue-green-gray-900"
                     v-on="on"
                     @click="copyText(address)"
                   >
@@ -31,7 +31,7 @@
                 </span>
               </v-tooltip>
               <span
-                class="app-title border-gradient-br-blue-green-gray-900 my-auto rounded-md border-2 border-solid border-transparent p-3 text-center text-gray-100"
+                class="p-3 my-auto text-center text-gray-100 border-2 border-transparent border-solid rounded-md app-title border-gradient-br-blue-green-gray-900"
               >
                 Balance: {{ formatBalanceToDisplay(balance) }}
               </span>
@@ -53,7 +53,7 @@
                 >
                   <v-text-field
                     v-model="amount"
-                    class="mx-4 mt-4 max-w-sm"
+                    class="max-w-sm mx-4 mt-4"
                     :counter="8"
                     dense
                     :error-messages="errors"
@@ -86,7 +86,7 @@
                   @click="send"
                   ><svg
                     v-if="spinner"
-                    class="mr-3 h-5 w-5 animate-spin text-white"
+                    class="w-5 h-5 mr-3 text-white animate-spin"
                     viewBox="0 0 24 24"
                   >
                     <circle
@@ -108,12 +108,12 @@
                 <v-btn @click="disconnectWeb3">Disconnect to Metamask</v-btn>
               </v-row>
             </ValidationObserver>
-            <div class="mt-5 text-center text-sm">
+            <div class="mt-5 text-sm text-center">
               Note: All chains are supported. (Including Testnets for testing
               this feature.)
             </div>
             <div
-              class="mt-5 flex flex-col items-center space-y-1 text-center text-sm"
+              class="flex flex-col items-center mt-5 space-y-1 text-sm text-center"
             >
               <div v-if="txHash" class="break-words">
                 Transaction Hash: {{ txHash }}

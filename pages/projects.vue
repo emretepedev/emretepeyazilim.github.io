@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="mt-12 flex justify-center">
+    <div class="flex justify-center mt-12">
       <v-container>
         <Project :projects="data.projects" />
       </v-container>
