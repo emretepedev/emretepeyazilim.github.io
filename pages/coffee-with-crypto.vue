@@ -286,9 +286,9 @@
         location.reload()
       }
 
-      const updateUserInfo = async (address = null) => {
+      const updateUserInfo = async (_address = null) => {
         // Get user address and balance
-        if (!address) {
+        if (!_address) {
           address.value = (await web3.eth.getAccounts())[0].toLowerCase()
         }
 
@@ -357,7 +357,7 @@
       const handleAccountsChanged = async (accounts) => {
         // eth change account event
         if (accounts.length > 0) {
-          const address = accounts[0]
+          const address = accounts[0].toLowerCase()
           await updateUserInfo(address)
           $vToastify.success(`Linked account changed to '${address}'`)
         } else {
