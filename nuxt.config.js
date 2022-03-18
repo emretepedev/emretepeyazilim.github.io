@@ -75,6 +75,7 @@ export default {
     googleRecaptchaV2SiteKey: process.env.GOOGLE_RECAPTCHA_V2_SITE_KEY,
     googleRecaptchaV2Size: 'v2-normal',
     googleAnalytics4Id: process.env.GOOGLE_ANALYTICS_4_ID,
+    ownerAddress: process.env.OWNER_ADDRESS,
     lastModifiedAt: new Date().toUTCString().replace('GMT', 'UTC'),
   },
 
