@@ -41,7 +41,7 @@
           fix="cover"
           height="32"
           :src="`/icons/skills/${item.image}`"
-          :style="`filter: ${item.color}`"
+          :style="item.color ? `filter: ${item.color}` : ''"
           :title="item.name"
           width="32"
         />

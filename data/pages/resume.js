@@ -247,7 +247,7 @@ export default {
       category: 'Personal',
       level: 0,
       url: 'https://protofire.github.io/solhint/',
-      color: '',
+      color: null,
       description:
         'Solhint is an open source project for linting Solidity code. Solhint provides both Security and Style Guide validations.',
     },
