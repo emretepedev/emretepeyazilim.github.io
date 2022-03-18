@@ -117,5 +117,19 @@
     "**/dist/**",
     "**/.nuxt/**"
   ],
-  "headwind.runOnSave": false
+  "vetur.format.enable": false,
+  "vetur.languageFeatures.codeActions": false,
+  "vetur.languageFeatures.semanticTokens": false,
+  "vetur.languageFeatures.updateImportOnFileMove": false,
+  "vetur.validation.interpolation": false,
+  "vetur.validation.script": false,
+  "vetur.validation.style": false,
+  "vetur.validation.template": false,
+  "vetur.completion.autoImport": false,
+  "volar.autoCompleteRefs": false,
+  "volar.autoWrapParentheses": false,
+  "volar.codeLens.references": false,
+  "volar.completion.autoImportComponent": false,
+  "volar.icon.vite": false,
+  "volar.takeOverMode.enabled": false
 }

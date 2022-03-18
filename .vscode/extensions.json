@@ -27,8 +27,9 @@
     "christian-kohler.npm-intellisense",
     "syler.sass-indented",
     "bradlc.vscode-tailwindcss",
+    "heybourn.headwind",
     "dariofuzinato.vue-peek",
-    "Wscats.vue",
+    "wscats.vue",
     "vuetifyjs.vuetify-vscode"
   ]
 }
