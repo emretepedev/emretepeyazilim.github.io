@@ -196,7 +196,7 @@
 
       // hooks
       onMounted(async () => {
-        await checkProvider()
+        await setProvider()
 
         if (provider.value) {
           web3 = new Web3(provider.value)
@@ -290,6 +290,8 @@
         // Get user address and balance
         if (!_address) {
           address.value = (await web3.eth.getAccounts())[0].toLowerCase()
+        } else {
+          address.value = _address
         }
 
         balance.value = web3.utils.fromWei(
@@ -393,8 +395,8 @@
         spinner.value = false
       }
 
-      const checkProvider = async () => {
-        // Check for web3 provider
+      const setProvider = async () => {
+        // Set for web3 provider
         provider.value = await detectEthereumProvider({
           mustBeMetaMask: true,
           silent: true,
