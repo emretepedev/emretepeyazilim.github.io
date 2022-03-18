@@ -171,6 +171,7 @@
 <script>
   import {
     defineComponent,
+    getCurrentInstance,
     onMounted,
     ref,
     useContext,
@@ -199,7 +200,7 @@
     },
 
     // setup
-    setup(_, { root }) {
+    setup() {
       // meta
       useMeta({
         link: [
@@ -227,7 +228,7 @@
       const { $config, $recaptcha } = useContext()
 
       // root variables
-      const $vToastify = root.$vToastify
+      const $vToastify = getCurrentInstance().proxy.$vToastify
 
       // refs
       const observer = ref(null)

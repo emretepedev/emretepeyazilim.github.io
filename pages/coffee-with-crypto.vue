@@ -145,8 +145,10 @@
 <script>
   import {
     defineComponent,
+    getCurrentInstance,
     onMounted,
     ref,
+    useContext,
     useMeta,
   } from '@nuxtjs/composition-api'
 
@@ -163,20 +165,23 @@
     },
 
     // setup
-    setup(_, { root }) {
+    setup() {
       // meta
       useMeta({
         title: 'Coffee With Crypto | ',
       })
 
+      // context
+      const { $config } = useContext()
+
       // root variables
-      const $vToastify = root.$vToastify
+      const $vToastify = getCurrentInstance().proxy.$vToastify
 
       // refs
       const observer = ref(null)
 
       // constants
-      const ownerAddress = '0x93C4C1e86434eA4E831d8A13e64aC288C49B7b76'
+      const ownerAddress = $config.ownerAddress.toLowerCase()
       let web3 = null
       const provider = ref(null)
       const isConnected = ref(false)
@@ -243,12 +248,12 @@
           // send tx
           await web3.eth
             .sendTransaction({
-              from: address.value.toLowerCase(),
-              to: ownerAddress.toLowerCase(),
+              from: address.value,
+              to: ownerAddress,
               value: web3.utils.toWei(amount.value, 'ether'),
             })
-            .on('transactionHash', handleTransactionHash)
-            .on('receipt', handleTransactionReceipt)
+            .once('transactionHash', handleTransactionHash)
+            .once('receipt', handleTransactionReceipt)
             .on('confirmation', handleTransactionConfirmation)
             .on('error', handleTransactionError)
         } catch (error) {
@@ -281,9 +286,12 @@
         location.reload()
       }
 
-      const updateUserInfo = async () => {
+      const updateUserInfo = async (address = null) => {
         // Get user address and balance
-        address.value = await web3.eth.getCoinbase()
+        if (!address) {
+          address.value = (await web3.eth.getAccounts())[0].toLowerCase()
+        }
+
         balance.value = web3.utils.fromWei(
           await web3.eth.getBalance(address.value),
           'ether'
@@ -298,7 +306,7 @@
       }
 
       const stopEthEvents = () => {
-        // Start eth events
+        // Stop eth events
         provider.value.removeListener('chainChanged', handleChainChanged)
         provider.value.removeListener('accountsChanged', handleAccountsChanged)
       }
@@ -349,8 +357,9 @@
       const handleAccountsChanged = async (accounts) => {
         // eth change account event
         if (accounts.length > 0) {
-          await updateUserInfo()
-          $vToastify.success(`Linked account changed to '${accounts[0]}'`)
+          const address = accounts[0]
+          await updateUserInfo(address)
+          $vToastify.success(`Linked account changed to '${address}'`)
         } else {
           $vToastify.warning('Linked account not found. Page will be reloaded.')
           location.reload()
@@ -363,8 +372,9 @@
         $vToastify.success('Chain has changed.')
       }
 
-      const handleDisconnect = () => {
+      const handleDisconnect = async () => {
         // eth disconnect event
+        await stopEthEvents()
         location.reload()
       }
 
