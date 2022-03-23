@@ -26,10 +26,12 @@
           <strong>Vuetify</strong> (UI Framework), <strong>Nuxt</strong> (Meta
           Framework based on Vue) and
           <strong>Material Design Icons</strong> (Icon Pack) on
-          <strong>GH Pages</strong>.
+          <a class="text-white" :href="$config.repositoryUrl" target="_blank"
+            ><strong>GH Pages</strong></a
+          >.
         </v-card-text>
         <v-card-subtitle>
-          Last modified at: {{ lastModifiedAt }}
+          Last modified at: {{ $config.lastModifiedAt }}
         </v-card-subtitle>
         <v-divider></v-divider>
         <v-card-text class="white--text">
@@ -42,18 +44,14 @@
 </template>
 
 <script>
-  import { defineComponent, useContext } from '@nuxtjs/composition-api'
+  import { defineComponent } from '@nuxtjs/composition-api'
   import data from '~/data/components/footer'
 
   export default defineComponent({
     // setup
     setup() {
-      // context
-      const { $config } = useContext()
-
       // return
       return {
-        lastModifiedAt: $config.lastModifiedAt,
         data,
       }
     },

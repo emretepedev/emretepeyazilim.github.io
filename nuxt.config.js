@@ -77,6 +77,7 @@ export default {
     googleAnalytics4Id: process.env.GOOGLE_ANALYTICS_4_ID,
     ownerAddress: process.env.OWNER_ADDRESS.toLowerCase(),
     txConfirmationBlocks: parseInt(process.env.TX_CONFIRMATION_BLOCKS),
+    repositoryUrl: process.env.REPOSITORY_URL,
     lastModifiedAt: new Date().toUTCString().replace('GMT', 'UTC'),
   },
 
