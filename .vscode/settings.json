@@ -80,27 +80,27 @@
     "commands": [
       {
         "match": "\\.css$",
-        "cmd": "yarn run stylelint ${file} --fix; yarn run prettier ${file} --write;",
+        "cmd": "yarn run prettier ${file} --write; yarn run stylelint ${file} --fix;",
         "isAsync": true
       },
       {
         "match": "\\.scss$",
-        "cmd": "yarn run stylelint ${file} --fix; yarn run prettier ${file} --write;",
+        "cmd": "yarn run prettier ${file} --write; yarn run stylelint ${file} --fix;",
         "isAsync": true
       },
       {
         "match": "\\.json$",
-        "cmd": "yarn run eslint ${file} --fix; yarn run prettier ${file} --write;",
+        "cmd": "yarn run prettier ${file} --write; yarn run eslint ${file} --fix;",
         "isAsync": true
       },
       {
         "match": "\\.js$",
-        "cmd": "yarn run eslint ${file} --fix; yarn run prettier ${file} --write;",
+        "cmd": "yarn run prettier ${file} --write; yarn run eslint ${file} --fix;",
         "isAsync": true
       },
       {
         "match": "\\.vue$",
-        "cmd": "yarn run eslint ${file} --fix; yarn run stylelint ${file} --fix; yarn run prettier ${file} --write;",
+        "cmd": "yarn run prettier ${file} --write; yarn run eslint ${file} --fix; yarn run stylelint ${file} --fix;",
         "isAsync": true
       }
     ]
@@ -130,6 +130,5 @@
   "volar.autoWrapParentheses": false,
   "volar.codeLens.references": false,
   "volar.completion.autoImportComponent": false,
-  "volar.icon.vite": false,
   "volar.takeOverMode.enabled": false
 }

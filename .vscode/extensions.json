@@ -30,6 +30,7 @@
     "heybourn.headwind",
     "dariofuzinato.vue-peek",
     "wscats.vue",
+    "octref.vetur",
     "vuetifyjs.vuetify-vscode"
   ]
 }
