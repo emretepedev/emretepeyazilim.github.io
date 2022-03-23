@@ -119,9 +119,9 @@
                 Transaction Hash: {{ txHash }}
               </div>
               <div v-if="txStatus">Status: {{ txStatus }}</div>
-              <div v-if="confirmationCount">
+              <div v-if="txConfirmationCount">
                 Confirmation Progress:
-                {{ confirmationCount }}/{{ totalConfirmationCount }}
+                {{ txConfirmationCount }}/{{ totalTxConfirmationCount }}
               </div>
             </div>
           </div>
@@ -130,10 +130,7 @@
           </div>
         </div>
         <div v-else class="flex items-center justify-center">
-          <v-btn
-            href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn"
-            target="_blank"
-          >
+          <v-btn href="https://metamask.io/download/" target="_blank">
             Install Metamask
           </v-btn>
         </div>
@@ -175,13 +172,15 @@
       const { $config } = useContext()
 
       // root variables
-      const $vToastify = getCurrentInstance().proxy.$vToastify
+      const { $vToastify } = getCurrentInstance().proxy
 
       // refs
       const observer = ref(null)
 
+      // envs
+      const { ownerAddress, txConfirmationBlocks } = $config
+
       // constants
-      const ownerAddress = $config.ownerAddress.toLowerCase()
       let web3 = null
       const provider = ref(null)
       const isConnected = ref(false)
@@ -189,8 +188,8 @@
       const balance = ref(0)
       const amount = ref('')
       const txStatus = ref('')
-      const confirmationCount = ref(0)
-      const totalConfirmationCount = ref(0)
+      const txConfirmationCount = ref(0)
+      const totalTxConfirmationCount = ref(0)
       const txHash = ref('')
       const spinner = ref(false)
 
@@ -199,20 +198,24 @@
         await setProvider()
 
         if (provider.value) {
+          // create web3 instance
           web3 = new Web3(provider.value)
+
+          // set total confirmation count
+          web3.eth.transactionConfirmationBlocks = txConfirmationBlocks
+          totalTxConfirmationCount.value =
+            web3.eth.transactionConfirmationBlocks
         }
       })
 
       // methods
       const connectWeb3 = async () => {
-        // if No web3 provider
-        if (!provider.value) {
-          $vToastify.error('No web3 provider detected.')
-
-          return
-        }
-
         try {
+          // if No web3 provider
+          if (!provider.value) {
+            throw new Error('No web3 provider detected.')
+          }
+
           // Ask to connect
           await web3.eth.requestAccounts()
 
@@ -220,10 +223,15 @@
           await updateUserInfo()
 
           // Check connecting
-          isConnected.value = await web3.eth.net.isListening()
+          isConnected.value =
+            (await web3.eth.net.isListening()) && provider.value.isConnected()
+
+          if (!isConnected.value) {
+            throw new Error('Connection Error.')
+          }
 
           // started eth events
-          startEthEvents()
+          await startEthEvents()
 
           $vToastify.success('Connected.')
         } catch (error) {
@@ -243,7 +251,8 @@
 
           // set total confirmation count
           web3.eth.transactionConfirmationBlocks = 5
-          totalConfirmationCount.value = web3.eth.transactionConfirmationBlocks
+          totalTxConfirmationCount.value =
+            web3.eth.transactionConfirmationBlocks
 
           // send tx
           await web3.eth
@@ -252,10 +261,12 @@
               to: ownerAddress,
               value: web3.utils.toWei(amount.value, 'ether'),
             })
-            .once('transactionHash', handleTransactionHash)
-            .once('receipt', handleTransactionReceipt)
-            .on('confirmation', handleTransactionConfirmation)
-            .on('error', handleTransactionError)
+            .once('sent', handleTxSent)
+            .once('sending', handleTxSending)
+            .once('transactionHash', handleTxHash)
+            .once('receipt', handleTxReceipt)
+            .on('confirmation', handleTxConfirmation)
+            .on('error', handleTxError)
         } catch (error) {
           if (error) {
             $vToastify.error(String(error?.message))
@@ -263,140 +274,109 @@
         }
       }
 
-      const disconnectWeb3 = () => {
+      const disconnectWeb3 = async () => {
         $vToastify.success('Disconnected.')
 
-        // Disconnect
-        isConnected.value = false
-
-        // reset user info
-        address.value = null
-        balance.value = null
-
-        // inputs
-        resetInputs()
-
-        // reset tx details
-        resetTxDetails()
-
         // reset events
-        stopEthEvents()
+        await stopEthEvents()
 
         // reload to
         location.reload()
       }
 
-      const updateUserInfo = async (_address = null) => {
-        // Get user address and balance
-        if (!_address) {
-          address.value = (await web3.eth.getAccounts())[0].toLowerCase()
-        } else {
-          address.value = _address
-        }
-
-        balance.value = web3.utils.fromWei(
-          await web3.eth.getBalance(address.value),
-          'ether'
-        )
-      }
-
+      // Start eth events
       const startEthEvents = () => {
-        // Start eth events
         provider.value.on('chainChanged', handleChainChanged)
         provider.value.on('accountsChanged', handleAccountsChanged)
         provider.value.on('disconnect', handleDisconnect)
       }
 
+      // Stop eth events
       const stopEthEvents = () => {
-        // Stop eth events
         provider.value.removeListener('chainChanged', handleChainChanged)
         provider.value.removeListener('accountsChanged', handleAccountsChanged)
       }
 
-      const handleTransactionHash = (_txHash) => {
-        // tx created event
+      // tx prepare event
+      const handleTxSent = () => {
+        spinner.value = true
+        $vToastify.info('Transaction Status: Transaction sent to Metamask.')
+      }
+
+      // tx before create event
+      const handleTxSending = () => {
+        $vToastify.info('Transaction Status: Waiting to user confirm.')
+      }
+
+      // tx created event
+      const handleTxHash = (_txHash) => {
         txHash.value = _txHash
         txStatus.value = 'Awaiting transaction confirmation.'
+        resetInputs()
         $vToastify.info(
           'Transaction Status: Awaiting transaction confirmation.'
         )
-        spinner.value = true
-        resetInputs()
       }
 
-      const handleTransactionReceipt = async () => {
-        // tx created successfully event
-        await updateUserInfo()
+      // tx created successfully event
+      const handleTxReceipt = async () => {
+        // preparing confirmation count
+        txConfirmationCount.value = '0'
+        await updateUserBalance()
         txStatus.value = 'Awaiting block confirmation.'
         $vToastify.success('Transaction Status: Awaiting block confirmation.')
         $vToastify.info('Thank You For Your Support! - @emretepedev')
       }
 
-      const handleTransactionConfirmation = (_confirmationCount) => {
+      const handleTxConfirmation = (_txConfirmationCount) => {
         // tx confirmation event
         if (
-          _confirmationCount > 0 &&
-          _confirmationCount <= totalConfirmationCount.value
+          _txConfirmationCount > 0 &&
+          _txConfirmationCount <= totalTxConfirmationCount.value
         ) {
-          confirmationCount.value = _confirmationCount
+          txConfirmationCount.value = _txConfirmationCount
           $vToastify.info('Confirmation Status: New block found.')
         }
 
-        if (_confirmationCount >= totalConfirmationCount.value) {
+        if (_txConfirmationCount >= totalTxConfirmationCount.value) {
           txStatus.value = 'Confirmed.'
           resetTxDetails()
           $vToastify.success('Transaction Status: Confirmed.')
         }
       }
 
-      const handleTransactionError = () => {
-        // tx error event
+      // tx error event
+      const handleTxError = () => {
         txStatus.value = 'Failed.'
         resetTxDetails()
         $vToastify.error('Transaction Status: Failed.')
       }
 
-      const handleAccountsChanged = async (accounts) => {
-        // eth change account event
-        if (accounts.length > 0) {
-          const address = accounts[0].toLowerCase()
-          await updateUserInfo(address)
-          $vToastify.success(`Linked account changed to '${address}'`)
+      // eth change chain event
+      const handleChainChanged = async () => {
+        await updateUserBalance()
+        $vToastify.success('Chain has changed.')
+      }
+
+      // eth change account event
+      const handleAccountsChanged = async (_accounts) => {
+        if (_accounts.length > 0) {
+          await updateUserInfo(_accounts[0].toLowerCase())
+          $vToastify.success(`Linked account changed to '${_accounts[0]}'`)
         } else {
           $vToastify.warning('Linked account not found. Page will be reloaded.')
           location.reload()
         }
       }
 
-      const handleChainChanged = async () => {
-        // eth change chain event
-        await updateUserInfo()
-        $vToastify.success('Chain has changed.')
-      }
-
+      // eth disconnect event
       const handleDisconnect = async () => {
-        // eth disconnect event
         await stopEthEvents()
         location.reload()
       }
 
-      const resetInputs = () => {
-        // removed fields and reset validate
-        observer.value.reset()
-        amount.value = ''
-      }
-
-      const resetTxDetails = () => {
-        // removed tx details for sustainability
-        txStatus.value = ''
-        txHash.value = ''
-        totalConfirmationCount.value = 0
-        confirmationCount.value = 0
-        spinner.value = false
-      }
-
+      // Set for web3 provider
       const setProvider = async () => {
-        // Set for web3 provider
         provider.value = await detectEthereumProvider({
           mustBeMetaMask: true,
           silent: true,
@@ -404,27 +384,61 @@
         })
       }
 
-      const formatAddressToDisplay = (address) => {
-        // address value formatted to user
-        return (
-          address.substring(0, 4) +
-          '...' +
-          address.substring(address.length - 4)
+      // get user address and balance
+      const updateUserInfo = async (_address = null) => {
+        await updateUserAddress(_address)
+        await updateUserBalance()
+      }
+
+      // get user address
+      const updateUserAddress = async (_address = null) => {
+        address.value =
+          _address || (await web3.eth.getAccounts())[0].toLowerCase()
+      }
+
+      // get user address
+      const updateUserBalance = async () => {
+        balance.value = web3.utils.fromWei(
+          await web3.eth.getBalance(address.value),
+          'ether'
         )
       }
 
-      const formatBalanceToDisplay = (balance) => {
-        // balance value formatted to user
-        return (+balance).toFixed(6)
+      // removed fields and reset validate
+      const resetInputs = () => {
+        observer.value.reset()
+        amount.value = ''
       }
 
-      const copyText = async (text) => {
-        // copy to clipboard
+      // removed tx details for sustainability
+      const resetTxDetails = () => {
+        txStatus.value = ''
+        txHash.value = ''
+        totalTxConfirmationCount.value = 0
+        txConfirmationCount.value = 0
+        spinner.value = false
+      }
+
+      // address value formatted to user
+      const formatAddressToDisplay = (_address) => {
+        return (
+          _address.substring(0, 4) +
+          '...' +
+          _address.substring(_address.length - 4)
+        )
+      }
+
+      // balance value formatted to user
+      const formatBalanceToDisplay = (_balance) => {
+        return (+_balance).toFixed(6)
+      }
+
+      // copy to clipboard
+      const copyText = async (_text) => {
         try {
-          await navigator.clipboard.writeText(text)
+          await navigator.clipboard.writeText(_text)
         } catch (error) {
           // suppressed error
-          return null
         }
       }
 
@@ -437,9 +451,9 @@
         balance,
         observer,
         txStatus,
-        confirmationCount,
+        txConfirmationCount,
         txHash,
-        totalConfirmationCount,
+        totalTxConfirmationCount,
         spinner,
         copyText,
         connectWeb3,
