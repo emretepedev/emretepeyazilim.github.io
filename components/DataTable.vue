@@ -47,21 +47,6 @@
         />
       </div>
     </template>
-    <template #[`item.level`]="{ item }">
-      <div v-if="item.level > 0" class="flex items-center justify-center">
-        <v-rating
-          background-color="grey"
-          dense
-          half-increments
-          readonly
-          small
-          :value="item.level"
-        ></v-rating>
-      </div>
-      <div v-else>
-        <span>-</span>
-      </div>
-    </template>
     <template #[`item.actions`]="{ item }">
       <a :href="item.url" target="_blank">
         <v-icon color="blue">{{ mdiLink }}</v-icon>

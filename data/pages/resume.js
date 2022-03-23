@@ -14,7 +14,6 @@ export default {
       name: 'Solidity',
       image: 'solidity.svg',
       category: 'Blockchain',
-      level: 4,
       url: 'https://docs.soliditylang.org/',
       color:
         'invert(9%) sepia(0%) saturate(1221%) hue-rotate(202deg) brightness(96%) contrast(71%);',
@@ -25,7 +24,6 @@ export default {
       name: 'Web3.js',
       image: 'web3js.svg',
       category: 'Blockchain',
-      level: 4.5,
       url: 'https://web3js.readthedocs.io/',
       color:
         'invert(45%) sepia(20%) saturate(3924%) hue-rotate(350deg) brightness(102%) contrast(89%);',
@@ -36,7 +34,6 @@ export default {
       name: 'PHP',
       image: 'php.svg',
       category: 'Backend',
-      level: 4,
       url: 'https://www.php.net/',
       color:
         'invert(52%) sepia(71%) saturate(274%) hue-rotate(198deg) brightness(82%) contrast(83%);',
@@ -47,7 +44,6 @@ export default {
       name: 'Laravel',
       image: 'laravel.svg',
       category: 'Backend',
-      level: 4,
       url: 'https://laravel.com/',
       color:
         'invert(26%) sepia(64%) saturate(3232%) hue-rotate(347deg) brightness(99%) contrast(105%);',
@@ -58,7 +54,6 @@ export default {
       name: 'Vue',
       image: 'vue.svg',
       category: 'Frontend',
-      level: 3.5,
       url: 'https://vuejs.org/',
       color:
         'invert(66%) sepia(44%) saturate(447%) hue-rotate(101deg) brightness(90%) contrast(97%);',
@@ -69,7 +64,6 @@ export default {
       name: 'Nuxt',
       image: 'nuxt.svg',
       category: 'Frontend',
-      level: 4,
       url: 'https://nuxtjs.org/',
       color:
         'invert(76%) sepia(37%) saturate(6771%) hue-rotate(111deg) brightness(100%) contrast(101%);',
@@ -80,7 +74,6 @@ export default {
       name: 'Vuetify',
       image: 'vuetify.svg',
       category: 'Frontend',
-      level: 4,
       url: 'https://vuetifyjs.com/',
       color:
         'invert(32%) sepia(95%) saturate(1178%) hue-rotate(191deg) brightness(82%) contrast(93%);',
@@ -91,7 +84,6 @@ export default {
       name: 'Tailwind',
       image: 'tailwind.svg',
       category: 'Frontend',
-      level: 4,
       url: 'https://tailwindcss.com/',
       color:
         'invert(60%) sepia(81%) saturate(3417%) hue-rotate(151deg) brightness(98%) contrast(95%);',
@@ -102,7 +94,6 @@ export default {
       name: 'Redis',
       image: 'redis.svg',
       category: 'Database',
-      level: 0,
       url: 'https://redis.io/',
       color:
         'invert(31%) sepia(87%) saturate(1414%) hue-rotate(337deg) brightness(85%) contrast(103%);',
@@ -113,7 +104,6 @@ export default {
       name: 'PostgreSQL',
       image: 'postgresql.svg',
       category: 'Database',
-      level: 0,
       url: 'https://www.postgresql.org/',
       color:
         'invert(39%) sepia(23%) saturate(3779%) hue-rotate(206deg) brightness(91%) contrast(93%);',
@@ -124,7 +114,6 @@ export default {
       name: 'MySQL',
       image: 'mysql.svg',
       category: 'Database',
-      level: 0,
       url: 'https://www.mysql.com/',
       color:
         'invert(44%) sepia(61%) saturate(408%) hue-rotate(163deg) brightness(88%) contrast(88%);',
@@ -132,32 +121,9 @@ export default {
         'MySQL Database Service is a fully managed database service to deploy cloud-native applications.',
     },
     {
-      name: 'Livewire',
-      image: 'livewire.svg',
-      category: 'Backend',
-      level: 0,
-      url: 'https://laravel-livewire.com/',
-      color:
-        'invert(30%) sepia(83%) saturate(539%) hue-rotate(198deg) brightness(91%) contrast(83%);',
-      description:
-        'Livewire is a full-stack framework for Laravel that makes building dynamic interfaces simple, without leaving the comfort of Laravel.',
-    },
-    {
-      name: 'Bootstrap',
-      image: 'bootstrap.svg',
-      category: 'Frontend',
-      level: 0,
-      url: 'https://getbootstrap.com/',
-      color:
-        'invert(40%) sepia(20%) saturate(1830%) hue-rotate(222deg) brightness(86%) contrast(86%);',
-      description:
-        'Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.',
-    },
-    {
       name: 'Git',
       image: 'git.svg',
       category: 'Tool',
-      level: 0,
       url: 'https://git-scm.com/',
       color:
         'invert(41%) sepia(76%) saturate(3620%) hue-rotate(344deg) brightness(99%) contrast(90%);',
@@ -168,7 +134,6 @@ export default {
       name: 'Docker',
       image: 'docker.svg',
       category: 'System',
-      level: 0,
       url: 'https://www.docker.com/',
       color:
         'invert(49%) sepia(14%) saturate(4512%) hue-rotate(176deg) brightness(98%) contrast(89%);',
@@ -179,7 +144,6 @@ export default {
       name: 'Nginx',
       image: 'nginx.svg',
       category: 'System',
-      level: 0,
       url: 'https://nginx.org/',
       color:
         'invert(39%) sepia(99%) saturate(4784%) hue-rotate(136deg) brightness(96%) contrast(101%);',
@@ -190,7 +154,6 @@ export default {
       name: 'JavaScript',
       image: 'javascript.svg',
       category: 'Frontend',
-      level: 0,
       url: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/',
       color:
         'invert(84%) sepia(35%) saturate(1047%) hue-rotate(351deg) brightness(110%) contrast(94%);',
@@ -198,32 +161,9 @@ export default {
         'JavaScript (JS) is a lightweight, interpreted, or just-in-time compiled programming language with first-class functions.',
     },
     {
-      name: 'CSS3',
-      image: 'css3.svg',
-      category: 'Frontend',
-      level: 0,
-      url: 'https://developer.mozilla.org/en-US/docs/Web/CSS/',
-      color:
-        'invert(23%) sepia(83%) saturate(2252%) hue-rotate(189deg) brightness(99%) contrast(84%);',
-      description:
-        'Cascading Style Sheets (CSS) is a stylesheet language used to describe the presentation of a document written in HTML or XML (including XML dialects such as SVG, MathML or XHTML).',
-    },
-    {
-      name: 'HTML5',
-      image: 'html5.svg',
-      category: 'Frontend',
-      level: 0,
-      url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/',
-      color:
-        'invert(40%) sepia(22%) saturate(4368%) hue-rotate(345deg) brightness(92%) contrast(94%);',
-      description:
-        'HTML (HyperText Markup Language) is the most basic building block of the Web. It defines the meaning and structure of web content.',
-    },
-    {
       name: 'G. Tag Manager',
       image: 'googletagmanager.svg',
       category: 'Tool',
-      level: 0,
       url: 'https://tagmanager.google.com/',
       color:
         'invert(24%) sepia(76%) saturate(4421%) hue-rotate(212deg) brightness(105%) contrast(72%);',
@@ -234,7 +174,6 @@ export default {
       name: 'ESLint',
       image: 'eslint.svg',
       category: 'Personal',
-      level: 0,
       url: 'https://eslint.org/',
       color:
         'invert(23%) sepia(65%) saturate(2196%) hue-rotate(236deg) brightness(89%) contrast(111%);',
@@ -245,7 +184,6 @@ export default {
       name: 'Solhint',
       image: 'solhint.svg',
       category: 'Personal',
-      level: 0,
       url: 'https://protofire.github.io/solhint/',
       color: null,
       description:
@@ -255,7 +193,6 @@ export default {
       name: 'Stylelint',
       image: 'stylelint.svg',
       category: 'Personal',
-      level: 0,
       url: 'https://stylelint.io/',
       color:
         'invert(15%) sepia(12%) saturate(1013%) hue-rotate(155deg) brightness(97%) contrast(90%);',
@@ -266,7 +203,6 @@ export default {
       name: 'Prettier',
       image: 'prettier.svg',
       category: 'Personal',
-      level: 0,
       url: 'https://prettier.io/',
       color:
         'invert(78%) sepia(25%) saturate(1276%) hue-rotate(343deg) brightness(101%) contrast(94%);',
@@ -276,7 +212,6 @@ export default {
       name: 'Vim',
       image: 'vim.svg',
       category: 'Personal',
-      level: 0,
       url: 'https://www.vim.org/',
       color:
         'invert(53%) sepia(67%) saturate(6598%) hue-rotate(124deg) brightness(89%) contrast(99%);',
@@ -287,7 +222,6 @@ export default {
       name: 'Linux',
       image: 'linux.svg',
       category: 'Personal',
-      level: 0,
       url: 'https://docs.kernel.org/',
       color:
         'invert(82%) sepia(69%) saturate(1268%) hue-rotate(337deg) brightness(101%) contrast(98%);',
@@ -316,14 +250,6 @@ export default {
     {
       text: 'Name',
       value: 'name',
-      class: 'hide-icon-to-sortable',
-      divider: true,
-      align: 'center',
-      groupable: false,
-    },
-    {
-      text: 'Level',
-      value: 'level',
       class: 'hide-icon-to-sortable',
       divider: true,
       align: 'center',
