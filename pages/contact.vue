@@ -228,10 +228,13 @@
       const { $config, $recaptcha } = useContext()
 
       // root variables
-      const $vToastify = getCurrentInstance().proxy.$vToastify
+      const { $vToastify } = getCurrentInstance().proxy
 
       // refs
       const observer = ref(null)
+
+      // envs
+      const { googleRecaptchaV2Size, googleRecaptchaV2SiteKey } = $config
 
       // constants
       const name = ref('')
@@ -331,8 +334,8 @@
           if (Boolean(recaptcha) || count === maxTime) {
             clearInterval(recaptchaInterval)
 
-            widgetId.value = $recaptcha.render($config.googleRecaptchaV2Size, {
-              sitekey: $config.googleRecaptchaV2SiteKey,
+            widgetId.value = $recaptcha.render(googleRecaptchaV2Size, {
+              sitekey: googleRecaptchaV2SiteKey,
             })
 
             if (count === maxTime) {
