@@ -1,7 +1,10 @@
 {
-  "license": "MIT",
   "name": "emretepedev.github.io",
+  "description": "Personal Homepage.",
   "version": "1.0.0",
+  "author": {
+    "name": "emretepedev"
+  },
   "private": false,
   "scripts": {
     "prepare": "husky install; rm -rf .husky/pre-push; husky add .husky/pre-push 'yarn run hook:pre-push'; rm -rf .husky/_/.gitignore",
@@ -10,15 +13,15 @@
     "start": "nuxt start",
     "generate": "nuxt generate",
     "analyze": "nuxt build --analyze",
-    "format": "eslint '**/{*,''}.{json,js,vue}' --fix; stylelint '**/*.{css,scss,vue}' --fix; prettier '**/{*,''}.{css,scss,json,js,vue}' --write;",
-    "format:css": "stylelint '**/*.css' --fix; prettier '**/*.css' --write;",
-    "format:scss": "stylelint '**/*.scss' --fix; prettier '**/*.scss' --write;",
-    "format:json": "eslint '**/{*,''}.json' --fix; prettier '**/{*,''}.json' --write;",
-    "format:js": "eslint '**/{*,''}.js' --fix; prettier '**/{*,''}.js' --write;",
-    "format:vue": "eslint '**/*.vue' --fix; stylelint '**/*.vue' --fix; prettier '**/*.vue' --write;",
-    "lint": "cspell lint --gitignore '**/{*,''}{.,''}*'; eslint '**/{*,''}.{json,js,vue}'; prettier '**/{*,''}.{css,scss,json,js,vue}' --check; stylelint '**/*.{css,scss,vue}';",
+    "format": "prettier '**/{*,''}.{css,scss,json,js,vue}' --write; eslint '**/{*,''}.{json,js,vue}' --fix; stylelint '**/*.{css,scss,vue}' --fix;",
+    "format:css": "prettier '**/*.css' --write; stylelint '**/*.css' --fix;",
+    "format:scss": "prettier '**/*.scss' --write; stylelint '**/*.scss' --fix;",
+    "format:json": "prettier '**/{*,''}.json' --write; eslint '**/{*,''}.json' --fix;",
+    "format:js": "prettier '**/{*,''}.js' --write; eslint '**/{*,''}.js' --fix;",
+    "format:vue": "prettier '**/*.vue' --write; eslint '**/*.vue' --fix; stylelint '**/*.vue' --fix;",
+    "lint": "cspell lint --gitignore --dot '**/{*,''}{.,''}*'; prettier '**/{*,''}.{css,scss,json,js,vue}' --check; eslint '**/{*,''}.{json,js,vue}'; stylelint '**/*.{css,scss,vue}';",
     "fetch": "tsc contributionsCount.ts && node contributionsCount.js",
-    "hook:pre-push": "cspell lint --gitignore '**/{*,''}{.,''}*' && eslint '**/{*,''}.{json,js,vue}' && prettier '**/{*,''}.{css,scss,json,js,vue}' --check && stylelint '**/*.{css,scss,vue}'",
+    "hook:pre-push": "cspell lint --gitignore --dot '**/{*,''}{.,''}*' && prettier '**/{*,''}.{css,scss,json,js,vue}' --check && eslint '**/{*,''}.{json,js,vue}' && stylelint '**/*.{css,scss,vue}'",
     "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup"
   },
   "husky": {

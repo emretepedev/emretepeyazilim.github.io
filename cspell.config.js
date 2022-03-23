@@ -9,12 +9,13 @@ module.exports = {
     'vuepress',
     'jscoverage',
     'toastify',
-    // plugins
+    // projects
     'noindex',
     'inbug',
+    'anothr',
   ],
   ignoreWords: ['emretepedev', 'emre', 'tepe', 'osmangazi', 'bixos'],
-  ignorePaths: ['yarn.lock'],
+  ignorePaths: ['yarn.lock', '.git', '.vscode'],
   allowCompoundWords: true,
   dictionaries: [
     'vue',
