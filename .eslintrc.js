@@ -6,6 +6,8 @@ module.exports = {
     node: true,
   },
 
+  parser: 'vue-eslint-parser',
+
   extends: [
     'eslint:recommended',
     'plugin:json/recommended',
