@@ -10,10 +10,11 @@ module.exports = {
 
   extends: [
     'eslint:recommended',
-    'plugin:json/recommended',
     'plugin:nuxt/recommended',
     '@nuxtjs',
     'plugin:vue/vue3-recommended',
+    'plugin:vuetify/recommended',
+    'plugin:json/recommended',
     'prettier',
   ],
 
