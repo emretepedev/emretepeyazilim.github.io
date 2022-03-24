@@ -68,6 +68,7 @@
                     :success="
                       !Boolean(Object.keys(errors).length) && Boolean(amount)
                     "
+                    @keyup.enter="send"
                   ></v-text-field>
                 </ValidationProvider>
               </v-row>
@@ -119,7 +120,7 @@
                 Transaction Hash: {{ txHash }}
               </div>
               <div v-if="txStatus">Status: {{ txStatus }}</div>
-              <div v-if="txConfirmationCount">
+              <div v-if="waitForConfirmation">
                 Confirmation Progress:
                 {{ txConfirmationCount }}/{{ totalTxConfirmationCount }}
               </div>
@@ -192,6 +193,7 @@
       const totalTxConfirmationCount = ref(0)
       const txHash = ref('')
       const spinner = ref(false)
+      const waitForConfirmation = ref(false)
 
       // hooks
       onMounted(async () => {
@@ -249,10 +251,9 @@
             throw new Error('Validation Error.')
           }
 
-          // set total confirmation count
-          web3.eth.transactionConfirmationBlocks = 5
-          totalTxConfirmationCount.value =
-            web3.eth.transactionConfirmationBlocks
+          if (spinner.value) {
+            throw new Error('Wait until the current tx is finished.')
+          }
 
           // send tx
           await web3.eth
@@ -320,12 +321,11 @@
 
       // tx created successfully event
       const handleTxReceipt = async () => {
-        // preparing confirmation count
-        txConfirmationCount.value = '0'
-        await updateUserBalance()
+        waitForConfirmation.value = true
         txStatus.value = 'Awaiting block confirmation.'
         $vToastify.success('Transaction Status: Awaiting block confirmation.')
         $vToastify.info('Thank You For Your Support! - @emretepedev')
+        await updateUserBalance()
       }
 
       const handleTxConfirmation = (_txConfirmationCount) => {
@@ -416,6 +416,7 @@
         txHash.value = ''
         totalTxConfirmationCount.value = 0
         txConfirmationCount.value = 0
+        waitForConfirmation.value = false
         spinner.value = false
       }
 
@@ -452,6 +453,7 @@
         observer,
         txStatus,
         txConfirmationCount,
+        waitForConfirmation,
         txHash,
         totalTxConfirmationCount,
         spinner,
