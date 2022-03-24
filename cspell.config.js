@@ -1,6 +1,8 @@
 module.exports = {
   version: '0.2',
+
   language: 'en',
+
   words: [
     // general
     'nuxt',
@@ -9,14 +11,26 @@ module.exports = {
     'vuepress',
     'jscoverage',
     'toastify',
-    // projects
+    // project
     'noindex',
     'inbug',
     'anothr',
   ],
+
   ignoreWords: ['emretepedev', 'emre', 'tepe', 'osmangazi', 'bixos'],
-  ignorePaths: ['yarn.lock', '.git', '.vscode'],
+
+  ignorePaths: [
+    'yarn.lock',
+    '.git',
+    '.vscode',
+    '*.webp',
+    '*.jpg',
+    '*.jpeg',
+    '*.png',
+  ],
+
   allowCompoundWords: true,
+
   dictionaries: [
     'vue',
     'javascript',

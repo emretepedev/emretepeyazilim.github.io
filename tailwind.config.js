@@ -1,9 +1,11 @@
 module.exports = {
   important: true,
+
   future: {
     // removeDeprecatedGapUtilities: true,
     // purgeLayersByDefault: true,
   },
+
   content: [
     `components/**/*.{vue,js}`,
     `layouts/**/*.vue`,
@@ -11,6 +13,7 @@ module.exports = {
     `plugins/**/*.{js,ts}`,
     `nuxt.config.{js,ts}`,
   ],
+
   theme: {
     extend: {
       container: {
@@ -33,5 +36,6 @@ module.exports = {
       },
     },
   },
+
   plugins: [],
 }
