@@ -293,7 +293,7 @@ export default {
       detail: 'Backend Developer',
       name: 'Bixos Incorporation',
       icon: mdiNetworkStrength2Alert,
-      year: '2021 - Present',
+      year: '2021 - 2022',
       type: 'Remote',
       description: 'Cryptocurrency asset management and investment company.',
     },

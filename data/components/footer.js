@@ -26,7 +26,7 @@ export default {
       color: '#FCA121',
     },
     {
-      href: 'https://linkedin.com/in/emretepedev/',
+      href: 'https://linkedin.in/in/emretepedev/',
       image: mdiLinkedin,
       color: '#0A66C2',
     },
@@ -36,22 +36,22 @@ export default {
       color: '#1DA1F2',
     },
     {
-      href: 'https://instagram.com/emretepedev/',
+      href: 'https://instagr.am/emretepedev/',
       image: mdiInstagram,
       color: '#E4405F',
     },
     {
-      href: 'https://facebook.com/emretepedev/',
+      href: 'https://fb.me/emretepedev/',
       image: mdiFacebook,
       color: '#1877F2',
     },
     {
-      href: 'https://telegram.me/emretepedev/',
+      href: 'https://t.me/emretepedev/',
       image: mdiSend,
       color: '#26A5E4',
     },
     {
-      href: 'https://api.whatsapp.com/send?phone=905522801804&text=Hi%20@emretepedev.',
+      href: 'https://wa.me/905522801804?text=Hi%20@emretepedev.',
       image: mdiWhatsapp,
       color: '#25D366',
     },
