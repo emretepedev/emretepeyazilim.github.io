@@ -24,6 +24,7 @@ module.exports = {
     '.git',
     '.vscode',
     '*.webp',
+    '*.svg',
     '*.jpg',
     '*.jpeg',
     '*.png',
