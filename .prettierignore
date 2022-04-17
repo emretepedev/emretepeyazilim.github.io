@@ -94,6 +94,9 @@ sw.*
 # Vim swap files
 *.swp
 
+# Husky default generated files
+.husky
+
 # Fetch data to GitHub
 data/contributionsCount.json
 contributionsCount.js

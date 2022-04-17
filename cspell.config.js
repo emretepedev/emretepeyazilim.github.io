@@ -23,6 +23,7 @@ module.exports = {
     'yarn.lock',
     '.git',
     '.vscode',
+    '.husky',
     '*.webp',
     '*.svg',
     '*.jpg',
