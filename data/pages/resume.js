@@ -21,6 +21,15 @@ export default {
         'Solidity is an object-oriented, high-level language for implementing smart contracts. Smart contracts are programs which govern the behaviour of accounts within the Ethereum state.',
     },
     {
+      name: 'Hardhat',
+      image: 'hardhat.svg',
+      category: 'Blockchain',
+      url: 'https://hardhat.org/',
+      color: null,
+      description:
+        'Hardhat is an Ethereum development environment for professionals. It facilitates performing frequent tasks, such as running tests, automatically checking code for mistakes or interacting with a smart contract.',
+    },
+    {
       name: 'Web3.js',
       image: 'web3js.svg',
       category: 'Blockchain',
@@ -150,9 +159,18 @@ export default {
         'Docker takes away repetitive, mundane configuration tasks and is used throughout the development lifecycle for fast, easy and portable application development - desktop and cloud.',
     },
     {
+      name: 'Solhint',
+      image: 'solhint.svg',
+      category: 'Linters & Formatters',
+      url: 'https://protofire.github.io/solhint/',
+      color: null,
+      description:
+        'Solhint is an open source project for linting Solidity code. Solhint provides both Security and Style Guide validations.',
+    },
+    {
       name: 'ESLint',
       image: 'eslint.svg',
-      category: 'Personal',
+      category: 'Linters & Formatters',
       url: 'https://eslint.org/',
       color:
         'invert(23%) sepia(65%) saturate(2196%) hue-rotate(236deg) brightness(89%) contrast(111%);',
@@ -160,18 +178,9 @@ export default {
         'ESLint statically analyzes your code to quickly find problems. ESLint is built into most text editors and you can run ESLint as part of your continuous integration pipeline.',
     },
     {
-      name: 'Solhint',
-      image: 'solhint.svg',
-      category: 'Personal',
-      url: 'https://protofire.github.io/solhint/',
-      color: null,
-      description:
-        'Solhint is an open source project for linting Solidity code. Solhint provides both Security and Style Guide validations.',
-    },
-    {
       name: 'Stylelint',
       image: 'stylelint.svg',
-      category: 'Personal',
+      category: 'Linters & Formatters',
       url: 'https://stylelint.io/',
       color:
         'invert(15%) sepia(12%) saturate(1013%) hue-rotate(155deg) brightness(97%) contrast(90%);',
@@ -181,7 +190,7 @@ export default {
     {
       name: 'Prettier',
       image: 'prettier.svg',
-      category: 'Personal',
+      category: 'Linters & Formatters',
       url: 'https://prettier.io/',
       color:
         'invert(78%) sepia(25%) saturate(1276%) hue-rotate(343deg) brightness(101%) contrast(94%);',
