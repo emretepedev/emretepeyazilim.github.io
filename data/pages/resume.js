@@ -31,24 +31,33 @@ export default {
         'web3.js is a collection of libraries that allow you to interact with a local or remote ethereum node using HTTP, IPC or WebSocket.',
     },
     {
-      name: 'PHP',
-      image: 'php.svg',
-      category: 'Backend',
-      url: 'https://www.php.net/',
-      color:
-        'invert(52%) sepia(71%) saturate(274%) hue-rotate(198deg) brightness(82%) contrast(83%);',
+      name: 'Ethers.js',
+      image: 'ethersjs.svg',
+      category: 'Blockchain',
+      url: 'https://docs.ethers.io/',
+      color: null,
       description:
-        'PHP is a popular general-purpose scripting language that is especially suited to web development. Fast, flexible and pragmatic, PHP powers everything from your blog to the most popular websites in the world.',
+        'The ethers.js library aims to be a complete and compact library for interacting with the Ethereum Blockchain and its ecosystem.',
     },
     {
-      name: 'Laravel',
-      image: 'laravel.svg',
-      category: 'Backend',
-      url: 'https://laravel.com/',
+      name: 'JavaScript',
+      image: 'javascript.svg',
+      category: 'Frontend',
+      url: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/',
       color:
-        'invert(26%) sepia(64%) saturate(3232%) hue-rotate(347deg) brightness(99%) contrast(105%);',
+        'invert(84%) sepia(35%) saturate(1047%) hue-rotate(351deg) brightness(110%) contrast(94%);',
       description:
-        'Laravel is a web application framework with expressive, elegant syntax. We’ve already laid the foundation — freeing you to create without sweating the small things.',
+        'JavaScript (JS) is a lightweight, interpreted, or just-in-time compiled programming language with first-class functions.',
+    },
+    {
+      name: 'TypeScript',
+      image: 'typescript.svg',
+      category: 'Frontend',
+      url: 'https://www.typescriptlang.org/',
+      color:
+        'invert(38%) sepia(84%) saturate(691%) hue-rotate(177deg) brightness(90%) contrast(85%);',
+      description:
+        'TypeScript is a strongly typed programming language that builds on JavaScript, giving you better tooling at any scale.',
     },
     {
       name: 'Vue',
@@ -91,6 +100,26 @@ export default {
         'A utility-first CSS framework packed with classes like flex, pt-4, text-center and rotate-90 that can be composed to build any design, directly in your markup.',
     },
     {
+      name: 'PHP',
+      image: 'php.svg',
+      category: 'Backend',
+      url: 'https://www.php.net/',
+      color:
+        'invert(52%) sepia(71%) saturate(274%) hue-rotate(198deg) brightness(82%) contrast(83%);',
+      description:
+        'PHP is a popular general-purpose scripting language that is especially suited to web development. Fast, flexible and pragmatic, PHP powers everything from your blog to the most popular websites in the world.',
+    },
+    {
+      name: 'Laravel',
+      image: 'laravel.svg',
+      category: 'Backend',
+      url: 'https://laravel.com/',
+      color:
+        'invert(26%) sepia(64%) saturate(3232%) hue-rotate(347deg) brightness(99%) contrast(105%);',
+      description:
+        'Laravel is a web application framework with expressive, elegant syntax. We’ve already laid the foundation — freeing you to create without sweating the small things.',
+    },
+    {
       name: 'Redis',
       image: 'redis.svg',
       category: 'Database',
@@ -99,26 +128,6 @@ export default {
         'invert(31%) sepia(87%) saturate(1414%) hue-rotate(337deg) brightness(85%) contrast(103%);',
       description:
         'Redis is an open source (BSD licensed), in-memory data structure store, used as a database, cache, and message broker.',
-    },
-    {
-      name: 'PostgreSQL',
-      image: 'postgresql.svg',
-      category: 'Database',
-      url: 'https://www.postgresql.org/',
-      color:
-        'invert(39%) sepia(23%) saturate(3779%) hue-rotate(206deg) brightness(91%) contrast(93%);',
-      description:
-        'PostgreSQL is a powerful, open source object-relational database system with over 30 years of active development that has earned it a strong reputation for reliability, feature robustness, and performance.',
-    },
-    {
-      name: 'MySQL',
-      image: 'mysql.svg',
-      category: 'Database',
-      url: 'https://www.mysql.com/',
-      color:
-        'invert(44%) sepia(61%) saturate(408%) hue-rotate(163deg) brightness(88%) contrast(88%);',
-      description:
-        'MySQL Database Service is a fully managed database service to deploy cloud-native applications.',
     },
     {
       name: 'Git',
@@ -139,36 +148,6 @@ export default {
         'invert(49%) sepia(14%) saturate(4512%) hue-rotate(176deg) brightness(98%) contrast(89%);',
       description:
         'Docker takes away repetitive, mundane configuration tasks and is used throughout the development lifecycle for fast, easy and portable application development - desktop and cloud.',
-    },
-    {
-      name: 'Nginx',
-      image: 'nginx.svg',
-      category: 'System',
-      url: 'https://nginx.org/',
-      color:
-        'invert(39%) sepia(99%) saturate(4784%) hue-rotate(136deg) brightness(96%) contrast(101%);',
-      description:
-        'Nginx is a web server that can also be used as a reverse proxy, load balancer, mail proxy and HTTP cache.',
-    },
-    {
-      name: 'JavaScript',
-      image: 'javascript.svg',
-      category: 'Frontend',
-      url: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/',
-      color:
-        'invert(84%) sepia(35%) saturate(1047%) hue-rotate(351deg) brightness(110%) contrast(94%);',
-      description:
-        'JavaScript (JS) is a lightweight, interpreted, or just-in-time compiled programming language with first-class functions.',
-    },
-    {
-      name: 'G. Tag Manager',
-      image: 'googletagmanager.svg',
-      category: 'Tool',
-      url: 'https://tagmanager.google.com/',
-      color:
-        'invert(24%) sepia(76%) saturate(4421%) hue-rotate(212deg) brightness(105%) contrast(72%);',
-      description:
-        'G. Tag Manager is a tag management system that allows you to quickly and easily update measurement codes and related code fragments collectively known as tags on your website or mobile app.',
     },
     {
       name: 'ESLint',
