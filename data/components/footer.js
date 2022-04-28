@@ -13,7 +13,7 @@ export default {
     {
       href: 'https://github.com/emretepedev/',
       image: mdiGithub,
-      color: '#181717',
+      color: '#FFFFFF',
     },
     {
       href: 'https://gitlab.com/emretepedev/',
