@@ -2,7 +2,6 @@ import {
   mdiDiscord,
   mdiEmail,
   mdiGithub,
-  mdiGitlab,
   mdiLinkedin,
   mdiSend,
   mdiTwitter,
@@ -14,11 +13,6 @@ export default {
       href: 'https://github.com/emretepedev/',
       image: mdiGithub,
       color: '#FFFFFF',
-    },
-    {
-      href: 'https://gitlab.com/emretepedev/',
-      image: mdiGitlab,
-      color: '#FCA121',
     },
     {
       href: 'https://linkedin.in/in/emretepedev/',
