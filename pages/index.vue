@@ -35,9 +35,6 @@
             :graph-data="graphData"
           />
         </div>
-        <div>
-          <Project :projects="data.projects" />
-        </div>
       </v-container>
     </div>
   </div>
@@ -48,11 +45,10 @@
   import data from '~/data/pages/index'
   import contributionsCount from '~/data/contributionsCount.json'
   import Sparkline from '~/components/Sparkline.vue'
-  import Project from '~/components/Project.vue'
 
   export default defineComponent({
     // components
-    components: { Sparkline, Project },
+    components: { Sparkline },
 
     // setup
     setup() {
