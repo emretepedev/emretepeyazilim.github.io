@@ -272,7 +272,7 @@ export default {
       detail: 'Full Stack Developer',
       name: 'LandIndex',
       icon: mdiNetworkStrength2,
-      year: '2021 - Present',
+      year: '2021 - 2022',
       type: 'Remote',
       description:
         'LandIndex provides digital land prices and analytics. Land investing basics, guides and resources.',
