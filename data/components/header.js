@@ -1,9 +1,4 @@
-import {
-  mdiCardAccountMail,
-  mdiCoffee,
-  mdiFileAccount,
-  mdiXml,
-} from '@mdi/js'
+import { mdiCardAccountMail, mdiCoffee, mdiFileAccount, mdiXml } from '@mdi/js'
 
 export default {
   pages: [
