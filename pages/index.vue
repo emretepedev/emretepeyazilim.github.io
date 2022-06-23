@@ -11,7 +11,7 @@
                   class="inline rounded-full"
                   height="150"
                   provider="static"
-                  src="/images/avatar.jpg"
+                  src="/images/avatar.png"
                   title="@emretepedev"
                   width="150"
                 />
