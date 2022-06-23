@@ -4,6 +4,7 @@ import {
   mdiNetworkStrength2,
   mdiNetworkStrength2Alert,
   mdiNetworkStrength3,
+  mdiNetworkStrength3Alert,
   mdiNetworkStrengthOffOutline,
   mdiNetworkStrengthOutline,
 } from '@mdi/js'
@@ -262,9 +263,16 @@ export default {
   experiences: [
     {
       detail: 'Blockchain Developer',
-      name: 'Bixos Incorporation',
+      name: '*** (Private)',
       icon: mdiNetworkStrength3,
-      year: '2021 - Present',
+      year: '2022 - Present',
+      description: '',
+    },
+    {
+      detail: 'Blockchain Developer',
+      name: 'Bixos Incorporation',
+      icon: mdiNetworkStrength3Alert,
+      year: '2021 - 2022',
       type: 'Remote',
       description: 'Cryptocurrency asset management and investment company.',
     },
