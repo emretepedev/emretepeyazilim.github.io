@@ -21,11 +21,9 @@
           </v-btn>
         </v-card-text>
         <v-card-text class="white--text pt-0">
-          This website made with <strong>Vue</strong> (JavaScript Framework),
-          <strong>Tailwind</strong> (CSS Framework),
-          <strong>Vuetify</strong> (UI Framework), <strong>Nuxt</strong> (Meta
-          Framework based on Vue) and
-          <strong>Material Design Icons</strong> (Icon Pack) on
+          This website made with <strong>Vue</strong>, <strong>Vuetify</strong>,
+          <strong>Nuxt</strong>, <strong>Tailwind</strong> and
+          <strong>Material Design Icons</strong> on
           <a class="text-white" :href="$config.repositoryUrl" target="_blank"
             ><strong>GH Pages</strong></a
           >.

@@ -8,9 +8,8 @@
     </v-card-title>
     <v-card-subtitle class="text-center">
       <div class="text-caption grey--text text-uppercase">
-        <strong>GitHub</strong> contributions in the last
-        <strong>30 days</strong> (<strong>exclude</strong>
-        GitLab etc.)
+        contributions in the last
+        <strong>30 days</strong>
       </div>
     </v-card-subtitle>
     <v-sheet color="transparent">
