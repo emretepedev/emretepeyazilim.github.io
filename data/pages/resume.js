@@ -31,6 +31,24 @@ export default {
         'Hardhat is an Ethereum development environment for professionals. It facilitates performing frequent tasks, such as running tests, automatically checking code for mistakes or interacting with a smart contract.',
     },
     {
+      name: 'Truffle',
+      image: 'truffle.svg',
+      category: 'Blockchain',
+      url: 'https://trufflesuite.com/truffle/',
+      color: null,
+      description:
+        'A world class development environment, testing framework and asset pipeline for blockchains using the Ethereum Virtual Machine (EVM), aiming to make life as a developer easier.',
+    },
+    {
+      name: 'Ethers.js',
+      image: 'ethersjs.svg',
+      category: 'Blockchain',
+      url: 'https://docs.ethers.io/',
+      color: null,
+      description:
+        'The ethers.js library aims to be a complete and compact library for interacting with the Ethereum Blockchain and its ecosystem.',
+    },
+    {
       name: 'Web3.js',
       image: 'web3js.svg',
       category: 'Blockchain',
@@ -41,13 +59,33 @@ export default {
         'web3.js is a collection of libraries that allow you to interact with a local or remote ethereum node using HTTP, IPC or WebSocket.',
     },
     {
-      name: 'Ethers.js',
-      image: 'ethersjs.svg',
+      name: 'Slither',
+      image: 'slither.svg',
       category: 'Blockchain',
-      url: 'https://docs.ethers.io/',
+      url: 'https://github.com/crytic/slither/',
+      color:
+        'invert(17%) sepia(51%) saturate(4871%) hue-rotate(341deg) brightness(85%) contrast(92%);',
+      description:
+        'Slither is a Solidity static analysis framework written in Python 3. It runs a suite of vulnerability detectors, prints visual information about contract details, and provides an API to easily write custom analyses. Slither enables developers to find vulnerabilities, enhance their code comprehension, and quickly prototype custom analyses.',
+    },
+    {
+      name: 'Mythril',
+      image: 'mythril.svg',
+      category: 'Blockchain',
+      url: 'https://mythril-classic.readthedocs.io/en/master/',
+      color:
+        'invert(30%) sepia(97%) saturate(1267%) hue-rotate(180deg) brightness(108%) contrast(99%);',
+      description:
+        'Mythril detects a range of security issues, including integer underflows, owner-overwrite-to-Ether-withdrawal, and others.',
+    },
+    {
+      name: 'Solhint',
+      image: 'solhint.svg',
+      category: 'Blockchain',
+      url: 'https://protofire.github.io/solhint/',
       color: null,
       description:
-        'The ethers.js library aims to be a complete and compact library for interacting with the Ethereum Blockchain and its ecosystem.',
+        'Solhint is an open source project for linting Solidity code. Solhint provides both Security and Style Guide validations.',
     },
     {
       name: 'JavaScript',
@@ -80,36 +118,6 @@ export default {
         'Vue is an open-source model–view–viewmodel front end JavaScript framework for building user interfaces and single-page applications.',
     },
     {
-      name: 'Nuxt',
-      image: 'nuxt.svg',
-      category: 'Frontend',
-      url: 'https://nuxtjs.org/',
-      color:
-        'invert(76%) sepia(37%) saturate(6771%) hue-rotate(111deg) brightness(100%) contrast(101%);',
-      description:
-        'Build your next Vue.js application with confidence using Nuxt. An open source framework making web development simple and powerful.',
-    },
-    {
-      name: 'Vuetify',
-      image: 'vuetify.svg',
-      category: 'Frontend',
-      url: 'https://vuetifyjs.com/',
-      color:
-        'invert(32%) sepia(95%) saturate(1178%) hue-rotate(191deg) brightness(82%) contrast(93%);',
-      description:
-        'Vuetify is a Vue UI Library with beautifully handcrafted Material Components. No design skills required — everything you need to create amazing applications is at your fingertips.',
-    },
-    {
-      name: 'Tailwind',
-      image: 'tailwind.svg',
-      category: 'Frontend',
-      url: 'https://tailwindcss.com/',
-      color:
-        'invert(60%) sepia(81%) saturate(3417%) hue-rotate(151deg) brightness(98%) contrast(95%);',
-      description:
-        'A utility-first CSS framework packed with classes like flex, pt-4, text-center and rotate-90 that can be composed to build any design, directly in your markup.',
-    },
-    {
       name: 'PHP',
       image: 'php.svg',
       category: 'Backend',
@@ -130,19 +138,9 @@ export default {
         'Laravel is a web application framework with expressive, elegant syntax. We’ve already laid the foundation — freeing you to create without sweating the small things.',
     },
     {
-      name: 'Redis',
-      image: 'redis.svg',
-      category: 'Database',
-      url: 'https://redis.io/',
-      color:
-        'invert(31%) sepia(87%) saturate(1414%) hue-rotate(337deg) brightness(85%) contrast(103%);',
-      description:
-        'Redis is an open source (BSD licensed), in-memory data structure store, used as a database, cache, and message broker.',
-    },
-    {
       name: 'Git',
       image: 'git.svg',
-      category: 'Tool',
+      category: 'Software',
       url: 'https://git-scm.com/',
       color:
         'invert(41%) sepia(76%) saturate(3620%) hue-rotate(344deg) brightness(99%) contrast(90%);',
@@ -152,50 +150,12 @@ export default {
     {
       name: 'Docker',
       image: 'docker.svg',
-      category: 'System',
+      category: 'Software',
       url: 'https://www.docker.com/',
       color:
         'invert(49%) sepia(14%) saturate(4512%) hue-rotate(176deg) brightness(98%) contrast(89%);',
       description:
         'Docker takes away repetitive, mundane configuration tasks and is used throughout the development lifecycle for fast, easy and portable application development - desktop and cloud.',
-    },
-    {
-      name: 'Solhint',
-      image: 'solhint.svg',
-      category: 'Linters & Formatters',
-      url: 'https://protofire.github.io/solhint/',
-      color: null,
-      description:
-        'Solhint is an open source project for linting Solidity code. Solhint provides both Security and Style Guide validations.',
-    },
-    {
-      name: 'ESLint',
-      image: 'eslint.svg',
-      category: 'Linters & Formatters',
-      url: 'https://eslint.org/',
-      color:
-        'invert(23%) sepia(65%) saturate(2196%) hue-rotate(236deg) brightness(89%) contrast(111%);',
-      description:
-        'ESLint statically analyzes your code to quickly find problems. ESLint is built into most text editors and you can run ESLint as part of your continuous integration pipeline.',
-    },
-    {
-      name: 'Stylelint',
-      image: 'stylelint.svg',
-      category: 'Linters & Formatters',
-      url: 'https://stylelint.io/',
-      color:
-        'invert(15%) sepia(12%) saturate(1013%) hue-rotate(155deg) brightness(97%) contrast(90%);',
-      description:
-        'A mighty, modern linter that helps you avoid errors and enforce conventions in your styles.',
-    },
-    {
-      name: 'Prettier',
-      image: 'prettier.svg',
-      category: 'Linters & Formatters',
-      url: 'https://prettier.io/',
-      color:
-        'invert(78%) sepia(25%) saturate(1276%) hue-rotate(343deg) brightness(101%) contrast(94%);',
-      description: 'Prettier is an opinionated code formatter.',
     },
     {
       name: 'Vim',
