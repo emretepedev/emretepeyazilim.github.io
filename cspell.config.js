@@ -15,6 +15,7 @@ module.exports = {
     'noindex',
     'inbug',
     'anothr',
+    'mythril',
   ],
 
   ignoreWords: ['emretepedev', 'emre', 'tepe', 'osmangazi', 'bixos'],
