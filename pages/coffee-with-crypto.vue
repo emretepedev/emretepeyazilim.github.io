@@ -438,6 +438,7 @@
       const copyText = async (_text) => {
         try {
           await navigator.clipboard.writeText(_text)
+          $vToastify.success('Copied')
         } catch (error) {
           // suppressed error
         }
