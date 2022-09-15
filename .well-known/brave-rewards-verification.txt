@@ -1,0 +1,4 @@
+This is a Brave Rewards publisher verification file.
+
+Domain: emretepedev.github.io
+Token: 6a0ab36a5a2959a6efd89df7fc17b75c6a4de909732a6c8571fc3c821ebc091a
