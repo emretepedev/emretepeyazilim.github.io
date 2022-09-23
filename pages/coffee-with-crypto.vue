@@ -207,6 +207,9 @@
           web3.eth.transactionConfirmationBlocks = txConfirmationBlocks
           totalTxConfirmationCount.value =
             web3.eth.transactionConfirmationBlocks
+
+          const accounts = await web3.eth.getAccounts()
+          if (accounts.length > 0) await connect()
         }
       })
 
@@ -221,25 +224,29 @@
           // Ask to connect
           await web3.eth.requestAccounts()
 
-          // get address, balance etc.
-          await updateUserInfo()
-
-          // Check connecting
-          isConnected.value =
-            (await web3.eth.net.isListening()) && provider.value.isConnected()
-
-          if (!isConnected.value) {
-            throw new Error('Connection Error.')
-          }
-
-          // started eth events
-          await startEthEvents()
+          await connect()
 
           $vToastify.success('Connected.')
         } catch (error) {
           // User denied account access
           $vToastify.error(String(error.message))
         }
+      }
+
+      const connect = async () => {
+        // get address, balance etc.
+        await updateUserInfo()
+
+        // Check connecting
+        isConnected.value =
+          (await web3.eth.net.isListening()) && provider.value.isConnected()
+
+        if (!isConnected.value) {
+          throw new Error('Connection Error.')
+        }
+
+        // started eth events
+        await startEthEvents()
       }
 
       const send = async () => {
@@ -276,13 +283,13 @@
       }
 
       const disconnectWeb3 = async () => {
-        $vToastify.success('Disconnected.')
-
         // reset events
         await stopEthEvents()
 
-        // reload to
-        location.reload()
+        // set false to `isConnected`
+        isConnected.value = false
+
+        $vToastify.success('Disconnected.')
       }
 
       // Start eth events
@@ -362,17 +369,18 @@
       const handleAccountsChanged = async (_accounts) => {
         if (_accounts.length > 0) {
           await updateUserInfo(_accounts[0].toLowerCase())
+
           $vToastify.success(`Linked account changed to '${_accounts[0]}'`)
         } else {
-          $vToastify.warning('Linked account not found. Page will be reloaded.')
-          location.reload()
+          await disconnectWeb3()
         }
       }
 
       // eth disconnect event
       const handleDisconnect = async () => {
         await stopEthEvents()
-        location.reload()
+
+        isConnected.value = false
       }
 
       // Set for web3 provider
