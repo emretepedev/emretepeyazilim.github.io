@@ -21,7 +21,7 @@
       clipped
       :expand-on-hover="!$vuetify.breakpoint.mdAndDown"
       :permanent="!$vuetify.breakpoint.mdAndDown"
-      :right="Boolean(isOnRight)"
+      :right="isOnRight"
       style="z-index: 99999 !important"
     >
       <v-list-item>
@@ -38,7 +38,7 @@
               class="flex justify-between"
             >
               {{ $config.spaName }}
-              <v-icon @click="isOnRight = !Boolean(isOnRight)">
+              <v-icon @click="toggleNavDrawer()">
                 {{ mdiSwapHorizontal }}
               </v-icon>
             </span>
@@ -63,20 +63,36 @@
 </template>
 
 <script>
-  import { defineComponent } from '@nuxtjs/composition-api'
+  import { defineComponent, onMounted, ref } from '@nuxtjs/composition-api'
   import { mdiClose, mdiSwapHorizontal } from '@mdi/js'
   import data from '~/data/components/header'
 
   export default defineComponent({
     // setup
     setup() {
+      // constants
+      const isOnRight = ref(false)
+
+      // hooks
+      onMounted(() => {
+        isOnRight.value = Boolean(
+          JSON.parse(window.localStorage.getItem('isOnRight'))
+        )
+      })
+
+      const toggleNavDrawer = () => {
+        isOnRight.value = !isOnRight.value
+        localStorage.setItem('isOnRight', isOnRight.value)
+      }
+
       // return
       return {
         data,
         drawer: false,
-        isOnRight: false,
+        isOnRight,
         mdiClose,
         mdiSwapHorizontal,
+        toggleNavDrawer,
       }
     },
   })
