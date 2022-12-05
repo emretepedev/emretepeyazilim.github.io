@@ -14,7 +14,7 @@
   import Header from '~/components/Header.vue'
 
   export default defineComponent({
-    // components
+    // eslint-disable-next-line vue/no-reserved-component-names
     components: { Footer, Header },
   })
 </script>
