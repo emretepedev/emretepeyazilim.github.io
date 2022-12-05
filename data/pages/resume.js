@@ -4,7 +4,7 @@ import {
   mdiNetworkStrength2,
   mdiNetworkStrength2Alert,
   mdiNetworkStrength3,
-  mdiNetworkStrength3Alert,
+  mdiNetworkStrength4Cog,
   mdiNetworkStrengthOffOutline,
   mdiNetworkStrengthOutline,
 } from '@mdi/js'
@@ -224,16 +224,15 @@ export default {
     {
       detail: 'Blockchain Developer',
       name: '*** (Private)',
-      icon: mdiNetworkStrength3,
+      icon: mdiNetworkStrength4Cog,
       year: '2022 - Present',
       description: '',
     },
     {
       detail: 'Blockchain Developer',
       name: 'Bixos Incorporation',
-      icon: mdiNetworkStrength3Alert,
+      icon: mdiNetworkStrength3,
       year: '2021 - 2022',
-      type: 'Remote',
       description: 'Cryptocurrency asset management and investment company.',
     },
     {
@@ -243,35 +242,32 @@ export default {
       year: '2021 - 2022',
       type: 'Remote',
       description:
-        'LandIndex provides digital land prices and analytics. Land investing basics, guides and resources.',
+        'LandIndex is a Metaverse data analytics tool that helps businesses and investors to understand the value of the land at Metaverse.',
     },
     {
       detail: 'Backend Developer',
       name: 'Bixos Incorporation',
       icon: mdiNetworkStrength2Alert,
       year: '2021 - 2022',
-      type: 'Remote',
       description: 'Cryptocurrency asset management and investment company.',
     },
     {
-      detail: 'Backend Developer',
-      name: 'Q Digital Agency',
+      detail: 'Full Stack Developer',
+      name: 'Freelance',
       icon: mdiNetworkStrength1,
       year: '2020 - 2021',
-      description:
-        'Getting online is easy. Succeeding online is a different story. You’ll need more than just a beautiful website to stand out these days. Online marketing solutions. Conversion-based web design coupled with a lead generating marketing plan, your online success is inevitable.',
     },
     {
       detail: 'Intern',
       name: 'E-Yaz',
       icon: mdiNetworkStrength1Alert,
-      year: '2019 - 2020',
+      year: '2019',
     },
     {
       detail: 'Intern',
       name: 'MyData',
       icon: mdiNetworkStrengthOutline,
-      year: '2018 - 2019',
+      year: '2018',
     },
     {
       detail: 'Mathematics and Computer Science',
