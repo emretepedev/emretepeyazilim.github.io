@@ -1,14 +1,14 @@
-import * as fs from 'fs'
+import { writeFile } from 'fs'
 import axios from 'axios'
 import 'dotenv/config'
 
 // constants
-const from: Date = new Date()
-const to: Date = new Date()
+const from = new Date()
+const to = new Date()
 from.setDate(to.getDate() - 30)
 
 // methods
-const hexToString = (hex: string): string => {
+const hexToString = (hex: string) => {
   let string = ''
   for (let i = 0; i < hex.length; i += 2) {
     string += String.fromCharCode(parseInt(hex.substring(i, i + 2), 16))
@@ -17,8 +17,8 @@ const hexToString = (hex: string): string => {
   return string
 }
 
-const saveFile = (fileName: string, content: string): void => {
-  fs.writeFile(fileName, content, 'utf8', function (error) {
+const saveFile = (fileName: string, content: string) => {
+  writeFile(fileName, content, 'utf8', function (error) {
     if (error) {
       saveFile('fsError.txt', String(error))
     }
