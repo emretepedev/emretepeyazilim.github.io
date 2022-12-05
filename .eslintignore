@@ -117,3 +117,4 @@ sw.*
 # Fetch data to GitHub
 data/contributionsCount.json
 contributionsCount.js
+contributionsCount.ts
