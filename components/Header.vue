@@ -38,10 +38,10 @@
               class="flex justify-between"
             >
               {{ $config.spaName }}
-              <v-icon @click="toggleNavDrawer()">
-                {{ mdiSwapHorizontal }}
-              </v-icon>
             </span>
+            <v-icon @click="toggleNavDrawer()">
+              {{ mdiSwapHorizontal }}
+            </v-icon>
           </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
