@@ -1,13 +1,50 @@
-import { writeFile } from 'fs'
+import { writeFileSync } from 'fs'
 import axios from 'axios'
 import 'dotenv/config'
 
-// constants
-const from = new Date()
-const to = new Date()
-from.setDate(to.getDate() - 30)
+const dateSelector = new Date()
+const to = new Date(
+  dateSelector.setDate(dateSelector.getDate() - 1)
+).toISOString()
+const from = new Date(
+  dateSelector.setDate(dateSelector.getDate() - 30)
+).toISOString()
 
-// methods
+const fetchData = async () => {
+  const url = 'https://api.github.com/graphql'
+
+  const data = {
+    query: `
+              query {
+                user(login: "${process.env.GH_USERNAME}") {
+                  contributionsCollection(from: "${from}" to: "${to}") {
+                    contributionCalendar {
+                      weeks {
+                        contributionDays {
+                          contributionCount
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            `,
+  }
+
+  const headers = {
+    Authorization: `bearer ${hexToString(
+      process.env.GH_PERSONAL_ACCESS_TOKEN!
+    )}`,
+  }
+
+  try {
+    const res = await axios.post(url, data, { headers })
+    saveFile('./data/contributionsCount.json', JSON.stringify(res.data))
+  } catch (err: any) {
+    saveFile('fetchError.txt', String(err))
+  }
+}
+
 const hexToString = (hex: string) => {
   let string = ''
   for (let i = 0; i < hex.length; i += 2) {
@@ -18,56 +55,15 @@ const hexToString = (hex: string) => {
 }
 
 const saveFile = (fileName: string, content: string) => {
-  writeFile(fileName, content, 'utf8', function (error) {
-    if (error) {
-      saveFile('fsError.txt', String(error))
-    }
-
-    if ('contributionsCount.json' === fileName) {
-      saveFile('fsSuccess.txt', new Date().toUTCString())
-    }
-  })
-}
-
-const fetchData = async (): Promise<string | null> => {
-  const url = 'https://api.github.com/graphql'
-
-  const data = {
-    query: `
-                query {
-                    user(login: "${process.env.GH_USERNAME}") {
-                        contributionsCollection(from: "${from.toISOString()}" to: "${to.toISOString()}") {
-                            contributionCalendar {
-                                weeks {
-                                    contributionDays {
-                                        contributionCount
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            `,
-  }
-
-  const headers = {
-    Authorization: `bearer ${hexToString(
-      process.env.GH_PERSONAL_ACCESS_TOKEN!
-    )}`,
-  }
-
-  // fetch data from github
   try {
-    return JSON.stringify(await (await axios.post(url, data, { headers })).data)
-  } catch (error: any) {
-    saveFile('fetchError.txt', String(error))
-    return null
+    writeFileSync(fileName, content, {
+      encoding: 'utf8',
+    })
+  } catch (err: any) {
+    saveFile('fsError.txt', String(err))
   }
 }
 
 ;(async () => {
-  const data = await fetchData()
-  if (data) {
-    saveFile('./data/contributionsCount.json', data)
-  }
+  await fetchData()
 })()
