@@ -27,21 +27,20 @@
       <v-list-item>
         <v-list-item-content>
           <v-list-item-title>
-            <v-icon
-              v-if="$vuetify.breakpoint.mdAndDown"
-              @click.stop="drawer = !Boolean(drawer)"
-            >
-              {{ mdiClose }}
-            </v-icon>
-            <span
-              v-if="!$vuetify.breakpoint.mdAndDown"
-              class="flex justify-between"
-            >
-              {{ $config.spaName }}
+            <span class="flex justify-between">
+              <v-icon
+                v-if="$vuetify.breakpoint.mdAndDown"
+                @click.stop="drawer = !Boolean(drawer)"
+              >
+                {{ mdiClose }}
+              </v-icon>
+              <span v-else>
+                {{ $config.spaName }}
+              </span>
+              <v-icon @click="toggleNavDrawer()">
+                {{ mdiSwapHorizontal }}
+              </v-icon>
             </span>
-            <v-icon @click="toggleNavDrawer()">
-              {{ mdiSwapHorizontal }}
-            </v-icon>
           </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
