@@ -1,11 +1,4 @@
-import {
-  mdiDiscord,
-  mdiEmail,
-  mdiGithub,
-  mdiLinkedin,
-  mdiSend,
-  mdiTwitter,
-} from '@mdi/js'
+import { mdiEmail, mdiGithub, mdiLinkedin, mdiTwitter } from '@mdi/js'
 
 export default {
   socials: [
@@ -23,16 +16,6 @@ export default {
       href: 'https://twitter.com/emretepedev/',
       image: mdiTwitter,
       color: '#1DA1F2',
-    },
-    {
-      href: 'https://t.me/emretepedev/',
-      image: mdiSend,
-      color: '#26A5E4',
-    },
-    {
-      href: 'https://discordapp.com/users/365827212890341378/',
-      image: mdiDiscord,
-      color: '#5865F2',
     },
     {
       href: 'mailto:emretepedev@gmail.com',
