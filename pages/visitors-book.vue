@@ -222,7 +222,7 @@
 
           for (const message of visitorsBookMessages) {
             messages.value.push({
-              author: message.author.toLowerCase(),
+              author: message.author,
               createdAt: message.createdAt,
               content: message.content,
             })
@@ -343,7 +343,6 @@
 
       // tx created event
       const handleTxHash = (_txHash) => {
-        resetInputs()
         $vToastify.info(
           'Transaction Status: Awaiting transaction confirmation.\n' +
             `Tx Hash: ${_txHash}`
@@ -372,7 +371,7 @@
       // eth change account event
       const handleAccountsChanged = async (_accounts) => {
         if (_accounts.length > 0) {
-          await updateUserInfo(_accounts[0].toLowerCase())
+          await updateUserInfo(_accounts[0])
 
           $vToastify.success(`Linked account changed to '${_accounts[0]}'`)
         } else {
@@ -392,7 +391,7 @@
         const message = event.returnValues[0]
 
         messages.value.push({
-          author: message.author.toLowerCase(),
+          author: message.author,
           createdAt: message.createdAt,
           content: message.content,
         })
@@ -417,8 +416,9 @@
 
       // get user address
       const updateUserAddress = async (_address = null) => {
-        address.value =
-          _address || (await web3.eth.getAccounts())[0].toLowerCase()
+        address.value = _address
+          ? web3.utils.toChecksumAddress(_address)
+          : (await web3.eth.getAccounts())[0]
       }
 
       // get user address
