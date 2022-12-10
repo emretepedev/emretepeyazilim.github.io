@@ -44,6 +44,8 @@
     "@nuxtjs/recaptcha": "^1.1.1",
     "@nuxtjs/robots": "^2.5.0",
     "@nuxtjs/sitemap": "^2.4.0",
+    "moment": "^2.29.4",
+    "moment-timezone": "^0.5.39",
     "nuxt": "^2.5.18",
     "vee-validate": "^3.4.14",
     "vue-gtag": "^1.16.1",
