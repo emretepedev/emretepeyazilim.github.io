@@ -83,7 +83,7 @@
               >
                 <v-btn
                   :class="`${!$vuetify.breakpoint.smAndDown ? '' : 'w-full'}`"
-                  :disabled="invalid || Boolean(spinner)"
+                  :disabled="invalid || spinner"
                   @click="send"
                   ><svg
                     v-if="spinner"
@@ -182,7 +182,7 @@
       const { ownerAddress, txConfirmationBlocks } = $config
 
       // constants
-      let web3 = null
+      let web3
       const provider = ref(null)
       const isConnected = ref(false)
       const address = ref(null)
@@ -255,7 +255,7 @@
           const validate = await observer.value.validate()
 
           if (!validate) {
-            throw new Error('Validation Error.')
+            throw new Error(observer.value.errors.message[0])
           }
 
           if (spinner.value) {
@@ -429,11 +429,11 @@
       }
 
       // address value formatted to user
-      const formatAddressToDisplay = (_address) => {
+      const formatAddressToDisplay = (_address, charCount = 4) => {
         return (
-          _address.substring(0, 4) +
+          _address.substring(0, charCount) +
           '...' +
-          _address.substring(_address.length - 4)
+          _address.substring(_address.length - charCount)
         )
       }
 
