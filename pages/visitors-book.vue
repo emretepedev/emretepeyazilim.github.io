@@ -4,11 +4,8 @@
       <v-container class="py-0">
         <div v-if="hasMetamask">
           <div v-if="onValidNetwork">
-            <v-container
-              ref="visitorsBook"
-              class="box-border h-screen overflow-scroll pt-10 pb-2"
-            >
-              <v-row align="end" class="pb-14">
+            <v-container class="box-border h-screen overflow-scroll pt-10 pb-2">
+              <v-row align="end" class="pb-10">
                 <v-col>
                   <v-alert
                     v-for="(message, index) in messages"
@@ -74,8 +71,8 @@
                 </v-col>
               </v-row>
             </v-container>
-            <v-footer class="fixed bottom-0 left-0 right-0">
-              <v-container>
+            <v-footer class="fixed bottom-0 left-0 right-0 p-0">
+              <v-container class="p-0">
                 <v-row no-gutters>
                   <v-col>
                     <ValidationObserver ref="observer">
@@ -194,11 +191,13 @@
               </v-container>
             </v-footer>
           </div>
-          <div v-else class="flex items-center justify-center">
-            <v-btn @click="switchNetwork()">Switch Network</v-btn>
+          <div v-else class="mt-20 flex items-center justify-center">
+            <v-btn @click="switchNetwork()"
+              >Switch Network to {{ visitorsBookContractChainName }}</v-btn
+            >
           </div>
         </div>
-        <div v-else class="flex items-center justify-center">
+        <div v-else class="mt-20 flex items-center justify-center">
           <v-btn href="https://metamask.io/download/" target="_blank">
             Install Metamask
           </v-btn>
@@ -242,9 +241,11 @@
       const { $config } = useContext()
       const { $vToastify } = getCurrentInstance().proxy
       const observer = ref(null)
-      const visitorsBook = ref(null)
-      const { visitorsBookContractAddress, visitorsBookContractChainId } =
-        $config
+      const {
+        visitorsBookContractAddress,
+        visitorsBookContractChainId,
+        visitorsBookContractChainName,
+      } = $config
       let web3
       let visitorsBookContract
       const provider = ref(null)
@@ -335,7 +336,7 @@
               .on('data', handleMessageSent)
           }
 
-          scrollVisitorsBookDown()
+          scrollToLastMessage()
         } catch (error) {
           $vToastify.error(String(error.message))
         }
@@ -384,7 +385,7 @@
         }
       }
 
-      const scrollVisitorsBookDown = () => {
+      const scrollToLastMessage = () => {
         let tries = 0
         const frequency = 1000 / 10 // 0.1 sec
         const maxTries = (1000 / frequency) * 10 // 10 secs
@@ -407,7 +408,11 @@
             tries++
           }, frequency)
         } else {
-          lastMessageElement.value[0].$el.scrollIntoView({ behavior: 'smooth' })
+          lastMessageElement.value[0].$el.scrollIntoView({
+            behavior: 'smooth',
+            block: 'end',
+            inline: 'nearest',
+          })
         }
       }
 
@@ -495,7 +500,7 @@
           content: message.content,
         })
 
-        scrollVisitorsBookDown()
+        scrollToLastMessage()
       }
 
       const setProvider = async () => {
@@ -555,16 +560,6 @@
         } catch {}
       }
 
-      const touchStart = (arg1) => {
-        console.log('touchStart')
-        console.log(arg1)
-      }
-
-      const touchEnd = (arg1) => {
-        console.log('touchEnd')
-        console.log(arg1)
-      }
-
       return {
         hasMetamask,
         onValidNetwork,
@@ -584,9 +579,7 @@
         switchNetwork,
         messageContent,
         messages,
-        visitorsBook,
-        touchStart,
-        touchEnd,
+        visitorsBookContractChainName,
         mdiSend,
         mdiMessage,
         mdiConnection,
