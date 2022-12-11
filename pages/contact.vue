@@ -125,7 +125,7 @@
                 name="message"
                 outlined
                 placeholder="Your message"
-                :prepend-inner-icon="mdiComment"
+                :prepend-inner-icon="mdiMessage"
                 rounded
                 shaped
                 :success="
@@ -183,9 +183,9 @@
     mdiCheckboxBlankCircleOutline,
     mdiCheckboxMarkedCircle,
     mdiCloseCircle,
-    mdiComment,
     mdiFormSelect,
     mdiFormTextbox,
+    mdiMessage,
     mdiPhone,
   } from '@mdi/js'
 
@@ -375,7 +375,7 @@
         mdiCheckboxBlankCircleOutline,
         mdiCheckboxMarkedCircle,
         mdiCloseCircle,
-        mdiComment,
+        mdiMessage,
         mdiFormSelect,
         mdiFormTextbox,
         mdiPhone,
