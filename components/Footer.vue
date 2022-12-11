@@ -21,9 +21,10 @@
           </v-btn>
         </v-card-text>
         <v-card-text class="white--text pt-0">
-          This website made with <strong>Vue</strong>, <strong>Vuetify</strong>,
-          <strong>Nuxt</strong>, <strong>Tailwind</strong> and
-          <strong>Material Design Icons</strong> on
+          This website is made with <strong>Vue</strong>,
+          <strong>Vuetify</strong>, <strong>Nuxt</strong>,
+          <strong>Tailwind</strong> and
+          <strong>Material Design Icons</strong> and deployed on
           <a class="text-white" :href="$config.repositoryUrl" target="_blank"
             ><strong>GH Pages</strong></a
           >.
