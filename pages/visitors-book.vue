@@ -386,33 +386,35 @@
       }
 
       const scrollToLastMessage = () => {
-        let tries = 0
-        const frequency = 1000 / 10 // 0.1 sec
-        const maxTries = (1000 / frequency) * 10 // 10 secs
+        if (messages.length) {
+          let tries = 0
+          const frequency = 1000 / 10 // 0.1 sec
+          const maxTries = (1000 / frequency) * 10 // 10 secs
 
-        if (!lastMessageElement.value) {
-          const getLastMessageInterval = setInterval(() => {
-            if (Boolean(lastMessageElement.value) || tries === maxTries) {
-              clearInterval(getLastMessageInterval)
+          if (!lastMessageElement.value) {
+            const getLastMessageInterval = setInterval(() => {
+              if (Boolean(lastMessageElement.value) || tries === maxTries) {
+                clearInterval(getLastMessageInterval)
 
-              if (tries === maxTries) {
-                $vToastify.error('Something went wrong.')
+                if (tries === maxTries) {
+                  $vToastify.error('Something went wrong.')
 
-                return
+                  return
+                }
+
+                lastMessageElement.value[0].$el.scrollIntoView({
+                  behavior: 'smooth',
+                })
               }
-
-              lastMessageElement.value[0].$el.scrollIntoView({
-                behavior: 'smooth',
-              })
-            }
-            tries++
-          }, frequency)
-        } else {
-          lastMessageElement.value[0].$el.scrollIntoView({
-            behavior: 'smooth',
-            block: 'end',
-            inline: 'nearest',
-          })
+              tries++
+            }, frequency)
+          } else {
+            lastMessageElement.value[0].$el.scrollIntoView({
+              behavior: 'smooth',
+              block: 'end',
+              inline: 'nearest',
+            })
+          }
         }
       }
 
