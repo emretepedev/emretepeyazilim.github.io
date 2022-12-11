@@ -1,3 +1,10 @@
 export default {
-  subjects: ['Proposal', 'Hire', 'Suggestion', 'Donate', 'Other'],
+  subjects: [
+    'Hire',
+    'Suggestion',
+    'Proposal',
+    'Donate',
+    'Request to Test ETH',
+    'Other',
+  ],
 }
