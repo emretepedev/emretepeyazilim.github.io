@@ -2,63 +2,75 @@
   <div>
     <div class="flex justify-center">
       <v-container class="py-0">
-        <div v-if="provider">
-          <div v-if="isConnected">
+        <div v-if="hasMetamask">
+          <div v-if="onValidNetwork">
             <v-container
               ref="visitorsBook"
-              class="box-border h-screen overflow-scroll pt-10 pb-20"
+              class="box-border h-screen overflow-scroll pt-10 pb-2"
             >
               <v-row align="end" class="pb-14">
                 <v-col>
-                  <div
+                  <v-alert
                     v-for="(message, index) in messages"
                     :key="index"
+                    :ref="
+                      index === messages.length - 1 ? 'lastMessageElement' : ''
+                    "
                     :class="[
-                      'd-flex align-center m-2 flex-row break-all',
+                      'm-2 break-all',
                       message.author == address ? 'justify-end' : '',
                     ]"
+                    shaped
                   >
-                    <span v-if="message.author == address"
-                      ><span class="text-xs text-gray-400"
-                        >({{
-                          formatTimestampToDisplay(message.createdAt)
-                        }}) </span
-                      ><span
-                        :class="`blue--text mr-3 ${
-                          $vuetify.breakpoint.smAndDown ? 'text-sm' : ''
-                        }`"
-                        >{{ message.content }}</span
-                      ></span
-                    >
-                    <v-tooltip bottom content-class="text-xs">
-                      <template #activator="{ on, attrs }">
-                        <v-img
-                          v-bind="attrs"
-                          :lazy-src="`https://robohash.org/${message.author}?size=8x8`"
-                          max-height="32"
-                          max-width="32"
-                          :src="`https://robohash.org/${message.author}?bgset=bg1`"
-                          v-on="on"
-                          @click="copyText(address)"
-                        >
-                        </v-img>
-                      </template>
-                      <span>
-                        {{ message.author }}
-                      </span>
-                    </v-tooltip>
-                    <span v-if="message.author != address">
+                    <div class="flex">
                       <span
-                        :class="`blue--text ml-3 ${
-                          $vuetify.breakpoint.smAndDown ? 'text-sm' : ''
-                        }`"
-                        >{{ message.content }}</span
-                      >
-                      <span class="text-xs text-gray-400">
-                        ({{ formatTimestampToDisplay(message.createdAt) }})
+                        v-if="message.author == address"
+                        class="flex flex-col items-end text-right"
+                        ><span
+                          :class="`blue--text mr-3 max-w-lg text-left ${
+                            $vuetify.breakpoint.smAndDown ? 'text-sm' : ''
+                          }`"
+                          >{{ message.content }}</span
+                        ><span class="text-xs text-gray-400"
+                          >({{
+                            formatTimestampToDisplay(message.createdAt)
+                          }})</span
+                        >
                       </span>
-                    </span>
-                  </div>
+                      <v-tooltip bottom content-class="text-xs">
+                        <template #activator="{ on, attrs }">
+                          <v-img
+                            v-bind="attrs"
+                            class="rounded-full"
+                            :lazy-src="`https://robohash.org/${message.author}?size=8x8`"
+                            max-height="32"
+                            max-width="32"
+                            :src="`https://robohash.org/${message.author}?bgset=bg1`"
+                            v-on="on"
+                            @click="copyText(address)"
+                          >
+                          </v-img>
+                        </template>
+                        <span>
+                          {{ message.author }}
+                        </span>
+                      </v-tooltip>
+                      <span
+                        v-if="message.author != address"
+                        class="flex max-w-lg flex-col"
+                      >
+                        <span
+                          :class="`blue--text ml-3 ${
+                            $vuetify.breakpoint.smAndDown ? 'text-sm' : ''
+                          }`"
+                          >{{ message.content }}</span
+                        >
+                        <span class="text-right text-xs text-gray-400">
+                          ({{ formatTimestampToDisplay(message.createdAt) }})
+                        </span>
+                      </span>
+                    </div>
+                  </v-alert>
                 </v-col>
               </v-row>
             </v-container>
@@ -66,7 +78,7 @@
               <v-container>
                 <v-row no-gutters>
                   <v-col>
-                    <ValidationObserver ref="observer" v-slot="{ invalid }">
+                    <ValidationObserver ref="observer">
                       <ValidationProvider
                         v-slot="{ errors }"
                         name="message"
@@ -92,37 +104,88 @@
                               !Boolean(Object.keys(errors).length) &&
                               Boolean(messageContent)
                             "
-                            @keyup.enter="send"
+                            @keyup.enter="send()"
                           ></v-text-field>
-                          <v-btn
-                            class="p-0"
-                            :disabled="invalid || spinner"
-                            min-width="36"
-                            outlined
-                            rounded
-                            shaped
-                            @click="send"
-                            ><svg
-                              v-if="spinner"
-                              class="h-9 w-9 animate-spin text-white"
-                              viewBox="0 0 24 24"
-                            >
-                              <circle
-                                class="opacity-25"
-                                cx="12"
-                                cy="12"
-                                r="10"
-                                stroke="currentColor"
-                                stroke-width="4"
-                              />
-                              <path
-                                class="opacity-75"
-                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                                fill="currentColor"
-                              />
-                            </svg>
-                            <v-icon v-else>{{ mdiSend }}</v-icon>
-                          </v-btn>
+                          <v-tooltip content-class="text-xs" top>
+                            <template #activator="{ on, attrs }">
+                              <v-btn
+                                v-if="isConnected"
+                                v-longclick="
+                                  () => isConnected && disconnectWeb3()
+                                "
+                                class="p-0"
+                                :disabled="spinner"
+                                min-width="36"
+                                outlined
+                                rounded
+                                v-bind="attrs"
+                                shaped
+                                v-on="on"
+                                @click="send()"
+                                ><svg
+                                  v-if="spinner"
+                                  class="h-9 w-9 animate-spin text-white"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <circle
+                                    class="opacity-25"
+                                    cx="12"
+                                    cy="12"
+                                    r="10"
+                                    stroke="currentColor"
+                                    stroke-width="4"
+                                  />
+                                  <path
+                                    class="opacity-75"
+                                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                                    fill="currentColor"
+                                  />
+                                </svg>
+                                <v-icon v-else class="pl-1">{{
+                                  mdiSend
+                                }}</v-icon>
+                              </v-btn>
+                              <v-btn
+                                v-else
+                                class="p-0"
+                                :disabled="spinner"
+                                min-width="36"
+                                outlined
+                                v-bind="attrs"
+                                rounded
+                                shaped
+                                v-on="on"
+                                @click="connectWeb3()"
+                                ><svg
+                                  v-if="spinner"
+                                  class="h-9 w-9 animate-spin text-white"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <circle
+                                    class="opacity-25"
+                                    cx="12"
+                                    cy="12"
+                                    r="10"
+                                    stroke="currentColor"
+                                    stroke-width="4"
+                                  />
+                                  <path
+                                    class="opacity-75"
+                                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                                    fill="currentColor"
+                                  />
+                                </svg>
+                                <v-icon v-else>{{ mdiConnection }}</v-icon>
+                              </v-btn>
+                            </template>
+                            <div v-if="isConnected">
+                              <div class="text-center">Click to Send</div>
+                              <div>(Long press to Disconnect)</div>
+                            </div>
+                            <div v-else>
+                              <div>Click to Connect</div>
+                            </div>
+                          </v-tooltip>
                         </div>
                       </ValidationProvider>
                     </ValidationObserver>
@@ -132,7 +195,7 @@
             </v-footer>
           </div>
           <div v-else class="flex items-center justify-center">
-            <v-btn @click="connectWeb3">Connect to Metamask</v-btn>
+            <v-btn @click="switchNetwork()">Switch Network</v-btn>
           </div>
         </div>
         <div v-else class="flex items-center justify-center">
@@ -157,59 +220,96 @@
 
   import Web3 from 'web3'
   import detectEthereumProvider from '@metamask/detect-provider'
-  import { mdiMessage, mdiSend } from '@mdi/js'
+  import { mdiConnection, mdiMessage, mdiSend } from '@mdi/js'
   import moment from 'moment'
   import 'moment-timezone'
   import { ValidationObserver, ValidationProvider } from 'vee-validate'
   import visitorsBookContractAbi from '~/data/abi/visitorsBook'
 
   export default defineComponent({
-    // components
     components: {
       ValidationProvider,
       ValidationObserver,
     },
 
-    // layout
     layout: 'footerless',
 
-    // setup
     setup() {
-      // meta
       useMeta({
         title: "Visitor's Book | ",
       })
 
-      // context
       const { $config } = useContext()
-
-      // root variables
       const { $vToastify } = getCurrentInstance().proxy
-
-      // refs
       const observer = ref(null)
       const visitorsBook = ref(null)
-
-      // envs
-      const { visitorsBookContractAddress } = $config
-
-      // constants
+      const { visitorsBookContractAddress, visitorsBookContractChainId } =
+        $config
       let web3
       let visitorsBookContract
       const provider = ref(null)
+      const hasMetamask = ref(false)
+      const onValidNetwork = ref(false)
       const isConnected = ref(false)
       const address = ref(null)
       const balance = ref(0)
       const spinner = ref(false)
       const messageContent = ref('')
       const messages = ref([])
+      const lastMessageElement = ref(null)
+      const contractMessageSentEventEmitter = ref(null)
 
-      // hooks
       onMounted(async () => {
         await setProvider()
 
-        if (provider.value) {
+        if (hasMetamask.value) {
           web3 = new Web3(provider.value)
+
+          const accounts = await web3.eth.getAccounts()
+          if (accounts.length > 0) await connect()
+
+          onValidNetwork.value =
+            // eslint-disable-next-line
+            web3.currentProvider.chainId == visitorsBookContractChainId
+
+          if (onValidNetwork.value) {
+            await getContractData()
+          }
+        }
+      })
+
+      const connectWeb3 = async () => {
+        try {
+          spinner.value = true
+          await web3.eth.requestAccounts()
+          await connect()
+          spinner.value = false
+          $vToastify.success('Connected.')
+        } catch (error) {
+          spinner.value = false
+          $vToastify.error(String(error.message))
+        }
+      }
+
+      const switchNetwork = async () => {
+        try {
+          await window.ethereum.request({
+            method: 'wallet_switchEthereumChain',
+            params: [
+              {
+                chainId:
+                  '0x' + Number(visitorsBookContractChainId).toString(16),
+              },
+            ],
+          })
+        } catch (error) {
+          $vToastify.error(String(error.message))
+        }
+      }
+
+      const getContractData = async () => {
+        try {
+          onValidNetwork.value = true
 
           visitorsBookContract = new web3.eth.Contract(
             visitorsBookContractAbi,
@@ -220,6 +320,7 @@
             .getMessages()
             .call()
 
+          messages.value = []
           for (const message of visitorsBookMessages) {
             messages.value.push({
               author: message.author,
@@ -228,42 +329,21 @@
             })
           }
 
-          visitorsBookContract.events
-            .MessageSent()
-            .on('data', handleMessageSent)
-
-          const accounts = await web3.eth.getAccounts()
-          if (accounts.length > 0) await connect()
-
-          scrollVisitorsBookDown()
-        }
-      })
-
-      // methods
-      const connectWeb3 = async () => {
-        try {
-          // if No web3 provider
-          if (!provider.value) {
-            throw new Error('No web3 provider detected.')
+          if (!contractMessageSentEventEmitter.value) {
+            contractMessageSentEventEmitter.value = visitorsBookContract.events
+              .MessageSent()
+              .on('data', handleMessageSent)
           }
 
-          // Ask to connect
-          await web3.eth.requestAccounts()
-
-          await connect()
-
-          $vToastify.success('Connected.')
+          scrollVisitorsBookDown()
         } catch (error) {
-          // User denied account access
           $vToastify.error(String(error.message))
         }
       }
 
       const connect = async () => {
-        // get address, balance etc.
         await updateUserInfo()
 
-        // Check connecting
         isConnected.value =
           (await web3.eth.net.isListening()) && provider.value.isConnected()
 
@@ -271,15 +351,16 @@
           throw new Error('Connection Error.')
         }
 
-        // started eth events
         await startEthEvents()
       }
 
       const send = async () => {
         try {
-          // validate
-          const validate = await observer.value.validate()
+          if (!isConnected.value) {
+            await connectWeb3()
+          }
 
+          const validate = await observer.value.validate()
           if (!validate) {
             throw new Error(observer.value.errors.message[0])
           }
@@ -304,44 +385,62 @@
       }
 
       const scrollVisitorsBookDown = () => {
-        visitorsBook.value.scrollTop = visitorsBook.value.scrollHeight
+        let tries = 0
+        const frequency = 1000 / 10 // 0.1 sec
+        const maxTries = (1000 / frequency) * 10 // 10 secs
+
+        if (!lastMessageElement.value) {
+          const getLastMessageInterval = setInterval(() => {
+            if (Boolean(lastMessageElement.value) || tries === maxTries) {
+              clearInterval(getLastMessageInterval)
+
+              if (tries === maxTries) {
+                $vToastify.error('Something went wrong.')
+
+                return
+              }
+
+              lastMessageElement.value[0].$el.scrollIntoView({
+                behavior: 'smooth',
+              })
+            }
+            tries++
+          }, frequency)
+        } else {
+          lastMessageElement.value[0].$el.scrollIntoView({ behavior: 'smooth' })
+        }
       }
 
       const disconnectWeb3 = async () => {
-        // reset events
+        spinner.value = true
         await stopEthEvents()
-
-        // set false to `isConnected`
+        address.value = null
+        balance.value = null
         isConnected.value = false
-
         $vToastify.success('Disconnected.')
+        spinner.value = false
       }
 
-      // Start eth events
       const startEthEvents = () => {
         provider.value.on('chainChanged', handleChainChanged)
         provider.value.on('accountsChanged', handleAccountsChanged)
         provider.value.on('disconnect', handleDisconnect)
       }
 
-      // Stop eth events
       const stopEthEvents = () => {
         provider.value.removeListener('chainChanged', handleChainChanged)
         provider.value.removeListener('accountsChanged', handleAccountsChanged)
       }
 
-      // tx prepare event
       const handleTxSent = () => {
         spinner.value = true
         $vToastify.info('Transaction Status: Transaction sent to Metamask.')
       }
 
-      // tx before create event
       const handleTxSending = () => {
         $vToastify.info('Transaction Status: Waiting to user confirm.')
       }
 
-      // tx created event
       const handleTxHash = (_txHash) => {
         $vToastify.info(
           'Transaction Status: Awaiting transaction confirmation.\n' +
@@ -349,26 +448,30 @@
         )
       }
 
-      // tx created successfully event
       const handleTxReceipt = async () => {
         $vToastify.success('Thank you for your message! - @emretepedev')
         resetInputs()
         await updateUserBalance()
       }
 
-      // tx error event
       const handleTxError = () => {
         spinner.value = false
         $vToastify.error('Transaction Status: Failed.')
       }
 
-      // eth change chain event
-      const handleChainChanged = async () => {
+      const handleChainChanged = async (chainId) => {
+        // eslint-disable-next-line
+        if (chainId != visitorsBookContractChainId) {
+          onValidNetwork.value = false
+          lastMessageElement.value = null
+        } else {
+          await getContractData()
+        }
+
         await updateUserBalance()
         $vToastify.success('Chain has changed.')
       }
 
-      // eth change account event
       const handleAccountsChanged = async (_accounts) => {
         if (_accounts.length > 0) {
           await updateUserInfo(_accounts[0])
@@ -379,14 +482,10 @@
         }
       }
 
-      // eth disconnect event
       const handleDisconnect = async () => {
-        await stopEthEvents()
-
-        isConnected.value = false
+        await disconnectWeb3()
       }
 
-      // visitor's book MessageSent event
       const handleMessageSent = (event) => {
         const message = event.returnValues[0]
 
@@ -399,29 +498,27 @@
         scrollVisitorsBookDown()
       }
 
-      // Set for web3 provider
       const setProvider = async () => {
         provider.value = await detectEthereumProvider({
           mustBeMetaMask: true,
           silent: true,
           timeout: 3000,
         })
+
+        hasMetamask.value = Boolean(provider.value)
       }
 
-      // get user address and balance
       const updateUserInfo = async (_address = null) => {
         await updateUserAddress(_address)
         await updateUserBalance()
       }
 
-      // get user address
       const updateUserAddress = async (_address = null) => {
         address.value = _address
           ? web3.utils.toChecksumAddress(_address)
           : (await web3.eth.getAccounts())[0]
       }
 
-      // get user address
       const updateUserBalance = async () => {
         balance.value = web3.utils.fromWei(
           await web3.eth.getBalance(address.value),
@@ -429,14 +526,12 @@
         )
       }
 
-      // removed fields and reset validate
       const resetInputs = () => {
         messageContent.value = ''
         spinner.value = false
         observer.value.reset()
       }
 
-      // address value formatted to user
       const formatAddressToDisplay = (_address, charCount = 4) => {
         return (
           _address.substring(0, charCount) +
@@ -445,34 +540,40 @@
         )
       }
 
-      // timestamp value formatted to user
       const formatTimestampToDisplay = (timestamp) => {
         return moment.unix(timestamp).tz('UTC').format('MM/DD/YY - HH:mm A')
       }
 
-      // balance value formatted to user
       const formatBalanceToDisplay = (_balance) => {
         return (+_balance).toFixed(6)
       }
 
-      // copy to clipboard
       const copyText = async (_text) => {
         try {
           await navigator.clipboard.writeText(_text)
           $vToastify.success('Copied')
-        } catch (error) {
-          // suppressed error
-        }
+        } catch {}
       }
 
-      // return
+      const touchStart = (arg1) => {
+        console.log('touchStart')
+        console.log(arg1)
+      }
+
+      const touchEnd = (arg1) => {
+        console.log('touchEnd')
+        console.log(arg1)
+      }
+
       return {
-        provider,
+        hasMetamask,
+        onValidNetwork,
         isConnected,
         address,
         balance,
         observer,
         spinner,
+        lastMessageElement,
         copyText,
         connectWeb3,
         disconnectWeb3,
@@ -480,31 +581,18 @@
         formatTimestampToDisplay,
         formatAddressToDisplay,
         send,
+        switchNetwork,
         messageContent,
         messages,
         visitorsBook,
+        touchStart,
+        touchEnd,
         mdiSend,
         mdiMessage,
+        mdiConnection,
       }
     },
 
-    // head
     head: {},
   })
 </script>
-
-<style>
-  .border-gradient-br-blue-green-gray-900 {
-    background: linear-gradient(to right, #18181b, #18181b),
-      linear-gradient(to bottom right, #60a5fa, #4ade80);
-    background-clip: padding-box, border-box;
-    background-origin: padding-box, border-box;
-  }
-
-  .hover\:border-gradient-tl-blue-green-gray-900:hover {
-    background: linear-gradient(to right, #18181b, #18181b),
-      linear-gradient(to top left, #60a5fa, #4ade80);
-    background-clip: padding-box, border-box;
-    background-origin: padding-box, border-box;
-  }
-</style>
