@@ -3,6 +3,6 @@ import Vue from 'vue'
 import { longClickDirective } from 'vue-long-click'
 
 export default defineNuxtPlugin(({ $config }) => {
-  const longClickInstance = longClickDirective({ delay: 1000, interval: 10000 })
+  const longClickInstance = longClickDirective({ delay: 2000, interval: 10000 })
   Vue.directive('longclick', longClickInstance)
 })
