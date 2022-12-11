@@ -17,7 +17,7 @@
                       index === messages.length - 1 ? 'lastMessageElement' : ''
                     "
                     :class="[
-                      'm-2 break-all',
+                      'break-all p-0',
                       message.author == address ? 'justify-end' : '',
                     ]"
                     shaped
