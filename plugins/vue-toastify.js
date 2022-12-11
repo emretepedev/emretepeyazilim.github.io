@@ -7,9 +7,9 @@ export default defineNuxtPlugin(() => {
     customNotifications: {
       clientError: {
         canTimeout: false,
-        errorDuration: false,
         theme: '~/assets/css/custom-toastify.scss',
       },
     },
+    position: 'top-right',
   })
 })
