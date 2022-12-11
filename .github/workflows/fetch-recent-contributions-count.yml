@@ -2,7 +2,7 @@ name: Fetch recent contributions count
 
 on:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: "0 0 * * *"
 
 env:
   NODE_ENV: ${{ secrets.NODE_ENV }}
@@ -20,6 +20,7 @@ env:
   REPOSITORY_URL: ${{ secrets.REPOSITORY_URL }}
   VISITORS_BOOK_CONTRACT_ADDRESS: ${{ secrets.VISITORS_BOOK_CONTRACT_ADDRESS }}
   VISITORS_BOOK_CONTRACT_CHAIN_ID: ${{ secrets.VISITORS_BOOK_CONTRACT_CHAIN_ID }}
+  VISITORS_BOOK_CONTRACT_CHAIN_NAME: ${{ secrets.VISITORS_BOOK_CONTRACT_CHAIN_NAME }}
 
 jobs:
   fetch-recent-contributions-count:

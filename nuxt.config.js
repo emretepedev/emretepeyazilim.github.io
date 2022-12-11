@@ -80,6 +80,8 @@ export default {
     repositoryUrl: process.env.REPOSITORY_URL,
     visitorsBookContractAddress: process.env.VISITORS_BOOK_CONTRACT_ADDRESS,
     visitorsBookContractChainId: process.env.VISITORS_BOOK_CONTRACT_CHAIN_ID,
+    visitorsBookContractChainName:
+      process.env.VISITORS_BOOK_CONTRACT_CHAIN_NAME,
     lastModifiedAt: new Date().toUTCString().replace('GMT', 'UTC'),
   },
 
