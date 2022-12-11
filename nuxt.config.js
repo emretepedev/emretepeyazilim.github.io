@@ -79,6 +79,7 @@ export default {
     txConfirmationBlocks: parseInt(process.env.TX_CONFIRMATION_BLOCKS),
     repositoryUrl: process.env.REPOSITORY_URL,
     visitorsBookContractAddress: process.env.VISITORS_BOOK_CONTRACT_ADDRESS,
+    visitorsBookContractChainId: process.env.VISITORS_BOOK_CONTRACT_CHAIN_ID,
     lastModifiedAt: new Date().toUTCString().replace('GMT', 'UTC'),
   },
 
@@ -99,6 +100,7 @@ export default {
   plugins: [
     '~/plugins/vue-gtag',
     '~/plugins/vee-validate',
+    '~/plugins/vue-long-click',
     { src: '~/plugins/vue-toastify', mode: 'client' },
   ],
 
