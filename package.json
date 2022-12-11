@@ -38,12 +38,12 @@
   "dependencies": {
     "@mdi/js": "^7.0.96",
     "@metamask/detect-provider": "^2.0.0",
-    "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/composition-api": "^0.32.0",
     "@nuxtjs/gtm": "^2.4.0",
     "@nuxtjs/recaptcha": "^1.1.1",
     "@nuxtjs/robots": "^2.5.0",
     "@nuxtjs/sitemap": "^2.4.0",
+    "axios": "^1.2.1",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.39",
     "nuxt": "^2.5.18",

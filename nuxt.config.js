@@ -123,7 +123,6 @@ export default {
     '@nuxtjs/recaptcha',
     '@nuxtjs/robots',
     '@nuxtjs/sitemap',
-    '@nuxtjs/axios',
   ],
 
   // all options https://github.com/nuxt-community/google-fonts-module/blob/master/src/module.ts#L23
