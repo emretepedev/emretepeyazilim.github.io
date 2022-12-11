@@ -19,10 +19,10 @@
               <v-card-text>
                 <div>
                   I am a passionate and curious blockchain & web developer who
-                  takes discipline seriously. In addition, I’m open-minded to
-                  learning new things about technology and software. In addition
-                  to the technical topics I am interested in, I take into
-                  account everything related to the concept of esteem.
+                  takes discipline seriously. On the other hand, I’m open-minded
+                  to learning new things about technology and software. In
+                  addition to the technical topics I am interested in, I take
+                  into account everything related to the concept of esteem.
                 </div>
               </v-card-text>
             </v-card>
