@@ -72,7 +72,7 @@
               </v-row>
             </v-container>
             <v-footer class="fixed bottom-0 left-0 right-0 p-0">
-              <v-container class="p-0">
+              <v-container class="px-2 py-1">
                 <v-row no-gutters>
                   <v-col>
                     <ValidationObserver ref="observer">
