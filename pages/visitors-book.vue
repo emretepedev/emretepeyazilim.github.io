@@ -5,7 +5,10 @@
         <div v-if="hasMetamask">
           <div v-if="onValidNetwork">
             <v-container class="box-border h-screen overflow-scroll pt-10 pb-2">
-              <v-row align="end" class="pb-10">
+              <v-row
+                align="end"
+                :style="`padding-bottom: ${rowPaddingBottom}px`"
+              >
                 <v-col>
                   <v-alert
                     v-for="(message, index) in messages"
@@ -22,46 +25,78 @@
                     <div class="flex">
                       <span
                         v-if="message.author == address"
-                        class="flex flex-col items-end text-right"
-                        ><span
-                          :class="`blue--text mr-3 max-w-lg text-left ${
-                            $vuetify.breakpoint.smAndDown ? 'text-sm' : ''
-                          }`"
-                          >{{ message.content }}</span
-                        ><span class="text-xs text-gray-400"
+                        class="relative flex flex-col items-end text-right"
+                        ><div class="flex">
+                          <span
+                            :class="`blue--text relative mr-3 max-w-screen-sm text-left ${
+                              $vuetify.breakpoint.smAndDown ? 'text-sm' : ''
+                            }`"
+                            >{{ message.content }}</span
+                          >
+                          <div class="group">
+                            <v-img
+                              class="rounded-full"
+                              :lazy-src="`https://robohash.org/${message.author}?size=8x8`"
+                              max-height="32"
+                              max-width="32"
+                              :src="`https://robohash.org/${message.author}?bgset=bg1`"
+                              v-on="on"
+                              @click="copyText(message.author)"
+                            >
+                            </v-img>
+                            <div
+                              class="absolute -top-8 right-0 hidden flex-col items-center group-hover:flex"
+                            >
+                              <span
+                                class="whitespace-no-wrap relative z-10 bg-black p-2 text-xs leading-none text-white shadow-lg"
+                              >
+                                {{ message.author }}
+                              </span>
+                              <div
+                                class="-mt-2 h-3 w-3 rotate-45 bg-black"
+                              ></div>
+                            </div>
+                          </div>
+                        </div>
+                        <span class="text-xs text-gray-400"
                           >({{
                             formatTimestampToDisplay(message.createdAt)
                           }})</span
                         >
                       </span>
-                      <v-tooltip bottom content-class="text-xs">
-                        <template #activator="{ on, attrs }">
-                          <v-img
-                            v-bind="attrs"
-                            class="rounded-full"
-                            :lazy-src="`https://robohash.org/${message.author}?size=8x8`"
-                            max-height="32"
-                            max-width="32"
-                            :src="`https://robohash.org/${message.author}?bgset=bg1`"
-                            v-on="on"
-                            @click="copyText(address)"
-                          >
-                          </v-img>
-                        </template>
-                        <span>
-                          {{ message.author }}
-                        </span>
-                      </v-tooltip>
                       <span
-                        v-if="message.author != address"
-                        class="flex max-w-lg flex-col"
+                        v-else
+                        class="relative flex max-w-screen-sm flex-col"
                       >
-                        <span
-                          :class="`blue--text ml-3 ${
-                            $vuetify.breakpoint.smAndDown ? 'text-sm' : ''
-                          }`"
-                          >{{ message.content }}</span
-                        >
+                        <div class="flex">
+                          <div class="group">
+                            <v-img
+                              class="rounded-full"
+                              :lazy-src="`https://robohash.org/${message.author}?size=8x8`"
+                              max-height="32"
+                              max-width="32"
+                              :src="`https://robohash.org/${message.author}?bgset=bg1`"
+                              v-on="on"
+                              @click="copyText(message.author)"
+                            >
+                            </v-img>
+                            <div
+                              class="absolute -top-8 hidden flex-col items-center group-hover:flex"
+                            >
+                              <span
+                                class="relative z-10 bg-black p-2 text-xs leading-none text-white shadow-lg"
+                              >
+                                {{ message.author }}
+                              </span>
+                            </div>
+                          </div>
+                          <span
+                            :class="`blue--text ml-3 ${
+                              $vuetify.breakpoint.smAndDown ? 'text-sm' : ''
+                            }`"
+                            >{{ message.content }}</span
+                          >
+                        </div>
                         <span class="text-right text-xs text-gray-400">
                           ({{ formatTimestampToDisplay(message.createdAt) }})
                         </span>
@@ -75,7 +110,7 @@
               <v-container class="px-2 py-1">
                 <v-row no-gutters>
                   <v-col>
-                    <ValidationObserver ref="observer">
+                    <ValidationObserver ref="observer" v-slot="{ invalid }">
                       <ValidationProvider
                         v-slot="{ errors }"
                         name="message"
@@ -83,26 +118,39 @@
                           required: true,
                         }"
                       >
-                        <div class="d-flex align-center flex-row">
-                          <v-text-field
+                        <div class="align-center flex flex-row">
+                          <v-textarea
+                            ref="textField"
                             v-model="messageContent"
+                            auto-grow
+                            :autofocus="isConnected"
                             class="mx-4"
+                            :clear-icon="mdiCloseCircle"
+                            clearable
                             dense
                             :error-messages="errors"
                             hide-details
-                            label="Message"
+                            label="Message*"
+                            maxlength="1000"
                             name="message"
+                            no-resize
                             outlined
-                            placeholder="Your message"
+                            :placeholder="
+                              isConnected
+                                ? 'Your message'
+                                : 'Connect to writing a message'
+                            "
                             :prepend-inner-icon="mdiMessage"
+                            :readonly="!isConnected"
                             rounded
+                            rows="3"
                             shaped
                             :success="
-                              !Boolean(Object.keys(errors).length) &&
+                              !Object.keys(errors).length &&
                               Boolean(messageContent)
                             "
-                            @keyup.enter="send()"
-                          ></v-text-field>
+                            @keyup.enter="isConnected && !invalid && send()"
+                          ></v-textarea>
                           <v-tooltip content-class="text-xs" top>
                             <template #activator="{ on, attrs }">
                               <v-btn
@@ -219,7 +267,7 @@
 
   import Web3 from 'web3'
   import detectEthereumProvider from '@metamask/detect-provider'
-  import { mdiConnection, mdiMessage, mdiSend } from '@mdi/js'
+  import { mdiCloseCircle, mdiConnection, mdiMessage, mdiSend } from '@mdi/js'
   import moment from 'moment'
   import 'moment-timezone'
   import { ValidationObserver, ValidationProvider } from 'vee-validate'
@@ -241,6 +289,8 @@
       const { $config } = useContext()
       const { $vToastify } = getCurrentInstance().proxy
       const observer = ref(null)
+      const textField = ref(null)
+      const rowPaddingBottom = ref(0)
       const {
         visitorsBookContractAddress,
         visitorsBookContractChainId,
@@ -259,11 +309,14 @@
       const messages = ref([])
       const lastMessageElement = ref(null)
       const contractMessageSentEventEmitter = ref(null)
+      const textFieldResizeObserver = ref(null)
 
       onMounted(async () => {
         await setProvider()
 
         if (hasMetamask.value) {
+          startEthEvents()
+
           web3 = new Web3(provider.value)
 
           const accounts = await web3.eth.getAccounts()
@@ -336,6 +389,12 @@
               .on('data', handleMessageSent)
           }
 
+          if (!textFieldResizeObserver.value) {
+            textFieldResizeObserver.value = new ResizeObserver(
+              handleTextFieldResize
+            ).observe(textField.value.$refs.input)
+          }
+
           scrollToLastMessage()
         } catch (error) {
           $vToastify.error(String(error.message))
@@ -351,16 +410,10 @@
         if (!isConnected.value) {
           throw new Error('Connection Error.')
         }
-
-        await startEthEvents()
       }
 
       const send = async () => {
         try {
-          if (!isConnected.value) {
-            await connectWeb3()
-          }
-
           const validate = await observer.value.validate()
           if (!validate) {
             throw new Error(observer.value.errors.message[0])
@@ -386,7 +439,7 @@
       }
 
       const scrollToLastMessage = () => {
-        if (messages.length) {
+        if (messages.value.length) {
           let tries = 0
           const frequency = 1000 / 10 // 0.1 sec
           const maxTries = (1000 / frequency) * 10 // 10 secs
@@ -418,9 +471,8 @@
         }
       }
 
-      const disconnectWeb3 = async () => {
+      const disconnectWeb3 = () => {
         spinner.value = true
-        await stopEthEvents()
         address.value = null
         balance.value = null
         isConnected.value = false
@@ -432,11 +484,6 @@
         provider.value.on('chainChanged', handleChainChanged)
         provider.value.on('accountsChanged', handleAccountsChanged)
         provider.value.on('disconnect', handleDisconnect)
-      }
-
-      const stopEthEvents = () => {
-        provider.value.removeListener('chainChanged', handleChainChanged)
-        provider.value.removeListener('accountsChanged', handleAccountsChanged)
       }
 
       const handleTxSent = () => {
@@ -562,6 +609,10 @@
         } catch {}
       }
 
+      const handleTextFieldResize = (textFieldElement) => {
+        rowPaddingBottom.value = textFieldElement[0].contentRect.height
+      }
+
       return {
         hasMetamask,
         onValidNetwork,
@@ -569,6 +620,7 @@
         address,
         balance,
         observer,
+        textField,
         spinner,
         lastMessageElement,
         copyText,
@@ -584,7 +636,9 @@
         visitorsBookContractChainName,
         mdiSend,
         mdiMessage,
+        mdiCloseCircle,
         mdiConnection,
+        rowPaddingBottom,
       }
     },
 
