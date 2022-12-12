@@ -94,7 +94,7 @@
 </template>
 
 <script>
-  import { defineComponent } from '@nuxtjs/composition-api'
+  import { defineComponent, ref } from '@nuxtjs/composition-api'
   import {
     mdiArrowCollapseLeft,
     mdiArrowCollapseRight,
@@ -104,7 +104,6 @@
   } from '@mdi/js'
 
   export default defineComponent({
-    // props
     props: {
       headers: {
         type: Array,
@@ -122,9 +121,10 @@
       },
     },
     setup() {
-      // return
+      const search = ref('')
+
       return {
-        search: '',
+        search,
         mdiArrowCollapseLeft,
         mdiArrowCollapseRight,
         mdiMagnify,

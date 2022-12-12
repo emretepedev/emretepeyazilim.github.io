@@ -7,12 +7,8 @@
       clipped-left
     >
       <v-toolbar-title class="flex items-center justify-between">
-        <v-app-bar-nav-icon
-          @click.stop="drawer = !Boolean(drawer)"
-        ></v-app-bar-nav-icon>
-        <span>
-          {{ $config.spaName }}
-        </span>
+        <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+        <span> {{ $config.spaName }}s </span>
       </v-toolbar-title>
     </v-app-bar>
     <v-navigation-drawer
@@ -34,9 +30,7 @@
               >
                 {{ mdiClose }}
               </v-icon>
-              <span v-else>
-                {{ $config.spaName }}
-              </span>
+              <span v-else> {{ $config.spaName }} </span>
               <v-icon @click="toggleNavDrawer()">
                 {{ mdiSwapHorizontal }}
               </v-icon>
@@ -73,6 +67,7 @@
   export default defineComponent({
     setup() {
       const isOnRight = ref(false)
+      const drawer = ref(false)
 
       onMounted(() => {
         isOnRight.value = Boolean(
@@ -87,7 +82,7 @@
 
       return {
         data,
-        drawer: false,
+        drawer,
         isOnRight,
         mdiClose,
         mdiSwapHorizontal,

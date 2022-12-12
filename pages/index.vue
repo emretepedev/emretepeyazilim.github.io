@@ -46,12 +46,9 @@
   import Sparkline from '~/components/Sparkline.vue'
 
   export default defineComponent({
-    // components
     components: { Sparkline },
 
-    // setup
     setup() {
-      // constants
       const graphData = ref([])
       const from = new Date()
       const to = new Date()
@@ -65,7 +62,6 @@
         }
       )
 
-      // return
       return {
         data,
         graphData,

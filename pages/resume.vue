@@ -18,23 +18,18 @@
   import LinkedInBadge from '~/components/LinkedInBadge.vue'
 
   export default defineComponent({
-    // components
     components: { Timeline, DataTable, LinkedInBadge },
 
-    // setup
     setup() {
-      // meta
       useMeta({
         title: 'Resume | ',
       })
 
-      // return
       return {
         data,
       }
     },
 
-    // head
     head: {},
   })
 </script>

@@ -38,7 +38,6 @@
   import { mdiPoll } from '@mdi/js'
 
   export default defineComponent({
-    // props
     props: {
       graphData: {
         type: Array,
@@ -56,7 +55,6 @@
       },
     },
     setup() {
-      // return
       return {
         mdiPoll,
       }
