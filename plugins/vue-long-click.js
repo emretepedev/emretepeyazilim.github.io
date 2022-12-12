@@ -2,7 +2,7 @@ import { defineNuxtPlugin } from '@nuxtjs/composition-api'
 import Vue from 'vue'
 import { longClickDirective } from 'vue-long-click'
 
-export default defineNuxtPlugin(({ $config }) => {
-  const longClickInstance = longClickDirective({ delay: 2000, interval: 10000 })
-  Vue.directive('longclick', longClickInstance)
-})
+export default defineNuxtPlugin(() =>
+  // all options https://github.com/ittus/vue-long-click#config
+  Vue.directive('longclick', longClickDirective({ delay: 1500, interval: 0 }))
+)
