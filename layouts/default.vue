@@ -23,7 +23,6 @@
 
       if (testWebsite) {
         useMeta({
-          title: 'Page not found | ',
           meta: [
             {
               hid: 'robots',
