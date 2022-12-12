@@ -92,13 +92,14 @@ export default {
   // router: https://nuxtjs.org/docs/configuration-glossary/configuration-router/
   router: {
     trailingSlash: false,
-    base: process.env.TEST_WEBSITE
-      ? '/' +
-        process.env.SPA_URL.match(
-          /(?<=https:\/\/emretepedev\.github\.io\/)\w+/i
-        )[0] +
-        '/'
-      : '/',
+    base:
+      process.env.TEST_WEBSITE === 'true'
+        ? '/' +
+          process.env.SPA_URL.match(
+            /(?<=https:\/\/emretepedev\.github\.io\/)\w+/i
+          )[0] +
+          '/'
+        : '/',
   },
 
   // generate: https://nuxtjs.org/docs/configuration-glossary/configuration-generate/
