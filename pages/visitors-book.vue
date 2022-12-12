@@ -5,14 +5,14 @@
         <div v-if="hasMetamask">
           <div v-if="onValidNetwork">
             <v-container
-              class="box-border h-screen overflow-scroll pb-2"
+              class="box-border h-screen overflow-y-scroll scrollbar-thin scrollbar-track-dark-gray scrollbar-thumb-black scrollbar-track-rounded-full scrollbar-thumb-rounded-full"
               :class="$vuetify.breakpoint.mdAndDown ? 'pt-14' : ''"
             >
               <v-row
                 align="end"
                 :style="`padding-bottom: ${rowPaddingBottom}px`"
               >
-                <v-col :class="!$vuetify.breakpoint.smAndDown ? 'pb-0' : ''">
+                <v-col>
                   <v-alert
                     v-for="(message, index) in messages"
                     :key="index"
@@ -149,6 +149,7 @@
                               !Object.keys(errors).length &&
                               Boolean(messageContent)
                             "
+                            @keydown.enter.prevent
                             @keyup.enter="isConnected && !invalid && send()"
                           ></v-textarea>
                           <v-tooltip content-class="text-xs" top>
@@ -156,10 +157,7 @@
                               <v-btn
                                 v-if="isConnected"
                                 v-longclick="
-                                  () =>
-                                    isConnected &&
-                                    !disconnectWeb3() &&
-                                    scrollToLastMessage()
+                                  () => isConnected && disconnectWeb3()
                                 "
                                 class="p-0"
                                 :disabled="spinner"
@@ -199,7 +197,6 @@
                                 :disabled="spinner"
                                 min-width="36"
                                 outlined
-                                v-bind="attrs"
                                 rounded
                                 shaped
                                 v-on="on"
@@ -559,7 +556,11 @@
           content: message.content,
         })
 
-        scrollToLastMessage()
+        if (message.author === address.value) {
+          scrollToLastMessage()
+        }
+
+        $vToastify.success(`New message received from ${message.author}.`)
       }
 
       const setProvider = async () => {

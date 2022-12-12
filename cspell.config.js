@@ -15,7 +15,7 @@ module.exports = {
     'inbug',
     'anothr',
     'mythril',
-    'noncompatible',
+    'nocompatible',
   ],
 
   ignoreWords: ['emretepedev', 'emre', 'tepe', 'osmangazi', 'bixos'],
