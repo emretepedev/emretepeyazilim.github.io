@@ -65,7 +65,7 @@ export default {
   },
 
   // global css: https://go.nuxtjs.dev/config-css
-  css: ['@/assets/css/main.css'],
+  css: ['@/assets/css/main.css', '@/assets/css/fonts.css'],
 
   // use runtime config instead of env https://nuxtjs.org/docs/directory-structure/nuxt-config/#publicruntimeconfig
   publicRuntimeConfig: {
