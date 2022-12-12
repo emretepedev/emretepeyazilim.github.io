@@ -46,7 +46,11 @@
       </v-list-item>
       <v-divider></v-divider>
       <v-list active-class="text--red" dense nav>
-        <nuxt-link v-for="page in data.pages" :key="page.title" :to="page.to">
+        <nuxt-link
+          v-for="(page, index) in data.pages"
+          :key="index"
+          :to="page.to"
+        >
           <v-list-item link>
             <v-list-item-icon>
               <v-icon>{{ page.icon }}</v-icon>
@@ -67,12 +71,9 @@
   import data from '~/data/components/header'
 
   export default defineComponent({
-    // setup
     setup() {
-      // constants
       const isOnRight = ref(false)
 
-      // hooks
       onMounted(() => {
         isOnRight.value = Boolean(
           JSON.parse(window.localStorage.getItem('isOnRight'))
@@ -84,7 +85,6 @@
         localStorage.setItem('isOnRight', isOnRight.value)
       }
 
-      // return
       return {
         data,
         drawer: false,

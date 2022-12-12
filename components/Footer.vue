@@ -5,8 +5,8 @@
       <v-card class="w-full text-center text-white" flat ripple tile>
         <v-card-text>
           <v-btn
-            v-for="social in data.socials"
-            :key="social.href"
+            v-for="(social, index) in data.socials"
+            :key="index"
             class="mx-4 text-white"
             :href="social.href"
             icon
@@ -47,9 +47,7 @@
   import data from '~/data/components/footer'
 
   export default defineComponent({
-    // setup
     setup() {
-      // return
       return {
         data,
       }
