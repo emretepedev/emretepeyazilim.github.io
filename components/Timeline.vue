@@ -4,8 +4,8 @@
     :reverse="$vuetify.breakpoint.smAndDown"
   >
     <v-timeline-item
-      v-for="item in items"
-      :key="item.name"
+      v-for="(item, index) in items"
+      :key="index"
       color="transparent"
       small
     >
