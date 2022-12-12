@@ -36,6 +36,12 @@ export default {
         removeEmptyElements: true,
       },
     },
+    postcss: {
+      plugins: {
+        tailwindcss: {},
+        autoprefixer: {},
+      },
+    },
     devtools: false,
     transpile: ['vee-validate/dist/rules'],
     extractCSS: {
@@ -122,7 +128,7 @@ export default {
     'nuxt-purgecss',
     '@nuxtjs/pwa',
     '@nuxt/image',
-    '@nuxtjs/tailwindcss',
+    '@nuxt/postcss8',
     '@nuxtjs/vuetify',
   ],
 
@@ -196,11 +202,6 @@ export default {
         'Emre Tepe is a young, ambitious and open-minded Web and Blockchain Developer who seriously cares about discipline. He likes following the pace of new technology.',
       background_color: '#1E1E1E',
     },
-  },
-
-  // all options https://tailwindcss.nuxtjs.org/options/
-  tailwindcss: {
-    viewer: false,
   },
 
   // all options https://github.com/nuxt-community/vuetify-module/blob/master/src/options.ts#L37
