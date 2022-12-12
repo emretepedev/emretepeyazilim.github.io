@@ -344,7 +344,7 @@
           $vToastify.success('Connected.')
         } catch (error) {
           spinner.value = false
-          $vToastify.error(String(error.message))
+          $vToastify.error(String(error?.message))
         }
       }
 
@@ -360,7 +360,7 @@
             ],
           })
         } catch (error) {
-          $vToastify.error(String(error.message))
+          $vToastify.error(String(error?.message))
         }
       }
 
@@ -395,12 +395,14 @@
           if (!textFieldResizeObserver.value) {
             textFieldResizeObserver.value = new ResizeObserver(
               handleTextFieldResize
-            ).observe(textField.value.$refs.input)
+            ).observe(textField.value?.$refs.input)
           }
 
           scrollToLastMessage()
         } catch (error) {
-          $vToastify.error(String(error.message))
+          if (!error?.message.includes('ResizeObserver')) {
+            $vToastify.error(String(error?.message))
+          }
         }
       }
 
@@ -459,7 +461,7 @@
                 }
 
                 setTimeout(function () {
-                  lastMessageElement.value[0].$el.scrollIntoView({
+                  lastMessageElement.value[0]?.$el?.scrollIntoView({
                     behavior: 'smooth',
                     block: 'start',
                   })
@@ -469,7 +471,7 @@
             }, frequency)
           } else {
             setTimeout(function () {
-              lastMessageElement.value[0].$el.scrollIntoView({
+              lastMessageElement.value[0]?.$el?.scrollIntoView({
                 behavior: 'smooth',
                 block: 'start',
               })
