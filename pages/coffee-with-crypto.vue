@@ -110,8 +110,8 @@
               </v-row>
             </ValidationObserver>
             <div class="mt-5 text-center text-sm">
-              Note: Never mind the coffee. As a developer, I prefer testnet
-              tokens which are main :)
+              Note: Never mind the coffee. As a developer, I prefer Testnet
+              coins for testing :)
             </div>
             <div
               class="mt-5 flex flex-col items-center space-y-1 text-center text-sm"

@@ -2,12 +2,12 @@
   <v-container>
     <v-divider></v-divider>
     <v-footer padless>
-      <v-card class="white--text w-full text-center" flat ripple tile>
+      <v-card class="w-full text-center text-white" flat ripple tile>
         <v-card-text>
           <v-btn
             v-for="social in data.socials"
             :key="social.href"
-            class="white--text mx-4"
+            class="mx-4 text-white"
             :href="social.href"
             icon
             target="_blank"
@@ -20,7 +20,7 @@
             </v-icon>
           </v-btn>
         </v-card-text>
-        <v-card-text class="white--text pt-0">
+        <v-card-text class="pt-0 text-white">
           This website is made with <strong>Vue</strong>,
           <strong>Vuetify</strong>, <strong>Nuxt</strong>,
           <strong>Tailwind</strong> and
@@ -33,7 +33,7 @@
           Last modified at: {{ $config.lastModifiedAt }}
         </v-card-subtitle>
         <v-divider></v-divider>
-        <v-card-text class="white--text">
+        <v-card-text class="text-white">
           {{ new Date().getFullYear() }} —
           <strong>{{ $config.spaName }}</strong>
         </v-card-text>
