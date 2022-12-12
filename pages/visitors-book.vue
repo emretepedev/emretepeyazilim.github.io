@@ -659,11 +659,3 @@
     head: {},
   })
 </script>
-
-<style>
-  html,
-  body {
-    overflow-x: hidden;
-    overflow-y: hidden;
-  }
-</style>
