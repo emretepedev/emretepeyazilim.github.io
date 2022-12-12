@@ -31,7 +31,7 @@
                         class="relative flex flex-col items-end text-right"
                         ><div class="flex">
                           <span
-                            :class="`blue--text relative my-auto mr-3 max-w-screen-sm text-left ${
+                            :class="`relative my-auto mr-3 max-w-screen-sm text-left ${
                               $vuetify.breakpoint.smAndDown ? 'text-sm' : ''
                             }`"
                             >{{ message.content }}</span
@@ -47,7 +47,7 @@
                             >
                             </v-img>
                             <div
-                              class="absolute -top-8 right-0 hidden flex-col items-center group-hover:flex"
+                              class="invisible absolute -top-8 right-0 flex-col items-center opacity-0 transition-opacity duration-500 ease-in-out group-hover:visible group-hover:opacity-100"
                             >
                               <span
                                 class="relative z-10 bg-black p-2 text-xs leading-none text-white shadow-lg"
@@ -82,7 +82,7 @@
                             >
                             </v-img>
                             <div
-                              class="absolute -top-8 hidden flex-col items-center group-hover:flex"
+                              class="invisible absolute -top-8 flex-col items-center opacity-0 transition-opacity duration-500 ease-in-out group-hover:visible group-hover:opacity-100"
                             >
                               <span
                                 class="relative z-10 bg-black p-2 text-xs leading-none text-white shadow-lg"
@@ -92,7 +92,7 @@
                             </div>
                           </div>
                           <span
-                            :class="`blue--text my-auto ml-3 ${
+                            :class="`my-auto ml-3 ${
                               $vuetify.breakpoint.smAndDown ? 'text-sm' : ''
                             }`"
                             >{{ message.content }}</span
