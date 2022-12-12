@@ -8,19 +8,31 @@
 </template>
 
 <script>
-  import { defineComponent } from '@nuxtjs/composition-api'
+  import { defineComponent, useContext, useMeta } from '@nuxtjs/composition-api'
   import Header from '~/components/Header.vue'
 
   export default defineComponent({
     // eslint-disable-next-line vue/no-reserved-component-names
     components: { Header },
+
+    setup() {
+      const { $config } = useContext()
+      const { testWebsite } = $config
+
+      if (testWebsite) {
+        useMeta({
+          title: 'Page not found | ',
+          meta: [
+            {
+              hid: 'robots',
+              name: 'robots',
+              content: 'noindex, nofollow',
+            },
+          ],
+        })
+      }
+    },
+
+    head: {},
   })
 </script>
-
-<style>
-  /* *,
-  *::after,
-  *::before {
-    box-sizing: border-box !important;
-  } */
-</style>

@@ -82,6 +82,7 @@ export default {
     visitorsBookContractChainId: process.env.VISITORS_BOOK_CONTRACT_CHAIN_ID,
     visitorsBookContractChainName:
       process.env.VISITORS_BOOK_CONTRACT_CHAIN_NAME,
+    testWebsite: process.env.TEST_WEBSITE,
     lastModifiedAt: new Date().toUTCString().replace('GMT', 'UTC'),
   },
 

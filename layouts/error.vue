@@ -29,9 +29,7 @@
   import { mdiArrowRightThin } from '@mdi/js'
 
   export default defineComponent({
-    // setup
     setup() {
-      // meta
       useMeta({
         title: 'Page not found | ',
         meta: [
@@ -43,7 +41,6 @@
         ],
       })
 
-      // return
       return {
         mdiArrowRightThin,
       }
