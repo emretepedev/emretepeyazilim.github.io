@@ -9,13 +9,13 @@ module.exports = {
     'nuxtjs',
     'vuetify',
     'vuepress',
-    'jscoverage',
     'toastify',
-    // project
+    'jscoverage',
     'noindex',
     'inbug',
     'anothr',
     'mythril',
+    'noncompatible',
   ],
 
   ignoreWords: ['emretepedev', 'emre', 'tepe', 'osmangazi', 'bixos'],
