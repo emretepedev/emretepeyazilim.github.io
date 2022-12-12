@@ -4,12 +4,15 @@
       <v-container class="py-0">
         <div v-if="hasMetamask">
           <div v-if="onValidNetwork">
-            <v-container class="box-border h-screen overflow-scroll pt-10 pb-2">
+            <v-container
+              class="box-border h-screen overflow-scroll pb-2"
+              :class="$vuetify.breakpoint.mdAndDown ? 'pt-14' : ''"
+            >
               <v-row
                 align="end"
                 :style="`padding-bottom: ${rowPaddingBottom}px`"
               >
-                <v-col>
+                <v-col :class="!$vuetify.breakpoint.smAndDown ? 'pb-0' : ''">
                   <v-alert
                     v-for="(message, index) in messages"
                     :key="index"
@@ -28,7 +31,7 @@
                         class="relative flex flex-col items-end text-right"
                         ><div class="flex">
                           <span
-                            :class="`blue--text relative mr-3 max-w-screen-sm text-left ${
+                            :class="`blue--text relative my-auto mr-3 max-w-screen-sm text-left ${
                               $vuetify.breakpoint.smAndDown ? 'text-sm' : ''
                             }`"
                             >{{ message.content }}</span
@@ -36,19 +39,18 @@
                           <div class="group">
                             <v-img
                               class="rounded-full"
+                              height="36"
                               :lazy-src="`https://robohash.org/${message.author}?size=8x8`"
-                              max-height="32"
-                              max-width="32"
                               :src="`https://robohash.org/${message.author}?bgset=bg1`"
-                              v-on="on"
-                              @click="copyText(message.author)"
+                              width="36"
+                              @click="copyToAddress(message.author)"
                             >
                             </v-img>
                             <div
                               class="absolute -top-8 right-0 hidden flex-col items-center group-hover:flex"
                             >
                               <span
-                                class="whitespace-no-wrap relative z-10 bg-black p-2 text-xs leading-none text-white shadow-lg"
+                                class="relative z-10 bg-black p-2 text-xs leading-none text-white shadow-lg"
                               >
                                 {{ message.author }}
                               </span>
@@ -72,12 +74,11 @@
                           <div class="group">
                             <v-img
                               class="rounded-full"
+                              height="36"
                               :lazy-src="`https://robohash.org/${message.author}?size=8x8`"
-                              max-height="32"
-                              max-width="32"
                               :src="`https://robohash.org/${message.author}?bgset=bg1`"
-                              v-on="on"
-                              @click="copyText(message.author)"
+                              width="36"
+                              @click="copyToAddress(message.author)"
                             >
                             </v-img>
                             <div
@@ -91,7 +92,7 @@
                             </div>
                           </div>
                           <span
-                            :class="`blue--text ml-3 ${
+                            :class="`blue--text my-auto ml-3 ${
                               $vuetify.breakpoint.smAndDown ? 'text-sm' : ''
                             }`"
                             >{{ message.content }}</span
@@ -123,7 +124,6 @@
                             ref="textField"
                             v-model="messageContent"
                             auto-grow
-                            :autofocus="isConnected"
                             class="mx-4"
                             :clear-icon="mdiCloseCircle"
                             clearable
@@ -131,7 +131,7 @@
                             :error-messages="errors"
                             hide-details
                             label="Message*"
-                            maxlength="1000"
+                            maxlength="1024"
                             name="message"
                             no-resize
                             outlined
@@ -143,7 +143,7 @@
                             :prepend-inner-icon="mdiMessage"
                             :readonly="!isConnected"
                             rounded
-                            rows="3"
+                            rows="1"
                             shaped
                             :success="
                               !Object.keys(errors).length &&
@@ -152,21 +152,24 @@
                             @keyup.enter="isConnected && !invalid && send()"
                           ></v-textarea>
                           <v-tooltip content-class="text-xs" top>
-                            <template #activator="{ on, attrs }">
+                            <template #activator="{ on }">
                               <v-btn
                                 v-if="isConnected"
                                 v-longclick="
-                                  () => isConnected && disconnectWeb3()
+                                  () =>
+                                    isConnected &&
+                                    !disconnectWeb3() &&
+                                    scrollToLastMessage()
                                 "
                                 class="p-0"
                                 :disabled="spinner"
                                 min-width="36"
                                 outlined
                                 rounded
-                                v-bind="attrs"
                                 shaped
                                 v-on="on"
                                 @click="send()"
+                                @contextmenu.prevent
                                 ><svg
                                   v-if="spinner"
                                   class="h-9 w-9 animate-spin text-white"
@@ -201,6 +204,7 @@
                                 shaped
                                 v-on="on"
                                 @click="connectWeb3()"
+                                @contextmenu.prevent
                                 ><svg
                                   v-if="spinner"
                                   class="h-9 w-9 animate-spin text-white"
@@ -223,11 +227,14 @@
                                 <v-icon v-else>{{ mdiConnection }}</v-icon>
                               </v-btn>
                             </template>
-                            <div v-if="isConnected">
-                              <div class="text-center">Click to Send</div>
-                              <div>(Long press to Disconnect)</div>
+                            <div v-if="isConnected" class="text-center">
+                              <div>Click to Send</div>
+                              <div>
+                                (Long touch or press Left/Right Click to
+                                Disconnect)
+                              </div>
                             </div>
-                            <div v-else>
+                            <div v-else class="text-center">
                               <div>Click to Connect</div>
                             </div>
                           </v-tooltip>
@@ -264,7 +271,6 @@
     useContext,
     useMeta,
   } from '@nuxtjs/composition-api'
-
   import Web3 from 'web3'
   import detectEthereumProvider from '@metamask/detect-provider'
   import { mdiCloseCircle, mdiConnection, mdiMessage, mdiSend } from '@mdi/js'
@@ -455,18 +461,22 @@
                   return
                 }
 
-                lastMessageElement.value[0].$el.scrollIntoView({
-                  behavior: 'smooth',
-                })
+                setTimeout(function () {
+                  lastMessageElement.value[0].$el.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start',
+                  })
+                }, 250)
               }
               tries++
             }, frequency)
           } else {
-            lastMessageElement.value[0].$el.scrollIntoView({
-              behavior: 'smooth',
-              block: 'end',
-              inline: 'nearest',
-            })
+            setTimeout(function () {
+              lastMessageElement.value[0].$el.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start',
+              })
+            }, 250)
           }
         }
       }
@@ -602,10 +612,10 @@
         return (+_balance).toFixed(6)
       }
 
-      const copyText = async (_text) => {
+      const copyToAddress = async (address) => {
         try {
-          await navigator.clipboard.writeText(_text)
-          $vToastify.success('Copied')
+          await navigator.clipboard.writeText(address)
+          $vToastify.success(`Address ${address} copied.`)
         } catch {}
       }
 
@@ -623,7 +633,7 @@
         textField,
         spinner,
         lastMessageElement,
-        copyText,
+        copyToAddress,
         connectWeb3,
         disconnectWeb3,
         formatBalanceToDisplay,
@@ -639,9 +649,18 @@
         mdiCloseCircle,
         mdiConnection,
         rowPaddingBottom,
+        scrollToLastMessage,
       }
     },
 
     head: {},
   })
 </script>
+
+<style>
+  html,
+  body {
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
+</style>
