@@ -30,6 +30,9 @@ module.exports = {
         'logo-green': '#1A721F',
         'dark-logo-green': '#1d581d',
       },
+      zIndex: {
+        max: '99999',
+      },
     },
   },
 

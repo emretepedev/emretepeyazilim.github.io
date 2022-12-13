@@ -13,14 +13,14 @@
           </div>
         </div>
       </div>
-      <nuxt-link to="/">
+      <NuxtLink to="/">
         <span class="text-logo-green hover:text-dark-logo-green"
           >Go back home</span
         >
         <v-btn color="green darken-2" icon text>
           <v-icon>{{ mdiArrowRightThin }}</v-icon>
         </v-btn>
-      </nuxt-link>
+      </NuxtLink>
     </div>
   </div>
 </template>

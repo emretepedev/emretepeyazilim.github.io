@@ -8,17 +8,18 @@
     >
       <v-toolbar-title class="flex items-center justify-between">
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-        <span> {{ $config.spaName }}s </span>
+        <span> {{ $config.spaName }} </span>
       </v-toolbar-title>
     </v-app-bar>
     <v-navigation-drawer
       v-model="drawer"
       app
+      class="z-max"
       clipped
       :expand-on-hover="!$vuetify.breakpoint.mdAndDown"
       :permanent="!$vuetify.breakpoint.mdAndDown"
       :right="isOnRight"
-      style="z-index: 99999 !important"
+      width="196"
     >
       <v-list-item>
         <v-list-item-content>
@@ -26,7 +27,7 @@
             <span class="flex justify-between">
               <v-icon
                 v-if="$vuetify.breakpoint.mdAndDown"
-                @click.stop="drawer = !Boolean(drawer)"
+                @click.stop="drawer = !drawer"
               >
                 {{ mdiClose }}
               </v-icon>
@@ -39,35 +40,82 @@
         </v-list-item-content>
       </v-list-item>
       <v-divider></v-divider>
-      <v-list active-class="text--red" dense nav>
-        <nuxt-link
+      <v-list dense nav shaped>
+        <NuxtLink
           v-for="(page, index) in data.pages"
           :key="index"
           :to="page.to"
         >
-          <v-list-item link>
-            <v-list-item-icon>
+          <v-list-item
+            :class="activePath === page.to ? 'bg-dark-gray' : ''"
+            link
+          >
+            <v-list-item-icon class="mr-2">
               <v-icon>{{ page.icon }}</v-icon>
             </v-list-item-icon>
-            <v-list-item-title>
-              {{ page.title }}
-            </v-list-item-title>
+            <v-list-item-content>
+              <v-list-item-title>
+                {{ page.title }}
+              </v-list-item-title>
+            </v-list-item-content>
           </v-list-item>
-        </nuxt-link>
+        </NuxtLink>
+        <a :href="otherWebsiteVersion.to" target="_blank">
+          <v-list-item link>
+            <v-list-item-icon class="mr-2">
+              <v-icon>{{ otherWebsiteVersion.icon }}</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>
+                {{ otherWebsiteVersion.title }}
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </a>
       </v-list>
     </v-navigation-drawer>
   </div>
 </template>
 
 <script>
-  import { defineComponent, onMounted, ref } from '@nuxtjs/composition-api'
-  import { mdiClose, mdiSwapHorizontal } from '@mdi/js'
+  import {
+    computed,
+    defineComponent,
+    onMounted,
+    ref,
+    useContext,
+    useRoute,
+  } from '@nuxtjs/composition-api'
+  import {
+    mdiClose,
+    mdiSwapHorizontal,
+    mdiTestTube,
+    mdiTestTubeOff,
+  } from '@mdi/js'
   import data from '~/data/components/header'
 
   export default defineComponent({
     setup() {
+      const { $config } = useContext()
+      const route = useRoute()
+      const { testWebsite } = $config
       const isOnRight = ref(false)
       const drawer = ref(false)
+
+      const otherWebsiteVersion = computed(() =>
+        testWebsite
+          ? {
+              title: '~/live-version',
+              to: window.location.origin,
+              icon: mdiTestTubeOff,
+            }
+          : {
+              title: '~/dev-version',
+              to: '/develop',
+              icon: mdiTestTube,
+            }
+      )
+      const activePath = computed(() => route.value.path)
 
       onMounted(() => {
         isOnRight.value = Boolean(
@@ -84,9 +132,14 @@
         data,
         drawer,
         isOnRight,
+        testWebsite,
+        toggleNavDrawer,
+        otherWebsiteVersion,
+        activePath,
         mdiClose,
         mdiSwapHorizontal,
-        toggleNavDrawer,
+        mdiTestTube,
+        mdiTestTubeOff,
       }
     },
   })
