@@ -269,7 +269,6 @@
     useMeta,
   } from '@nuxtjs/composition-api'
   import Web3 from 'web3'
-  import detectEthereumProvider from '@metamask/detect-provider'
   import { mdiCloseCircle, mdiConnection, mdiMessage, mdiSend } from '@mdi/js'
   import moment from 'moment'
   import 'moment-timezone'
@@ -299,10 +298,8 @@
         visitorsBookContractChainId,
         visitorsBookContractChainName,
       } = $config
-      let web3
       let visitorsBookContract
-      const provider = ref(null)
-      const hasMetamask = ref(false)
+      const hasMetamask = Boolean(window.ethereum)
       const onValidNetwork = ref(false)
       const isConnected = ref(false)
       const address = ref(null)
@@ -312,14 +309,11 @@
       const lastMessageElement = ref(null)
       const contractMessageSentEventEmitter = ref(null)
       const textFieldResizeObserver = ref(null)
+      const web3 = new Web3(window.ethereum)
 
       onMounted(async () => {
-        await setProvider()
-
-        if (hasMetamask.value) {
+        if (hasMetamask) {
           startEthEvents()
-
-          web3 = new Web3(provider.value)
 
           const accounts = await web3.eth.getAccounts()
           if (accounts.length > 0) await connect()
@@ -406,14 +400,14 @@
       }
 
       const connect = async () => {
-        await updateUserInfo()
-
         isConnected.value =
-          (await web3.eth.net.isListening()) && provider.value.isConnected()
+          (await web3.eth.net.isListening()) && window.ethereum.isConnected()
 
         if (!isConnected.value) {
           throw new Error('Connection Error.')
         }
+
+        await updateUserInfo()
       }
 
       const send = async () => {
@@ -488,9 +482,9 @@
       }
 
       const startEthEvents = () => {
-        provider.value.on('chainChanged', handleChainChanged)
-        provider.value.on('accountsChanged', handleAccountsChanged)
-        provider.value.on('disconnect', handleDisconnect)
+        window.ethereum.on('chainChanged', handleChainChanged)
+        window.ethereum.on('accountsChanged', handleAccountsChanged)
+        window.ethereum.on('disconnect', handleDisconnect)
       }
 
       const handleTxSent = () => {
@@ -559,16 +553,6 @@
         }
 
         $vToastify.success(`New message received from ${message.author}.`)
-      }
-
-      const setProvider = async () => {
-        provider.value = await detectEthereumProvider({
-          mustBeMetaMask: true,
-          silent: true,
-          timeout: 3000,
-        })
-
-        hasMetamask.value = Boolean(provider.value)
       }
 
       const updateUserInfo = async (address = null) => {
