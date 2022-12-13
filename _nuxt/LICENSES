@@ -5,21 +5,6 @@
  */
 
 
-//! Copyright (c) JS Foundation and other contributors
-
-//! github.com/moment/moment-timezone
-
-//! license : MIT
-
-//! moment-timezone.js
-
-//! moment.js
-
-//! moment.js locale configuration
-
-//! version : 0.5.40
-
-
 /*!
  * vue-client-only v0.0.0-semantic-release
  * (c) 2021-present egoist <0x142857@gmail.com>
@@ -104,3 +89,18 @@ object-assign
  * @copyright Chen, Yi-Cyuan 2015-2018
  * @license MIT
  */
+
+
+//! Copyright (c) JS Foundation and other contributors
+
+//! github.com/moment/moment-timezone
+
+//! license : MIT
+
+//! moment-timezone.js
+
+//! moment.js
+
+//! moment.js locale configuration
+
+//! version : 0.5.40
