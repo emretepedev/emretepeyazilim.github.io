@@ -306,7 +306,6 @@
       const onValidNetwork = ref(false)
       const isConnected = ref(false)
       const address = ref(null)
-      const balance = ref(0)
       const spinner = ref(false)
       const messageContent = ref('')
       const messages = ref([])
@@ -483,7 +482,6 @@
       const disconnectWeb3 = () => {
         spinner.value = true
         address.value = null
-        balance.value = null
         isConnected.value = false
         $vToastify.success('Disconnected.')
         spinner.value = false
@@ -504,17 +502,16 @@
         $vToastify.info('Transaction Status: Waiting to user confirm.')
       }
 
-      const handleTxHash = (_txHash) => {
+      const handleTxHash = (txHash) => {
         $vToastify.info(
           'Transaction Status: Awaiting transaction confirmation.\n' +
-            `Tx Hash: ${_txHash}`
+            `Tx Hash: ${txHash}`
         )
       }
 
-      const handleTxReceipt = async () => {
-        $vToastify.success('Thank you for your message! - @emretepedev')
+      const handleTxReceipt = () => {
         resetInputs()
-        await updateUserBalance()
+        $vToastify.success('Thank you for your message! - @emretepedev')
       }
 
       const handleTxError = () => {
@@ -531,15 +528,14 @@
           await getContractData()
         }
 
-        await updateUserBalance()
         $vToastify.success('Chain has changed.')
       }
 
-      const handleAccountsChanged = async (_accounts) => {
-        if (_accounts.length > 0) {
-          await updateUserInfo(_accounts[0])
+      const handleAccountsChanged = async (accounts) => {
+        if (accounts.length > 0) {
+          await updateUserInfo(accounts[0])
 
-          $vToastify.success(`Linked account changed to '${_accounts[0]}'`)
+          $vToastify.success(`Linked account changed to '${accounts[0]}'`)
         } else {
           await disconnectWeb3()
         }
@@ -575,9 +571,8 @@
         hasMetamask.value = Boolean(provider.value)
       }
 
-      const updateUserInfo = async (_address = null) => {
-        await updateUserAddress(_address)
-        await updateUserBalance()
+      const updateUserInfo = async (address = null) => {
+        await updateUserAddress(address)
       }
 
       const updateUserAddress = async (_address = null) => {
@@ -586,34 +581,14 @@
           : (await web3.eth.getAccounts())[0]
       }
 
-      const updateUserBalance = async () => {
-        balance.value = web3.utils.fromWei(
-          await web3.eth.getBalance(address.value),
-          'ether'
-        )
-      }
-
       const resetInputs = () => {
         messageContent.value = ''
         spinner.value = false
         observer.value.reset()
       }
 
-      const formatAddressToDisplay = (_address, charCount = 4) => {
-        return (
-          _address.substring(0, charCount) +
-          '...' +
-          _address.substring(_address.length - charCount)
-        )
-      }
-
-      const formatTimestampToDisplay = (timestamp) => {
-        return moment.unix(timestamp).tz('UTC').format('MM/DD/YY - HH:mm A')
-      }
-
-      const formatBalanceToDisplay = (_balance) => {
-        return (+_balance).toFixed(6)
-      }
+      const formatTimestampToDisplay = (timestamp) =>
+        moment.unix(timestamp).tz('UTC').format('MM/DD/YY - HH:mm A')
 
       const copyToAddress = async (address) => {
         try {
@@ -631,7 +606,6 @@
         onValidNetwork,
         isConnected,
         address,
-        balance,
         observer,
         textField,
         spinner,
@@ -639,9 +613,7 @@
         copyToAddress,
         connectWeb3,
         disconnectWeb3,
-        formatBalanceToDisplay,
         formatTimestampToDisplay,
-        formatAddressToDisplay,
         send,
         switchNetwork,
         messageContent,
