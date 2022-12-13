@@ -3,7 +3,7 @@ export default {
   target: 'static',
 
   // ssr property: https://go.nuxtjs.dev/config-ssr
-  ssr: true,
+  ssr: false,
 
   // dev property: https://nuxtjs.org/docs/configuration-glossary/configuration-dev
   dev: false,
@@ -81,7 +81,7 @@ export default {
     googleRecaptchaV2SiteKey: process.env.GOOGLE_RECAPTCHA_V2_SITE_KEY,
     googleRecaptchaV2Size: 'v2-normal',
     googleAnalytics4Id: process.env.GOOGLE_ANALYTICS_4_ID,
-    ownerAddress: process.env.OWNER_ADDRESS.toLowerCase(),
+    ownerAddress: process.env.OWNER_ADDRESS,
     txConfirmationBlocks: parseInt(process.env.TX_CONFIRMATION_BLOCKS),
     repositoryUrl: process.env.REPOSITORY_URL,
     visitorsBookContractAddress: process.env.VISITORS_BOOK_CONTRACT_ADDRESS,
