@@ -5,12 +5,12 @@
         class="flex w-full justify-center rounded-t-xl py-2 md:py-5"
         style="background: #39424f"
       >
-        <nuxt-img
+        <v-img
           alt="LinkedIn"
           class="select-none"
+          contain
           :height="$vuetify.breakpoint.smAndDown ? '25' : '37.5'"
-          provider="static"
-          src="/images/linkedin.svg"
+          src="images/linkedin.svg"
           style="
             filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(87deg)
               brightness(99%) contrast(104%);
@@ -22,12 +22,11 @@
       <div
         class="flex w-full flex-col items-center justify-center rounded-b-xl bg-black p-5"
       >
-        <nuxt-img
+        <v-img
           alt="@emretepedev"
           class="inline rounded-full"
           height="100"
-          provider="static"
-          src="/images/avatar.png"
+          src="images/avatar.png"
           title="@emretepedev"
           width="100"
         />

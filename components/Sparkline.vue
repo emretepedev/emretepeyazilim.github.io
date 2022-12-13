@@ -1,17 +1,14 @@
 <template>
   <v-card class="overflow-y-auto" outlined ripple>
     <v-card-title>
-      <v-spacer v-if="$vuetify.breakpoint.mdAndDown"></v-spacer>
-      <v-icon>
+      <v-icon left>
         {{ mdiPoll }}
       </v-icon>
-    </v-card-title>
-    <v-card-subtitle class="text-center">
-      <div class="text-caption grey--text text-uppercase">
+      <div class="text-caption grey--text text-uppercase mx-auto">
         contributions in the last
         <strong>30 days</strong>
       </div>
-    </v-card-subtitle>
+    </v-card-title>
     <v-sheet color="transparent">
       <v-sparkline
         auto-draw

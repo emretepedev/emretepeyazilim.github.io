@@ -35,15 +35,17 @@
     </template>
     <template #[`item.image`]="{ item }">
       <div class="flex items-center justify-center">
-        <nuxt-img
+        <v-img
           :alt="item.name"
           class="select-none"
-          fix="cover"
-          height="32"
-          :src="`/icons/skills/${item.image}`"
+          contain
+          height="28"
+          max-height="28"
+          max-width="28"
+          :src="`icons/skills/${item.image}`"
           :style="item.color ? `filter: ${item.color}` : ''"
           :title="item.name"
-          width="32"
+          width="28"
         />
       </div>
     </template>

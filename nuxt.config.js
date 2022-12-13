@@ -127,7 +127,6 @@ export default {
     '@nuxtjs/google-fonts',
     'nuxt-purgecss',
     '@nuxtjs/pwa',
-    '@nuxt/image',
     '@nuxt/postcss8',
     '@nuxtjs/vuetify',
   ],

@@ -188,6 +188,7 @@ export default {
       filterable: false,
     },
     {
+      text: 'Image',
       value: 'image',
       divider: true,
       align: 'center',
