@@ -20,11 +20,11 @@
         />
       </div>
       <div
-        class="flex w-full flex-col items-center justify-center rounded-b-xl bg-black p-5"
+        class="flex w-full flex-col items-center justify-center rounded-b-xl bg-neutral-900 p-5"
       >
         <v-img
           alt="@emretepedev"
-          class="inline rounded-full"
+          class="border-gradient-br-blue-green-gray-900 inline rounded-full border border-solid border-transparent"
           height="100"
           src="images/avatar.png"
           title="@emretepedev"

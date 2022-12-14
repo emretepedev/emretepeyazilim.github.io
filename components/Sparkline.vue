@@ -1,7 +1,7 @@
 <template>
   <v-card class="overflow-y-auto" outlined ripple>
-    <v-card-title>
-      <v-icon left>
+    <v-card-title class="relative">
+      <v-icon class="absolute" left>
         {{ mdiPoll }}
       </v-icon>
       <div class="text-caption grey--text text-uppercase mx-auto">

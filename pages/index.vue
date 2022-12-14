@@ -3,12 +3,12 @@
     <div class="mt-12 flex justify-center">
       <v-container class="space-y-5">
         <div class="flex flex-col items-center text-center">
-          <v-row align="center" justify="center">
+          <v-row align="center" class="m-0" justify="center">
             <v-card class="overflow-y-auto" max-height="400" outlined ripple>
               <v-banner class="text-h5 font-weight-light justify-center" sticky>
                 <v-img
                   alt="@emretepedev"
-                  class="mx-auto rounded-full"
+                  class="border-gradient-br-blue-green-gray-900 mx-auto rounded-full border-2 border-solid border-transparent"
                   height="150"
                   max-height="150"
                   max-width="150"

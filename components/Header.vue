@@ -60,7 +60,11 @@
             </v-list-item-content>
           </v-list-item>
         </NuxtLink>
-        <a :href="otherWebsiteVersion.to" target="_blank">
+        <a
+          class="absolute bottom-2 left-0 w-full px-2"
+          :href="otherWebsiteVersion.to"
+          target="_blank"
+        >
           <v-list-item link>
             <v-list-item-icon class="mr-2">
               <v-icon>{{ otherWebsiteVersion.icon }}</v-icon>

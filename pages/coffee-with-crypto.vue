@@ -480,19 +480,3 @@
     head: {},
   })
 </script>
-
-<style>
-  .border-gradient-br-blue-green-gray-900 {
-    background: linear-gradient(to right, #18181b, #18181b),
-      linear-gradient(to bottom right, #60a5fa, #4ade80);
-    background-clip: padding-box, border-box;
-    background-origin: padding-box, border-box;
-  }
-
-  .hover\:border-gradient-tl-blue-green-gray-900:hover {
-    background: linear-gradient(to right, #18181b, #18181b),
-      linear-gradient(to top left, #60a5fa, #4ade80);
-    background-clip: padding-box, border-box;
-    background-origin: padding-box, border-box;
-  }
-</style>

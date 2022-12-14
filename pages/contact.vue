@@ -1,8 +1,12 @@
 <template>
   <div>
     <div class="mt-12 flex justify-center">
-      <v-container>
-        <ValidationObserver ref="observer" v-slot="{ invalid }">
+      <v-container class="flex justify-center">
+        <ValidationObserver
+          ref="observer"
+          v-slot="{ invalid }"
+          class="w-full sm:w-3/4"
+        >
           <v-form
             :action="$config.pageclipActionUrl"
             class="pageclip-form"
