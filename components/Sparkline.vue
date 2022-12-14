@@ -12,20 +12,16 @@
     <v-sheet color="transparent">
       <v-sparkline
         auto-draw
-        :auto-draw-duration="5000"
-        :auto-line-width="false"
-        :fill="false"
+        auto-draw-duration="10000"
+        auto-line-width
         :gradient="gradients"
-        gradient-direction="top"
-        :line-width="1"
-        :padding="8"
-        :show-labels="true"
-        :smooth="10"
+        line-width="1"
+        show-labels
+        smooth="9"
         stroke-linecap="round"
         type="trend"
         :value="graphData"
-      >
-      </v-sparkline>
+      />
     </v-sheet>
   </v-card>
 </template>
