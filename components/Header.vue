@@ -102,23 +102,21 @@
     setup() {
       const { $config } = useContext()
       const route = useRoute()
-      const { testWebsite } = $config
+      const { testWebsite, spaOrigin } = $config
       const isOnRight = ref(false)
       const drawer = ref(false)
+      const otherWebsiteVersion = testWebsite
+        ? {
+            title: '~/live-version',
+            to: spaOrigin,
+            icon: mdiTestTubeOff,
+          }
+        : {
+            title: '~/dev-version',
+            to: '/develop',
+            icon: mdiTestTube,
+          }
 
-      const otherWebsiteVersion = computed(() =>
-        testWebsite
-          ? {
-              title: '~/live-version',
-              to: window.location.origin,
-              icon: mdiTestTubeOff,
-            }
-          : {
-              title: '~/dev-version',
-              to: '/develop',
-              icon: mdiTestTube,
-            }
-      )
       const activePath = computed(() => route.value.path)
 
       onMounted(() => {

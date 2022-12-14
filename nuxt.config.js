@@ -76,6 +76,7 @@ export default {
   // use runtime config instead of env https://nuxtjs.org/docs/directory-structure/nuxt-config/#publicruntimeconfig
   publicRuntimeConfig: {
     spaName: process.env.SPA_NAME,
+    spaOrigin: process.env.SPA_ORIGIN,
     githubPersonalAccessToken: process.env.GH_PERSONAL_ACCESS_TOKEN,
     pageclipActionUrl: process.env.PAGECLIP_ACTION_URL,
     googleRecaptchaV2SiteKey: process.env.GOOGLE_RECAPTCHA_V2_SITE_KEY,
@@ -98,14 +99,7 @@ export default {
   // router: https://nuxtjs.org/docs/configuration-glossary/configuration-router/
   router: {
     trailingSlash: false,
-    base:
-      process.env.TEST_WEBSITE === 'true'
-        ? '/' +
-          process.env.SPA_URL.match(
-            /(?<=https:\/\/emretepedev\.github\.io\/)\w+/i
-          )[0] +
-          '/'
-        : '/',
+    base: process.env.SPA_PATH,
   },
 
   // generate: https://nuxtjs.org/docs/configuration-glossary/configuration-generate/
@@ -246,7 +240,7 @@ export default {
 
   // all options https://github.com/nuxt-community/sitemap-module/blob/dev/lib/options.js#L15
   sitemap: {
-    hostname: process.env.SPA_URL,
+    hostname: process.env.SPA_ORIGIN,
     gzip: true,
     trailingSlash: false,
     cacheTime: 1000 * 60 * 15, // 15 mins
