@@ -1,3 +1,18 @@
+//! Copyright (c) JS Foundation and other contributors
+
+//! github.com/moment/moment-timezone
+
+//! license : MIT
+
+//! moment-timezone.js
+
+//! moment.js
+
+//! moment.js locale configuration
+
+//! version : 0.5.40
+
+
 /*!
  * Vue.js v2.7.14
  * (c) 2014-2022 Evan You
@@ -89,18 +104,3 @@ object-assign
  * @copyright Chen, Yi-Cyuan 2015-2018
  * @license MIT
  */
-
-
-//! Copyright (c) JS Foundation and other contributors
-
-//! github.com/moment/moment-timezone
-
-//! license : MIT
-
-//! moment-timezone.js
-
-//! moment.js
-
-//! moment.js locale configuration
-
-//! version : 0.5.40
