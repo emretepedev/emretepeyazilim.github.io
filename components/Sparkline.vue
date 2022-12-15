@@ -19,7 +19,6 @@
         show-labels
         smooth="9"
         stroke-linecap="round"
-        type="trend"
         :value="graphData"
       />
     </v-sheet>

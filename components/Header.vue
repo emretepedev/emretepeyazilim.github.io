@@ -17,30 +17,31 @@
       class="z-max"
       clipped
       :expand-on-hover="!$vuetify.breakpoint.mdAndDown"
+      height="100%"
       :permanent="!$vuetify.breakpoint.mdAndDown"
       :right="isOnRight"
       width="196"
     >
-      <v-list-item>
-        <v-list-item-content>
-          <v-list-item-title>
-            <span class="flex justify-between">
-              <v-icon
-                v-if="$vuetify.breakpoint.mdAndDown"
-                @click.stop="drawer = !drawer"
-              >
-                {{ mdiClose }}
-              </v-icon>
-              <span v-else> {{ $config.spaName }} </span>
-              <v-icon @click="toggleNavDrawer()">
-                {{ mdiSwapHorizontal }}
-              </v-icon>
-            </span>
-          </v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
-      <v-divider></v-divider>
       <v-list dense nav shaped>
+        <v-list-item>
+          <v-list-item-content>
+            <v-list-item-title>
+              <span class="flex justify-between">
+                <v-icon
+                  v-if="$vuetify.breakpoint.mdAndDown"
+                  @click.stop="drawer = !drawer"
+                >
+                  {{ mdiClose }}
+                </v-icon>
+                <span v-else> {{ $config.spaName }} </span>
+                <v-icon @click="toggleNavDrawer()">
+                  {{ mdiSwapHorizontal }}
+                </v-icon>
+              </span>
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-divider></v-divider>
         <NuxtLink
           v-for="(page, index) in data.pages"
           :key="index"
