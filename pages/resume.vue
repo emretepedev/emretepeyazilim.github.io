@@ -10,26 +10,20 @@
   </div>
 </template>
 
-<script>
+<script setup>
   import { defineComponent, useMeta } from '@nuxtjs/composition-api'
   import data from '~/data/pages/resume'
   import Timeline from '~/components/Timeline.vue'
   import DataTable from '~/components/DataTable.vue'
   import LinkedInBadge from '~/components/LinkedInBadge.vue'
 
+  useMeta({
+    title: 'Resume | ',
+  })
+</script>
+
+<script>
   export default defineComponent({
-    components: { Timeline, DataTable, LinkedInBadge },
-
-    setup() {
-      useMeta({
-        title: 'Resume | ',
-      })
-
-      return {
-        data,
-      }
-    },
-
     head: {},
   })
 </script>

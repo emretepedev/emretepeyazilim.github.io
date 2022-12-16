@@ -32,19 +32,14 @@
   </v-timeline>
 </template>
 
-<script>
-  import { defineComponent } from '@nuxtjs/composition-api'
-
-  export default defineComponent({
-    // props
-    props: {
-      items: {
-        type: Array,
-        default() {
-          return []
-        },
-        required: true,
+<script setup>
+  defineProps({
+    items: {
+      type: Array,
+      default() {
+        return []
       },
+      required: true,
     },
   })
 </script>

@@ -1,14 +1,10 @@
 <template>
   <div>
-    <v-app-bar
-      v-if="$vuetify.breakpoint.mdAndDown"
-      app
-      class="h-12"
-      clipped-left
-    >
-      <v-toolbar-title class="flex items-center justify-between">
-        <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-        <span> {{ $config.spaName }} </span>
+    <v-app-bar v-if="$vuetify.breakpoint.mdAndDown" app dense hide-on-scroll>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-spacer></v-spacer>
+      <v-toolbar-title>
+        {{ $config.spaName }}
       </v-toolbar-title>
     </v-app-bar>
     <v-navigation-drawer
@@ -22,75 +18,53 @@
       :right="isOnRight"
       width="196"
     >
-      <v-list dense nav shaped>
-        <v-list-item>
+      <div class="flex justify-between px-4">
+        <v-list-item-icon
+          v-if="$vuetify.breakpoint.mdAndDown"
+          class="mx-0"
+          @click.stop="drawer = !drawer"
+        >
+          <v-icon dense>
+            {{ mdiClose }}
+          </v-icon>
+        </v-list-item-icon>
+        <v-list-item-icon @click="toggleNavDrawer()">
+          <v-icon dense>
+            {{ mdiSwapHorizontal }}
+          </v-icon>
+        </v-list-item-icon>
+      </div>
+      <v-divider class="mb-2 px-0"></v-divider>
+      <v-list dense nav rounded shaped>
+        <v-list-item
+          v-for="(page, index) in data.pages"
+          :key="index"
+          :class="
+            (isLastItem =
+              index === data.pages.length - 1
+                ? 'absolute bottom-2 left-2 right-2 w-[calc(100%-16px)]'
+                : '')
+          "
+          :href="isLastItem ? page.to : ''"
+          :target="isLastItem ? page.target : ''"
+          :to="isLastItem ? '' : page.to"
+        >
+          <v-list-item-icon class="mx-0">
+            <v-icon dense left>{{ page.icon }}</v-icon>
+          </v-list-item-icon>
           <v-list-item-content>
             <v-list-item-title>
-              <span class="flex justify-between">
-                <v-icon
-                  v-if="$vuetify.breakpoint.mdAndDown"
-                  @click.stop="drawer = !drawer"
-                >
-                  {{ mdiClose }}
-                </v-icon>
-                <span v-else> {{ $config.spaName }} </span>
-                <v-icon @click="toggleNavDrawer()">
-                  {{ mdiSwapHorizontal }}
-                </v-icon>
-              </span>
+              {{ page.title }}
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-divider></v-divider>
-        <NuxtLink
-          v-for="(page, index) in data.pages"
-          :key="index"
-          :to="page.to"
-        >
-          <v-list-item
-            :class="activePath === page.to ? 'bg-dark-gray' : ''"
-            link
-          >
-            <v-list-item-icon class="mr-2">
-              <v-icon>{{ page.icon }}</v-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title>
-                {{ page.title }}
-              </v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </NuxtLink>
-        <a
-          class="absolute bottom-2 left-0 w-full px-2"
-          :href="otherWebsiteVersion.to"
-          target="_blank"
-        >
-          <v-list-item link>
-            <v-list-item-icon class="mr-2">
-              <v-icon>{{ otherWebsiteVersion.icon }}</v-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title>
-                {{ otherWebsiteVersion.title }}
-              </v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </a>
       </v-list>
     </v-navigation-drawer>
   </div>
 </template>
 
-<script>
-  import {
-    computed,
-    defineComponent,
-    onMounted,
-    ref,
-    useContext,
-    useRoute,
-  } from '@nuxtjs/composition-api'
+<script setup>
+  import { onMounted, ref, useContext } from '@nuxtjs/composition-api'
   import {
     mdiClose,
     mdiSwapHorizontal,
@@ -99,51 +73,36 @@
   } from '@mdi/js'
   import data from '~/data/components/header'
 
-  export default defineComponent({
-    setup() {
-      const { $config } = useContext()
-      const route = useRoute()
-      const { testWebsite, spaOrigin } = $config
-      const isOnRight = ref(false)
-      const drawer = ref(false)
-      const otherWebsiteVersion = testWebsite
+  const { $config } = useContext()
+  const { testWebsite, spaOrigin } = $config
+  const isOnRight = ref(false)
+  const drawer = ref(false)
+  const lastPageItem = data.pages[data.pages.length - 1]
+  if (!lastPageItem.title.includes('version'))
+    data.pages.push(
+      testWebsite
         ? {
             title: '~/live-version',
             to: spaOrigin,
             icon: mdiTestTubeOff,
+            target: '_blank',
           }
         : {
             title: '~/dev-version',
             to: '/develop',
             icon: mdiTestTube,
+            target: '_blank',
           }
+    )
 
-      const activePath = computed(() => route.value.path)
-
-      onMounted(() => {
-        isOnRight.value = Boolean(
-          JSON.parse(window.localStorage.getItem('isOnRight'))
-        )
-      })
-
-      const toggleNavDrawer = () => {
-        isOnRight.value = !isOnRight.value
-        localStorage.setItem('isOnRight', isOnRight.value)
-      }
-
-      return {
-        data,
-        drawer,
-        isOnRight,
-        testWebsite,
-        toggleNavDrawer,
-        otherWebsiteVersion,
-        activePath,
-        mdiClose,
-        mdiSwapHorizontal,
-        mdiTestTube,
-        mdiTestTubeOff,
-      }
-    },
+  onMounted(() => {
+    isOnRight.value = Boolean(
+      JSON.parse(window.localStorage.getItem('isOnRight'))
+    )
   })
+
+  const toggleNavDrawer = () => {
+    isOnRight.value = !isOnRight.value
+    localStorage.setItem('isOnRight', isOnRight.value)
+  }
 </script>

@@ -172,7 +172,7 @@
   </div>
 </template>
 
-<script>
+<script setup>
   import {
     defineComponent,
     getCurrentInstance,
@@ -196,207 +196,162 @@
   import { ValidationObserver, ValidationProvider } from 'vee-validate'
   import data from '~/data/pages/contact'
 
-  export default defineComponent({
-    // components
-    components: {
-      ValidationObserver,
-      ValidationProvider,
-    },
+  useMeta({
+    link: [
+      {
+        href: 'https://s.pageclip.co/v1/pageclip.css',
+        media: 'screen',
+        rel: 'stylesheet',
+      },
+    ],
+    script: [
+      {
+        body: true,
+        callback: () => {
+          styleToPageclip()
+        },
+        charset: 'utf-8',
+        defer: true,
+        src: 'https://s.pageclip.co/v1/pageclip.js',
+      },
+    ],
+    title: 'Contact | ',
+  })
 
-    // setup
-    setup() {
-      // meta
-      useMeta({
-        link: [
-          {
-            href: 'https://s.pageclip.co/v1/pageclip.css',
-            media: 'screen',
-            rel: 'stylesheet',
-          },
-        ],
-        script: [
-          {
-            body: true,
-            callback: () => {
-              styleToPageclip()
-            },
-            charset: 'utf-8',
-            defer: true,
-            src: 'https://s.pageclip.co/v1/pageclip.js',
-          },
-        ],
-        title: 'Contact | ',
+  const { $config, $recaptcha } = useContext()
+  const { $vToastify } = getCurrentInstance().proxy
+  const observer = ref(null)
+  const { googleRecaptchaV2Size, googleRecaptchaV2SiteKey } = $config
+  const name = ref('')
+  const phone = ref('')
+  const subject = ref('')
+  const message = ref('')
+  const asap = ref(false)
+  const email = ref('')
+  const passRecaptcha = ref(false)
+  const widgetId = ref(0)
+
+  onMounted(async () => {
+    await $recaptcha.init()
+
+    renderToRecaptcha()
+  })
+
+  const submit = async (event) => {
+    try {
+      const validate = await observer.value.validate()
+
+      if (!validate) {
+        throw new Error('Form Validation: Failed.')
+      }
+
+      await $recaptcha.getResponse(widgetId.value).catch(() => {
+        throw new Error('reCAPTCHA v2 Verification: Token not found.')
       })
 
-      // context
-      const { $config, $recaptcha } = useContext()
-
-      // root variables
-      const { $vToastify } = getCurrentInstance().proxy
-
-      // refs
-      const observer = ref(null)
-
-      // envs
-      const { googleRecaptchaV2Size, googleRecaptchaV2SiteKey } = $config
-
-      // constants
-      const name = ref('')
-      const phone = ref('')
-      const subject = ref('')
-      const message = ref('')
-      const asap = ref(false)
-      const email = ref('')
-      const passRecaptcha = ref(false)
-      const widgetId = ref(0)
-
-      // hooks
-      onMounted(async () => {
-        await $recaptcha.init()
-
-        renderToRecaptcha()
+      await $recaptcha.execute('login').catch(() => {
+        throw new Error('reCAPTCHA v3 Verification: Token not found.')
       })
 
-      // methods
-      const submit = async (event) => {
-        try {
-          const validate = await observer.value.validate()
+      await $recaptcha.reset(widgetId.value)
+    } catch (error) {
+      $vToastify.error(String(error))
 
-          if (!validate) {
-            throw new Error('Form Validation: Failed.')
-          }
+      event.preventDefault()
+    }
+  }
 
-          await $recaptcha.getResponse(widgetId.value).catch(() => {
-            throw new Error('reCAPTCHA v2 Verification: Token not found.')
-          })
+  const resetForm = () => {
+    name.value = ''
+    phone.value = ''
+    email.value = ''
+    subject.value = ''
+    message.value = ''
+    asap.value = false
+    observer.value.reset()
+  }
 
-          await $recaptcha.execute('login').catch(() => {
-            throw new Error('reCAPTCHA v3 Verification: Token not found.')
-          })
+  const onError = () => {
+    $vToastify.error('reCAPTCHA Verification: Error.')
+    passRecaptcha.value = false
+  }
 
-          await $recaptcha.reset(widgetId.value)
-        } catch (error) {
-          $vToastify.error(String(error))
+  const onSuccess = () => {
+    $vToastify.success('reCAPTCHA Verification: Success.')
+    passRecaptcha.value = true
+  }
 
-          event.preventDefault()
-        }
-      }
+  const onExpired = () => {
+    $vToastify.warning('reCAPTCHA Verification: Expired.')
+    passRecaptcha.value = false
+  }
 
-      const resetForm = () => {
-        name.value = ''
-        phone.value = ''
-        email.value = ''
-        subject.value = ''
-        message.value = ''
-        asap.value = false
-        observer.value.reset()
-      }
+  const onResponse = (error, response) => {
+    if (error) {
+      $vToastify.error("Mail didn't send because of `Form has errors`.")
 
-      const onError = () => {
-        $vToastify.error('reCAPTCHA Verification: Error.')
-        passRecaptcha.value = false
-      }
+      return
+    }
 
-      const onSuccess = () => {
-        $vToastify.success('reCAPTCHA Verification: Success.')
-        passRecaptcha.value = true
-      }
+    if (response.data !== 'ok') {
+      $vToastify.error(
+        "Mail didn't send because of `Server Error`. Try again later."
+      )
 
-      const onExpired = () => {
-        $vToastify.warning('reCAPTCHA Verification: Expired.')
-        passRecaptcha.value = false
-      }
+      return
+    }
 
-      const onResponse = (error, response) => {
-        if (error) {
-          $vToastify.error("Mail didn't send because of `Form has errors`.")
+    resetForm()
 
-          return
-        }
+    $vToastify.success('Mail sent successfully.')
+  }
 
-        if (response.data !== 'ok') {
+  const renderToRecaptcha = () => {
+    let count = 0
+    const frequency = 1000 / 4 // 0.25 sec
+    const maxTime = (1000 / frequency) * 10 // 10 sec
+
+    const recaptchaInterval = setInterval(() => {
+      const recaptcha = document.querySelector('.g-recaptcha')
+
+      if (Boolean(recaptcha) || count === maxTime) {
+        clearInterval(recaptchaInterval)
+
+        widgetId.value = $recaptcha.render(googleRecaptchaV2Size, {
+          sitekey: googleRecaptchaV2SiteKey,
+        })
+
+        if (count === maxTime) {
           $vToastify.error(
-            "Mail didn't send because of `Server Error`. Try again later."
+            'reCAPTCHA Verification: Server Error. Try again later.'
           )
 
           return
         }
 
-        resetForm()
-
-        $vToastify.success('Mail sent successfully.')
+        recaptcha.style.display = 'flex'
+        recaptcha.style.justifyContent = 'center'
       }
 
-      const renderToRecaptcha = () => {
-        let count = 0
-        const frequency = 1000 / 4 // 0.25 sec
-        const maxTime = (1000 / frequency) * 10 // 10 sec
+      count++
+    }, frequency)
+  }
 
-        const recaptchaInterval = setInterval(() => {
-          const recaptcha = document.querySelector('.g-recaptcha')
+  const styleToPageclip = () => {
+    const form = document.querySelector('.pageclip-form')
 
-          if (Boolean(recaptcha) || count === maxTime) {
-            clearInterval(recaptchaInterval)
+    /* eslint-disable-next-line */
+    Pageclip.form(form, {
+      onResponse(error, response) {
+        onResponse(error, response)
+      },
+      successTemplate: 'I`ll reply to you ASAP. - @emretepedev',
+    })
+  }
+</script>
 
-            widgetId.value = $recaptcha.render(googleRecaptchaV2Size, {
-              sitekey: googleRecaptchaV2SiteKey,
-            })
-
-            if (count === maxTime) {
-              $vToastify.error(
-                'reCAPTCHA Verification: Server Error. Try again later.'
-              )
-
-              return
-            }
-
-            recaptcha.style.display = 'flex'
-            recaptcha.style.justifyContent = 'center'
-          }
-
-          count++
-        }, frequency)
-      }
-
-      const styleToPageclip = () => {
-        const form = document.querySelector('.pageclip-form')
-
-        /* eslint-disable-next-line */
-        Pageclip.form(form, {
-          onResponse(error, response) {
-            onResponse(error, response)
-          },
-          successTemplate: 'I`ll reply to you ASAP. - @emretepedev',
-        })
-      }
-
-      // return
-      return {
-        asap,
-        data,
-        email,
-        mdiAt,
-        mdiCheckboxBlankCircleOutline,
-        mdiCheckboxMarkedCircle,
-        mdiCloseCircle,
-        mdiMessage,
-        mdiFormSelect,
-        mdiFormTextbox,
-        mdiPhone,
-        message,
-        name,
-        observer,
-        onError,
-        onExpired,
-        onSuccess,
-        passRecaptcha,
-        phone,
-        subject,
-        submit,
-      }
-    },
-
-    // head
+<script>
+  export default defineComponent({
     head: {},
   })
 </script>

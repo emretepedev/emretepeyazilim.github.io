@@ -33,7 +33,7 @@
         <h1 class="my-4 text-lg font-bold md:text-xl" style="color: #2c9dec">
           <a
             class="my-2 px-2 text-center"
-            href="https://www.linkedin.com/in/emretepedev/"
+            href="https://linkedin.in/in/emretepedev/"
             target="_blank"
           >
             Emre Tepe
@@ -44,7 +44,7 @@
         </h2>
         <a
           class="my-3 rounded-full border-2 px-8 py-2 text-lg font-bold text-white md:text-xl"
-          href="https://www.linkedin.com/in/emretepedev/"
+          href="https://linkedin.in/in/emretepedev/"
           target="_blank"
           >View Profile</a
         >

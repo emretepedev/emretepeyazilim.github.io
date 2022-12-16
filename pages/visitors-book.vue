@@ -259,7 +259,7 @@
   </div>
 </template>
 
-<script>
+<script setup>
   import {
     defineComponent,
     getCurrentInstance,
@@ -275,194 +275,174 @@
   import { ValidationObserver, ValidationProvider } from 'vee-validate'
   import visitorsBookContractAbi from '~/data/abi/visitorsBook'
 
-  export default defineComponent({
-    components: {
-      ValidationProvider,
-      ValidationObserver,
-    },
+  useMeta({
+    title: "Visitor's Book | ",
+  })
 
-    layout: 'footerless',
+  const { $config } = useContext()
+  const { $vToastify } = getCurrentInstance().proxy
+  const observer = ref(null)
+  const textField = ref(null)
+  const rowPaddingBottom = ref(0)
+  const {
+    visitorsBookContractAddress,
+    visitorsBookContractChainId,
+    visitorsBookContractChainName,
+  } = $config
+  let visitorsBookContract
+  const hasMetamask = Boolean(window.ethereum)
+  const onValidNetwork = ref(false)
+  const isConnected = ref(false)
+  const address = ref(null)
+  const spinner = ref(false)
+  const messageContent = ref('')
+  const messages = ref([])
+  const lastMessageElement = ref(null)
+  const contractMessageSentEventEmitter = ref(null)
+  const textFieldResizeObserver = ref(null)
+  const web3 = new Web3(window.ethereum)
 
-    setup() {
-      useMeta({
-        title: "Visitor's Book | ",
+  onMounted(async () => {
+    if (hasMetamask) {
+      startEthEvents()
+
+      const accounts = await web3.eth.getAccounts()
+      if (accounts.length > 0) await connect()
+
+      onValidNetwork.value =
+        // eslint-disable-next-line
+        web3.currentProvider.chainId == visitorsBookContractChainId
+
+      if (onValidNetwork.value) {
+        await getContractData()
+      }
+    }
+  })
+
+  const connectWeb3 = async () => {
+    try {
+      spinner.value = true
+      await web3.eth.requestAccounts()
+      await connect()
+      spinner.value = false
+      $vToastify.success('Connected.')
+    } catch (error) {
+      spinner.value = false
+      $vToastify.error(String(error?.message))
+    }
+  }
+
+  const switchNetwork = async () => {
+    try {
+      await window.ethereum.request({
+        method: 'wallet_switchEthereumChain',
+        params: [
+          {
+            chainId: '0x' + Number(visitorsBookContractChainId).toString(16),
+          },
+        ],
       })
+    } catch (error) {
+      $vToastify.error(String(error?.message))
+    }
+  }
 
-      const { $config } = useContext()
-      const { $vToastify } = getCurrentInstance().proxy
-      const observer = ref(null)
-      const textField = ref(null)
-      const rowPaddingBottom = ref(0)
-      const {
-        visitorsBookContractAddress,
-        visitorsBookContractChainId,
-        visitorsBookContractChainName,
-      } = $config
-      let visitorsBookContract
-      const hasMetamask = Boolean(window.ethereum)
-      const onValidNetwork = ref(false)
-      const isConnected = ref(false)
-      const address = ref(null)
-      const spinner = ref(false)
-      const messageContent = ref('')
-      const messages = ref([])
-      const lastMessageElement = ref(null)
-      const contractMessageSentEventEmitter = ref(null)
-      const textFieldResizeObserver = ref(null)
-      const web3 = new Web3(window.ethereum)
+  const getContractData = async () => {
+    try {
+      onValidNetwork.value = true
 
-      onMounted(async () => {
-        if (hasMetamask) {
-          startEthEvents()
+      visitorsBookContract = new web3.eth.Contract(
+        visitorsBookContractAbi,
+        visitorsBookContractAddress
+      )
 
-          const accounts = await web3.eth.getAccounts()
-          if (accounts.length > 0) await connect()
+      const visitorsBookMessages = await visitorsBookContract.methods
+        .getMessages()
+        .call()
 
-          onValidNetwork.value =
-            // eslint-disable-next-line
-            web3.currentProvider.chainId == visitorsBookContractChainId
-
-          if (onValidNetwork.value) {
-            await getContractData()
-          }
-        }
-      })
-
-      const connectWeb3 = async () => {
-        try {
-          spinner.value = true
-          await web3.eth.requestAccounts()
-          await connect()
-          spinner.value = false
-          $vToastify.success('Connected.')
-        } catch (error) {
-          spinner.value = false
-          $vToastify.error(String(error?.message))
-        }
+      messages.value = []
+      for (const message of visitorsBookMessages) {
+        messages.value.push({
+          author: message.author,
+          createdAt: message.createdAt,
+          content: message.content,
+        })
       }
 
-      const switchNetwork = async () => {
-        try {
-          await window.ethereum.request({
-            method: 'wallet_switchEthereumChain',
-            params: [
-              {
-                chainId:
-                  '0x' + Number(visitorsBookContractChainId).toString(16),
-              },
-            ],
-          })
-        } catch (error) {
-          $vToastify.error(String(error?.message))
-        }
+      if (!contractMessageSentEventEmitter.value) {
+        contractMessageSentEventEmitter.value = visitorsBookContract.events
+          .MessageSent()
+          .on('data', handleMessageSent)
       }
 
-      const getContractData = async () => {
-        try {
-          onValidNetwork.value = true
-
-          visitorsBookContract = new web3.eth.Contract(
-            visitorsBookContractAbi,
-            visitorsBookContractAddress
-          )
-
-          const visitorsBookMessages = await visitorsBookContract.methods
-            .getMessages()
-            .call()
-
-          messages.value = []
-          for (const message of visitorsBookMessages) {
-            messages.value.push({
-              author: message.author,
-              createdAt: message.createdAt,
-              content: message.content,
-            })
-          }
-
-          if (!contractMessageSentEventEmitter.value) {
-            contractMessageSentEventEmitter.value = visitorsBookContract.events
-              .MessageSent()
-              .on('data', handleMessageSent)
-          }
-
-          if (!textFieldResizeObserver.value) {
-            textFieldResizeObserver.value = new ResizeObserver(
-              handleTextFieldResize
-            ).observe(textField.value?.$refs.input)
-          }
-
-          scrollToLastMessage()
-        } catch (error) {
-          if (!error?.message.includes('ResizeObserver')) {
-            $vToastify.error(String(error?.message))
-          }
-        }
+      if (!textFieldResizeObserver.value) {
+        textFieldResizeObserver.value = new ResizeObserver(
+          handleTextFieldResize
+        ).observe(textField.value?.$refs.input)
       }
 
-      const connect = async () => {
-        isConnected.value =
-          (await web3.eth.net.isListening()) && window.ethereum.isConnected()
+      scrollToLastMessage()
+    } catch (error) {
+      if (!error?.message.includes('ResizeObserver')) {
+        $vToastify.error(String(error?.message))
+      }
+    }
+  }
 
-        if (!isConnected.value) {
-          throw new Error('Connection Error.')
-        }
+  const connect = async () => {
+    isConnected.value =
+      (await web3.eth.net.isListening()) && window.ethereum.isConnected()
 
-        await updateUserInfo()
+    if (!isConnected.value) {
+      throw new Error('Connection Error.')
+    }
+
+    await updateUserInfo()
+  }
+
+  const send = async () => {
+    try {
+      const validate = await observer.value.validate()
+      if (!validate) {
+        throw new Error(observer.value.errors.message[0])
       }
 
-      const send = async () => {
-        try {
-          const validate = await observer.value.validate()
-          if (!validate) {
-            throw new Error(observer.value.errors.message[0])
-          }
-
-          if (spinner.value) {
-            throw new Error('Wait until the current tx is finished.')
-          }
-
-          await visitorsBookContract.methods
-            .sendMessage(messageContent.value)
-            .send({ from: address.value })
-            .once('sent', handleTxSent)
-            .once('sending', handleTxSending)
-            .once('transactionHash', handleTxHash)
-            .once('receipt', handleTxReceipt)
-            .on('error', handleTxError)
-        } catch (error) {
-          if (error) {
-            $vToastify.error(String(error?.message))
-          }
-        }
+      if (spinner.value) {
+        throw new Error('Wait until the current tx is finished.')
       }
 
-      const scrollToLastMessage = () => {
-        if (messages.value.length) {
-          let tries = 0
-          const frequency = 1000 / 10 // 0.1 sec
-          const maxTries = (1000 / frequency) * 10 // 10 secs
+      await visitorsBookContract.methods
+        .sendMessage(messageContent.value)
+        .send({ from: address.value })
+        .once('sent', handleTxSent)
+        .once('sending', handleTxSending)
+        .once('transactionHash', handleTxHash)
+        .once('receipt', handleTxReceipt)
+        .on('error', handleTxError)
+    } catch (error) {
+      if (error) {
+        $vToastify.error(String(error?.message))
+      }
+    }
+  }
 
-          if (!lastMessageElement.value) {
-            const getLastMessageInterval = setInterval(() => {
-              if (Boolean(lastMessageElement.value) || tries === maxTries) {
-                clearInterval(getLastMessageInterval)
+  const scrollToLastMessage = () => {
+    if (messages.value.length) {
+      let tries = 0
+      const frequency = 1000 / 10 // 0.1 sec
+      const maxTries = (1000 / frequency) * 10 // 10 secs
 
-                if (tries === maxTries) {
-                  $vToastify.error('Something went wrong.')
+      if (!lastMessageElement.value) {
+        const getLastMessageInterval = setInterval(() => {
+          if (Boolean(lastMessageElement.value) || tries === maxTries) {
+            clearInterval(getLastMessageInterval)
 
-                  return
-                }
+            if (tries === maxTries) {
+              $vToastify.error('Something went wrong.')
 
-                setTimeout(function () {
-                  lastMessageElement.value[0]?.$el?.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start',
-                  })
-                }, 250)
-              }
-              tries++
-            }, frequency)
-          } else {
+              return
+            }
+
             setTimeout(function () {
               lastMessageElement.value[0]?.$el?.scrollIntoView({
                 behavior: 'smooth',
@@ -470,148 +450,135 @@
               })
             }, 250)
           }
-        }
+          tries++
+        }, frequency)
+      } else {
+        setTimeout(function () {
+          lastMessageElement.value[0]?.$el?.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+          })
+        }, 250)
       }
+    }
+  }
 
-      const disconnectWeb3 = () => {
-        spinner.value = true
-        address.value = null
-        isConnected.value = false
-        $vToastify.success('Disconnected.')
-        spinner.value = false
-      }
+  const disconnectWeb3 = () => {
+    spinner.value = true
+    address.value = null
+    isConnected.value = false
+    $vToastify.success('Disconnected.')
+    spinner.value = false
+  }
 
-      const startEthEvents = () => {
-        window.ethereum.on('chainChanged', handleChainChanged)
-        window.ethereum.on('accountsChanged', handleAccountsChanged)
-        window.ethereum.on('disconnect', handleDisconnect)
-      }
+  const startEthEvents = () => {
+    window.ethereum.on('chainChanged', handleChainChanged)
+    window.ethereum.on('accountsChanged', handleAccountsChanged)
+    window.ethereum.on('disconnect', handleDisconnect)
+  }
 
-      const handleTxSent = () => {
-        spinner.value = true
-        $vToastify.info('Transaction Status: Transaction sent to Metamask.')
-      }
+  const handleTxSent = () => {
+    spinner.value = true
+    $vToastify.info('Transaction Status: Transaction sent to Metamask.')
+  }
 
-      const handleTxSending = () => {
-        $vToastify.info('Transaction Status: Waiting to user confirm.')
-      }
+  const handleTxSending = () => {
+    $vToastify.info('Transaction Status: Waiting to user confirm.')
+  }
 
-      const handleTxHash = (txHash) => {
-        $vToastify.info(
-          'Transaction Status: Awaiting transaction confirmation.\n' +
-            `Tx Hash: ${txHash}`
-        )
-      }
+  const handleTxHash = (txHash) => {
+    $vToastify.info(
+      'Transaction Status: Awaiting transaction confirmation.\n' +
+        `Tx Hash: ${txHash}`
+    )
+  }
 
-      const handleTxReceipt = () => {
-        resetInputs()
-        $vToastify.success('Thank you for your message! - @emretepedev')
-      }
+  const handleTxReceipt = () => {
+    resetInputs()
+    $vToastify.success('Thank you for your message! - @emretepedev')
+  }
 
-      const handleTxError = () => {
-        spinner.value = false
-        $vToastify.error('Transaction Status: Failed.')
-      }
+  const handleTxError = () => {
+    spinner.value = false
+    $vToastify.error('Transaction Status: Failed.')
+  }
 
-      const handleChainChanged = async (chainId) => {
-        // eslint-disable-next-line
-        if (chainId != visitorsBookContractChainId) {
-          onValidNetwork.value = false
-          lastMessageElement.value = null
-        } else {
-          await getContractData()
-        }
+  const handleChainChanged = async (chainId) => {
+    // eslint-disable-next-line
+    if (chainId != visitorsBookContractChainId) {
+      onValidNetwork.value = false
+      lastMessageElement.value = null
+    } else {
+      await getContractData()
+    }
 
-        $vToastify.success('Chain has changed.')
-      }
+    $vToastify.success('Chain has changed.')
+  }
 
-      const handleAccountsChanged = async (accounts) => {
-        if (accounts.length > 0) {
-          await updateUserInfo(accounts[0])
+  const handleAccountsChanged = async (accounts) => {
+    if (accounts.length > 0) {
+      await updateUserInfo(accounts[0])
 
-          $vToastify.success(`Linked account changed to '${accounts[0]}'`)
-        } else {
-          await disconnectWeb3()
-        }
-      }
+      $vToastify.success(`Linked account changed to '${accounts[0]}'`)
+    } else {
+      await disconnectWeb3()
+    }
+  }
 
-      const handleDisconnect = async () => {
-        await disconnectWeb3()
-      }
+  const handleDisconnect = async () => {
+    await disconnectWeb3()
+  }
 
-      const handleMessageSent = (event) => {
-        const message = event.returnValues[0]
+  const handleMessageSent = (event) => {
+    const message = event.returnValues[0]
 
-        messages.value.push({
-          author: message.author,
-          createdAt: message.createdAt,
-          content: message.content,
-        })
+    messages.value.push({
+      author: message.author,
+      createdAt: message.createdAt,
+      content: message.content,
+    })
 
-        if (message.author === address.value) {
-          scrollToLastMessage()
-        }
+    if (message.author === address.value) {
+      scrollToLastMessage()
+    }
 
-        $vToastify.success(`New message received from ${message.author}.`)
-      }
+    $vToastify.success(`New message received from ${message.author}.`)
+  }
 
-      const updateUserInfo = async (address = null) => {
-        await updateUserAddress(address)
-      }
+  const updateUserInfo = async (address = null) => {
+    await updateUserAddress(address)
+  }
 
-      const updateUserAddress = async (_address = null) => {
-        address.value = _address
-          ? web3.utils.toChecksumAddress(_address)
-          : (await web3.eth.getAccounts())[0]
-      }
+  const updateUserAddress = async (_address = null) => {
+    address.value = _address
+      ? web3.utils.toChecksumAddress(_address)
+      : (await web3.eth.getAccounts())[0]
+  }
 
-      const resetInputs = () => {
-        messageContent.value = ''
-        spinner.value = false
-        observer.value.reset()
-      }
+  const resetInputs = () => {
+    messageContent.value = ''
+    spinner.value = false
+    observer.value.reset()
+  }
 
-      const formatTimestampToDisplay = (timestamp) =>
-        moment.unix(timestamp).tz('UTC').format('MM/DD/YY - HH:mm A')
+  const formatTimestampToDisplay = (timestamp) =>
+    moment.unix(timestamp).tz('UTC').format('MM/DD/YY - HH:mm A')
 
-      const copyToAddress = async (address) => {
-        try {
-          await navigator.clipboard.writeText(address)
-          $vToastify.success(`Address ${address} copied.`)
-        } catch {}
-      }
+  const copyToAddress = async (address) => {
+    try {
+      await navigator.clipboard.writeText(address)
+      $vToastify.success(`Address ${address} copied.`)
+    } catch {}
+  }
 
-      const handleTextFieldResize = (textFieldElement) => {
-        rowPaddingBottom.value = textFieldElement[0].contentRect.height
-      }
+  const handleTextFieldResize = (textFieldElement) => {
+    rowPaddingBottom.value = textFieldElement[0].contentRect.height
+  }
+</script>
 
-      return {
-        hasMetamask,
-        onValidNetwork,
-        isConnected,
-        address,
-        observer,
-        textField,
-        spinner,
-        lastMessageElement,
-        copyToAddress,
-        connectWeb3,
-        disconnectWeb3,
-        formatTimestampToDisplay,
-        send,
-        switchNetwork,
-        messageContent,
-        messages,
-        visitorsBookContractChainName,
-        mdiSend,
-        mdiMessage,
-        mdiCloseCircle,
-        mdiConnection,
-        rowPaddingBottom,
-        scrollToLastMessage,
-      }
-    },
-
+<script>
+  export default defineComponent({
+    layout: 'footerless',
     head: {},
   })
 </script>

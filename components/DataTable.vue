@@ -95,8 +95,8 @@
   </v-data-table>
 </template>
 
-<script>
-  import { defineComponent, ref } from '@nuxtjs/composition-api'
+<script setup>
+  import { ref } from '@nuxtjs/composition-api'
   import {
     mdiArrowCollapseLeft,
     mdiArrowCollapseRight,
@@ -105,34 +105,22 @@
     mdiMagnify,
   } from '@mdi/js'
 
-  export default defineComponent({
-    props: {
-      headers: {
-        type: Array,
-        default() {
-          return []
-        },
-        required: true,
+  defineProps({
+    headers: {
+      type: Array,
+      default() {
+        return []
       },
-      items: {
-        type: Array,
-        default() {
-          return []
-        },
-        required: true,
-      },
+      required: true,
     },
-    setup() {
-      const search = ref('')
-
-      return {
-        search,
-        mdiArrowCollapseLeft,
-        mdiArrowCollapseRight,
-        mdiMagnify,
-        mdiLink,
-        mdiComment,
-      }
+    items: {
+      type: Array,
+      default() {
+        return []
+      },
+      required: true,
     },
   })
+
+  const search = ref('')
 </script>

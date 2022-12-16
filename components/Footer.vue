@@ -42,15 +42,6 @@
   </v-container>
 </template>
 
-<script>
-  import { defineComponent } from '@nuxtjs/composition-api'
+<script setup>
   import data from '~/data/components/footer'
-
-  export default defineComponent({
-    setup() {
-      return {
-        data,
-      }
-    },
-  })
 </script>

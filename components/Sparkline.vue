@@ -12,7 +12,7 @@
     <v-sheet color="transparent">
       <v-sparkline
         auto-draw
-        auto-draw-duration="10000"
+        :auto-draw-duration="10000"
         auto-line-width
         :gradient="gradients"
         line-width="1"
@@ -25,31 +25,23 @@
   </v-card>
 </template>
 
-<script>
-  import { defineComponent } from '@nuxtjs/composition-api'
+<script setup>
   import { mdiPoll } from '@mdi/js'
 
-  export default defineComponent({
-    props: {
-      graphData: {
-        type: Array,
-        default() {
-          return []
-        },
-        required: true,
+  defineProps({
+    graphData: {
+      type: Array,
+      default() {
+        return []
       },
-      gradients: {
-        type: Array,
-        default() {
-          return []
-        },
-        required: true,
-      },
+      required: true,
     },
-    setup() {
-      return {
-        mdiPoll,
-      }
+    gradients: {
+      type: Array,
+      default() {
+        return []
+      },
+      required: true,
     },
   })
 </script>

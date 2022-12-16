@@ -24,27 +24,25 @@
     </div>
   </div>
 </template>
-<script>
+
+<script setup>
   import { defineComponent, useMeta } from '@nuxtjs/composition-api'
   import { mdiArrowRightThin } from '@mdi/js'
 
-  export default defineComponent({
-    setup() {
-      useMeta({
-        title: 'Page not found | ',
-        meta: [
-          {
-            hid: 'robots',
-            name: 'robots',
-            content: 'noindex, nofollow',
-          },
-        ],
-      })
+  useMeta({
+    title: 'Page not found | ',
+    meta: [
+      {
+        hid: 'robots',
+        name: 'robots',
+        content: 'noindex, nofollow',
+      },
+    ],
+  })
+</script>
 
-      return {
-        mdiArrowRightThin,
-      }
-    },
+<script>
+  export default defineComponent({
     head: {},
   })
 </script>

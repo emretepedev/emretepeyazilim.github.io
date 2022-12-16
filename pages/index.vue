@@ -40,36 +40,22 @@
   </div>
 </template>
 
-<script>
-  import { defineComponent, ref } from '@nuxtjs/composition-api'
+<script setup>
+  import { ref } from '@nuxtjs/composition-api'
   import data from '~/data/pages/index'
   import contributionsCount from '~/data/contributionsCount.json'
   import Sparkline from '~/components/Sparkline.vue'
 
-  export default defineComponent({
-    components: { Sparkline },
+  const graphData = ref([])
+  const from = new Date()
+  const to = new Date()
+  from.setDate(to.getDate() - 30)
 
-    setup() {
-      const graphData = ref([])
-      const from = new Date()
-      const to = new Date()
-      from.setDate(to.getDate() - 30)
-
-      contributionsCount.data.user.contributionsCollection.contributionCalendar.weeks.forEach(
-        (week) => {
-          week.contributionDays.forEach((day) => {
-            graphData.value.push(day.contributionCount)
-          })
-        }
-      )
-
-      return {
-        data,
-        graphData,
-      }
-    },
-
-    // head
-    head: {},
-  })
+  contributionsCount.data.user.contributionsCollection.contributionCalendar.weeks.forEach(
+    (week) => {
+      week.contributionDays.forEach((day) => {
+        graphData.value.push(day.contributionCount)
+      })
+    }
+  )
 </script>
