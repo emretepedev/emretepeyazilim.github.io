@@ -1,3 +1,5 @@
+const isDev = process.env.NODE_ENV !== 'production'
+
 export default {
   // target property: https://go.nuxtjs.dev/config-target
   target: 'static',
@@ -6,7 +8,7 @@ export default {
   ssr: false,
 
   // dev property: https://nuxtjs.org/docs/configuration-glossary/configuration-dev
-  dev: false,
+  dev: isDev,
 
   // telemetry property: https://nuxtjs.org/docs/configuration-glossary/configuration-telemetry
   telemetry: false,
@@ -16,6 +18,15 @@ export default {
 
   // loading property: https://nuxtjs.org/docs/configuration-glossary/configuration-loading
   loading: false,
+
+  vue: {
+    config: {
+      productionTip: isDev,
+      devtools: isDev,
+      silent: !isDev,
+      performance: isDev,
+    },
+  },
 
   // build configuration: https://go.nuxtjs.dev/config-build
   build: {
@@ -152,7 +163,7 @@ export default {
 
   // all options https://github.com/Developmint/nuxt-purgecss/blob/master/lib/utils.js#L10
   purgeCSS: {
-    enabled: true,
+    enabled: !isDev,
     paths: ['./node_modules/vuetify/src/**/*.ts'],
     whitelist: ['v-app', 'v-app--wrap'],
     whitelistPatterns: [/^v-((?!app).)*$/, /^theme--*/, /^text--*/, /--text$/],
