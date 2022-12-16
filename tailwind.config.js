@@ -2,6 +2,8 @@
 module.exports = {
   important: true,
 
+  mode: 'jit',
+
   content: [
     './components/**/*.{js,vue,ts}',
     './layouts/**/*.vue',
