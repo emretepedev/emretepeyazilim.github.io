@@ -41,6 +41,7 @@
     "@nuxtjs/robots": "^2.5.0",
     "@nuxtjs/sitemap": "^2.4.0",
     "axios": "^1.2.1",
+    "ethers": "^5.7.2",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.40",
     "nuxt": "^2.5.18",
