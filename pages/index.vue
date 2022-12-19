@@ -44,7 +44,6 @@
   import { ref } from '@nuxtjs/composition-api'
   import data from '~/data/pages/index'
   import contributions from '~/data/contributions.json'
-  import Sparkline from '~/components/Sparkline.vue'
 
   const graphData = ref([])
 

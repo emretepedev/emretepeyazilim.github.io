@@ -10,8 +10,6 @@
 
 <script setup>
   import { defineComponent, useContext, useMeta } from '@nuxtjs/composition-api'
-  import Footer from '~/components/Footer.vue'
-  import Header from '~/components/Header.vue'
 
   const { $config } = useContext()
   const { testWebsite } = $config

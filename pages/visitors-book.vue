@@ -270,8 +270,6 @@
   } from '@nuxtjs/composition-api'
   import Web3 from 'web3'
   import { mdiCloseCircle, mdiConnection, mdiMessage, mdiSend } from '@mdi/js'
-  import moment from 'moment'
-  import 'moment-timezone'
   import { ValidationObserver, ValidationProvider } from 'vee-validate'
   import visitorsBookContractAbi from '~/data/abi/visitorsBook'
 
@@ -279,7 +277,7 @@
     title: "Visitor's Book | ",
   })
 
-  const { $config } = useContext()
+  const { $config, $moment } = useContext()
   const { $vToastify } = getCurrentInstance().proxy
   const observer = ref(null)
   const textField = ref(null)
@@ -310,8 +308,7 @@
       if (accounts.length > 0) await connect()
 
       onValidNetwork.value =
-        // eslint-disable-next-line
-        web3.currentProvider.chainId == visitorsBookContractChainId
+        web3.currentProvider.chainId === visitorsBookContractChainId
 
       if (onValidNetwork.value) {
         await getContractData()
@@ -338,7 +335,7 @@
         method: 'wallet_switchEthereumChain',
         params: [
           {
-            chainId: '0x' + Number(visitorsBookContractChainId).toString(16),
+            chainId: visitorsBookContractChainId,
           },
         ],
       })
@@ -504,8 +501,7 @@
   }
 
   const handleChainChanged = async (chainId) => {
-    // eslint-disable-next-line
-    if (chainId != visitorsBookContractChainId) {
+    if (chainId !== visitorsBookContractChainId) {
       onValidNetwork.value = false
       lastMessageElement.value = null
     } else {
@@ -561,8 +557,9 @@
     observer.value.reset()
   }
 
-  const formatTimestampToDisplay = (timestamp) =>
-    moment.unix(timestamp).tz('UTC').format('MM/DD/YY - HH:mm A')
+  const formatTimestampToDisplay = (timestamp) => {
+    return $moment.unix(timestamp).format('MM/DD/YY - HH:mm A')
+  }
 
   const copyToAddress = async (address) => {
     try {
