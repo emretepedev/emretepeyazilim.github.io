@@ -115,6 +115,6 @@ sw.*
 .husky
 
 # Fetch data to GitHub
-data/contributionsCount.json
-contributionsCount.js
-contributionsCount.ts
+data/contributions.json
+contributions.js
+contributions.ts

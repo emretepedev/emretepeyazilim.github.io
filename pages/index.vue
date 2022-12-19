@@ -43,15 +43,12 @@
 <script setup>
   import { ref } from '@nuxtjs/composition-api'
   import data from '~/data/pages/index'
-  import contributionsCount from '~/data/contributionsCount.json'
+  import contributions from '~/data/contributions.json'
   import Sparkline from '~/components/Sparkline.vue'
 
   const graphData = ref([])
-  const from = new Date()
-  const to = new Date()
-  from.setDate(to.getDate() - 30)
 
-  contributionsCount.data.user.contributionsCollection.contributionCalendar.weeks.forEach(
+  contributions.data.user.contributionsCollection.contributionCalendar.weeks.forEach(
     (week) => {
       week.contributionDays.forEach((day) => {
         graphData.value.push(day.contributionCount)
