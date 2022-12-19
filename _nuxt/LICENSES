@@ -1,15 +1,16 @@
-/*!
- * Vue.js v2.7.14
- * (c) 2014-2022 Evan You
- * Released under the MIT License.
- */
-
-
 /*
 object-assign
 (c) Sindre Sorhus
 @license MIT
 */
+
+/*!
+ * @overview es6-promise - a tiny implementation of Promises/A+.
+ * @copyright Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and contributors (Conversion to ES6 API by Jake Archibald)
+ * @license   Licensed under MIT license
+ *            See https://raw.githubusercontent.com/stefanpenner/es6-promise/master/LICENSE
+ * @version   v4.2.8+1e68dce6
+ */
 
 /*!
  * The buffer module from node.js, for the browser.
@@ -30,11 +31,11 @@ object-assign
  * 
  */
 
-/*! crc32.js (C) 2014-present SheetJS -- http://sheetjs.com */
-
-/*! https://mths.be/punycode v1.4.1 by @mathias */
+/*! https://mths.be/utf8js v3.0.0 by @mathias */
 
 /*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */
+
+/*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */
 
 /*! safe-buffer. MIT License. Feross Aboukhadijeh <https://feross.org/opensource> */
 
@@ -57,19 +58,11 @@ object-assign
  */
 
 
-//! Copyright (c) JS Foundation and other contributors
-
-//! github.com/moment/moment-timezone
-
-//! license : MIT
-
-//! moment-timezone.js
-
-//! moment.js
-
-//! moment.js locale configuration
-
-//! version : 0.5.40
+/*!
+ * Vue.js v2.7.14
+ * (c) 2014-2022 Evan You
+ * Released under the MIT License.
+ */
 
 
 /*!
@@ -104,3 +97,15 @@ PERFORMANCE OF THIS SOFTWARE.
   * (c) 2021 Abdelrahman Awad
   * @license MIT
   */
+
+//! Copyright (c) JS Foundation and other contributors
+
+//! github.com/moment/moment-timezone
+
+//! license : MIT
+
+//! moment-timezone.js
+
+//! moment.js
+
+//! version : 0.5.40
