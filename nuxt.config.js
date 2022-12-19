@@ -254,18 +254,17 @@ export default {
     hostname: process.env.SPA_ORIGIN,
     gzip: true,
     trailingSlash: false,
-    cacheTime: 1000 * 60 * 15, // 15 mins
+    cacheTime: 1000 * 60 * 15,
     defaults: {
-      changefreq: 'monthly',
+      changefreq: 'yearly',
       priority: 0.5,
-      lastmod: new Date(),
+      lastmod: new Date().toISOString(),
     },
     routes: [
       {
         url: '/',
-        changefreq: 'daily',
+        changefreq: 'monthly',
         priority: 1,
-        lastmod: new Date(),
       },
     ],
   },
