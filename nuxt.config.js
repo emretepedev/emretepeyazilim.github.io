@@ -1,22 +1,16 @@
 const isDev = process.env.NODE_ENV !== 'production'
 
 export default {
-  // target property: https://go.nuxtjs.dev/config-target
   target: 'static',
 
-  // ssr property: https://go.nuxtjs.dev/config-ssr
   ssr: false,
 
-  // dev property: https://nuxtjs.org/docs/configuration-glossary/configuration-dev
   dev: isDev,
 
-  // telemetry property: https://nuxtjs.org/docs/configuration-glossary/configuration-telemetry
   telemetry: false,
 
-  // auto import components: https://go.nuxtjs.dev/config-components
-  components: false,
+  components: true,
 
-  // loading property: https://nuxtjs.org/docs/configuration-glossary/configuration-loading
   loading: false,
 
   vue: {
@@ -28,9 +22,7 @@ export default {
     },
   },
 
-  // build configuration: https://go.nuxtjs.dev/config-build
   build: {
-    // all options https://github.com/kangax/html-minifier#options-quick-reference
     html: {
       minify: {
         collapseBooleanAttributes: true,
@@ -60,15 +52,12 @@ export default {
     },
   },
 
-  // render property: https://nuxtjs.org/docs/configuration-glossary/configuration-render
   render: {
-    // setting up cache for 'static' directory and  https://web.dev/uses-long-cache-ttl
     static: {
-      maxAge: 1000 * 60 * 60 * 24 * 30 * 6, // six months
+      maxAge: 1000 * 60 * 60 * 24 * 30 * 1, // one month
     },
   },
 
-  // global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'Homepage | ',
     titleTemplate: '%s' + process.env.SPA_NAME + ' - Emre Tepe',
@@ -81,10 +70,8 @@ export default {
     ],
   },
 
-  // global css: https://go.nuxtjs.dev/config-css
   css: ['@/assets/css/main.css', '@/assets/css/fonts.css'],
 
-  // use runtime config instead of env https://nuxtjs.org/docs/directory-structure/nuxt-config/#publicruntimeconfig
   publicRuntimeConfig: {
     spaName: process.env.SPA_NAME,
     spaOrigin: process.env.SPA_ORIGIN,
@@ -97,28 +84,25 @@ export default {
     txConfirmationBlocks: parseInt(process.env.TX_CONFIRMATION_BLOCKS),
     repositoryUrl: process.env.REPOSITORY_URL,
     visitorsBookContractAddress: process.env.VISITORS_BOOK_CONTRACT_ADDRESS,
-    visitorsBookContractChainId: process.env.VISITORS_BOOK_CONTRACT_CHAIN_ID,
+    visitorsBookContractChainId:
+      '0x' + Number(process.env.VISITORS_BOOK_CONTRACT_CHAIN_ID).toString(16),
     visitorsBookContractChainName:
       process.env.VISITORS_BOOK_CONTRACT_CHAIN_NAME,
     testWebsite: process.env.TEST_WEBSITE,
     lastModifiedAt: new Date().toUTCString().replace('GMT', 'UTC'),
   },
 
-  // use runtime config instead of env https://nuxtjs.org/docs/directory-structure/nuxt-config/#privateruntimeconfig
   privateRuntimeConfig: {},
 
-  // router: https://nuxtjs.org/docs/configuration-glossary/configuration-router/
   router: {
     trailingSlash: false,
     base: process.env.SPA_PATH,
   },
 
-  // generate: https://nuxtjs.org/docs/configuration-glossary/configuration-generate/
   generate: {
     subFolders: false,
   },
 
-  // plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '~/plugins/vue-gtag',
     '~/plugins/vee-validate',
@@ -126,7 +110,6 @@ export default {
     { src: '~/plugins/vue-toastify', mode: 'client' },
   ],
 
-  // modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     '@nuxtjs/composition-api/module',
     '@nuxtjs/google-fonts',
@@ -134,9 +117,9 @@ export default {
     '@nuxtjs/pwa',
     '@nuxt/postcss8',
     '@nuxtjs/vuetify',
+    '@nuxtjs/moment',
   ],
 
-  // modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/gtm',
     '@nuxtjs/recaptcha',
@@ -144,7 +127,6 @@ export default {
     '@nuxtjs/sitemap',
   ],
 
-  // all options https://github.com/nuxt-community/google-fonts-module/blob/master/src/module.ts#L23
   googleFonts: {
     families: {
       Roboto: true,
@@ -161,7 +143,15 @@ export default {
     base64: false,
   },
 
-  // all options https://github.com/Developmint/nuxt-purgecss/blob/master/lib/utils.js#L10
+  moment: {
+    defaultTimezone: 'UTC',
+    timezone: {
+      matchZones: ['UTC'],
+      startYear: 2021,
+      endYear: 2050,
+    },
+  },
+
   purgeCSS: {
     enabled: !isDev,
     paths: ['./node_modules/vuetify/src/**/*.ts'],
@@ -176,12 +166,10 @@ export default {
   },
 
   pwa: {
-    // all options https://github.com/nuxt-community/pwa-module/blob/main/src/icon.ts#L11
     icon: {
       fileName: 'icon.png',
       plugin: false,
     },
-    // all options https://github.com/nuxt-community/pwa-module/blob/main/src/meta.ts#L8
     meta: {
       viewport: 'width=device-width, initial-scale=1',
       mobileApp: true,
@@ -198,7 +186,6 @@ export default {
       twitterSite: process.env.SPA_NAME,
       twitterCreator: process.env.SPA_NAME,
     },
-    // all options https://github.com/nuxt-community/pwa-module/blob/main/src/manifest.ts#L8
     manifest: {
       name: 'Homepage | ' + process.env.SPA_NAME,
       short_name: process.env.SPA_NAME,
@@ -208,7 +195,6 @@ export default {
     },
   },
 
-  // all options https://github.com/nuxt-community/vuetify-module/blob/master/src/options.ts#L37
   vuetify: {
     defaultAssets: false,
     icons: {
@@ -220,7 +206,6 @@ export default {
     },
   },
 
-  // all options https://github.com/nuxt-community/gtm-module#options
   gtm: {
     id: process.env.GOOGLE_TAG_MANAGER_ID,
     enabled: true,
@@ -230,7 +215,6 @@ export default {
     pageViewEventName: 'nuxtRoute',
   },
 
-  // all options https://github.com/nuxt-community/recaptcha-module#configuration
   recaptcha: {
     siteKey: process.env.GOOGLE_RECAPTCHA_V3_SITE_KEY,
     hideBadge: false,
@@ -238,18 +222,16 @@ export default {
     version: 3,
   },
 
-  // all options https://github.com/nuxt-community/robots-module#the-keys-and-values-available
   robots: [
     {
       UserAgent: '*',
-      Allow: '/',
+      Disallow: '',
     },
     {
       Sitemap: process.env.SPA_URL + '/sitemap.xml',
     },
   ],
 
-  // all options https://github.com/nuxt-community/sitemap-module/blob/dev/lib/options.js#L15
   sitemap: {
     hostname: process.env.SPA_ORIGIN,
     gzip: true,
