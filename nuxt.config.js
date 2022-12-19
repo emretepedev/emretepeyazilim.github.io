@@ -190,7 +190,7 @@ export default {
       name: 'Homepage | ' + process.env.SPA_NAME + ' - Emre Tepe',
       author: 'emretepedev',
       description:
-        'Emre Tepe is a young, ambitious and open-minded Web and Blockchain Developer who seriously cares about discipline. He likes following the pace of new technology.',
+        'Emre Tepe is an ambitious and open-minded Web and Blockchain Developer who seriously cares about discipline. He likes following the pace of new technology.',
       theme_color: '#1E1E1E',
       ogHost: process.env.SPA_URL,
       ogImage: true,
@@ -203,7 +203,7 @@ export default {
       name: 'Homepage | ' + process.env.SPA_NAME,
       short_name: process.env.SPA_NAME,
       description:
-        'Emre Tepe is a young, ambitious and open-minded Web and Blockchain Developer who seriously cares about discipline. He likes following the pace of new technology.',
+        'Emre Tepe is an ambitious and open-minded Web and Blockchain Developer who seriously cares about discipline. He likes following the pace of new technology.',
       background_color: '#1E1E1E',
     },
   },
