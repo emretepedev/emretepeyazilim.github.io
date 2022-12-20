@@ -62,15 +62,21 @@ export default {
     title: 'Homepage | ',
     titleTemplate: '%s' + process.env.SPA_NAME + ' - Emre Tepe',
     meta: [
-      {
-        hid: 'keywords',
-        name: 'keywords',
-        content: 'emre tepe, blockchain, developer',
-      },
+      process.env.TEST_WEBSITE === 'true'
+        ? {
+            hid: 'robots',
+            name: 'robots',
+            content: 'noindex, nofollow',
+          }
+        : {
+            hid: 'keywords',
+            name: 'keywords',
+            content: 'emre tepe, blockchain, developer',
+          },
     ],
   },
 
-  css: ['@/assets/css/main.css', '@/assets/css/fonts.css'],
+  css: ['@/assets/css/main.css'],
 
   publicRuntimeConfig: {
     spaName: process.env.SPA_NAME,
@@ -138,9 +144,9 @@ export default {
     preload: false,
     useStylesheet: false,
     download: true,
-    overwriting: false,
+    overwriting: true,
     inject: true,
-    base64: false,
+    base64: true,
   },
 
   moment: {

@@ -34,7 +34,6 @@
   },
   "dependencies": {
     "@mdi/js": "^7.1.96",
-    "@metamask/detect-provider": "^2.0.0",
     "@nuxtjs/composition-api": "^0.33.1",
     "@nuxtjs/gtm": "^2.4.0",
     "@nuxtjs/recaptcha": "^1.1.1",
