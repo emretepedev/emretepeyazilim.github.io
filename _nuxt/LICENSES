@@ -104,6 +104,13 @@ PERFORMANCE OF THIS SOFTWARE.
 //! version : 0.5.40
 
 
+/*!
+ * The buffer module from node.js, for the browser.
+ *
+ * @author   Feross Aboukhadijeh <https://feross.org>
+ * @license  MIT
+ */
+
 /**
  * [js-sha3]{@link https://github.com/emn178/js-sha3}
  *
@@ -111,11 +118,4 @@ PERFORMANCE OF THIS SOFTWARE.
  * @author Chen, Yi-Cyuan [emn178@gmail.com]
  * @copyright Chen, Yi-Cyuan 2015-2018
  * @license MIT
- */
-
-
-/*!
- * Vue.js v2.7.14
- * (c) 2014-2022 Evan You
- * Released under the MIT License.
  */

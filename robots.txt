@@ -1,3 +1,4 @@
 User-agent: *
-Disallow: 
+Disallow:
+
 Sitemap: https://emretepedev.github.io/sitemap.xml
