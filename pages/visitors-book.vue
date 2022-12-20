@@ -44,8 +44,7 @@
                               :src="`https://robohash.org/${message.author}?bgset=bg1`"
                               width="36"
                               @click="copyToAddress(message.author)"
-                            >
-                            </v-img>
+                            />
                             <div
                               class="invisible absolute -top-8 right-0 flex-col items-center opacity-0 transition-opacity duration-500 ease-in-out group-hover:visible group-hover:opacity-100"
                             >
@@ -79,8 +78,7 @@
                               :src="`https://robohash.org/${message.author}?bgset=bg1`"
                               width="36"
                               @click="copyToAddress(message.author)"
-                            >
-                            </v-img>
+                            />
                             <div
                               class="invisible absolute -top-8 flex-col items-center opacity-0 transition-opacity duration-500 ease-in-out group-hover:visible group-hover:opacity-100"
                             >
@@ -111,9 +109,9 @@
               <v-container class="px-2 py-1">
                 <v-row no-gutters>
                   <v-col>
-                    <ValidationObserver ref="observer" v-slot="{ invalid }">
+                    <ValidationObserver ref="observer" #default="{ invalid }">
                       <ValidationProvider
-                        v-slot="{ errors }"
+                        #default="{ errors }"
                         name="message"
                         :rules="{
                           required: true,
@@ -259,26 +257,25 @@
   </div>
 </template>
 
-<script setup>
-  import {
-    defineComponent,
-    getCurrentInstance,
-    onMounted,
-    ref,
-    useContext,
-    useMeta,
-  } from '@nuxtjs/composition-api'
+<script setup lang="ts">
   import Web3 from 'web3'
   import { mdiCloseCircle, mdiConnection, mdiMessage, mdiSend } from '@mdi/js'
   import { ValidationObserver, ValidationProvider } from 'vee-validate'
-  import visitorsBookContractAbi from '~/data/abi/visitorsBook'
+  import type { AbiItem } from 'web3-utils'
+  import type { Contract, EventData } from 'web3-eth-contract'
+  import visitorsBookContractAbi from '~/data/abi/visitorsBook.json'
 
-  useMeta({
+  interface Message {
+    author: string
+    createdAt: string
+    content: string
+  }
+
+  useNuxt2Meta({
     title: "Visitor's Book | ",
   })
 
-  const { $config, $moment } = useContext()
-  const { $vToastify } = getCurrentInstance().proxy
+  const { $vToastify, $moment, $config } = useNuxtApp()
   const observer = ref(null)
   const textField = ref(null)
   const rowPaddingBottom = ref(0)
@@ -286,33 +283,38 @@
     visitorsBookContractAddress,
     visitorsBookContractChainId,
     visitorsBookContractChainName,
-  } = $config
-  let visitorsBookContract
-  const hasMetamask = Boolean(window.ethereum)
-  const onValidNetwork = ref(false)
+  } = $config.public
+  let visitorsBookContract: Contract
+  const { ethereum } = window as any
+  const hasMetamask = Boolean(ethereum)
+  const onValidNetwork = ref(
+    hasMetamask && ethereum.chainId === visitorsBookContractChainId
+  )
   const isConnected = ref(false)
-  const address = ref(null)
+  const address = ref('')
   const spinner = ref(false)
   const messageContent = ref('')
-  const messages = ref([])
+  const messages = ref<Message[]>([])
   const lastMessageElement = ref(null)
-  const contractMessageSentEventEmitter = ref(null)
-  const textFieldResizeObserver = ref(null)
-  const web3 = new Web3(window.ethereum)
+  const contractMessageSentEventEmitter = ref(false)
+  const textFieldResizeObserver = ref(false)
+  const web3 = new Web3(ethereum)
 
   onMounted(async () => {
-    if (hasMetamask) {
+    try {
+      if (!hasMetamask) {
+        throw new Error('You have to install Metamask to access this page.')
+      }
+
       startEthEvents()
 
+      if (onValidNetwork.value) await getContractData()
+
       const accounts = await web3.eth.getAccounts()
-      if (accounts.length > 0) await connect()
-
-      onValidNetwork.value =
-        web3.currentProvider.chainId === visitorsBookContractChainId
-
-      if (onValidNetwork.value) {
-        await getContractData()
-      }
+      const isConnected = accounts.length > 0
+      if (isConnected) await connect()
+    } catch (error) {
+      $vToastify.error(String(error?.message))
     }
   })
 
@@ -331,7 +333,7 @@
 
   const switchNetwork = async () => {
     try {
-      await window.ethereum.request({
+      await ethereum.request({
         method: 'wallet_switchEthereumChain',
         params: [
           {
@@ -346,14 +348,12 @@
 
   const getContractData = async () => {
     try {
-      onValidNetwork.value = true
-
       visitorsBookContract = new web3.eth.Contract(
-        visitorsBookContractAbi,
+        visitorsBookContractAbi as AbiItem[],
         visitorsBookContractAddress
       )
 
-      const visitorsBookMessages = await visitorsBookContract.methods
+      const visitorsBookMessages: Message[] = await visitorsBookContract.methods
         .getMessages()
         .call()
 
@@ -367,15 +367,16 @@
       }
 
       if (!contractMessageSentEventEmitter.value) {
-        contractMessageSentEventEmitter.value = visitorsBookContract.events
-          .MessageSent()
-          .on('data', handleMessageSent)
+        contractMessageSentEventEmitter.value = true
+        visitorsBookContract.events.MessageSent().on('data', handleMessageSent)
       }
 
       if (!textFieldResizeObserver.value) {
-        textFieldResizeObserver.value = new ResizeObserver(
-          handleTextFieldResize
-        ).observe(textField.value?.$refs.input)
+        textFieldResizeObserver.value = true
+
+        new ResizeObserver(handleTextFieldResize).observe(
+          textField.value?.$refs.input
+        )
       }
 
       scrollToLastMessage()
@@ -388,7 +389,7 @@
 
   const connect = async () => {
     isConnected.value =
-      (await web3.eth.net.isListening()) && window.ethereum.isConnected()
+      (await web3.eth.net.isListening()) && ethereum.isConnected()
 
     if (!isConnected.value) {
       throw new Error('Connection Error.')
@@ -469,9 +470,9 @@
   }
 
   const startEthEvents = () => {
-    window.ethereum.on('chainChanged', handleChainChanged)
-    window.ethereum.on('accountsChanged', handleAccountsChanged)
-    window.ethereum.on('disconnect', handleDisconnect)
+    ethereum.on('chainChanged', handleChainChanged)
+    ethereum.on('accountsChanged', handleAccountsChanged)
+    ethereum.on('disconnect', handleDisconnect)
   }
 
   const handleTxSent = () => {
@@ -483,7 +484,7 @@
     $vToastify.info('Transaction Status: Waiting to user confirm.')
   }
 
-  const handleTxHash = (txHash) => {
+  const handleTxHash = (txHash: string) => {
     $vToastify.info(
       'Transaction Status: Awaiting transaction confirmation.\n' +
         `Tx Hash: ${txHash}`
@@ -500,32 +501,34 @@
     $vToastify.error('Transaction Status: Failed.')
   }
 
-  const handleChainChanged = async (chainId) => {
+  const handleChainChanged = async (chainId: string) => {
     if (chainId !== visitorsBookContractChainId) {
       onValidNetwork.value = false
       lastMessageElement.value = null
     } else {
+      onValidNetwork.value = true
       await getContractData()
     }
 
     $vToastify.success('Chain has changed.')
   }
 
-  const handleAccountsChanged = async (accounts) => {
-    if (accounts.length > 0) {
+  const handleAccountsChanged = async (accounts: string[]) => {
+    const isConnected = accounts.length > 0
+    if (isConnected) {
       await updateUserInfo(accounts[0])
 
       $vToastify.success(`Linked account changed to '${accounts[0]}'`)
     } else {
-      await disconnectWeb3()
+      disconnectWeb3()
     }
   }
 
-  const handleDisconnect = async () => {
-    await disconnectWeb3()
+  const handleDisconnect = () => {
+    disconnectWeb3()
   }
 
-  const handleMessageSent = (event) => {
+  const handleMessageSent = (event: EventData) => {
     const message = event.returnValues[0]
 
     messages.value.push({
@@ -541,11 +544,11 @@
     $vToastify.success(`New message received from ${message.author}.`)
   }
 
-  const updateUserInfo = async (address = null) => {
+  const updateUserInfo = async (address?: string) => {
     await updateUserAddress(address)
   }
 
-  const updateUserAddress = async (_address = null) => {
+  const updateUserAddress = async (_address?: string) => {
     address.value = _address
       ? web3.utils.toChecksumAddress(_address)
       : (await web3.eth.getAccounts())[0]
@@ -557,25 +560,26 @@
     observer.value.reset()
   }
 
-  const formatTimestampToDisplay = (timestamp) => {
-    return $moment.unix(timestamp).format('MM/DD/YY - HH:mm A')
+  const formatTimestampToDisplay = (timestamp: number | string) => {
+    return $moment.unix(timestamp as number).format('MM/DD/YY - HH:mm A')
   }
 
-  const copyToAddress = async (address) => {
+  const copyToAddress = async (address: string) => {
     try {
       await navigator.clipboard.writeText(address)
       $vToastify.success(`Address ${address} copied.`)
     } catch {}
   }
 
-  const handleTextFieldResize = (textFieldElement) => {
-    rowPaddingBottom.value = textFieldElement[0].contentRect.height
+  const handleTextFieldResize = (
+    resizeObserverEntries: ResizeObserverEntry[]
+  ) => {
+    rowPaddingBottom.value = resizeObserverEntries[0].contentRect.height
   }
 </script>
 
-<script>
-  export default defineComponent({
+<script lang="ts">
+  export default {
     layout: 'footerless',
-    head: {},
-  })
+  }
 </script>

@@ -24,6 +24,7 @@ env:
   VISITORS_BOOK_CONTRACT_CHAIN_ID: ${{ secrets.VISITORS_BOOK_CONTRACT_CHAIN_ID }}
   VISITORS_BOOK_CONTRACT_CHAIN_NAME: ${{ secrets.VISITORS_BOOK_CONTRACT_CHAIN_NAME }}
   TEST_WEBSITE: ${{ secrets.TEST_WEBSITE }}
+  LIVE: ${{ secrets.LIVE }}
 
 jobs:
   fetch-recent-contributions-count:
@@ -32,7 +33,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node: [16]
+        node: [18]
 
     steps:
       - name: Checkout
@@ -43,18 +44,18 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
-      - name: Install dependencies
+      - name: Install dependencies with dev deps
         run: yarn install --production=false
 
       - name: Fetch recent contributions count
         run: yarn fetch
 
-      - name: Generate
-        run: yarn generate
+      - name: Build
+        run: yarn build
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          publish_dir: ./.output/public
           publish_branch: gh-pages

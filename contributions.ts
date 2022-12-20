@@ -10,14 +10,14 @@ const from = new Date(
   dateSelector.setDate(dateSelector.getDate() - 29)
 ).toISOString()
 
-const fetchContributions = async () => {
+const fetchData = async () => {
   const url = 'https://api.github.com/graphql'
 
   const options = {
     method: 'POST',
     headers: {
       Authorization: `bearer ${hexToString(
-        process.env.GH_PERSONAL_ACCESS_TOKEN
+        process.env.GH_PERSONAL_ACCESS_TOKEN!
       )}`,
     },
     body: JSON.stringify({
@@ -42,7 +42,7 @@ const fetchContributions = async () => {
   writeFileSync('./data/contributions.json', JSON.stringify(contributions))
 }
 
-const hexToString = (hex) => {
+const hexToString = (hex: string) => {
   let string = ''
   const len = hex.length
   for (let i = 0; i < len; i += 2) {
@@ -54,8 +54,8 @@ const hexToString = (hex) => {
 
 ;(async () => {
   try {
-    await fetchContributions()
-  } catch (err) {
+    await fetchData()
+  } catch (err: any) {
     writeFileSync('error.txt', String(err))
   }
 })()

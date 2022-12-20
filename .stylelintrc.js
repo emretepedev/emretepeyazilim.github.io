@@ -1,14 +1,15 @@
 module.exports = {
   extends: [
     'stylelint-config-recommended',
-    'stylelint-config-recommended-scss',
     'stylelint-config-recommended-vue',
-    'stylelint-prettier/recommended',
+    'stylelint-config-prettier',
   ],
 
-  plugins: ['stylelint-prettier'],
-
   rules: {
-    'prettier/prettier': true,
+    'at-rule-no-unknown': [true, { ignoreAtRules: ['tailwind'] }],
+    'function-no-unknown': [true, { ignoreFunctions: ['theme'] }],
+    'custom-property-empty-line-before': null,
+    'selector-class-pattern': null,
+    'value-keyword-case': null,
   },
 }

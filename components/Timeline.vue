@@ -32,16 +32,21 @@
   </v-timeline>
 </template>
 
-<script setup>
-  defineProps({
-    items: {
-      type: Array,
-      default() {
-        return []
-      },
-      required: true,
-    },
-  })
+<script setup lang="ts">
+  interface Item {
+    detail: string
+    name: string
+    icon: string
+    year: string
+    type?: string
+    description?: string
+  }
+
+  interface TimelineProps {
+    items: Item[]
+  }
+
+  defineProps<TimelineProps>()
 </script>
 
 <style>

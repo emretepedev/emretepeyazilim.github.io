@@ -1,16 +1,11 @@
 {
   "recommendations": [
     "usernamehw.errorlens",
-    "eamodio.gitlens",
     "pflannery.vscode-versionlens",
     "mikestead.dotenv",
     "syler.ignore",
-    "timonwong.shellcheck",
-    "foxundermoon.shell-format",
     "wayou.vscode-todo-highlight",
     "christian-kohler.path-intellisense",
-    "ms-azuretools.vscode-docker",
-    "sleistner.vscode-fileutils",
     "emeraldwalk.runonsave",
     "shd101wyy.markdown-preview-enhanced",
     "simonsiefke.svg-preview",
@@ -20,15 +15,14 @@
     "esbenp.prettier-vscode",
     "dbaeumer.vscode-eslint",
     "stylelint.vscode-stylelint",
-    "rehfres.colored-console-log",
     "abumalick.vscode-nvm",
-    "eg2.vscode-npm-script",
     "christian-kohler.npm-intellisense",
-    "syler.sass-indented",
     "bradlc.vscode-tailwindcss",
     "dariofuzinato.vue-peek",
     "wscats.vue",
-    "octref.vetur",
-    "vuetifyjs.vuetify-vscode"
+    "vuetifyjs.vuetify-vscode",
+    "steoates.autoimport",
+    "Vue.volar",
+    "Vue.vscode-typescript-vue-plugin"
   ]
 }

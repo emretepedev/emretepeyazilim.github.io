@@ -12,7 +12,7 @@
                   height="150"
                   max-height="150"
                   max-width="150"
-                  src="images/avatar.png"
+                  :src="require('@/assets/images/avatar.png')"
                   title="@emretepedev"
                   width="150"
                 />
@@ -40,12 +40,11 @@
   </div>
 </template>
 
-<script setup>
-  import { ref } from '@nuxtjs/composition-api'
+<script setup lang="ts">
   import data from '~/data/pages/index'
   import contributions from '~/data/contributions.json'
 
-  const graphData = ref([])
+  const graphData = ref<number[]>([])
 
   contributions.data.user.contributionsCollection.contributionCalendar.weeks.forEach(
     (week) => {

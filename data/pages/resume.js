@@ -26,7 +26,6 @@ export default {
       image: 'hardhat.svg',
       category: 'Blockchain',
       url: 'https://hardhat.org/',
-      color: null,
       description:
         'Hardhat is an Ethereum development environment for professionals. It facilitates performing frequent tasks, such as running tests, automatically checking code for mistakes or interacting with a smart contract.',
     },
@@ -35,7 +34,6 @@ export default {
       image: 'truffle.svg',
       category: 'Blockchain',
       url: 'https://trufflesuite.com/truffle/',
-      color: null,
       description:
         'A world class development environment, testing framework and asset pipeline for blockchains using the Ethereum Virtual Machine (EVM), aiming to make life as a developer easier.',
     },
@@ -44,7 +42,6 @@ export default {
       image: 'ethersjs.svg',
       category: 'Blockchain',
       url: 'https://docs.ethers.io/',
-      color: null,
       description:
         'The ethers.js library aims to be a complete and compact library for interacting with the Ethereum Blockchain and its ecosystem.',
     },
@@ -83,7 +80,6 @@ export default {
       image: 'solhint.svg',
       category: 'Blockchain',
       url: 'https://protofire.github.io/solhint/',
-      color: null,
       description:
         'Solhint is an open source project for linting Solidity code. Solhint provides both Security and Style Guide validations.',
     },
@@ -227,7 +223,6 @@ export default {
       name: '*** (Private)',
       icon: mdiNetworkStrength4Cog,
       year: '2022 - Present',
-      description: '',
     },
     {
       detail: 'Blockchain Developer',

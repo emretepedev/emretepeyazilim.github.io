@@ -4,16 +4,16 @@
       <v-container class="flex justify-center">
         <ValidationObserver
           ref="observer"
-          v-slot="{ invalid }"
+          #default="{ invalid }"
           class="w-full sm:w-3/4"
         >
           <v-form
-            :action="$config.pageclipActionUrl"
+            :action="$config.public.pageclipActionUrl"
             class="pageclip-form"
             method="POST"
           >
             <ValidationProvider
-              v-slot="{ errors }"
+              #default="{ errors }"
               name="name"
               rules="required|min:2|max:30"
             >
@@ -34,7 +34,7 @@
               ></v-text-field>
             </ValidationProvider>
             <ValidationProvider
-              v-slot="{ errors }"
+              #default="{ errors }"
               name="email"
               :rules="{
                 required: true,
@@ -63,7 +63,7 @@
               ></v-text-field>
             </ValidationProvider>
             <ValidationProvider
-              v-slot="{ errors }"
+              #default="{ errors }"
               name="subject"
               :rules="`required|oneOf:${data.subjects}`"
             >
@@ -86,7 +86,7 @@
               ></v-autocomplete>
             </ValidationProvider>
             <ValidationProvider
-              v-slot="{ errors }"
+              #default="{ errors }"
               name="phone"
               rules="integer|min:7|max:20"
             >
@@ -109,7 +109,7 @@
               ></v-text-field>
             </ValidationProvider>
             <ValidationProvider
-              v-slot="{ errors }"
+              #default="{ errors }"
               name="message"
               rules="required|min:10|max:1000"
             >
@@ -138,19 +138,19 @@
               ></v-textarea>
             </ValidationProvider>
             <v-checkbox
-              v-model="asap"
               dense
-              :false-value="false"
+              :input-value="asap"
               :label="`ASAP: ${asap ? 'yes' : 'no'}`"
               name="asap"
               :off-icon="mdiCheckboxBlankCircleOutline"
               :on-icon="mdiCheckboxMarkedCircle"
               shaped
               :value="asap"
+              @change="asap = !asap"
             ></v-checkbox>
             <recaptcha
-              :id="$config.googleRecaptchaV2Size"
-              :site-key="$config.googleRecaptchaV2SiteKey"
+              :id="$config.public.googleRecaptchaV2Size"
+              :site-key="$config.public.googleRecaptchaV2SiteKey"
               @error="onError"
               @expired="onExpired"
               @success="onSuccess"
@@ -158,9 +158,9 @@
             <div class="mt-5 text-center">
               <v-btn
                 class="pageclip-form__submit pageclip-form__submit--dark-loader"
-                :disabled="invalid || !Boolean(passRecaptcha)"
+                :disabled="invalid || !passRecaptcha"
                 type="submit"
-                @click="submit"
+                @click="submit($event)"
               >
                 Submit
               </v-btn>
@@ -172,15 +172,7 @@
   </div>
 </template>
 
-<script setup>
-  import {
-    defineComponent,
-    getCurrentInstance,
-    onMounted,
-    ref,
-    useContext,
-    useMeta,
-  } from '@nuxtjs/composition-api'
+<script setup lang="ts">
   import {
     mdiAt,
     mdiCheckboxBlankCircleOutline,
@@ -191,10 +183,11 @@
     mdiMessage,
     mdiPhone,
   } from '@mdi/js'
+
   import { ValidationObserver, ValidationProvider } from 'vee-validate'
   import data from '~/data/pages/contact'
 
-  useMeta({
+  useNuxt2Meta({
     link: [
       {
         href: 'https://s.pageclip.co/v1/pageclip.css',
@@ -204,6 +197,7 @@
     ],
     script: [
       {
+        vmid: 'extscript',
         body: true,
         callback: () => {
           styleToPageclip()
@@ -216,10 +210,9 @@
     title: 'Contact | ',
   })
 
-  const { $config, $recaptcha } = useContext()
-  const { $vToastify } = getCurrentInstance().proxy
+  const { $recaptcha, $vToastify, $config } = useNuxtApp()
   const observer = ref(null)
-  const { googleRecaptchaV2Size, googleRecaptchaV2SiteKey } = $config
+  const { googleRecaptchaV2Size, googleRecaptchaV2SiteKey } = $config.public
   const name = ref('')
   const phone = ref('')
   const subject = ref('')
@@ -235,10 +228,9 @@
     renderToRecaptcha()
   })
 
-  const submit = async (event) => {
+  const submit = async (event: PointerEvent) => {
     try {
       const validate = await observer.value.validate()
-
       if (!validate) {
         throw new Error('Form Validation: Failed.')
       }
@@ -310,7 +302,7 @@
     const maxTime = (1000 / frequency) * 10 // 10 sec
 
     const recaptchaInterval = setInterval(() => {
-      const recaptcha = document.querySelector('.g-recaptcha')
+      const recaptcha: HTMLElement = document.querySelector('.g-recaptcha')
 
       if (Boolean(recaptcha) || count === maxTime) {
         clearInterval(recaptchaInterval)
@@ -338,7 +330,7 @@
   const styleToPageclip = () => {
     const form = document.querySelector('.pageclip-form')
 
-    /* eslint-disable-next-line */
+    // @ts-ignore
     Pageclip.form(form, {
       onResponse(error, response) {
         onResponse(error, response)
@@ -346,10 +338,4 @@
       successTemplate: 'I`ll reply to you ASAP. - @emretepedev',
     })
   }
-</script>
-
-<script>
-  export default defineComponent({
-    head: {},
-  })
 </script>

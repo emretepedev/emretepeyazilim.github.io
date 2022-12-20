@@ -10,18 +10,11 @@
   </div>
 </template>
 
-<script setup>
-  import { defineComponent, useMeta } from '@nuxtjs/composition-api'
+<script setup lang="ts">
   import data from '~/data/pages/resume'
 
-  useMeta({
+  useNuxt2Meta({
     title: 'Resume | ',
-  })
-</script>
-
-<script>
-  export default defineComponent({
-    head: {},
   })
 </script>
 

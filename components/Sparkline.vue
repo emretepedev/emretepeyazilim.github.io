@@ -25,23 +25,13 @@
   </v-card>
 </template>
 
-<script setup>
+<script setup lang="ts">
   import { mdiPoll } from '@mdi/js'
 
-  defineProps({
-    graphData: {
-      type: Array,
-      default() {
-        return []
-      },
-      required: true,
-    },
-    gradients: {
-      type: Array,
-      default() {
-        return []
-      },
-      required: true,
-    },
-  })
+  interface SparklineProps {
+    graphData: number[]
+    gradients: string[]
+  }
+
+  defineProps<SparklineProps>()
 </script>

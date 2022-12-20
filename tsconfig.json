@@ -1,0 +1,12 @@
+{
+  "extends": "./.nuxt/tsconfig.json",
+  "compilerOptions": {
+    "lib": ["ESNext", "ESNext.AsyncIterable", "DOM"],
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "experimentalDecorators": true,
+    "baseUrl": ".",
+    "types": ["@nuxt/types", "@types/node", "@nuxtjs/vuetify", "@nuxtjs/moment"]
+  },
+  "exclude": ["node_modules", "dist"]
+}

@@ -25,23 +25,26 @@
           <strong>Vuetify</strong>, <strong>Nuxt</strong>,
           <strong>Tailwind</strong> and
           <strong>Material Design Icons</strong> and deployed on
-          <a class="text-white" :href="$config.repositoryUrl" target="_blank"
+          <a
+            class="text-white"
+            :href="$config.public.repositoryUrl"
+            target="_blank"
             ><strong>GH Pages</strong></a
           >.
         </v-card-text>
         <v-card-subtitle>
-          Last modified at: {{ $config.lastModifiedAt }}
+          Last modified at: {{ $config.public.lastModifiedAt }}
         </v-card-subtitle>
         <v-divider></v-divider>
         <v-card-text class="text-white">
           {{ new Date().getFullYear() }} —
-          <strong>{{ $config.spaName }}</strong>
+          <strong>{{ $config.public.spaName }}</strong>
         </v-card-text>
       </v-card>
     </v-footer>
   </v-container>
 </template>
 
-<script setup>
+<script setup lang="ts">
   import data from '~/data/components/footer'
 </script>

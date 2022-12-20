@@ -6,19 +6,18 @@ module.exports = {
     node: true,
   },
 
-  parser: 'vue-eslint-parser',
+  // parser: 'vue-eslint-parser',
 
   extends: [
-    'eslint:recommended',
-    'plugin:nuxt/recommended',
-    '@nuxtjs',
     'plugin:vue/vue3-recommended',
     'plugin:vuetify/recommended',
     'plugin:json/recommended',
+    '@nuxtjs/eslint-config-typescript',
+    'plugin:nuxt/recommended',
     'prettier',
   ],
 
-  plugins: ['json', 'prettier', 'nuxt'],
+  plugins: ['json', 'prettier'], // 'nuxt'
 
   rules: {
     'prettier/prettier': 'warn',
@@ -49,5 +48,13 @@ module.exports = {
     ],
     'vue/multi-word-component-names': 'off',
     'vue/no-template-shadow': 'off',
+    'vue/v-slot-style': [
+      'warn',
+      {
+        atComponent: 'shorthand',
+        default: 'shorthand',
+        named: 'shorthand',
+      },
+    ],
   },
 }

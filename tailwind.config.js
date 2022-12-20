@@ -9,7 +9,7 @@ module.exports = {
     './layouts/**/*.vue',
     './pages/**/*.vue',
     './plugins/**/*.{js,ts}',
-    './nuxt.config.{js,ts}',
+    './nuxt.config.ts',
   ],
 
   theme: {
@@ -38,5 +38,6 @@ module.exports = {
     },
   },
 
+  // eslint-disable-next-line
   plugins: [require('tailwind-scrollbar')({ nocompatible: true })],
 }

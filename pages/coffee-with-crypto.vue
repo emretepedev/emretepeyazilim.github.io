@@ -37,10 +37,10 @@
               Balance: {{ isConnected ? formattedBalance : '' }}
             </span>
           </v-row>
-          <ValidationObserver ref="observer" v-slot="{ invalid }">
+          <ValidationObserver ref="observer" #default="{ invalid }">
             <v-row>
               <ValidationProvider
-                v-slot="{ errors }"
+                #default="{ errors }"
                 class="flex justify-center"
                 name="amount"
                 :rules="{
@@ -141,31 +141,20 @@
   </div>
 </template>
 
-<script setup>
-  import {
-    computed,
-    defineComponent,
-    getCurrentInstance,
-    onMounted,
-    ref,
-    useContext,
-    useMeta,
-  } from '@nuxtjs/composition-api'
-
+<script setup lang="ts">
   import { ethers } from 'ethers'
   import Web3 from 'web3'
   import { mdiCurrencyUsdOff } from '@mdi/js'
   import { ValidationObserver, ValidationProvider } from 'vee-validate'
 
-  useMeta({
+  useNuxt2Meta({
     title: 'Coffee With Crypto | ',
   })
 
-  const { $config } = useContext()
-  const { $vToastify } = getCurrentInstance().proxy
+  const { $vToastify, $config } = useNuxtApp()
   const observer = ref(null)
-  const { ownerAddress, txConfirmationBlocks } = $config
-  const { ethereum } = window
+  const { ownerAddress, txConfirmationBlocks } = $config.public
+  const { ethereum } = window as any
   const web3 = new Web3(ethereum)
   const provider = new ethers.providers.Web3Provider(ethereum)
   const hasMetamask = Boolean(ethereum)
@@ -253,7 +242,7 @@
         .sendTransaction({
           from: address.value,
           to: ownerAddress,
-          value: ethers.utils.parseEther(amount.value),
+          value: ethers.utils.parseEther(amount.value).toHexString(),
         })
         .once('sent', handleTxSent)
         .once('sending', handleTxSending)
@@ -277,7 +266,7 @@
     $vToastify.info('Transaction Status: Waiting to user confirm.')
   }
 
-  const handleTxHash = (_txHash) => {
+  const handleTxHash = (_txHash: string) => {
     txHash.value = _txHash
     txStatus.value = 'Awaiting transaction confirmation.'
     resetInputs()
@@ -292,7 +281,7 @@
     await updateUserBalance()
   }
 
-  const handleTxConfirmation = (_txConfirmationCount) => {
+  const handleTxConfirmation = (_txConfirmationCount: number) => {
     if (_txConfirmationCount && _txConfirmationCount < txConfirmationBlocks) {
       txConfirmationCount.value = _txConfirmationCount
       $vToastify.info('Confirmation Status: New block found.')
@@ -322,7 +311,7 @@
     $vToastify.success('Chain has changed.')
   }
 
-  const handleAccountsChanged = async (accounts) => {
+  const handleAccountsChanged = async (accounts: string[]) => {
     const _isConnected = accounts.length > 0
     isConnected.value = _isConnected
     if (isConnected.value) {
@@ -330,7 +319,7 @@
 
       $vToastify.success(`Linked account changed to '${accounts[0]}'`)
     } else {
-      await disconnectWeb3()
+      disconnectWeb3()
     }
   }
 
@@ -338,12 +327,12 @@
     isConnected.value = false
   }
 
-  const updateUserInfo = async (address = null) => {
+  const updateUserInfo = async (address?: string) => {
     await updateUserAddress(address)
     await updateUserBalance()
   }
 
-  const updateUserAddress = async (_address = null) => {
+  const updateUserAddress = async (_address?: string) => {
     address.value = _address
       ? ethers.utils.getAddress(_address)
       : (await provider.listAccounts())[0]
@@ -379,10 +368,4 @@
       $vToastify.success(`Address ${address.value} copied.`)
     } catch {}
   }
-</script>
-
-<script>
-  export default defineComponent({
-    head: {},
-  })
 </script>

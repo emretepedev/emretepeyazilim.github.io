@@ -6,6 +6,7 @@ module.exports = {
   words: [
     // general
     'nuxt',
+    'nuxi',
     'nuxtjs',
     'vuetify',
     'vuepress',
@@ -16,6 +17,8 @@ module.exports = {
     'anothr',
     'mythril',
     'nocompatible',
+    'vmid',
+    'vtoastify',
   ],
 
   ignoreWords: ['emretepedev', 'emre', 'tepe', 'osmangazi', 'bixos'],

@@ -25,11 +25,10 @@
   </div>
 </template>
 
-<script setup>
-  import { defineComponent, useMeta } from '@nuxtjs/composition-api'
+<script setup lang="ts">
   import { mdiArrowRightThin } from '@mdi/js'
 
-  useMeta({
+  useNuxt2Meta({
     title: 'Page not found | ',
     meta: [
       {
@@ -38,12 +37,6 @@
         content: 'noindex, nofollow',
       },
     ],
-  })
-</script>
-
-<script>
-  export default defineComponent({
-    head: {},
   })
 </script>
 

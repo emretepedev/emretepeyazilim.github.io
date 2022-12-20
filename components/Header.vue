@@ -1,10 +1,10 @@
 <template>
   <div>
     <v-app-bar v-if="$vuetify.breakpoint.mdAndDown" app dense hide-on-scroll>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon @click.stop="toggleNavDrawer()"></v-app-bar-nav-icon>
       <v-spacer></v-spacer>
       <v-toolbar-title>
-        {{ $config.spaName }}
+        {{ $config.public.spaName }}
       </v-toolbar-title>
     </v-app-bar>
     <v-navigation-drawer
@@ -22,13 +22,13 @@
         <v-list-item-icon
           v-if="$vuetify.breakpoint.mdAndDown"
           class="mx-0"
-          @click.stop="drawer = !drawer"
+          @click.stop="toggleNavDrawer()"
         >
           <v-icon dense>
             {{ mdiClose }}
           </v-icon>
         </v-list-item-icon>
-        <v-list-item-icon @click="toggleNavDrawer()">
+        <v-list-item-icon @click="toggleSideNavDrawer()">
           <v-icon dense>
             {{ mdiSwapHorizontal }}
           </v-icon>
@@ -63,8 +63,7 @@
   </div>
 </template>
 
-<script setup>
-  import { onMounted, ref, useContext } from '@nuxtjs/composition-api'
+<script setup lang="ts">
   import {
     mdiClose,
     mdiSwapHorizontal,
@@ -73,11 +72,11 @@
   } from '@mdi/js'
   import data from '~/data/components/header'
 
-  const { $config } = useContext()
-  const { testWebsite, spaOrigin } = $config
+  const { testWebsite, spaOrigin } = useRuntimeConfig().public
   const isOnRight = ref(false)
   const drawer = ref(false)
   const lastPageItem = data.pages[data.pages.length - 1]
+  const isLastItem = ''
   if (!lastPageItem.title.includes('version'))
     data.pages.push(
       testWebsite
@@ -101,8 +100,12 @@
     )
   })
 
-  const toggleNavDrawer = () => {
+  const toggleSideNavDrawer = () => {
     isOnRight.value = !isOnRight.value
-    localStorage.setItem('isOnRight', isOnRight.value)
+    localStorage.setItem('isOnRight', String(isOnRight.value))
+  }
+
+  const toggleNavDrawer = () => {
+    drawer.value = !drawer.value
   }
 </script>

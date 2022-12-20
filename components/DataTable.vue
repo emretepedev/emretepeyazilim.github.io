@@ -42,7 +42,7 @@
           height="28"
           max-height="28"
           max-width="28"
-          :src="`icons/skills/${item.image}`"
+          :src="require(`@/assets/icons/skills/${item.image}`)"
           :style="item.color ? `filter: ${item.color}` : ''"
           :title="item.name"
           width="28"
@@ -95,8 +95,7 @@
   </v-data-table>
 </template>
 
-<script setup>
-  import { ref } from '@nuxtjs/composition-api'
+<script setup lang="ts">
   import {
     mdiArrowCollapseLeft,
     mdiArrowCollapseRight,
@@ -105,22 +104,32 @@
     mdiMagnify,
   } from '@mdi/js'
 
-  defineProps({
-    headers: {
-      type: Array,
-      default() {
-        return []
-      },
-      required: true,
-    },
-    items: {
-      type: Array,
-      default() {
-        return []
-      },
-      required: true,
-    },
-  })
+  interface Item {
+    name: string
+    image: string
+    category: string
+    url: string
+    color?: string
+    description: string
+  }
+
+  interface Header {
+    text?: string
+    value: string
+    class?: string
+    divider?: boolean
+    align?: string
+    groupable?: boolean
+    sortable?: boolean
+    filterable?: boolean
+  }
+
+  interface DataTableProps {
+    headers: Header[]
+    items: Item[]
+  }
+
+  defineProps<DataTableProps>()
 
   const search = ref('')
 </script>

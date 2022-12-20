@@ -10,7 +10,7 @@
           class="select-none"
           contain
           :height="$vuetify.breakpoint.smAndDown ? '25' : '37.5'"
-          src="images/linkedin.svg"
+          :src="require('@/assets/images/linkedin.svg')"
           style="
             filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(87deg)
               brightness(99%) contrast(104%);
@@ -26,7 +26,7 @@
           alt="@emretepedev"
           class="border-gradient-br-blue-green-gray-900 inline rounded-full border border-solid border-transparent"
           height="100"
-          src="images/avatar.png"
+          :src="require('@/assets/images/avatar.png')"
           title="@emretepedev"
           width="100"
         />
