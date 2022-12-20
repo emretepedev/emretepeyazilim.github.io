@@ -72,14 +72,14 @@
   } from '@mdi/js'
   import data from '~/data/components/header'
 
-  const { testWebsite, spaOrigin } = useRuntimeConfig().public
+  const { spaOrigin } = useRuntimeConfig().public
   const isOnRight = ref(false)
   const drawer = ref(false)
   const lastPageItem = data.pages[data.pages.length - 1]
   const isLastItem = ''
   if (!lastPageItem.title.includes('version'))
     data.pages.push(
-      testWebsite
+      process.env.testWebsite === 'true'
         ? {
             title: '~/live-version',
             to: spaOrigin,

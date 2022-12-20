@@ -182,6 +182,10 @@ export default defineNuxtConfig({
 
   css: ['@/assets/css/main.css'],
 
+  env: {
+    testWebsite: process.env.TEST_WEBSITE,
+  },
+
   runtimeConfig: {
     public: {
       spaName: process.env.SPA_NAME,
@@ -199,7 +203,6 @@ export default defineNuxtConfig({
         '0x' + Number(process.env.VISITORS_BOOK_CONTRACT_CHAIN_ID).toString(16),
       visitorsBookContractChainName:
         process.env.VISITORS_BOOK_CONTRACT_CHAIN_NAME,
-      testWebsite: process.env.TEST_WEBSITE,
       lastModifiedAt: new Date().toUTCString().replace('GMT', 'UTC'),
     },
   },
