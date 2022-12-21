@@ -20,6 +20,7 @@ module.exports = {
     'vmid',
     'vtoastify',
     'pinia',
+    'vueuse',
   ],
 
   ignoreWords: ['emretepedev', 'emre', 'tepe', 'osmangazi', 'bixos'],

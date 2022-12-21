@@ -154,9 +154,15 @@
                             <template #activator="{ on }">
                               <v-btn
                                 v-if="isConnected"
-                                v-longclick="
-                                  () => isConnected && disconnectWeb3()
-                                "
+                                v-on-long-press="[
+                                  onLongPressCallbackDirective,
+                                  {
+                                    delay: 1500,
+                                    modifiers: {
+                                      prevent: true,
+                                    },
+                                  },
+                                ]"
                                 class="p-0"
                                 :disabled="spinner"
                                 min-width="36"
@@ -263,6 +269,7 @@
   import { ValidationObserver, ValidationProvider } from 'vee-validate'
   import type { AbiItem } from 'web3-utils'
   import type { Contract, EventData } from 'web3-eth-contract'
+  import { vOnLongPress } from '@vueuse/components'
   import visitorsBookContractAbi from '@/data/abi/visitorsBook.json'
 
   interface Message {
@@ -326,6 +333,10 @@
     () => metamaskStore.accounts,
     async (newAccounts) => await handleAccountsChanged(newAccounts)
   )
+
+  const onLongPressCallbackDirective = (e: PointerEvent) => {
+    isConnected && disconnectWeb3()
+  }
 
   const connectWeb3 = async () => {
     try {

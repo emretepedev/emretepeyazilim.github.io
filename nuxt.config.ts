@@ -231,7 +231,6 @@ export default defineNuxtConfig({
   plugins: [
     '@/plugins/vue-gtag',
     '@/plugins/vee-validate',
-    '@/plugins/vue-long-click',
     { src: '@/plugins/vue-toastify', mode: 'client' },
   ],
 
@@ -243,7 +242,7 @@ export default defineNuxtConfig({
     '@nuxt/postcss8',
   ],
 
-  modules: ['@nuxtjs/gtm', '@nuxtjs/recaptcha', '@pinia/nuxt'],
+  modules: ['@nuxtjs/gtm', '@nuxtjs/recaptcha', '@pinia/nuxt', '@vueuse/nuxt'],
 
   pinia: {
     autoImports: ['defineStore', 'storeToRefs'],
