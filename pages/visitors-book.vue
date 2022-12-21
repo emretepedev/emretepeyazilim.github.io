@@ -263,7 +263,7 @@
   import { ValidationObserver, ValidationProvider } from 'vee-validate'
   import type { AbiItem } from 'web3-utils'
   import type { Contract, EventData } from 'web3-eth-contract'
-  import visitorsBookContractAbi from '~/data/abi/visitorsBook.json'
+  import visitorsBookContractAbi from '@/data/abi/visitorsBook.json'
 
   interface Message {
     author: string
@@ -275,6 +275,7 @@
     title: "Visitor's Book | ",
   })
 
+  const metamaskStore = useMetamaskStore()
   const { $vToastify, $moment, $config } = useNuxtApp()
   const observer = ref(null)
   const textField = ref(null)
@@ -306,25 +307,35 @@
         throw new Error('You have to install Metamask to access this page.')
       }
 
-      startEthEvents()
-
-      if (onValidNetwork.value) await getContractData()
-
+      metamaskStore.startMetamaskEvents()
+      onValidNetwork.value && (await getContractData())
       const accounts = await web3.eth.getAccounts()
-      const isConnected = accounts.length > 0
-      if (isConnected) await connect()
+      isConnected.value = accounts.length > 0
+      isConnected.value && (await handleAccountsChanged(accounts))
     } catch (error) {
       $vToastify.error(String(error?.message))
     }
   })
 
+  watch(
+    () => metamaskStore.chainId,
+    async (newChainId) => await handleChainChanged(newChainId)
+  )
+
+  watch(
+    () => metamaskStore.accounts,
+    async (newAccounts) => await handleAccountsChanged(newAccounts)
+  )
+
   const connectWeb3 = async () => {
     try {
       spinner.value = true
-      await web3.eth.requestAccounts()
-      await connect()
+      const accounts = await web3.eth.getAccounts()
+      isConnected.value = accounts.length > 0
+      isConnected.value
+        ? await handleAccountsChanged(accounts)
+        : await web3.eth.requestAccounts()
       spinner.value = false
-      $vToastify.success('Connected.')
     } catch (error) {
       spinner.value = false
       $vToastify.error(String(error?.message))
@@ -385,17 +396,6 @@
         $vToastify.error(String(error?.message))
       }
     }
-  }
-
-  const connect = async () => {
-    isConnected.value =
-      (await web3.eth.net.isListening()) && ethereum.isConnected()
-
-    if (!isConnected.value) {
-      throw new Error('Connection Error.')
-    }
-
-    await updateUserInfo()
   }
 
   const send = async () => {
@@ -462,17 +462,9 @@
   }
 
   const disconnectWeb3 = () => {
-    spinner.value = true
-    address.value = null
     isConnected.value = false
+    resetUserDetails()
     $vToastify.success('Disconnected.')
-    spinner.value = false
-  }
-
-  const startEthEvents = () => {
-    ethereum.on('chainChanged', handleChainChanged)
-    ethereum.on('accountsChanged', handleAccountsChanged)
-    ethereum.on('disconnect', handleDisconnect)
   }
 
   const handleTxSent = () => {
@@ -514,18 +506,8 @@
   }
 
   const handleAccountsChanged = async (accounts: string[]) => {
-    const isConnected = accounts.length > 0
-    if (isConnected) {
-      await updateUserInfo(accounts[0])
-
-      $vToastify.success(`Linked account changed to '${accounts[0]}'`)
-    } else {
-      disconnectWeb3()
-    }
-  }
-
-  const handleDisconnect = () => {
-    disconnectWeb3()
+    isConnected.value = accounts.length > 0
+    isConnected.value ? await updateUserInfo(accounts[0]) : disconnectWeb3()
   }
 
   const handleMessageSent = (event: EventData) => {
@@ -552,6 +534,8 @@
     address.value = _address
       ? web3.utils.toChecksumAddress(_address)
       : (await web3.eth.getAccounts())[0]
+
+    $vToastify.success(`Linked account changed to '${address.value}'`)
   }
 
   const resetInputs = () => {
@@ -562,6 +546,10 @@
 
   const formatTimestampToDisplay = (timestamp: number | string) => {
     return $moment.unix(timestamp as number).format('MM/DD/YY - HH:mm A')
+  }
+
+  const resetUserDetails = () => {
+    address.value = ''
   }
 
   const copyToAddress = async (address: string) => {

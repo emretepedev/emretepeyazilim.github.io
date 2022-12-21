@@ -151,15 +151,17 @@
     title: 'Coffee With Crypto | ',
   })
 
+  const metamaskStore = useMetamaskStore()
   const { $vToastify, $config } = useNuxtApp()
   const observer = ref(null)
   const { ownerAddress, txConfirmationBlocks } = $config.public
   const { ethereum } = window as any
-  const web3 = new Web3(ethereum)
-  const provider = new ethers.providers.Web3Provider(ethereum)
   const hasMetamask = Boolean(ethereum)
+  const provider = hasMetamask
+    ? new ethers.providers.Web3Provider(ethereum, 'any')
+    : null
   const isConnected = ref(false)
-  const address = ref(null)
+  const address = ref('')
   const balance = ref('')
   const amount = ref('')
   const txStatus = ref('')
@@ -167,6 +169,9 @@
   const txHash = ref('')
   const spinner = ref(false)
   const waitForConfirmation = ref(false)
+  const web3 = new Web3(ethereum)
+  // TODO: check this if there is no metamask!
+  web3.eth.transactionConfirmationBlocks = txConfirmationBlocks
 
   const formattedAddress = computed(
     () =>
@@ -186,35 +191,40 @@
     }
   })
 
+  watch(
+    () => metamaskStore.chainId,
+    async () => await handleChainChanged()
+  )
+
+  watch(
+    () => metamaskStore.accounts,
+    async (newAccounts) => await handleAccountsChanged(newAccounts)
+  )
+
   onMounted(async () => {
-    if (hasMetamask) {
-      startEthEvents()
+    try {
+      if (!hasMetamask) {
+        throw new Error('You have to install Metamask to access this page.')
+      }
 
-      web3.eth.transactionConfirmationBlocks = txConfirmationBlocks
-
+      metamaskStore.startMetamaskEvents()
       const accounts = await provider.listAccounts()
       isConnected.value = accounts.length > 0
-      if (isConnected.value) await connect()
+      isConnected.value && (await handleAccountsChanged(accounts))
+    } catch (error) {
+      $vToastify.error(String(error?.message))
     }
   })
 
   const connectWeb3 = async () => {
     try {
-      await provider.send('eth_requestAccounts', [])
-
-      await connect()
-
-      $vToastify.success('Connected.')
-    } catch (error) {
-      $vToastify.error(String(error?.message))
-    }
-  }
-
-  const connect = async () => {
-    try {
+      spinner.value = true
       const accounts = await provider.listAccounts()
       isConnected.value = accounts.length > 0
-      await updateUserInfo()
+      isConnected.value
+        ? await handleAccountsChanged(accounts)
+        : await provider.send('eth_requestAccounts', [])
+      spinner.value = false
     } catch (error) {
       $vToastify.error(String(error?.message))
     }
@@ -223,7 +233,6 @@
   const disconnectWeb3 = () => {
     isConnected.value = false
     resetUserDetails()
-
     $vToastify.success('Disconnected.')
   }
 
@@ -300,31 +309,14 @@
     $vToastify.error('Transaction Status: Failed.')
   }
 
-  const startEthEvents = () => {
-    ethereum.on('chainChanged', handleChainChanged)
-    ethereum.on('accountsChanged', handleAccountsChanged)
-    ethereum.on('disconnect', handleDisconnect)
-  }
-
   const handleChainChanged = async () => {
     await updateUserBalance()
     $vToastify.success('Chain has changed.')
   }
 
   const handleAccountsChanged = async (accounts: string[]) => {
-    const _isConnected = accounts.length > 0
-    isConnected.value = _isConnected
-    if (isConnected.value) {
-      await updateUserInfo(accounts[0])
-
-      $vToastify.success(`Linked account changed to '${accounts[0]}'`)
-    } else {
-      disconnectWeb3()
-    }
-  }
-
-  const handleDisconnect = () => {
-    isConnected.value = false
+    isConnected.value = accounts.length > 0
+    isConnected.value ? await updateUserInfo(accounts[0]) : disconnectWeb3()
   }
 
   const updateUserInfo = async (address?: string) => {
@@ -336,6 +328,8 @@
     address.value = _address
       ? ethers.utils.getAddress(_address)
       : (await provider.listAccounts())[0]
+
+    $vToastify.success(`Linked account changed to '${address.value}'`)
   }
 
   const updateUserBalance = async () => {
