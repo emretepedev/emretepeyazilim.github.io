@@ -6,7 +6,13 @@
     "sourceMap": true,
     "experimentalDecorators": true,
     "baseUrl": ".",
-    "types": ["@nuxt/types", "@types/node", "@nuxtjs/vuetify", "@nuxtjs/moment"]
+    "types": [
+      "@nuxt/types",
+      "@types/node",
+      "@nuxtjs/vuetify",
+      "@nuxtjs/moment",
+      "@pinia/nuxt"
+    ]
   },
   "exclude": ["node_modules", "dist"]
 }

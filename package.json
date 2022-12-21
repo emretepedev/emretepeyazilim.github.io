@@ -35,6 +35,7 @@
     "@mdi/js": "^7.1.96",
     "@nuxtjs/gtm": "^2.4.0",
     "@nuxtjs/recaptcha": "^1.1.1",
+    "@pinia/nuxt": "^0.4.6",
     "ethers": "^5.7.2",
     "nuxt-edge": "latest",
     "vee-validate": "^3.4.14",

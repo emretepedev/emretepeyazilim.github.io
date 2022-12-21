@@ -220,6 +220,10 @@ export default defineNuxtConfig({
     baseURL: isLive ? undefined : '/',
   },
 
+  imports: {
+    dirs: ['stores'],
+  },
+
   generate: {
     subFolders: false,
   },
@@ -239,7 +243,11 @@ export default defineNuxtConfig({
     '@nuxt/postcss8',
   ],
 
-  modules: ['@nuxtjs/gtm', '@nuxtjs/recaptcha'],
+  modules: ['@nuxtjs/gtm', '@nuxtjs/recaptcha', '@pinia/nuxt'],
+
+  pinia: {
+    autoImports: ['defineStore', 'storeToRefs'],
+  },
 
   googleFonts: {
     families: {
