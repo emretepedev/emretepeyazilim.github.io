@@ -170,7 +170,6 @@
   const spinner = ref(false)
   const waitForConfirmation = ref(false)
   const web3 = new Web3(ethereum)
-  // TODO: check this if there is no metamask!
   web3.eth.transactionConfirmationBlocks = txConfirmationBlocks
 
   const formattedAddress = computed(
@@ -191,15 +190,20 @@
     }
   })
 
-  watch(
-    () => metamaskStore.chainId,
-    async () => await handleChainChanged()
-  )
+  metamaskStore.$onAction(async ({ name, args, onError }) => {
+    switch (name) {
+      case 'handleChainChanged':
+        await handleChainChanged()
+        break
+      case 'handleAccountsChanged':
+        await handleAccountsChanged(args[0])
+        break
+    }
 
-  watch(
-    () => metamaskStore.accounts,
-    async (newAccounts) => await handleAccountsChanged(newAccounts)
-  )
+    onError((error: any) => {
+      $vToastify.error(String(error?.message))
+    })
+  })
 
   onMounted(async () => {
     try {

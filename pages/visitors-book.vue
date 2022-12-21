@@ -324,17 +324,22 @@
     }
   })
 
-  watch(
-    () => metamaskStore.chainId,
-    async (newChainId) => await handleChainChanged(newChainId)
-  )
+  metamaskStore.$onAction(async ({ name, args, onError }) => {
+    switch (name) {
+      case 'handleChainChanged':
+        await handleChainChanged(args[0])
+        break
+      case 'handleAccountsChanged':
+        await handleAccountsChanged(args[0])
+        break
+    }
 
-  watch(
-    () => metamaskStore.accounts,
-    async (newAccounts) => await handleAccountsChanged(newAccounts)
-  )
+    onError((error: any) => {
+      $vToastify.error(String(error?.message))
+    })
+  })
 
-  const onLongPressCallbackDirective = (e: PointerEvent) => {
+  const onLongPressCallbackDirective = () => {
     isConnected && disconnectWeb3()
   }
 

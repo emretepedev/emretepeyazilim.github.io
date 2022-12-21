@@ -1,10 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 const { ethereum } = window as any
 
+// TODO: only use store and use chain and address in components
 export const useMetamaskStore = defineStore('metamask', {
   state: () => ({
     haveEventsStarted: false,
-    chainId: '',
-    accounts: [],
   }),
 
   actions: {
@@ -16,12 +16,8 @@ export const useMetamaskStore = defineStore('metamask', {
       }
     },
 
-    handleChainChanged(chainId: string) {
-      this.chainId = chainId
-    },
+    handleChainChanged(chainId: string) {},
 
-    handleAccountsChanged(accounts: string[]) {
-      this.accounts = accounts
-    },
+    handleAccountsChanged(accounts: string[]) {},
   },
 })
