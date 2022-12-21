@@ -41,8 +41,8 @@
 </template>
 
 <script setup lang="ts">
-  import data from '~/data/pages/index'
-  import contributions from '~/data/contributions.json'
+  import data from '@/data/pages/index'
+  import contributions from '@/data/contributions.json'
 
   const graphData = ref<number[]>([])
 

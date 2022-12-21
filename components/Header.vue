@@ -70,7 +70,7 @@
     mdiTestTube,
     mdiTestTubeOff,
   } from '@mdi/js'
-  import data from '~/data/components/header'
+  import data from '@/data/components/header'
 
   const { spaOrigin } = useRuntimeConfig().public
   const isOnRight = ref(false)
