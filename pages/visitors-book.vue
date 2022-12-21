@@ -436,8 +436,6 @@
             clearInterval(getLastMessageInterval)
 
             if (tries === maxTries) {
-              $vToastify.error('Something went wrong.')
-
               return
             }
 
