@@ -44,6 +44,10 @@
   import data from '@/data/pages/index'
   import contributions from '@/data/contributions.json'
 
+  useNuxt2Meta({
+    title: 'Homepage | ',
+  })
+
   const graphData = ref<number[]>([])
 
   contributions.data.user.contributionsCollection.contributionCalendar.weeks.forEach(

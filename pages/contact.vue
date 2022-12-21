@@ -183,7 +183,6 @@
     mdiMessage,
     mdiPhone,
   } from '@mdi/js'
-
   import { ValidationObserver, ValidationProvider } from 'vee-validate'
   import data from '@/data/pages/contact'
 
