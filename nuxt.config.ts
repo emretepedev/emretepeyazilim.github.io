@@ -253,7 +253,7 @@ export default defineNuxtConfig({
       Roboto: true,
     },
     display: 'swap',
-    subsets: ['latin'],
+    subsets: 'latin',
     prefetch: false,
     preconnect: false,
     preload: false,
@@ -261,7 +261,7 @@ export default defineNuxtConfig({
     download: true,
     overwriting: true,
     inject: true,
-    base64: true,
+    fontsPath: '@/assets/fonts',
   },
 
   moment: {
