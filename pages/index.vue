@@ -19,11 +19,7 @@
               </v-banner>
               <v-card-text>
                 <div>
-                  I am a passionate and curious blockchain & web developer who
-                  takes discipline seriously. In addition, I’m open-minded to
-                  learning new things about technology and software. On the
-                  other hand to the technical topics I am interested in, I take
-                  into account everything related to the concept of esteem.
+                  {{ $t('welcome') }}
                 </div>
               </v-card-text>
             </v-card>
@@ -37,6 +33,9 @@
         </div>
       </v-container>
     </div>
+    <div @click="$i18n.locale = 'en'">EN</div>
+    <div @click="$i18n.locale = 'fr'">FR</div>
+    <div @click="$i18n.locale = 'es'">ES</div>
   </div>
 </template>
 

@@ -11,7 +11,8 @@
       "@types/node",
       "@nuxtjs/vuetify",
       "@nuxtjs/moment",
-      "@pinia/nuxt"
+      "@pinia/nuxt",
+      "@nuxtjs/i18n"
     ]
   },
   "exclude": ["node_modules", "dist"]

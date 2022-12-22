@@ -242,7 +242,13 @@ export default defineNuxtConfig({
     '@nuxt/postcss8',
   ],
 
-  modules: ['@nuxtjs/gtm', '@nuxtjs/recaptcha', '@pinia/nuxt', '@vueuse/nuxt'],
+  modules: [
+    '@nuxtjs/gtm',
+    '@nuxtjs/recaptcha',
+    '@pinia/nuxt',
+    '@vueuse/nuxt',
+    '@nuxtjs/i18n',
+  ],
 
   pinia: {
     autoImports: ['defineStore', 'storeToRefs'],
@@ -311,5 +317,24 @@ export default defineNuxtConfig({
     hideBadge: false,
     language: 'en',
     version: 3,
+  },
+
+  i18n: {
+    locales: ['en', 'fr', 'es'],
+    defaultLocale: 'en',
+    vueI18n: {
+      fallbackLocale: 'en',
+      messages: {
+        en: {
+          welcome: 'Welcome',
+        },
+        fr: {
+          welcome: 'Bienvenue',
+        },
+        es: {
+          welcome: 'Bienvenido',
+        },
+      },
+    },
   },
 })
