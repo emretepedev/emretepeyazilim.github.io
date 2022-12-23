@@ -21,7 +21,7 @@
                   @click="isConnected && copyToAddress()"
                 >
                   Address:
-                  {{ isConnected ? formattedAddress : '' }}
+                  {{ formattedAddress }}
                 </span>
               </template>
               <span class="text-center">
@@ -34,7 +34,7 @@
             <span
               class="app-title border-gradient-br-blue-green-gray-900 my-auto rounded-md border-2 border-solid border-transparent p-3 text-center text-gray-100"
             >
-              Balance: {{ isConnected ? formattedBalance : '' }}
+              Balance: {{ formattedBalance }}
             </span>
           </v-row>
           <ValidationObserver ref="observer" #default="{ invalid }">
@@ -49,7 +49,7 @@
                   min: 1,
                   max: 8,
                   min_value: 0.000001,
-                  max_value: formattedBalance,
+                  max_value: balance,
                 }"
               >
                 <v-text-field

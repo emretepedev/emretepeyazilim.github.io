@@ -264,6 +264,7 @@
 </template>
 
 <script setup lang="ts">
+  // TODO: change visitors book to guestbook
   import Web3 from 'web3'
   import { mdiCloseCircle, mdiConnection, mdiMessage, mdiSend } from '@mdi/js'
   import { ValidationObserver, ValidationProvider } from 'vee-validate'
