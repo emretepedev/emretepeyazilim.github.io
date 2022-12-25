@@ -14,7 +14,7 @@ import {
   required,
 } from 'vee-validate/dist/rules'
 
-export default () => {
+export default defineNuxtPlugin(() => {
   extend('required', {
     ...required,
     message: 'The {_field_} field is required.',
@@ -84,4 +84,4 @@ export default () => {
     },
     message: 'The {_field_} must contain only decimal values',
   })
-}
+})
