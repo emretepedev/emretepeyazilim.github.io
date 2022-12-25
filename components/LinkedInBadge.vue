@@ -26,7 +26,7 @@
           alt="@emretepedev"
           class="border-gradient-br-blue-green-gray-900 inline rounded-full border border-solid border-transparent"
           height="100"
-          :src="require('@/assets/images/avatar.png')"
+          :src="require('@/assets/images/avatar.webp')"
           title="@emretepedev"
           width="100"
         />

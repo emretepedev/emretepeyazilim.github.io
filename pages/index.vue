@@ -12,7 +12,7 @@
                   height="150"
                   max-height="150"
                   max-width="150"
-                  :src="require('@/assets/images/avatar.png')"
+                  :src="require('@/assets/images/avatar.webp')"
                   title="@emretepedev"
                   width="150"
                 />
