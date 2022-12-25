@@ -305,18 +305,31 @@ export default defineNuxtConfig({
       // 'node_modules/vue-toastification/src/**/*.{vue,scss,ts}',
       'node_modules/vue-toastification/dist/index.css',
     ],
-    whitelist: [],
+    whitelist: [
+      'body',
+      'html',
+      'nuxt-progress',
+      '__nuxt',
+      /-(leave|enter|appear)(|-(to|from|active))$/,
+      /^nuxt-link(|-exact)-active$/,
+      /^(?!cursor-move).+-move$/,
+      /.*data-v-.*/,
+      /:slotted/,
+      /:deep/,
+      /:global/,
+    ],
     whitelistPatterns: [],
     whitelistPatternsChildren: [],
     extractors: [
       {
         extractor: (content) => content.match(/[A-z0-9-:\\/]+/g) || [],
-        extensions: ['html', 'vue', 'js', 'ts'],
+        extensions: ['html', 'vue', 'js'],
       },
     ],
   },
 
   vuetify: {
+    // customVariables: ['@/assets/css/vuetify.scss'], content-> $font-size-root: 50px; @import '~vuetify/src/styles/styles.sass';
     defaultAssets: false,
     icons: {
       iconfont: 'mdiSvg',
