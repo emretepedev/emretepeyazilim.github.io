@@ -148,8 +148,9 @@
               :value="asap"
               @change="asap = !asap"
             ></v-checkbox>
-            <recaptcha
+            <Recaptcha
               :id="$config.public.googleRecaptchaV2Size"
+              ref="recaptcha"
               :site-key="$config.public.googleRecaptchaV2SiteKey"
               @error="onError"
               @expired="onExpired"
@@ -209,7 +210,7 @@
     title: 'Contact | ',
   })
 
-  const { $recaptcha, $vToastify, $config } = useNuxtApp()
+  const { $recaptcha, $toast, $config } = useNuxtApp()
   const observer = ref(null)
   const { googleRecaptchaV2Size, googleRecaptchaV2SiteKey } = $config.public
   const name = ref('')
@@ -220,6 +221,7 @@
   const email = ref('')
   const passRecaptcha = ref(false)
   const widgetId = ref(0)
+  const recaptcha = ref(null)
 
   onMounted(async () => {
     await $recaptcha.init()
@@ -244,7 +246,7 @@
 
       await $recaptcha.reset(widgetId.value)
     } catch (error) {
-      $vToastify.error(String(error))
+      $toast.error(String(error))
 
       event.preventDefault()
     }
@@ -261,38 +263,20 @@
   }
 
   const onError = () => {
-    $vToastify.error('reCAPTCHA Verification: Error.')
+    $toast.error('reCAPTCHA Verification: Error.')
     passRecaptcha.value = false
   }
 
   const onSuccess = () => {
-    $vToastify.success('reCAPTCHA Verification: Success.')
+    $toast.success('reCAPTCHA Verification: Success.', {
+      pauseOnFocusLoss: false,
+    })
     passRecaptcha.value = true
   }
 
   const onExpired = () => {
-    $vToastify.warning('reCAPTCHA Verification: Expired.')
+    $toast.warning('reCAPTCHA Verification: Expired.')
     passRecaptcha.value = false
-  }
-
-  const onResponse = (error, response) => {
-    if (error) {
-      $vToastify.error("Mail didn't send because of `Form has errors`.")
-
-      return
-    }
-
-    if (response.data !== 'ok') {
-      $vToastify.error(
-        "Mail didn't send because of `Server Error`. Try again later."
-      )
-
-      return
-    }
-
-    resetForm()
-
-    $vToastify.success('Mail sent successfully.')
   }
 
   const renderToRecaptcha = () => {
@@ -301,25 +285,20 @@
     const maxTime = (1000 / frequency) * 10 // 10 sec
 
     const recaptchaInterval = setInterval(() => {
-      const recaptcha: HTMLElement = document.querySelector('.g-recaptcha')
-
-      if (Boolean(recaptcha) || count === maxTime) {
+      if (recaptcha.value) {
         clearInterval(recaptchaInterval)
 
         widgetId.value = $recaptcha.render(googleRecaptchaV2Size, {
           sitekey: googleRecaptchaV2SiteKey,
         })
 
-        if (count === maxTime) {
-          $vToastify.error(
-            'reCAPTCHA Verification: Server Error. Try again later.'
-          )
+        styleToRecaptcha()
+      }
 
-          return
-        }
+      if (count === maxTime) {
+        $toast.error('reCAPTCHA Verification: Server Error. Try again later.')
 
-        recaptcha.style.display = 'flex'
-        recaptcha.style.justifyContent = 'center'
+        return
       }
 
       count++
@@ -327,14 +306,36 @@
   }
 
   const styleToPageclip = () => {
+    // TODO: change to ref
     const form = document.querySelector('.pageclip-form')
 
     // @ts-ignore
     Pageclip.form(form, {
-      onResponse(error, response) {
-        onResponse(error, response)
+      onResponse(error: any, response: any) {
+        if (error) {
+          $toast.error("Mail didn't send because of `Form has errors`.")
+
+          return
+        }
+
+        if (response.data !== 'ok') {
+          $toast.error(
+            "Mail didn't send because of `Server Error`. Try again later."
+          )
+
+          return
+        }
+
+        resetForm()
+
+        $toast.success('Mail sent successfully.')
       },
       successTemplate: 'I`ll reply to you ASAP. - @emretepedev',
     })
+  }
+
+  const styleToRecaptcha = () => {
+    recaptcha.value.$el.style.display = 'flex'
+    recaptcha.value.$el.style.justifyContent = 'center'
   }
 </script>
