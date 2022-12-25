@@ -15,7 +15,7 @@
     "build": "NODE_OPTIONS=--openssl-legacy-provider nuxi generate",
     "start": "NODE_OPTIONS=--openssl-legacy-provider nuxi preview",
     "output": "NODE_OPTIONS=--openssl-legacy-provider nuxi prepare",
-    "analyze": "NODE_OPTIONS=--openssl-legacy-provider nuxt build --analyze",
+    "analyze": "NODE_OPTIONS=--openssl-legacy-provider nuxi generate --analyze",
     "format": "prettier '**/{*,''}.{css,json,js,vue}' --write; eslint '**/{*,''}.{json,js,vue}' --fix; stylelint '**/*.{css,vue}' --fix;",
     "format:css": "prettier '**/*.css' --write; stylelint '**/*.css' --fix;",
     "format:json": "prettier '**/{*,''}.json' --write; eslint '**/{*,''}.json' --fix;",
