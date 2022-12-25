@@ -1,4 +1,5 @@
 import { defineNuxtConfig } from '@nuxt/bridge'
+import { TYPE } from 'vue-toastification'
 import { initializeStaticFiles } from './scripts/initializeStaticFiles'
 
 const isDev = process.env.NODE_ENV !== 'production'
@@ -180,7 +181,7 @@ export default defineNuxtConfig({
     ],
   },
 
-  css: ['@/assets/css/main.css'],
+  css: ['@/assets/css/main.css', 'vue-toastification/dist/index.css'],
 
   env: {
     testWebsite: process.env.TEST_WEBSITE,
@@ -228,11 +229,7 @@ export default defineNuxtConfig({
     subFolders: false,
   },
 
-  plugins: [
-    '@/plugins/vue-gtag',
-    '@/plugins/vee-validate',
-    { src: '@/plugins/vue-toastify', mode: 'client' },
-  ],
+  plugins: ['@/plugins/vue-gtag', '@/plugins/vee-validate'],
 
   buildModules: [
     '@nuxtjs/google-fonts',
@@ -242,7 +239,13 @@ export default defineNuxtConfig({
     '@nuxt/postcss8',
   ],
 
-  modules: ['@nuxtjs/gtm', '@nuxtjs/recaptcha', '@pinia/nuxt', '@vueuse/nuxt'],
+  modules: [
+    '@nuxtjs/gtm',
+    '@nuxtjs/recaptcha',
+    '@pinia/nuxt',
+    '@vueuse/nuxt',
+    'vue-toastification/nuxt',
+  ],
 
   pinia: {
     autoImports: ['defineStore', 'storeToRefs'],
@@ -273,16 +276,56 @@ export default defineNuxtConfig({
     },
   },
 
+  toast: {
+    maxToasts: 3,
+    timeout: 5000,
+    toastDefaults: {
+      [TYPE.SUCCESS]: {
+        timeout: 3000,
+      },
+      [TYPE.INFO]: {
+        timeout: 4000,
+      },
+      [TYPE.WARNING]: {
+        timeout: 6000,
+      },
+      [TYPE.ERROR]: {
+        timeout: 7000,
+      },
+    },
+  },
+
   purgeCSS: {
     enabled: !isDev,
-    paths: ['./node_modules/vuetify/src/**/*.ts'],
+    paths: [
+      'components/**/*.vue',
+      'layouts/**/*.vue',
+      'pages/**/*.vue',
+      'plugins/**/*.js',
+      'plugins/**/*.ts',
+      './node_modules/vuetify/src/**/*.ts',
+    ],
     whitelist: ['v-app', 'v-app--wrap'],
-    whitelistPatterns: [/^v-((?!app).)*$/, /^theme--*/, /^text--*/, /--text$/],
+    whitelistPatterns: [
+      /^v-((?!app).)*$/,
+      /^theme--*/,
+      /^text--*/,
+      /--text$/,
+      /^Vue-Toastification/,
+      /^top-/,
+      /^bottom-/,
+    ],
     whitelistPatternsChildren: [
       /^v-((?!app).)*$/,
       /^theme--*/,
       /^text--*/,
       /--text$/,
+    ],
+    extractors: [
+      {
+        extractor: (content) => content.match(/[A-z0-9-:\\/]+/g) || [],
+        extensions: ['html', 'vue', 'js', 'ts'],
+      },
     ],
   },
 

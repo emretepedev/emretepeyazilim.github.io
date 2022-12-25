@@ -16,3 +16,24 @@
   background-clip: padding-box, border-box;
   background-origin: padding-box, border-box;
 }
+
+.Vue-Toastification__toast {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(24 24 27 / var(--tw-bg-opacity)) !important;
+}
+
+.Vue-Toastification__toast--success > .Vue-Toastification__icon {
+  color: green;
+}
+
+.Vue-Toastification__toast--warning > .Vue-Toastification__icon {
+  color: yellow;
+}
+
+.Vue-Toastification__toast--error > .Vue-Toastification__icon {
+  color: red;
+}
+
+.Vue-Toastification__toast--info > .Vue-Toastification__icon {
+  color: blue;
+}

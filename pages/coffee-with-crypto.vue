@@ -152,7 +152,7 @@
   })
 
   const metamaskStore = useMetamaskStore()
-  const { $vToastify, $config } = useNuxtApp()
+  const { $config, $toast } = useNuxtApp()
   const observer = ref(null)
   const { ownerAddress, txConfirmationBlocks } = $config.public
   const { ethereum } = window as any
@@ -201,7 +201,7 @@
     }
 
     onError((error: any) => {
-      $vToastify.error(String(error?.message))
+      $toast.error(String(error?.message || error))
     })
   })
 
@@ -216,7 +216,7 @@
       isConnected.value = accounts.length > 0
       isConnected.value && (await handleAccountsChanged(accounts))
     } catch (error) {
-      $vToastify.error(String(error?.message))
+      $toast.error(String(error?.message || error))
     }
   })
 
@@ -230,14 +230,14 @@
         : await provider.send('eth_requestAccounts', [])
       spinner.value = false
     } catch (error) {
-      $vToastify.error(String(error?.message))
+      $toast.error(String(error?.message || error))
     }
   }
 
   const disconnectWeb3 = () => {
     isConnected.value = false
     resetUserDetails()
-    $vToastify.success('Disconnected.')
+    $toast.success('Disconnected.')
   }
 
   const send = async () => {
@@ -265,57 +265,57 @@
         .on('error', handleTxError)
     } catch (error) {
       if (error) {
-        $vToastify.error(String(error?.message))
+        $toast.error(String(error?.message || error))
       }
     }
   }
 
   const handleTxSent = () => {
     spinner.value = true
-    $vToastify.info('Transaction Status: Transaction sent to Metamask.')
+    $toast.info('Transaction Status: Transaction sent to Metamask.')
   }
 
   const handleTxSending = () => {
-    $vToastify.info('Transaction Status: Waiting to user confirm.')
+    $toast.info('Transaction Status: Waiting to user confirm.')
   }
 
   const handleTxHash = (_txHash: string) => {
     txHash.value = _txHash
     txStatus.value = 'Awaiting transaction confirmation.'
     resetInputs()
-    $vToastify.info('Transaction Status: Awaiting transaction confirmation.')
+    $toast.info('Transaction Status: Awaiting transaction confirmation.')
   }
 
   const handleTxReceipt = async () => {
     waitForConfirmation.value = true
     txStatus.value = 'Awaiting block confirmation.'
-    $vToastify.success('Transaction Status: Awaiting block confirmation.')
-    $vToastify.info('Thank You For Your Support! - @emretepedev')
+    $toast.success('Transaction Status: Awaiting block confirmation.')
+    $toast.info('Thank You For Your Support! - @emretepedev')
     await updateUserBalance()
   }
 
   const handleTxConfirmation = (_txConfirmationCount: number) => {
     if (_txConfirmationCount && _txConfirmationCount < txConfirmationBlocks) {
       txConfirmationCount.value = _txConfirmationCount
-      $vToastify.info('Confirmation Status: New block found.')
+      $toast.info('Confirmation Status: New block found.')
     }
 
     if (_txConfirmationCount >= txConfirmationBlocks) {
       txStatus.value = 'Confirmed.'
       resetTxDetails()
-      $vToastify.success('Transaction Status: Confirmed.')
+      $toast.success('Transaction Status: Confirmed.')
     }
   }
 
   const handleTxError = () => {
     txStatus.value = 'Failed.'
     resetTxDetails()
-    $vToastify.error('Transaction Status: Failed.')
+    $toast.error('Transaction Status: Failed.')
   }
 
   const handleChainChanged = async () => {
     await updateUserBalance()
-    $vToastify.success('Chain has changed.')
+    $toast.success('Chain has changed.')
   }
 
   const handleAccountsChanged = async (accounts: string[]) => {
@@ -333,7 +333,7 @@
       ? ethers.utils.getAddress(_address)
       : (await provider.listAccounts())[0]
 
-    $vToastify.success(`Linked account changed to '${address.value}'`)
+    $toast.success(`Linked account changed to '${address.value}'`)
   }
 
   const updateUserBalance = async () => {
@@ -363,7 +363,7 @@
   const copyToAddress = async () => {
     try {
       await navigator.clipboard.writeText(address.value)
-      $vToastify.success(`Address ${address.value} copied.`)
+      $toast.success(`Address ${address.value} copied.`)
     } catch {}
   }
 </script>

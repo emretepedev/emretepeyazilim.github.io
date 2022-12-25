@@ -284,7 +284,7 @@
   })
 
   const metamaskStore = useMetamaskStore()
-  const { $vToastify, $moment, $config } = useNuxtApp()
+  const { $toast, $moment, $config } = useNuxtApp()
   const observer = ref(null)
   const textField = ref(null)
   const rowPaddingBottom = ref(0)
@@ -321,7 +321,7 @@
       isConnected.value = accounts.length > 0
       isConnected.value && (await handleAccountsChanged(accounts))
     } catch (error) {
-      $vToastify.error(String(error?.message))
+      $toast.error(String(error?.message || error))
     }
   })
 
@@ -336,7 +336,7 @@
     }
 
     onError((error: any) => {
-      $vToastify.error(String(error?.message))
+      $toast.error(String(error?.message || error))
     })
   })
 
@@ -355,7 +355,7 @@
       spinner.value = false
     } catch (error) {
       spinner.value = false
-      $vToastify.error(String(error?.message))
+      $toast.error(String(error?.message || error))
     }
   }
 
@@ -370,7 +370,7 @@
         ],
       })
     } catch (error) {
-      $vToastify.error(String(error?.message))
+      $toast.error(String(error?.message || error))
     }
   }
 
@@ -410,7 +410,7 @@
       scrollToLastMessage()
     } catch (error) {
       if (!error?.message.includes('ResizeObserver')) {
-        $vToastify.error(String(error?.message))
+        $toast.error(String(error?.message || error))
       }
     }
   }
@@ -436,7 +436,7 @@
         .on('error', handleTxError)
     } catch (error) {
       if (error) {
-        $vToastify.error(String(error?.message))
+        $toast.error(String(error?.message || error))
       }
     }
   }
@@ -449,12 +449,8 @@
 
       if (!lastMessageElement.value) {
         const getLastMessageInterval = setInterval(() => {
-          if (Boolean(lastMessageElement.value) || tries === maxTries) {
+          if (lastMessageElement.value) {
             clearInterval(getLastMessageInterval)
-
-            if (tries === maxTries) {
-              return
-            }
 
             setTimeout(function () {
               lastMessageElement.value[0]?.$el?.scrollIntoView({
@@ -463,6 +459,11 @@
               })
             }, 250)
           }
+
+          if (tries === maxTries) {
+            return
+          }
+
           tries++
         }, frequency)
       } else {
@@ -479,20 +480,20 @@
   const disconnectWeb3 = () => {
     isConnected.value = false
     resetUserDetails()
-    $vToastify.success('Disconnected.')
+    $toast.success('Disconnected.')
   }
 
   const handleTxSent = () => {
     spinner.value = true
-    $vToastify.info('Transaction Status: Transaction sent to Metamask.')
+    $toast.info('Transaction Status: Transaction sent to Metamask.')
   }
 
   const handleTxSending = () => {
-    $vToastify.info('Transaction Status: Waiting to user confirm.')
+    $toast.info('Transaction Status: Waiting to user confirm.')
   }
 
   const handleTxHash = (txHash: string) => {
-    $vToastify.info(
+    $toast.info(
       'Transaction Status: Awaiting transaction confirmation.\n' +
         `Tx Hash: ${txHash}`
     )
@@ -500,12 +501,12 @@
 
   const handleTxReceipt = () => {
     resetInputs()
-    $vToastify.success('Thank you for your message! - @emretepedev')
+    $toast.success('Thank you for your message! - @emretepedev')
   }
 
   const handleTxError = () => {
     spinner.value = false
-    $vToastify.error('Transaction Status: Failed.')
+    $toast.error('Transaction Status: Failed.')
   }
 
   const handleChainChanged = async (chainId: string) => {
@@ -517,7 +518,7 @@
       await getContractData()
     }
 
-    $vToastify.success('Chain has changed.')
+    $toast.success('Chain has changed.')
   }
 
   const handleAccountsChanged = async (accounts: string[]) => {
@@ -538,7 +539,7 @@
       scrollToLastMessage()
     }
 
-    $vToastify.success(`New message received from ${message.author}.`)
+    $toast.success(`New message received from ${message.author}.`)
   }
 
   const updateUserInfo = async (address?: string) => {
@@ -550,7 +551,7 @@
       ? web3.utils.toChecksumAddress(_address)
       : (await web3.eth.getAccounts())[0]
 
-    $vToastify.success(`Linked account changed to '${address.value}'`)
+    $toast.success(`Linked account changed to '${address.value}'`)
   }
 
   const resetInputs = () => {
@@ -570,7 +571,7 @@
   const copyToAddress = async (address: string) => {
     try {
       await navigator.clipboard.writeText(address)
-      $vToastify.success(`Address ${address} copied.`)
+      $toast.success(`Address ${address} copied.`)
     } catch {}
   }
 
