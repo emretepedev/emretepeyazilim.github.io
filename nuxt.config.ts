@@ -32,20 +32,14 @@ export default defineNuxtConfig({
   },
 
   build: {
-    html: {
-      minify: {
-        collapseBooleanAttributes: true,
-        decodeEntities: true,
-        minifyCSS: true,
-        minifyJS: true,
-        processConditionalComments: true,
-        removeEmptyAttributes: true,
-        removeRedundantAttributes: true,
-        trimCustomFragments: true,
-        useShortDoctype: true,
-        minifyURLs: true,
-        removeComments: true,
-        removeEmptyElements: true,
+    optimization: {
+      splitChunks: {
+        cacheGroups: {
+          vendor: {
+            test: /[\\/]node_modules[\\/](node-libs-browser)[\\/]/,
+            name: 'vendor',
+          },
+        },
       },
     },
     postcss: {
@@ -181,7 +175,7 @@ export default defineNuxtConfig({
     ],
   },
 
-  css: ['@/assets/css/main.css', 'vue-toastification/dist/index.css'],
+  css: ['@/assets/css/main.css'],
 
   env: {
     testWebsite: process.env.TEST_WEBSITE,
@@ -298,29 +292,22 @@ export default defineNuxtConfig({
   purgeCSS: {
     enabled: !isDev,
     paths: [
-      'components/**/*.vue',
-      'layouts/**/*.vue',
-      'pages/**/*.vue',
-      'plugins/**/*.js',
-      'plugins/**/*.ts',
-      './node_modules/vuetify/src/**/*.ts',
+      'components/**/*.{vue,jsx?,tsx?}',
+      'layouts/**/*.{vue,jsx?,tsx?}',
+      'pages/**/*.{vue,jsx?,tsx?}',
+      'composables/**/*.{vue,jsx?,tsx?}',
+      'App.{vue,jsx?,tsx?}',
+      'app.{vue,jsx?,tsx?}',
+      'plugins/**/*.{js,ts}',
+      'nuxt.config.{js,ts}',
+      // 'node_modules/vuetify/src/**/*.ts',
+      'node_modules/vuetify/dist/vuetify.css',
+      // 'node_modules/vue-toastification/src/**/*.{vue,scss,ts}',
+      'node_modules/vue-toastification/dist/index.css',
     ],
-    whitelist: ['v-app', 'v-app--wrap'],
-    whitelistPatterns: [
-      /^v-((?!app).)*$/,
-      /^theme--*/,
-      /^text--*/,
-      /--text$/,
-      /^Vue-Toastification/,
-      /^top-/,
-      /^bottom-/,
-    ],
-    whitelistPatternsChildren: [
-      /^v-((?!app).)*$/,
-      /^theme--*/,
-      /^text--*/,
-      /--text$/,
-    ],
+    whitelist: [],
+    whitelistPatterns: [],
+    whitelistPatternsChildren: [],
     extractors: [
       {
         extractor: (content) => content.match(/[A-z0-9-:\\/]+/g) || [],
