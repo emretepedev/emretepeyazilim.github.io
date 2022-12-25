@@ -10,7 +10,6 @@ module.exports = {
     'nuxtjs',
     'vuetify',
     'vuepress',
-    'toastify',
     'jscoverage',
     'noindex',
     'inbug',
