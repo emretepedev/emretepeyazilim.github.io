@@ -24,18 +24,20 @@ jobs:
     steps:
       - name: Checkout 🛎
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
-      - name: Setup node env 🏗
+      - name: Setup node env
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
           check-latest: true
 
-      - name: Get yarn cache directory path 🛠
+      - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
-      - name: Cache node_modules 📦
+      - name: Cache node_modules
         uses: actions/cache@v2.1.4
         id: yarn-cache
         with:
@@ -44,8 +46,13 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
 
-      - name: Install dependencies 👨🏻‍💻
+      - name: Install dependencies
         run: yarn
 
-      - name: Run linter 👀
+      - name: Check commit
+        uses: wagoid/commitlint-github-action@v5
+        with:
+          configFile: .commitlintrc.js
+
+      - name: Check lint
         run: yarn lint
