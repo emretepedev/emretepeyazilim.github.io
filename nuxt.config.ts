@@ -1,5 +1,5 @@
 import { defineNuxtConfig } from '@nuxt/bridge'
-import type { TYPE } from 'vue-toastification'
+import { TYPE } from 'vue-toastification'
 import { initializeStaticFiles } from './src/scripts/initializeStaticFiles'
 
 const isDev = process.env.NODE_ENV !== 'production'
