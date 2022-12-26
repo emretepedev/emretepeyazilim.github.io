@@ -1,6 +1,16 @@
 name: cd
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - nuxt-bridge
+      - main
+      - master
+  pull_request:
+    branches:
+      - nuxt-bridge
+      - main
+      - master
 
 env:
   NODE_ENV: ${{ secrets.NODE_ENV }}
