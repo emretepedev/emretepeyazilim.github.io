@@ -302,9 +302,7 @@ export default defineNuxtConfig({
       '../app.{vue,jsx?,tsx?}',
       '../plugins/**/*.{js,ts}',
       'nuxt.config.{js,ts}',
-      // '../node_modules/vuetify/src/**/*.ts',
       '../node_modules/vuetify/dist/vuetify.css',
-      // 'node_modules/vue-toastification/src/**/*.{vue,scss,ts}',
       '../node_modules/vue-toastification/dist/index.css',
     ],
     whitelist: [
