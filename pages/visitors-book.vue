@@ -461,6 +461,8 @@
           }
 
           if (tries === maxTries) {
+            clearInterval(getLastMessageInterval)
+
             return
           }
 

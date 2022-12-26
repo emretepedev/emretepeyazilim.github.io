@@ -296,7 +296,7 @@
       }
 
       if (count === maxTime) {
-        $toast.error('reCAPTCHA Verification: Server Error. Try again later.')
+        clearInterval(recaptchaInterval)
 
         return
       }
