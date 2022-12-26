@@ -3,10 +3,12 @@ name: ci
 on:
   push:
     branches:
+      - nuxt-bridge
       - main
       - master
   pull_request:
     branches:
+      - nuxt-bridge
       - main
       - master
 
