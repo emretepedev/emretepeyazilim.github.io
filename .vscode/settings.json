@@ -6,10 +6,6 @@
     "**/dist/*/**": true,
     "**/.nuxt/*/**": true
   },
-  "files.associations": {
-    "*.json": "javascript",
-    "package.json": "json"
-  },
   "files.saveConflictResolution": "overwriteFileOnDisk",
   "editor.quickSuggestions": {
     "strings": true
@@ -89,5 +85,5 @@
     ".*Classes.*",
     ".*-class"
   ],
-  "volar.takeOverMode.enabled": true
+  "volar.takeOverMode.enabled": "auto"
 }
