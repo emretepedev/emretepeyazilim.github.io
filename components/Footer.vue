@@ -5,7 +5,7 @@
       <v-card class="w-full text-center text-white" flat ripple tile>
         <v-card-text>
           <v-btn
-            v-for="(social, index) in data.socials"
+            v-for="(social, index) in socials"
             :key="index"
             class="mx-4 text-white"
             :href="social.href"
@@ -46,5 +46,5 @@
 </template>
 
 <script setup lang="ts">
-  import data from '@/data/components/footer'
+  import { socials } from '@/data/components/footer'
 </script>

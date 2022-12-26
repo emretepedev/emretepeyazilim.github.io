@@ -37,11 +37,11 @@
       <v-divider class="mb-2 px-0"></v-divider>
       <v-list dense nav rounded shaped>
         <v-list-item
-          v-for="(page, index) in data.pages"
+          v-for="(page, index) in pages"
           :key="index"
           :class="
             (isLastItem =
-              index === data.pages.length - 1
+              index === pages.length - 1
                 ? 'absolute bottom-2 left-2 right-2 w-[calc(100%-16px)]'
                 : '')
           "
@@ -70,15 +70,15 @@
     mdiTestTube,
     mdiTestTubeOff,
   } from '@mdi/js'
-  import data from '@/data/components/header'
+  import { pages } from '@/data/components/header'
 
   const { spaOrigin } = useRuntimeConfig().public
   const isOnRight = ref(false)
   const drawer = ref(false)
-  const lastPageItem = data.pages[data.pages.length - 1]
+  const lastPageItem = pages[pages.length - 1]
   const isLastItem = ''
   if (!lastPageItem.title.includes('version'))
-    data.pages.push(
+    pages.push(
       process.env.testWebsite === 'true'
         ? {
             title: '~/live-version',

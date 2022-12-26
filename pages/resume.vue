@@ -3,15 +3,15 @@
     <div class="mt-12 flex justify-center">
       <v-container>
         <LinkedInBadge />
-        <Timeline :items="data.experiences" />
-        <DataTable :headers="data.headers" :items="data.skills" />
+        <Timeline :items="experiences" />
+        <DataTable :headers="headers" :items="skills" />
       </v-container>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-  import data from '@/data/pages/resume'
+  import { experiences, headers, skills } from '@/data/pages/resume'
 
   useNuxt2Meta({
     title: 'Resume | ',

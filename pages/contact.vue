@@ -65,14 +65,14 @@
             <ValidationProvider
               #default="{ errors }"
               name="subject"
-              :rules="`required|oneOf:${data.subjects}`"
+              :rules="`required|oneOf:${subjects}`"
             >
               <v-autocomplete
                 v-model="subject"
                 dense
                 :error-messages="errors"
                 :hint="!Boolean(subject) ? 'For example, `Proposal`' : ''"
-                :items="data.subjects"
+                :items="subjects"
                 label="Subject*"
                 name="subject"
                 outlined
@@ -185,7 +185,7 @@
     mdiPhone,
   } from '@mdi/js'
   import { ValidationObserver, ValidationProvider } from 'vee-validate'
-  import data from '@/data/pages/contact'
+  import { subjects } from '@/data/pages/contact'
 
   useNuxt2Meta({
     link: [

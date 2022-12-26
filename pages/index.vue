@@ -30,10 +30,7 @@
           </v-row>
         </div>
         <div>
-          <Sparkline
-            :gradients="data.sparkline.gradients"
-            :graph-data="graphData"
-          />
+          <Sparkline :gradients="gradients" :graph-data="graphData" />
         </div>
       </v-container>
     </div>
@@ -41,7 +38,7 @@
 </template>
 
 <script setup lang="ts">
-  import data from '@/data/pages/index'
+  import { gradients } from '@/data/pages/index'
   import contributions from '@/data/contributions.json'
 
   useNuxt2Meta({

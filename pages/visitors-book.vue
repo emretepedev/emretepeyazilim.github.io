@@ -268,10 +268,9 @@
   import Web3 from 'web3'
   import { mdiCloseCircle, mdiConnection, mdiMessage, mdiSend } from '@mdi/js'
   import { ValidationObserver, ValidationProvider } from 'vee-validate'
-  import type { AbiItem } from 'web3-utils'
   import type { Contract, EventData } from 'web3-eth-contract'
   import { vOnLongPress } from '@vueuse/components'
-  import visitorsBookContractAbi from '@/data/abi/visitorsBook.json'
+  import { visitorsBookContractAbi } from '@/data/abi/visitorsBook'
 
   interface Message {
     author: string
@@ -378,7 +377,7 @@
   const getContractData = async () => {
     try {
       visitorsBookContract = new web3.eth.Contract(
-        visitorsBookContractAbi as AbiItem[],
+        visitorsBookContractAbi,
         visitorsBookContractAddress
       )
 
