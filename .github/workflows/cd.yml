@@ -51,7 +51,6 @@ jobs:
         uses: tj-actions/verify-changed-files@v9
         id: verify-changed-sol-files
         with:
-          separator: ", "
           files: |
             src
             nuxt.config.ts
