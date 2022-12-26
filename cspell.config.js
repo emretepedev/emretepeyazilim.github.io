@@ -21,6 +21,7 @@ module.exports = {
     'pinia',
     'vueuse',
     'toastification',
+    'wagoid',
   ],
 
   ignoreWords: ['emretepedev', 'emre', 'tepe', 'osmangazi', 'bixos'],
