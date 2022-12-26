@@ -49,7 +49,7 @@ jobs:
 
       - name: Verify change src files in the contracts directory
         uses: tj-actions/verify-changed-files@v9
-        id: verify-changed-sol-files
+        id: verify-changed-files
         with:
           files: |
             src
