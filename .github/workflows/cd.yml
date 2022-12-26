@@ -47,19 +47,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Verify change src files in the contracts directory
+      - name: Verify Changed sol files in the contracts directory
         uses: tj-actions/verify-changed-files@v9
-        id: verify-changed-files
+        id: verify-changed-sol-files
         with:
-          files: |
-            src
-            nuxt.config.ts
-            package.json
-            yarn.lock
+          files: .vscode/*.json
 
-      - name: Show changes
-        run: |
-          echo "Changed files: ${{ steps.verify-changed-files.outputs.changed_files }}"
+      - name: Setup node
+        uses: actions/setup-node@v3
+        if: steps.verify-changed-sol-files.outputs.files_changed == 'true'
+        with:
+          node-version: ${{ matrix.node }}
 
       - name: Bump version and push tag
         id: tag_version
@@ -69,27 +67,21 @@ jobs:
           WITH_V: true
           DEFAULT_BUMP: none
 
-      - name: Setup node
-        uses: actions/setup-node@v3
-        if: steps.verify-changed-files.outputs.files_changed == 'true'
-        with:
-          node-version: ${{ matrix.node }}
-
       - name: Install dependencies with dev deps
-        if: steps.verify-changed-files.outputs.files_changed == 'true'
+        if: steps.verify-changed-sol-files.outputs.files_changed == 'true'
         run: yarn install --production=false
 
       - name: Fetch recent contributions count
-        if: steps.verify-changed-files.outputs.files_changed == 'true'
+        if: steps.verify-changed-sol-files.outputs.files_changed == 'true'
         run: yarn fetch
 
       - name: Build
-        if: steps.verify-changed-files.outputs.files_changed == 'true'
+        if: steps.verify-changed-sol-files.outputs.files_changed == 'true'
         run: yarn build
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
-        if: steps.verify-changed-files.outputs.files_changed == 'true'
+        if: steps.verify-changed-sol-files.outputs.files_changed == 'true'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./.output/public
@@ -97,7 +89,7 @@ jobs:
 
       - name: Create a GitHub release
         uses: softprops/action-gh-release@v1
-        if: steps.verify-changed-files.outputs.files_changed == 'true'
+        if: steps.verify-changed-sol-files.outputs.files_changed == 'true'
         with:
           name: Release ${{ steps.tag_version.outputs.new_tag }}
           tag_name: ${{ steps.tag_version.outputs.new_tag }}
