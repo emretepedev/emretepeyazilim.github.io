@@ -1,6 +1,6 @@
 import { defineNuxtConfig } from '@nuxt/bridge'
 import { TYPE } from 'vue-toastification'
-import { initializeStaticFiles } from './scripts/initializeStaticFiles'
+import { initializeStaticFiles } from './src/scripts/initializeStaticFiles'
 
 const isDev = process.env.NODE_ENV !== 'production'
 const isLive = process.env.LIVE === 'true'
@@ -8,6 +8,8 @@ const isLive = process.env.LIVE === 'true'
 initializeStaticFiles(process.env.SPA_URL)
 
 export default defineNuxtConfig({
+  srcDir: 'src',
+
   bridge: {
     nitro: true,
   },
@@ -290,20 +292,20 @@ export default defineNuxtConfig({
   },
 
   purgeCSS: {
-    enabled: !isDev,
+    enabled: true,
     paths: [
-      'components/**/*.{vue,jsx?,tsx?}',
-      'layouts/**/*.{vue,jsx?,tsx?}',
-      'pages/**/*.{vue,jsx?,tsx?}',
-      'composables/**/*.{vue,jsx?,tsx?}',
-      'App.{vue,jsx?,tsx?}',
-      'app.{vue,jsx?,tsx?}',
-      'plugins/**/*.{js,ts}',
+      '../components/**/*.{vue,jsx?,tsx?}',
+      '../layouts/**/*.{vue,jsx?,tsx?}',
+      '../pages/**/*.{vue,jsx?,tsx?}',
+      '../composables/**/*.{vue,jsx?,tsx?}',
+      '../App.{vue,jsx?,tsx?}',
+      '../app.{vue,jsx?,tsx?}',
+      '../plugins/**/*.{js,ts}',
       'nuxt.config.{js,ts}',
-      // 'node_modules/vuetify/src/**/*.ts',
-      'node_modules/vuetify/dist/vuetify.css',
+      // '../node_modules/vuetify/src/**/*.ts',
+      '../node_modules/vuetify/dist/vuetify.css',
       // 'node_modules/vue-toastification/src/**/*.{vue,scss,ts}',
-      'node_modules/vue-toastification/dist/index.css',
+      '../node_modules/vue-toastification/dist/index.css',
     ],
     whitelist: [
       'body',

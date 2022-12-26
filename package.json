@@ -21,7 +21,7 @@
     "format:js": "prettier '**/{*,''}.js' --write; eslint '**/{*,''}.js' --fix;",
     "format:vue": "prettier '**/*.vue' --write; eslint '**/*.vue' --fix; stylelint '**/*.vue' --fix;",
     "lint": "cspell lint --gitignore --dot '**/{*,''}{.,''}*'; prettier '**/{*,''}.{css,json,js,vue}' --check; eslint '**/{*,''}.{json,js,vue}'; stylelint '**/*.{css,vue}';",
-    "fetch": "tsc contributions.ts && node contributions.js",
+    "fetch": "tsc src/scripts/contributions.ts && node src/scripts/contributions.js",
     "hook:pre-push": "cspell lint --gitignore --dot '**/{*,''}{.,''}*' && prettier '**/{*,''}.{css,json,js,vue}' --check && eslint '**/{*,''}.{json,js,vue}' && stylelint '**/*.{css,vue}'",
     "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup"
   },

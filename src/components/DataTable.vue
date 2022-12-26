@@ -104,32 +104,15 @@
     mdiMagnify,
   } from '@mdi/js'
 
-  interface Item {
-    name: string
-    image: string
-    category: string
-    url: string
-    color?: string
-    description: string
-  }
-
-  interface Header {
-    text?: string
-    value: string
-    class?: string
-    divider?: boolean
-    align?: string
-    groupable?: boolean
-    sortable?: boolean
-    filterable?: boolean
-  }
+  import { Header, Item } from '@/types'
 
   interface DataTableProps {
     headers: Header[]
     items: Item[]
   }
 
-  defineProps<DataTableProps>()
+  const props = defineProps<DataTableProps>()
+  const { headers, items } = { ...props }
 
   const search = ref('')
 </script>

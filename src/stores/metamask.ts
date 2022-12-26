@@ -16,6 +16,7 @@ export const useMetamaskStore = defineStore('metamask', {
       }
     },
 
+    // TODO: try delete this params
     handleChainChanged(chainId: string) {},
 
     handleAccountsChanged(accounts: string[]) {},

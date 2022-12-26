@@ -39,7 +39,7 @@ const fetchData = async () => {
 
   const res = await fetch(url, options)
   const contributions = await res.json()
-  writeFileSync('./data/contributions.json', JSON.stringify(contributions))
+  writeFileSync('./src/data/contributions.json', JSON.stringify(contributions))
 }
 
 const hexToString = (hex: string) => {
