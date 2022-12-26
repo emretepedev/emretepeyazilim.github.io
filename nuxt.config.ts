@@ -68,7 +68,7 @@ export default defineNuxtConfig({
       lang: 'en',
     },
     title: 'Homepage | ',
-    titleTemplate: '%s' + process.env.SPA_NAME + ' - Emre Tepe',
+    titleTemplate: '%s ' + process.env.SPA_NAME + ' - Emre Tepe',
     meta: [
       process.env.TEST_WEBSITE === 'true'
         ? {
