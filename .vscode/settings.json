@@ -50,7 +50,7 @@
   "errorLens.statusBarMessageType": "closestProblem",
   "errorLens.gutterIconsEnabled": true,
   "errorLens.gutterIconsFollowCursorOverride": false,
-  "errorLens.onSave": true,
+  "errorLens.onSave": false,
   "emeraldwalk.runonsave": {
     "commands": [
       {
