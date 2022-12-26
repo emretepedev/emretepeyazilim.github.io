@@ -10,11 +10,10 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "prepare": "husky install",
+    "prepare": "husky install && nuxi prepare",
     "dev": "NODE_OPTIONS=--openssl-legacy-provider nuxi dev",
     "build": "NODE_OPTIONS=--openssl-legacy-provider nuxi generate",
-    "start": "NODE_OPTIONS=--openssl-legacy-provider nuxi preview",
-    "output": "NODE_OPTIONS=--openssl-legacy-provider nuxi prepare",
+    "start": "nuxi preview",
     "analyze": "NODE_OPTIONS=--openssl-legacy-provider nuxi generate --analyze",
     "format": "prettier '**/{*,''}.{css,json,js,vue}' --write; eslint '**/{*,''}.{json,js,vue}' --fix; stylelint '**/*.{css,vue}' --fix;",
     "format:css": "prettier '**/*.css' --write; stylelint '**/*.css' --fix;",
@@ -25,6 +24,9 @@
     "fetch": "tsc contributions.ts && node contributions.js",
     "hook:pre-push": "cspell lint --gitignore --dot '**/{*,''}{.,''}*' && prettier '**/{*,''}.{css,json,js,vue}' --check && eslint '**/{*,''}.{json,js,vue}' && stylelint '**/*.{css,vue}'",
     "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   },
   "husky": {
     "hooks": {
