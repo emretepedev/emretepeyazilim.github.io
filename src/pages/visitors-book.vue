@@ -271,12 +271,7 @@
   import type { Contract, EventData } from 'web3-eth-contract'
   import { vOnLongPress } from '@vueuse/components'
   import { visitorsBookContractAbi } from '@/data/abi/visitorsBook'
-
-  interface Message {
-    author: string
-    createdAt: string
-    content: string
-  }
+  import type { Message } from '@/types'
 
   useNuxt2Meta({
     title: "Visitor's Book | ",

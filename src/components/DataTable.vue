@@ -104,7 +104,7 @@
     mdiMagnify,
   } from '@mdi/js'
 
-  import { Header, Item } from '@/types'
+  import type { Header, Item } from '@/types'
 
   interface DataTableProps {
     headers: Header[]

@@ -22,3 +22,9 @@ export interface DataTableProps {
   headers: Header[]
   items: Item[]
 }
+
+export interface Message {
+  author: string
+  createdAt: string
+  content: string
+}
