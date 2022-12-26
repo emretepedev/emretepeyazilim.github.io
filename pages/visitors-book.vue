@@ -283,6 +283,7 @@
     title: "Visitor's Book | ",
   })
 
+  const route = useRoute()
   const metamaskStore = useMetamaskStore()
   const { $toast, $moment, $config } = useNuxtApp()
   const observer = ref(null)
@@ -460,8 +461,12 @@
             }, 250)
           }
 
-          if (tries === maxTries) {
+          if (tries === maxTries || route.path !== '/visitors-book') {
             clearInterval(getLastMessageInterval)
+
+            if (route.path === '/visitors-book') {
+              $toast.error('Cannot get to last message. Try refresh the page.')
+            }
 
             return
           }

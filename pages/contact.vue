@@ -210,6 +210,7 @@
     title: 'Contact | ',
   })
 
+  const route = useRoute()
   const { $recaptcha, $toast, $config } = useNuxtApp()
   const observer = ref(null)
   const { googleRecaptchaV2Size, googleRecaptchaV2SiteKey } = $config.public
@@ -295,8 +296,12 @@
         styleToRecaptcha()
       }
 
-      if (count === maxTime) {
+      if (count === maxTime || route.path !== '/contact') {
         clearInterval(recaptchaInterval)
+
+        if (route.path === '/contact') {
+          $toast.error('reCAPTCHA Verification: Server Error. Try again later.')
+        }
 
         return
       }
