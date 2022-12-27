@@ -5,11 +5,12 @@
         <div v-if="hasMetamask">
           <v-row
             align="center"
-            :class="`my-5 ${
+            :class="[
+              'my-5',
               !$vuetify.breakpoint.smAndDown
                 ? 'space-x-6'
-                : 'mx-2 grid grid-cols-1 gap-y-5 space-x-0'
-            }`"
+                : 'mx-2 grid grid-cols-1 gap-y-5 space-x-0',
+            ]"
             justify="center"
           >
             <v-tooltip bottom content-class="text-xs" :disabled="!isConnected">
@@ -76,15 +77,15 @@
             </v-row>
             <v-row
               align="center"
-              :class="`${
+              :class="
                 !$vuetify.breakpoint.smAndDown
                   ? 'space-x-6'
                   : 'my-4 grid grid-cols-1 gap-y-2 space-x-0 space-y-1 px-5'
-              }`"
+              "
               justify="center"
             >
               <v-btn
-                :class="`${!$vuetify.breakpoint.smAndDown ? '' : 'w-full'}`"
+                :class="!$vuetify.breakpoint.smAndDown ? '' : 'w-full'"
                 :disabled="invalid || spinner || !isConnected"
                 @click="send()"
                 ><svg
@@ -241,6 +242,7 @@
   }
 
   const send = async () => {
+    // import('web3')
     try {
       const validate = await observer.value.validate()
       if (!validate) {

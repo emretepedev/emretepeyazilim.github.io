@@ -5,8 +5,10 @@
         <div v-if="hasMetamask">
           <div v-if="onValidNetwork">
             <v-container
-              class="box-border h-screen overflow-y-scroll scrollbar-thin scrollbar-track-dark-gray scrollbar-thumb-black scrollbar-track-rounded-full scrollbar-thumb-rounded-full"
-              :class="$vuetify.breakpoint.mdAndDown ? 'pt-14' : ''"
+              :class="[
+                'box-border h-screen overflow-y-scroll scrollbar-thin scrollbar-track-dark-gray scrollbar-thumb-black scrollbar-track-rounded-full scrollbar-thumb-rounded-full',
+                $vuetify.breakpoint.mdAndDown ? 'pt-14' : '',
+              ]"
             >
               <v-row
                 align="end"
@@ -31,9 +33,10 @@
                         class="relative flex flex-col items-end text-right"
                         ><div class="flex">
                           <span
-                            :class="`relative my-auto mr-3 max-w-screen-sm text-left ${
-                              $vuetify.breakpoint.smAndDown ? 'text-sm' : ''
-                            }`"
+                            :class="[
+                              'relative my-auto mr-3 max-w-screen-sm text-left',
+                              $vuetify.breakpoint.smAndDown ? 'text-sm' : '',
+                            ]"
                             >{{ message.content }}</span
                           >
                           <div class="group">
@@ -90,9 +93,10 @@
                             </div>
                           </div>
                           <span
-                            :class="`my-auto ml-3 ${
-                              $vuetify.breakpoint.smAndDown ? 'text-sm' : ''
-                            }`"
+                            :class="[
+                              'my-auto ml-3',
+                              $vuetify.breakpoint.smAndDown ? 'text-sm' : '',
+                            ]"
                             >{{ message.content }}</span
                           >
                         </div>

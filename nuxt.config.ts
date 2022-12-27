@@ -48,6 +48,42 @@ export default defineNuxtConfig({
       plugins: {
         tailwindcss: {},
         autoprefixer: {},
+        '@fullhuman/postcss-purgecss': {
+          content: [
+            './src/components/**/*.{vue,jsx?,tsx?}',
+            './src/layouts/**/*.{vue,jsx?,tsx?}',
+            './src/pages/**/*.{vue,jsx?,tsx?}',
+            './src/composables/**/*.{vue,jsx?,tsx?}',
+            './src/App.{vue,jsx?,tsx?}',
+            './src/app.{vue,jsx?,tsx?}',
+            './src/plugins/**/*.{js,ts}',
+            './nuxt.config.{js,ts}',
+            './node_modules/vuetify/dist/vuetify.js',
+          ],
+          safelist: [
+            'body',
+            'html',
+            'nuxt-progress',
+            '__nuxt',
+            /^v-.+__.+$/,
+            /^Vue-Toastification.*$/,
+            /top-.+/,
+            /bottom-.+/,
+            /-(leave|enter|appear)(|-(to|from|active))$/,
+            /^nuxt-link(|-exact)-active$/,
+            /^(?!cursor-move).+-move$/,
+            /.*data-v-.*/,
+            /:slotted/,
+            /:deep/,
+            /:global/,
+          ],
+          extractors: [
+            {
+              extractor: (content) => content.match(/[A-z0-9-:\\/]+/g) || [],
+              extensions: ['html', 'vue', 'js'],
+            },
+          ],
+        },
       },
     },
     devtools: false,
@@ -229,7 +265,6 @@ export default defineNuxtConfig({
 
   buildModules: [
     '@nuxtjs/google-fonts',
-    'nuxt-purgecss',
     '@nuxtjs/moment',
     '@nuxtjs/vuetify',
     '@nuxt/postcss8',
@@ -289,42 +324,6 @@ export default defineNuxtConfig({
         timeout: 7000,
       },
     },
-  },
-
-  purgeCSS: {
-    enabled: !isDev,
-    paths: [
-      '../components/**/*.{vue,jsx?,tsx?}',
-      '../layouts/**/*.{vue,jsx?,tsx?}',
-      '../pages/**/*.{vue,jsx?,tsx?}',
-      '../composables/**/*.{vue,jsx?,tsx?}',
-      '../App.{vue,jsx?,tsx?}',
-      '../app.{vue,jsx?,tsx?}',
-      '../plugins/**/*.{js,ts}',
-      '../nuxt.config.{js,ts}',
-      '../node_modules/vuetify/dist/vuetify.js',
-    ],
-    whitelist: ['body', 'html', 'nuxt-progress', '__nuxt'],
-    whitelistPatterns: [
-      /^v-.+__.+$/, // vuetify
-      /^Vue-Toastification.*$/, // vue-toastification
-      /top-.+/, // vue-toastification
-      /bottom-.+/, // vue-toastification
-      /-(leave|enter|appear)(|-(to|from|active))$/,
-      /^nuxt-link(|-exact)-active$/,
-      /^(?!cursor-move).+-move$/,
-      /.*data-v-.*/,
-      /:slotted/,
-      /:deep/,
-      /:global/,
-    ],
-    whitelistPatternsChildren: [],
-    extractors: [
-      {
-        extractor: (content) => content.match(/[A-z0-9-:\\/]+/g) || [],
-        extensions: ['html', 'vue', 'js'],
-      },
-    ],
   },
 
   vuetify: {
