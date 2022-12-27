@@ -72,6 +72,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
           DEFAULT_BUMP: none
+          RELEASE_BRANCHES: master,main,nuxt-bridge
 
       - name: Setup node
         uses: actions/setup-node@v3
