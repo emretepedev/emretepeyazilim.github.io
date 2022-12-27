@@ -101,7 +101,6 @@ jobs:
 
       - name: Create a GitHub release
         uses: softprops/action-gh-release@v1
-        if: steps.changed-files-specific.outputs.any_changed == 'true'
         with:
           name: Release ${{ steps.tag_version.outputs.new_tag }}
           tag_name: ${{ steps.tag_version.outputs.new_tag }}
