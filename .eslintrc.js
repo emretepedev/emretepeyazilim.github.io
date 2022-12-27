@@ -15,7 +15,7 @@ module.exports = {
     'prettier',
   ],
 
-  plugins: ['json', 'prettier'], // 'nuxt'
+  plugins: ['json', 'prettier', 'nuxt'],
 
   rules: {
     'prettier/prettier': 'warn',
