@@ -4,7 +4,6 @@ module.exports = {
   language: 'en',
 
   words: [
-    // general
     'nuxt',
     'nuxi',
     'nuxtjs',
