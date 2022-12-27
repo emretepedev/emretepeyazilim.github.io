@@ -33,17 +33,10 @@
 </template>
 
 <script setup lang="ts">
-  interface Item {
-    detail: string
-    name: string
-    icon: string
-    year: string
-    type?: string
-    description?: string
-  }
+  import type { TimelineItem } from '@/types'
 
   interface TimelineProps {
-    items: Item[]
+    items: TimelineItem[]
   }
 
   defineProps<TimelineProps>()

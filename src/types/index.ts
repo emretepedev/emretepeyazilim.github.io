@@ -28,3 +28,12 @@ export interface Message {
   createdAt: string
   content: string
 }
+
+export interface TimelineItem {
+  detail: string
+  name: string
+  icon: string
+  year: string
+  type?: string
+  description?: string
+}
