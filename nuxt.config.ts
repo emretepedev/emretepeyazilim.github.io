@@ -292,7 +292,7 @@ export default defineNuxtConfig({
   },
 
   purgeCSS: {
-    enabled: true,
+    enabled: !isDev,
     paths: [
       '../components/**/*.{vue,jsx?,tsx?}',
       '../layouts/**/*.{vue,jsx?,tsx?}',
