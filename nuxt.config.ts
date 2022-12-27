@@ -292,7 +292,7 @@ export default defineNuxtConfig({
   },
 
   purgeCSS: {
-    enabled: !isDev,
+    enabled: true,
     paths: [
       '../components/**/*.{vue,jsx?,tsx?}',
       '../layouts/**/*.{vue,jsx?,tsx?}',
@@ -301,15 +301,15 @@ export default defineNuxtConfig({
       '../App.{vue,jsx?,tsx?}',
       '../app.{vue,jsx?,tsx?}',
       '../plugins/**/*.{js,ts}',
-      'nuxt.config.{js,ts}',
-      '../node_modules/vuetify/dist/vuetify.css',
-      '../node_modules/vue-toastification/dist/index.css',
+      '../nuxt.config.{js,ts}',
+      '../node_modules/vuetify/dist/vuetify.js',
     ],
-    whitelist: [
-      'body',
-      'html',
-      'nuxt-progress',
-      '__nuxt',
+    whitelist: ['body', 'html', 'nuxt-progress', '__nuxt'],
+    whitelistPatterns: [
+      /^v-.+__.+$/, // vuetify
+      /^Vue-Toastification.*$/, // vue-toastification
+      /top-.+/, // vue-toastification
+      /bottom-.+/, // vue-toastification
       /-(leave|enter|appear)(|-(to|from|active))$/,
       /^nuxt-link(|-exact)-active$/,
       /^(?!cursor-move).+-move$/,
@@ -318,7 +318,6 @@ export default defineNuxtConfig({
       /:deep/,
       /:global/,
     ],
-    whitelistPatterns: [],
     whitelistPatternsChildren: [],
     extractors: [
       {
