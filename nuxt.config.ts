@@ -234,11 +234,10 @@ export default defineNuxtConfig({
       ownerAddress: process.env.OWNER_ADDRESS,
       txConfirmationBlocks: parseInt(process.env.TX_CONFIRMATION_BLOCKS),
       repositoryUrl: process.env.REPOSITORY_URL,
-      visitorsBookContractAddress: process.env.VISITORS_BOOK_CONTRACT_ADDRESS,
-      visitorsBookContractChainId:
-        '0x' + Number(process.env.VISITORS_BOOK_CONTRACT_CHAIN_ID).toString(16),
-      visitorsBookContractChainName:
-        process.env.VISITORS_BOOK_CONTRACT_CHAIN_NAME,
+      guestbookContractAddress: process.env.GUESTBOOK_CONTRACT_ADDRESS,
+      guestbookContractChainId:
+        '0x' + Number(process.env.GUESTBOOK_CONTRACT_CHAIN_ID).toString(16),
+      guestbookContractChainName: process.env.GUESTBOOK_CONTRACT_CHAIN_NAME,
       lastModifiedAt: new Date().toUTCString().replace('GMT', 'UTC'),
     },
   },

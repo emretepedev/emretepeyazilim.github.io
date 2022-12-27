@@ -16,8 +16,8 @@ export const pages = [
     icon: mdiCoffee,
   },
   {
-    title: '~/visitors-book',
-    to: '/visitors-book',
+    title: '~/guestbook',
+    to: '/guestbook',
     icon: mdiBookOpenVariant,
   },
 ]

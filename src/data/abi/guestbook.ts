@@ -1,6 +1,7 @@
 import type { AbiItem } from 'web3-utils'
 
-export const visitorsBookContractAbi: AbiItem = [
+export const guestbookContractAbi: AbiItem = [
+  { inputs: [], stateMutability: 'nonpayable', type: 'constructor' },
   { inputs: [], name: 'ContentMustNotEmpty', type: 'error' },
   { inputs: [], name: 'SpamMessage', type: 'error' },
   {
@@ -13,7 +14,7 @@ export const visitorsBookContractAbi: AbiItem = [
           { internalType: 'string', name: 'content', type: 'string' },
         ],
         indexed: false,
-        internalType: 'struct IVisitorsBook.Message',
+        internalType: 'struct IGuestbook.Message',
         name: 'message',
         type: 'tuple',
       },
@@ -31,7 +32,7 @@ export const visitorsBookContractAbi: AbiItem = [
           { internalType: 'uint96', name: 'createdAt', type: 'uint96' },
           { internalType: 'string', name: 'content', type: 'string' },
         ],
-        internalType: 'struct IVisitorsBook.Message[]',
+        internalType: 'struct IGuestbook.Message[]',
         name: '',
         type: 'tuple[]',
       },

@@ -56,9 +56,7 @@
                               >
                                 {{ message.author }}
                               </span>
-                              <div
-                                class="-mt-2 h-3 w-3 rotate-45 bg-black"
-                              ></div>
+                              <div class="-mt-2 h-3 w-3 rotate-45 bg-black" />
                             </div>
                           </div>
                         </div>
@@ -153,7 +151,7 @@
                             "
                             @keydown.enter.prevent
                             @keyup.enter="isConnected && send()"
-                          ></v-textarea>
+                          />
                           <v-tooltip content-class="text-xs" top>
                             <template #activator="{ on }">
                               <v-btn
@@ -253,7 +251,7 @@
           </div>
           <div v-else class="mt-20 flex items-center justify-center">
             <v-btn @click="switchNetwork()"
-              >Switch Network to {{ visitorsBookContractChainName }}</v-btn
+              >Switch Network to {{ guestbookContractChainName }}</v-btn
             >
           </div>
         </div>
@@ -268,17 +266,16 @@
 </template>
 
 <script setup lang="ts">
-  // TODO: change visitors book to guestbook
   import Web3 from 'web3'
   import { mdiCloseCircle, mdiConnection, mdiMessage, mdiSend } from '@mdi/js'
   import { ValidationObserver, ValidationProvider } from 'vee-validate'
   import type { Contract, EventData } from 'web3-eth-contract'
   import { vOnLongPress } from '@vueuse/components'
-  import { visitorsBookContractAbi } from '@/data/abi/visitorsBook'
+  import { guestbookContractAbi } from '@/data/abi/guestbook'
   import type { Message } from '@/types'
 
   useNuxt2Meta({
-    title: "Visitor's Book | ",
+    title: 'Guestbook | ',
   })
 
   const route = useRoute()
@@ -288,15 +285,15 @@
   const textField = ref(null)
   const rowPaddingBottom = ref(0)
   const {
-    visitorsBookContractAddress,
-    visitorsBookContractChainId,
-    visitorsBookContractChainName,
+    guestbookContractAddress,
+    guestbookContractChainId,
+    guestbookContractChainName,
   } = $config.public
-  let visitorsBookContract: Contract
+  let guestbookContract: Contract
   const { ethereum } = window as any
   const hasMetamask = Boolean(ethereum)
   const onValidNetwork = ref(
-    hasMetamask && ethereum.chainId === visitorsBookContractChainId
+    hasMetamask && ethereum.chainId === guestbookContractChainId
   )
   const isConnected = ref(false)
   const address = ref('')
@@ -364,7 +361,7 @@
         method: 'wallet_switchEthereumChain',
         params: [
           {
-            chainId: visitorsBookContractChainId,
+            chainId: guestbookContractChainId,
           },
         ],
       })
@@ -375,17 +372,17 @@
 
   const getContractData = async () => {
     try {
-      visitorsBookContract = new web3.eth.Contract(
-        visitorsBookContractAbi,
-        visitorsBookContractAddress
+      guestbookContract = new web3.eth.Contract(
+        guestbookContractAbi,
+        guestbookContractAddress
       )
 
-      const visitorsBookMessages: Message[] = await visitorsBookContract.methods
+      const guestbookMessages: Message[] = await guestbookContract.methods
         .getMessages()
         .call()
 
       messages.value = []
-      for (const message of visitorsBookMessages) {
+      for (const message of guestbookMessages) {
         messages.value.push({
           author: message.author,
           createdAt: message.createdAt,
@@ -395,7 +392,7 @@
 
       if (!contractMessageSentEventEmitter.value) {
         contractMessageSentEventEmitter.value = true
-        visitorsBookContract.events.MessageSent().on('data', handleMessageSent)
+        guestbookContract.events.MessageSent().on('data', handleMessageSent)
       }
 
       if (!textFieldResizeObserver.value) {
@@ -425,7 +422,7 @@
         throw new Error('Wait until the current tx is finished.')
       }
 
-      await visitorsBookContract.methods
+      await guestbookContract.methods
         .sendMessage(messageContent.value)
         .send({ from: address.value })
         .once('sent', handleTxSent)
@@ -459,10 +456,10 @@
             }, 250)
           }
 
-          if (tries === maxTries || route.path !== '/visitors-book') {
+          if (tries === maxTries || route.path !== '/guestbook') {
             clearInterval(getLastMessageInterval)
 
-            if (route.path === '/visitors-book') {
+            if (route.path === '/guestbook') {
               $toast.error('Cannot get to last message. Try refresh the page.')
             }
 
@@ -515,7 +512,7 @@
   }
 
   const handleChainChanged = async (chainId: string) => {
-    if (chainId !== visitorsBookContractChainId) {
+    if (chainId !== guestbookContractChainId) {
       onValidNetwork.value = false
       lastMessageElement.value = null
     } else {
