@@ -144,7 +144,6 @@
 
 <script setup lang="ts">
   import { ethers } from 'ethers'
-  import Web3 from 'web3'
   import { mdiCurrencyUsdOff } from '@mdi/js'
   import { ValidationObserver, ValidationProvider } from 'vee-validate'
 
@@ -170,8 +169,6 @@
   const txHash = ref('')
   const spinner = ref(false)
   const waitForConfirmation = ref(false)
-  const web3 = new Web3(ethereum)
-  web3.eth.transactionConfirmationBlocks = txConfirmationBlocks
 
   const formattedAddress = computed(
     () =>
@@ -242,16 +239,19 @@
   }
 
   const send = async () => {
-    // import('web3')
     try {
       const validate = await observer.value.validate()
       if (!validate) {
-        throw new Error(observer.value.errors.message[0])
+        throw new Error(observer.value.errors.amount[0])
       }
 
       if (spinner.value) {
         throw new Error('Wait until the current tx is finished.')
       }
+
+      const Web3 = (await import('web3')).default
+      const web3 = new Web3(ethereum)
+      web3.eth.transactionConfirmationBlocks = txConfirmationBlocks
 
       await web3.eth
         .sendTransaction({

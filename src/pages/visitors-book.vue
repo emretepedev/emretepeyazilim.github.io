@@ -113,7 +113,7 @@
               <v-container class="px-2 py-1">
                 <v-row no-gutters>
                   <v-col>
-                    <ValidationObserver ref="observer" #default="{ invalid }">
+                    <ValidationObserver ref="observer">
                       <ValidationProvider
                         #default="{ errors }"
                         name="message"
@@ -152,7 +152,7 @@
                               Boolean(messageContent)
                             "
                             @keydown.enter.prevent
-                            @keyup.enter="isConnected && !invalid && send()"
+                            @keyup.enter="isConnected && send()"
                           ></v-textarea>
                           <v-tooltip content-class="text-xs" top>
                             <template #activator="{ on }">
