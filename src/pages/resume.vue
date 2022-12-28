@@ -2,6 +2,11 @@
   <div>
     <div class="mt-12 flex justify-center">
       <v-container>
+        <v-btn @click="i18nStore.setLanguage('en')">en</v-btn>
+        <v-btn @click="i18nStore.setLanguage('tr')">tr</v-btn>
+        <v-btn @click="i18nStore.setLanguage('fr')">fr</v-btn>
+        {{ $t('welcome') }}
+        {{ $t('my_love') }}
         <LinkedInBadge />
         <Timeline :items="experiences" />
         <DataTable :headers="headers" :items="skills" />
@@ -12,6 +17,8 @@
 
 <script setup lang="ts">
   import { experiences, headers, skills } from '@/data/pages/resume'
+  const $t = useI18N
+  const i18nStore = useI18NStore()
 
   useNuxt2Meta({
     title: 'Resume | ',
