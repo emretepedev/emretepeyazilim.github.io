@@ -60,16 +60,14 @@ export default defineNuxtConfig({
                 './src/plugins/**/*.{js,ts}',
                 './nuxt.config.{js,ts}',
                 './node_modules/vuetify/dist/vuetify.js',
+                './node_modules/vue-toastification/dist/index.css',
               ],
               safelist: [
                 'body',
                 'html',
                 'nuxt-progress',
                 '__nuxt',
-                /^v-.+__.+$/,
-                /^Vue-Toastification.*$/,
-                /top-.+/,
-                /bottom-.+/,
+                /^v-.+__.+$/, // vuetify
                 /-(leave|enter|appear)(|-(to|from|active))$/,
                 /^nuxt-link(|-exact)-active$/,
                 /^(?!cursor-move).+-move$/,
