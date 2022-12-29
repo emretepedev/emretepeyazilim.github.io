@@ -242,6 +242,7 @@ export default defineNuxtConfig({
 
   router: {
     base: process.env.SPA_PATH,
+    trailingSlash: false,
   },
 
   app: {
