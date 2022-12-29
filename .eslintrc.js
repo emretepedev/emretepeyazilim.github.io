@@ -7,11 +7,11 @@ module.exports = {
   },
 
   extends: [
-    'plugin:vue/vue3-recommended',
-    'plugin:vuetify/recommended',
     'plugin:json/recommended',
-    '@nuxtjs/eslint-config-typescript',
+    // 'plugin:vuetify/recommended',
+    'plugin:vue/vue3-recommended',
     'plugin:nuxt/recommended',
+    '@nuxtjs/eslint-config-typescript',
     'prettier',
   ],
 
