@@ -3,6 +3,6 @@ export const subjects = [
   'Suggestion',
   'Proposal',
   'Donate',
-  'Request to Test ETH',
+  'ETH For Guestbook',
   'Other',
 ]
