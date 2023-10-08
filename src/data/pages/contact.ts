@@ -1,8 +1,8 @@
 export const subjects = [
-  'Hire',
+  // 'Hire',
+  // 'Donate',
   'Suggestion',
   'Proposal',
-  'Donate',
-  'ETH For Guestbook',
+  'Request to Test ETH',
   'Other',
 ]

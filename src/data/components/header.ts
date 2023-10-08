@@ -1,14 +1,14 @@
 import {
   mdiBookOpenVariant,
   mdiCoffee,
-  mdiFileAccount,
+  // mdiFileAccount,
   mdiListBox,
   mdiXml,
 } from '@mdi/js'
 
 export const pages = [
   { title: '~', to: '/', icon: mdiXml, target: null },
-  { title: '~/resume', to: '/resume', icon: mdiFileAccount },
+  // { title: '~/resume', to: '/resume', icon: mdiFileAccount },
   { title: '~/contact', to: '/contact', icon: mdiListBox },
   {
     title: '~/coffee-with-crypto',
