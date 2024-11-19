@@ -35,6 +35,7 @@ module.exports = {
     '*.jpg',
     '*.jpeg',
     '*.png',
+    '.env*',
   ],
 
   allowCompoundWords: true,
