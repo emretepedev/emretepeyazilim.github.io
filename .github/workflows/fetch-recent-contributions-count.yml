@@ -3,6 +3,7 @@ name: Fetch recent contributions count
 on:
   schedule:
     - cron: "0 0 * * *"
+  workflow_dispatch:
 
 env:
   NODE_ENV: ${{ secrets.NODE_ENV }}
