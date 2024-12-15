@@ -20,7 +20,7 @@
             </v-icon>
           </v-btn>
         </v-card-text>
-        <v-card-text class="pt-0 text-white">
+        <v-card-text v-if="false" class="pt-0 text-white">
           This website is made with <strong>Vue</strong>,
           <strong>Vuetify</strong>, <strong>Nuxt</strong>,
           <strong>Tailwind</strong> and
