@@ -81,13 +81,13 @@
     pages.push(
       process.env.testWebsite === 'true'
         ? {
-            title: '~/live-version',
+            title: '~/live',
             to: spaOrigin,
             icon: mdiTestTubeOff,
             target: '_blank',
           }
         : {
-            title: '~/dev-version',
+            title: '~/dev',
             to: '/develop',
             icon: mdiTestTube,
             target: '_blank',
