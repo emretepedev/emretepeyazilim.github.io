@@ -1,7 +1,7 @@
 import { mdiTilde } from '@mdi/js'
 
 export const pages = [
-  { title: '~', to: '/', icon: mdiTilde, target: null },
+  { title: '', to: '/', icon: mdiTilde, target: null },
   // { title: '~/resume', to: '/resume', icon: mdiFileAccount },
   // { title: '~/contact', to: '/contact', icon: mdiListBox },
   // {
